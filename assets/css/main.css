@@ -132,6 +132,13 @@ table a{
   }
 }
 
+/* Zoom */
+.zoom {
+  transition: transform .2s; 
+}
+.zoom:hover {
+  transform: scale(1.05); 
+}
 
 /* Code & Blockquote */
 .code {
