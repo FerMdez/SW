@@ -216,6 +216,8 @@ textarea {
   margin-top: 5px;
   font-size: 15px;
   font-weight: bold;
+  box-shadow: 2px 2px #1f2c3d;
+  filter: brightness(105%);
   cursor: pointer;
 }
 #submit:hover {
@@ -232,6 +234,7 @@ textarea {
   margin-top: 5px;
   font-size: 12px;
   font-weight: bold;
+  box-shadow: 2px 2px #1f2c3d;
   cursor: pointer;
 }
 #reset:hover {
