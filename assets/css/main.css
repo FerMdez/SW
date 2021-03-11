@@ -21,7 +21,7 @@ h1, h2, h3, h4 {
   color: #dadada;
   padding: 15px;
   text-align: left;
-  font-size: 15px;
+  font-size: 18px;
 } 
 .header img {
   width: 11px;
@@ -118,6 +118,17 @@ table a{
   width: 33.33%;
 }
 
+/* Left column */
+.column.left {
+  width: 50%;
+}
+
+/* Right column */
+.column.right {
+  float: right;
+  width: 50%;
+}
+
 /* Clear floats after the columns */
 .row:after {
   content: "";
@@ -127,7 +138,7 @@ table a{
 
 /* Responsive layout: makes the three columns stack on top of each other instead of next to each other */
 @media (max-width: 800px) {
-  .column.side, .column.middle {
+  .column.side, .column.middle, .column.left, .column.right{
     width: 100%;
   }
 }
@@ -170,6 +181,35 @@ table a{
 }
 .blockquote.bio {
   height: 250px;
+}
+
+
+/* Sketches */
+.sketches{
+  text-align: center;
+  display: block;
+  line-height: 1.25em;
+  padding: 1em 1em;
+  overflow-x: auto;
+  background: #1f2c3d;
+  border-radius: 3px;
+}
+.sketches h1, h2, h3, h4 {
+  color: #d3ebff;
+}
+.sketches img{
+  width: 550px; 
+  height: 550px;
+}
+.sketches .description {
+  color: #d3ebff;
+}
+/* Responsive layout */
+@media (max-width: 1150px) {
+  .sketches img{
+    width: 100%;
+    height: 75%;
+  }
 }
 
 
