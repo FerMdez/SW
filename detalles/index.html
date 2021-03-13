@@ -1,5 +1,4 @@
 <!DOCTYPE HTML>
-<!DOCTYPE HTML>
 <!--
     Práctica 1 - Sistemas Web | Grupo D
     CompluCine - FDI-cines
@@ -31,32 +30,31 @@
             <div class="image"><img src="../img/logo_trasparente.png" /></div>
         </div>
         <!-- Details -->
-		<section id ="detalles">
-			<div class="code">
-				<h1>Introduccion</h1>
-				<hr />
-				<div class="blockquote">
-					<p>
-						Con este proyecto buscamos la creación de una aplicación web que
-						gestione la cartelera de un grupo de cines con una cartelera de películas variable, unos horarios propios de cada cine por sesión y película
-						y unos precios determinados.
-					</br>
-						Los usuarios podrán registrarse, comprar sus entradas para una
-						sesión, elegir asientos, precomprar sus snacks y ver ofertas y promociones.
-					</p>
-				</div>
+		<div class = "code">
+			<h1>Introduccion</h1>
+			<hr/>
+			<div class ="blockquote">
+				<p>
+					Con este proyecto buscamos la creación de una aplicación web que
+					gestione la cartelera de un grupo de cines con una cartelera de películas variable, unos horarios propios de cada cine por sesión y película
+					y unos precios determinados.
+				</br>
+					Los usuarios podrán registrarse, comprar sus entradas para una
+					sesión, elegir asientos, precomprar sus snacks y ver ofertas y promociones.
+				</p>
 			</div>
-			<div class="code">
-				<h1>Tipos de usuario</h1>
-				<hr />	
-				<div class="blockquote">
+		</div>
+		<!-- Rows -->
+		<div class ="row">
+			<div class="column left">
+				<div class = "code">
+					<h1>Tipos de usuario</h1>
 					<hr />	
 					<h2> Usuario No Registrado </h2>
 					<p>
 						Usuario que entra a la web sin necesidad de estar registrado, podrá realizar compras, ver horarios y cartelera, sin necesidad de realizar ningún registro.
 						No podrá usar ninguna de las promociones, pues estas estarán únicamente destinadas a los usuarios registrados
 					</p>
-					<hr />	
 					<h2> Usuario Registrado </h2>
 					<p>
 						Estos usuarios son aquellos que previamente han realizado un registro en la base de datos del sistema.Tendrán las mismas funcionalidades básicas 
@@ -65,13 +63,12 @@
 						Además, estos usuarios podrán cancelar una compra previamente hecha, pues estas se asociarían a su cuenta, algo que sería imposible
 						con un usuario no registrado.
 					</p>
-					<hr />	
 					<h2> Gerente de Cine </h2>
 					<p>
 						Un administrador de rango bajo capaz de acceder a la vista de administradores, puede ver las peliculas que hay en la base de datos. Esta asociado a un cine al cual
 						puede añadir sesiones con peliculas existentes y modificar la disposicion de butacas.
 					</p>
-					<hr />	
+					
 					<h2> Administrador </h2>
 					<p>
 						El administrador es capaz de ascender cuentas de usuario registradas a cuentas de gerente de cine. Ademas es el encargado de añadir nuevos cines y peliculas.
@@ -79,10 +76,10 @@
 					</p>
 				</div>
 			</div>
-			<div class="code">
-				<h1>Funcionalidad</h1>
-				<hr />
-				<div class="blockquote">
+			<div class="column right">
+				<div class = "code">
+					<h1>Funcionalidad</h1>
+					<hr />
 					<p>
 						La aplicación debe permitir la compra online de entradas para sesiones de cine, mostrando los cines y
 						horarios en los que se encuentra disponible la película seleccionada por el usuario dentro del catálogo disponible en ese momento (la cartelera).
@@ -94,7 +91,6 @@
 					</br>
 						Antes de realizar la compra, los usuarios podrán aplicar promociones especificas que le permitan obtener algun snack en el cine o descuentos disponibles en la aplicación.
 					</p>
-					</br>
 					<p>
 						Por otro lado la aplicacion debe permitir a los gerentes y administradores acceder a todas las peliculas que hay en emision siendo los administradores los encargados de modificarlas y añadir
 						nuevas.
@@ -105,10 +101,10 @@
 						disposicion de butacas, modificar el horario de las sesiones y añadir nuevas sesiones, y crear promociones especificas para una sesion concreta o para el cine completo. Todo esto unicamente para el cine
 						con el cual esta relacionado
 					</p>
-
 				</div>
 			</div>
-		</section>
+			
+		</div>
         <!-- Footer -->
         <div class="footer">
             <p>© Práctica 1 | Sistemas Web 2021 </p>
@@ -117,7 +113,4 @@
         <!-- Scripts -->
        
     </body>
-
-</html>
-
 </html>
