@@ -7,14 +7,14 @@
     <head>
         <title>CompluCine | Planificación</title>
         <meta charset="utf-8" />
+        <link id="estilo" rel="stylesheet" type="text/css" href="../assets/css/main.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="img/favicon.png" />
-        <link id="estilo" rel="stylesheet" href="assets/css/plan.css" type="text/css">
+        <link rel="icon" href="../img/favicon.png" />
     </head>
     <body>
         <!-- Header -->
         <div class="header">
-            <a href="/"><img src="img/favicon2.png" /> CompluCine</a> | Planificación
+            <a href="/"><img src="../img/favicon2.png" /> CompluCine</a> | Planificación
             <div class="menu">
                 <a href="/">Inicio |</a>
                 <a href="../detalles/">Detalles |</a>
@@ -27,81 +27,78 @@
 
         <!-- Main -->
         <div class="main">
-            <div class="image"><img src="img/logo_trasparente.png" /></div>
-            
+            <div class="image"><img src="../img/logo_trasparente.png" /></div>
+            <h1>Planificación</h1>
+            <hr />
         </div>
         
-        <!-- Timeline -->
-        <section id="planificacion">
-            <h1 class="princpial">PLANIFICACIÓN</h1>
-            <div class="code" id="web">
-                <h2>WEB</h2>
-                <hr />
-                <div class="blockquote">  
-                    <ul>
-                        <li>Pantalla de Inicio (incluye promociones y estrenos)</li>
-                        <li>Cartelera Dinámica</li>
-                        <li>Selección de cines (mapa)</li>
-                        <li>Listado de Horarios</li>
-                        <li>Seleccion de Horarios</li>
-                        <li>Pagar + codigos promocionales</li>
-                        <li>¡Compra realizada!</li>
-                    </ul>
+        <!-- Planning -->
+        <section class="planning">
+            <div class="row">
+                <div class="column side">
+                    <div class="code">
+                        <h2>Tareas</h2>
+                        <p>Aquí las tareas a realizar.</p>
+                    </div>
+                </div>
+                <div class="column middle">
+                    <div class="code">
+                        <h2>Divisón del trabajo</h2>
+                        <p>Aquí cómo están repartidas las tareas y el trabajo.</p>
+                    </div>
+                </div>
+                <div class="column side">
+                    <div class="code">
+                        <h2>Plazos</h2>
+                        <p>Aquí plazos estimados para cada una de las tareas</p>
+                    </div>
                 </div>
             </div>
-            <div class="code" id="usuario">
-                <h2>Usuario</h2>
-                <hr />
-                <div class="blockquote">  
-                    <ul>
-                        <li>Registrarse (formulario para usuarios nuevos)</li>
-                        <li>Iniciar sesión (en cualquier pantalla)</li>
-                        <li>Menú y opciones de usuario</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="code" id="pie">
-                <h2>Footer</h2>
-                <hr />
-                <div class="blockquote">  
-                    <ul>
-                        <li>About Us</li>
-                        <li>Formulario de contacto</li>
-                        <li>Términos y condiciones</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="code" id="administrador">
-                <h2>Administrador</h2>
-                <hr />
-                <div class="blockquote">  
-                    <p>VISTA</p>
-                    <ul>
-                        <li>Panel de inicio administrador</li>
-                        <li>Panel Ver todos los cines</li>
-                        <li>Panel añadir/editar/eliminar cine</li>
-                        <li>Panel Ver salas del cine</li>
-                        <li>Panel añadir/editar/eliminar sesiones (peliculas proyectadas en un horario y sala)</li>
-                        <li>Panel editar disposicion de butacas de una sala o crear/eliminar sala</li>
-                    </ul>
-                </div>
-                <div class="blockquote">  
-                    <p>FUNCIONES</p>
-                    <ul>
-                        <legend>Administrador</legend>
-                        <li>Añadir/Eliminar Cine (Añadir Cine -> Panel Añadir Cine (formulario) + subir nueva imagen -> Añadir)</li>
-                        <li>Añadir/Eliminar Administrador/Gerente</li>
-                        <li>Añadir/Editar/Eliminar pelicula en Cartelera</li>
-                    </ul>
-                    <ul>
-                        <legend>Gerente de Cine</legend>
-                        <li>Añadir/Editar/Eliminar pelicula en su Cine</li>
-                        <li>Añadir/Editar/Eliminar sesión en su Cine (peliculas proyectadas en un horario y sala)</li>
-                        <li>Añadir/Editar/Eliminar Sala o disposicion de butacas en su Cine</li>
-                    </ul>
-                </div>
-            </div>
+        </section>
 
+        <!-- Timeline -->
+        <!-- TODO: INSERTAR AQUÍ UNA LÍNEA DEL TIEMPO HECHA CON PHOTOSHOP -->
+
+        <!-- Timeline Table -->
+        <section id="timeline table">
+            <h2>Hitos</h2>
+            <hr />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hito</th>
+                        <th>Fecha estimada</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Práctica 0</td>
+                        <td>4 de Marzo de 2021</td>
+                        <td>ENTREGADO</td>
+                    </tr>
+                    <tr>
+                        <td>Práctica 1</td>
+                        <td>18 de Marzo</td>
+                        <td>EN PROCESO</td>
+                    </tr>
+                    <tr>
+                        <td>Práctica 2</td>
+                        <td>15 de Abril de 2021</td>
+                        <td>PENDIENTE</td>
+                    </tr>
+                    <tr>
+                        <td>Práctica 3</td>
+                        <td>7 de Mayo de 2021</td>
+                        <td>PENDIENTE</td>
+                    </tr>
+                    <tr>
+                        <td>Entrega Final</td>
+                        <td>28 de Mayo de 2021</td>
+                        <td>PENDIENTE</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
 

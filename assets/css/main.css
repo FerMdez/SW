@@ -8,16 +8,23 @@ h1, h2, h3, h4 {
   color: #363636;
   text-transform: uppercase;
   margin: 0;
-	padding: 0;
-	border: 0;
+  padding: 0;
+  border: 0;
 	font-size: 100%;
 	vertical-align: baseline;
   text-align: center;
 }
 
 h2 {
- text-transform: none;
- font-size: 90%;
+	font-size: 90%;
+}
+
+h3 {
+  font-size: 85%;
+}
+
+h4 {
+  font-size: 75%;
 }
 
 /* Header */
@@ -168,7 +175,19 @@ table a{
   overflow-x: auto;
   overflow-y: auto;
 }
-.code p, h1, h2, h3 {
+.code h1{
+  color: #dadada;
+}
+.code h2 {
+  color: #dadada;
+}
+.code h3 {
+  color: #d3ebff;
+}
+.code h4 {
+  color: #d3ebff;
+}
+.code p {
   color: #dadada;
 }
 .code a {
@@ -177,6 +196,17 @@ table a{
 .code img{
   /* width: 80px; height: 80px; */
   width: 25%;
+}
+.code fieldset{
+  margin: 1px;
+  border-color: #dadada;
+  border-style: groove;
+}
+.code fieldset legend {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 90%;
+  color: #d3ebff;
 }
 
 .blockquote {
@@ -199,8 +229,20 @@ table a{
   background: #1f2c3d;
   border-radius: 3px;
 }
-.sketches h1, h2, h3, h4 {
-  color: #d3ebff;
+.sketches h1 {
+  color: #dadada;
+}
+.sketches h2 {
+  color: #dadada;
+}
+.sketches h3 {
+  color: #dadada;
+}
+.sketches h4 {
+  color: #dadada;
+}
+.sketches p {
+  color: #dadada;
 }
 .sketches img{
   width: 550px; 
@@ -221,7 +263,11 @@ table a{
 /* Form */
 form {
   margin: auto;
-  width: 50%;
+  width: 65%;
+}
+
+form h1, h2, h3, h4 {
+  color: #363636;
 }
 
 label {
