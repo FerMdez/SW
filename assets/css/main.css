@@ -193,6 +193,9 @@ table a{
 .code a {
   text-decoration: underline; 
 }
+.code ul {
+  color: #dadada;
+}
 .code img{
   /* width: 80px; height: 80px; */
   width: 25%;
@@ -207,6 +210,12 @@ table a{
   font-weight: bold;
   font-size: 90%;
   color: #d3ebff;
+}
+.code.details{
+  height: 750px;
+}
+.code.plan {
+  height: 1050px;
 }
 
 .blockquote {
