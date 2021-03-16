@@ -16,7 +16,7 @@ h1, h2, h3, h4 {
 }
 
 h2 {
-	font-size: 90%;
+	font-size: 95%;
 }
 
 h3 {
@@ -215,7 +215,7 @@ table a{
   height: 750px;
 }
 .code.plan {
-  height: 1050px;
+  height: 1150px;
 }
 
 .blockquote {
@@ -237,6 +237,7 @@ table a{
   overflow-x: auto;
   background: #1f2c3d;
   border-radius: 3px;
+  height: 680px;
 }
 .sketches h1 {
   color: #dadada;
@@ -283,6 +284,9 @@ table a{
 }
 .bar.fifty {
   width: 50%;
+}
+.bar.twentyfive {
+  width: 25%;
 }
 
 
