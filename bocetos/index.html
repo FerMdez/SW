@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <!--
     Práctica 1 - Sistemas Web | Grupo D
     CompluCine - FDI-cines
@@ -11,135 +11,343 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="../img/favicon.png" />
     </head>
-    <body>
-        <!-- Header -->
-        <div class="header">
-            <a href="/"><img src="../img/favicon2.png" /> CompluCine</a> | Bocetos
-            <div class="menu">
-                <a href="/">Inicio |</a>
-                <a href="../detalles/">Detalles |</a>
-                <a href="#">Bocetos |</a>
-                <a href="../miembros/">Miembros |</a>
-                <a href="../planificacion/">Planificación |</a>
-                <a href="../contacto/">Contacto</a>
-            </div>
-        </div>
+	<body>
+		<!-- Header -->
+		<div class="header">
+			<a href="/"><img src="../img/favicon2.png" /> CompluCine</a> | Bocetos
+			<div class="menu">
+				<a href="/">Inicio |</a>
+				<a href="../detalles/">Detalles |</a>
+				<a href="#">Bocetos |</a>
+				<a href="../miembros/">Miembros |</a>
+				<a href="../planificacion/">Planificación |</a>
+				<a href="../contacto/">Contacto</a>
+			</div>
+		</div>
 
-        <!-- Main -->
-        <div class="main">
-            <div class="image"><img src="../img/logo_trasparente.png" /></div>
-            <h1>Bocetos</h1>
-            <hr />
-        </div>
+		<!-- Main -->
+		<div class="main">
+			<div class="image"><img src="../img/logo_trasparente.png" /></div>
+			<h1>Bocetos</h1>
+		</div>
+		<!-- Flujo de Navegacion -->
+		<div class="code">
+			<h1>FLUJO DE NAVEGACION</h1>
+			<hr>
+			<div class="blockquote">
+				<!-- Usuario -->
+				<fieldset>
+					<legend>Usuario</legend>
+					<p>
+						El Usuario puede tomar dos caminos a la hora de seleccionar la película, el cine, y la sesión a la que quiere asistir. La diferencia es puramente
+						de orden entre la elección de cine y de la película, a conveniencia del usuario; se procede a explicar ambos:
+					</p>
+					<p>
+						1. Selección de Cine -> Selección de Película -> Selección de Sesión -> Reserva de Butacas -> Checkout: Primero se selecciona el cine en la vista de selección
+						de cines en la que se encuentra un mapa y una lista con los cines de la cadena. Una vez seleccionado el cine se redirigirá al usuario a la vista de selección
+						de película, con el filtro del cine correspondiente activado, de forma que solo se muestren las películas disponibles en el cine seleccionado. En esa vista se
+						eligirá la película y la versión a ver (VO, 3D, 4DX, etc).
+					</p>
+					<p>
+						Una vez elegida la película, se redirigirá al usuario a la elección de sesión. Se mostrarán todas las sesiones disponibles y el usuario podrá elegir la sesión y
+						el número de entradas que quiere reservar, pudiendo ver el precio final de las mismas. Se le llevará a la vista de butacas en donde podrá elegir qué butacas reservar.
+					</p>
+					<p>
+						Una vez elegidas las butacas, el usuario procede a la página de pago, en donde rellenará los datos necesarios para pagar online. Terminada la compra con éxito, se
+						mostrará una pantalla de "Compra Realizada", dando al usuario la seguridad de que su reserva se ha registrado correctamente. Luego se le redirigirá a la pantalla de
+						inicio.
+					</p>
+					<p>
+						2. Selección de Película -> Selección de Cine -> Selección de Sesión -> Reserva de Butacas -> Checkout: Es idéntico al flujo anterior pero el usuario empieza eligiendo
+						la película, de forma que se le redirige a la vista de selección de cine, esta vez con un filtro, de forma que solo se muestran los cines que tengan sesiones activas
+						con la película seleccionada.
+					</p>
+					<p>
+						Una vez elegidos película y cine, el flujo es idéntico al anterior.
+					</p>
+				</fieldset>
+				<!-- Administrador -->
+				<fieldset>
+					<legend>Administrador</legend>
+					<p>El Administrador es el encargado de gestionar las: películas, cines, promociones, otros administradores y gerentes de cada cine.</p>
+					<p>Para cada categoría tiene un panel en el que puede seleccionar, a partir de una lista, el elemento que quiere modificar, también hay otro panel al lado, en donde
+					puede modificar los datos de un elemento ya existente o crear uno nuevo introduciendo datos que no existan en la BD. También hay una opción de Eliminar en caso de que
+					quiera eliminar un elemento.</p>
+					<p>También cuenta con un botón de "Vista de Usuario", con el que puede navegar por la página con la vista que tendrá el usuario final.</p>
+				</fieldset>
 
-        <!-- Sketches -->
-        <div class="row">
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/inicio.png" />
-                    <div class="description">
-                        <h3>Pantalla de inicio</h3>
-                        <p>Pantalla de bienvenida al entrar en la web.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/peliculas.png" />
-                    <div class="description">
-                        <h3>Películas</h3>
-                        <p>Películas.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/cine.png" />
-                    <div class="description">
-                        <h3>Cine</h3>
-                        <p>Cine.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/mapa_asientos.png" />
-                    <div class="description">
-                        <h3>Mapa de los Asientos</h3>
-                        <p>Mapa de los asientos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/compra_realizada.png" />
-                    <div class="description">
-                        <h3>Cine</h3>
-                        <p>Cine.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/pagar.png" />
-                    <div class="description">
-                        <h3>Mapa de los Asientos</h3>
-                        <p>Mapa de los asientos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/mapa_asientos.png" />
-                    <div class="description">
-                        <h3>Mapa de los Asientos</h3>
-                        <p>Mapa de los asientos.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/terminosyCondiciones.png" />
-                    <div class="description">
-                        <h3>Mapa de los Asientos</h3>
-                        <p>Mapa de los asientos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/contacto.png" />
-                    <div class="description">
-                        <h3>Cine</h3>
-                        <p>Cine.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="column left">
-                <div class="sketches">
-                    <img src="../img/about_us.png" />
-                    <div class="description">
-                        <h3>Mapa de los Asientos</h3>
-                        <p>Mapa de los asientos.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
+				<!-- Gerente -->
+				<fieldset>
+					<legend>Gerente</legend>
+					<p>
+						El Gerente es el encargado de gestionar las sesiones y salas de cada cine. La forma de proceder es la misma que el administrador, con vistas equivalentes.
+						En el caso de la gestión de salas, se administrarán los asientos disponibles (por temas de Covid-19) y si está o no habilitada para su uso.
+					</p>
+				</fieldset>
+			</div>
+		</div>
 
-        <!-- Footer -->
-        <div class="footer">
-        <p>© Práctica 1 | Sistemas Web 2021 </p>
-        </div>
+		<div class="row">
+			<!-- Boceto Inicio -->
+			<div class="column left">
+				<fieldset>
+					<legend>INICIAR SESIÓN</legend>
+					<div class="sketches">
+						<img src="../img/registrarse_iniciar_sesion.png" />
+						<div class="description">
+							<h4>~ REGISTRARSE/LOGIN ~</h4>
+							<p>En esta parte se podrá dar de alta o iniciar sesión.</p>
+						</div>
+					</div>
+				</fieldset>
+			</div>
 
-    </body>
+			<!-- Boceto Menu Usuario -->
+			<div class="column left">
+				<fieldset>
+					<legend>MENU USUARIO REGISTRADO</legend>
+					<div class="sketches">
+						<img src="../img/menu_usuario.png" />
+						<div class="description">
+							<h4>~ MENU ~</h4>
+							<p>En esta zona de la página, el usuario registrado accede a su perfil con sus correspondientes opciones.</p>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		<br>
+		<!-- Bocetos Usuario -->
+		<fieldset>
+			<legend>VISTA USUARIO</legend>
+			<div class="row">
+				<div class="column left">
+					<!-- Pagina inicio -->
+					<div class="sketches">
+						<img src="../img/inicio.png" />
+						<div class="description">
+							<h4>~ PÁGINA DE INICIO ~</h4>
+							<p>Pantalla de bienvenida al entrar en la web.</p>
+							<p>Se mostrará los estrenos con sus sinopsis, las promociones disponibles y el último cine añadido.</p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- Peliculas -->
+					<div class="sketches">
+						<img src="../img/peliculas.png" />
+						<div class="description">
+							<h4>~ CARTELERA ~</h4>
+							<p>Mostrará todas las películas disponibles en base al filtro seleccionado (cine).</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column left">
+					<!-- Cines -->
+					<div class="sketches">
+						<img src="../img/cine.png" />
+						<div class="description">
+							<h4>~ CINES ~</h4>
+							<p>Mostrará todos los cines disponibles.</p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- Horario -->
+					<div class="sketches">
+						<img src="../img/selector_horario.png" />
+						<div class="description">
+							<h4>~ SELECTOR DE HORARIO ~</h4>
+							<p>Aquí se mostrará todos los horarios disponibles y salas de la película y cine seleccionada.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column left">
+					<!-- Butacas -->
+					<div class="sketches">
+						<img src="../img/mapa_asientos .png" />
+						<div class="description">
+							<h4>~ SELECTOR DE BUTACAS ~</h4>
+							<p>Se mostrará los asientos que se van a seleccionar, ocupados y libres, dependiendo de las personas se subirá o bajará el precio. </p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- Pagar -->
+					<div class="sketches">
+						<img src="../img/pagar.png" />
+						<div class="description">
+							<h4>~ PAGAR ~</h4>
+							<p>Se ofrecerá un resumen de toda la compra, podrá poner algún código de descuento y realizar la compra.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column left">
+					<!-- Compra Realizada -->
+					<div class="sketches">
+						<img src="../img/compra_realizada.png" />
+						<div class="description">
+							<h4>~ COMPRA REALIZADA ~</h4>
+							<p>Confirmará la compra de las entradas y si estás registrado podrás ver tu historial de compras.</p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- About us -->
+					<div class="sketches">
+						<img src="../img/about_us.png" />
+						<div class="description">
+							<h4>~ ABOUT US ~</h4>
+							<p>Describe el equipo de FDI-cines.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column left">
+					<!-- Formulario de contacto -->
+					<div class="sketches">
+						<img src="../img/contacto.png" />
+						<div class="description">
+							<h4>~ FORMULARIO DE CONTACTO ~</h4>
+							<p>Si un usuario tiene algún problema se puede poner en contacto en esta página.</p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- Terminos y condiciones -->
+					<div class="sketches">
+						<img src="../img/terminosyCondiciones.png" />
+						<div class="description">
+							<h4>~ TÉRMINOS Y CONDICIONES ~</h4>
+							<p>Habrá un texto describiendo los términos y condiciones de la página web.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<br>
+
+		<!-- Bocetos Gerente -->
+		<fieldset>
+			<legend>VISTA GERENTE</legend>
+			<div class="row">
+				<div class="column left">
+					<!-- Panel de inicio Gerente -->
+					<div class="sketches">
+						<img src="../img/panel_inicio_gerente.png" />
+						<div class="description">
+							<h4>~ PANEL DE INICIO ~</h4>
+							<p>Pantalla de inicio del gerente de un cine.</p>
+							<p>El gerente podrá administrar las salas y las sesiones.</p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- Gestionar salas -->
+					<div class="sketches">
+						<img src="../img/gestionar_salas.png" />
+						<div class="description">
+							<h4>~ GESTIONAR SALAS ~</h4>
+							<p>Solo podrá gestionar las salas el gerente, escoge una sala y lo edita o lo deshabilita(ya que una sala no se puede eliminar físicamente), también podrá añadir una nueva sala y guardarla.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column left">
+					<!-- Gestionar sesiones -->
+					<div class="sketches">
+						<img src="../img/gestionar_sesiones.png" />
+						<div class="description">
+							<h4>~ GESTIONAR SESIONES ~</h4>
+							<p>Solo podrá gestionar las sesiones el gerente, escoge una sesión y lo edita o lo elimina, también podrá añadir una nueva sesión y guardarla.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+		<br>
+
+		<!-- Bocetos Administrador -->
+		<fieldset>
+			<legend>VISTA ADMINISTRADOR</legend>
+			<div class="row">
+				<div class="column left">
+					<!-- Panel de Inicio Admin -->
+					<div class="sketches">
+						<img src="../img/panel_inicio_admin.png" />
+						<div class="description">
+							<h4>~ PANEL DE INICIO ~</h4>
+							<p>Pantalla de inicio del administrador.</p>
+							<p>
+								El administrador podrá añadir, editar y eliminar las películas, cines y promociones, también podrá añadir o eliminar
+								a un gerente o administrador, y ver la página con la vista de usuario final.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- Gestionar Peliculas -->
+					<div class="sketches">
+						<img src="../img/gestionarPeliculas.png" />
+						<div class="description">
+							<h4>~ GESTIONAR PELÍCULAS ~</h4>
+							<p>El administrador puede listar las películas existentes, modificar sus datos, eliminarlas, o añadir una película nueva.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column left">
+					<!-- Gestionar Cines -->
+					<div class="sketches">
+						<img src="../img/gestionarCines.png" />
+						<div class="description">
+							<h4>~ GESTIONAR CINES ~</h4>
+							<p>El administrador puede listar los cines existentes, modificar sus datos, eliminarlos, o añadir un cine nuevo.</p>
+						</div>
+					</div>
+				</div>
+				<div class="column left">
+					<!-- Gestionar Promociones -->
+					<div class="sketches">
+						<img src="../img/gestionarPromociones.png" />
+						<div class="description">
+							<h4>~ GESTIONAR PROMOCIONES ~</h4>
+							<p>El administrador puede listar las promociones existentes, modificar sus datos, eliminarlas, o añadir una promoción nueva.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="column left">
+					<!-- Gestionar Admins-Gerentes -->
+					<div class="sketches">
+						<img src="../img/gestionar_admins_gerentes.png" />
+						<div class="description">
+							<h4>~ GESTIONAR ADMINS-GERENTES ~</h4>
+							<p>El administrador puede listar los administradores y gerentes existentes, modificar sus datos, eliminarlos, o añadir un admin/gerente nuevo.</p>
+						</div>
+					</div>
+				</div>
+
+		</fieldset>
+		<br>
+
+		<!-- Footer -->
+		<div class="footer">
+			<p>© Práctica 1 | Sistemas Web 2021 </p>
+		</div>
+
+		<!-- Scripts -->
+
+	</body>
 
 </html>
