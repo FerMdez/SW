@@ -1,6 +1,7 @@
 /* Basic */
 * {
   box-sizing: border-box;
+  margin: 0px;
 }
 
 /* Headers */
@@ -39,11 +40,40 @@ h4 {
   width: 11px;
 }
 .menu {
-    background-color: #1f2c3d;
-    color: #dadada;
     text-align: right;
     font-size: 15px;
 }
+.menu nav a{
+  text-decoration: none;
+  color: inherit;
+  font-size: 14px;
+}  
+.menu nav li{
+  display: inline-block;
+  width: 150px;
+  height: 30px;
+  padding: 5px 10px;
+  background-color :#1f2c3d;
+  border: 1px solid #d3ebff;
+  text-align: center;
+  color :#d3ebff;
+  position: relative;
+}      
+.menu nav li:hover{
+  background-color:#d3ebff;
+  color:#1f2c3d;
+  border-color: #1f2c3d;
+} 
+.menu nav li>ul{
+  display: none;
+}
+.menu nav li:hover>ul{
+  display: block;
+  position: absolute;
+  top: 29px;
+  right: -1px;
+}
+
 
 /* Paragraphs */
 p {
