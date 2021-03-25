@@ -56,10 +56,60 @@
             <!-- Contents -->
             <div class="row">
                 <div class="column side"></div>
-                    <div class="column middle">
-                        <h2>AQUÍ EL CONTENIDO DE CADA FUNCIONALIDAD.</h2>
-                        <p>Debe variar dinámicamente según el botón del panel izquierdo que se pulse (sin cargar una página diferente, aunque tendrá que recargar el contido, eso sí).</p>
-                        <p>Tendréis que rehacer todo el "PANEL" con PHP.</p>
+                    <div class="column side">
+                        <?php
+							class Session {
+								public $hour;
+								public $title;
+								public $format;
+								public $lang;
+							}			
+
+							$s1 = new Session();
+							$s1->hour = '10:00';
+							$s1->title = 'Los vengativos:final del juego';
+							$s1->format = 'Comic Sans';
+							$s1->lang = 'Castellano';
+							
+							
+							$s2 = new Session();
+							$s2->hour = '12:00';
+							$s2->title = 'Los vengativos:final del juego';
+							$s2->format = 'Comic Sans';
+							$s2->lang = 'Castellano';
+							
+							$s3 = new Session();
+							$s3->hour = '14:00';
+							$s3->title = 'Los vengativos:final del juego';
+							$s3->format = 'Comic Sans';
+							$s3->lang = 'Castellano';
+
+
+							$sessions = array($s1, $s2, $s3);							
+							$num_s = 3; 
+							
+							function drawSessions($ses){
+							echo "<table border='1'>"; 
+
+								foreach($ses as $s){ 
+								echo "<tr>"; 
+								
+									echo "<td> <td align='center'>". $s->hour."</td>"; 
+									echo "<td> <td align='center'>". $s->title."</td>"; 
+									echo "<td> <td align='center'>". $s->format."</td>"; 
+									echo "<td> <td align='center'>". $s->lang."</td>"; 
+									echo "<td> <td align='center'> <button type=\"button\">Editar</button> </td>"; 
+									echo "</tr>"; 
+									
+								} 
+								echo "<tr>"; 
+								echo "<td> <td align='center'> <button type=\"button\">Añadir</button> </td>"; 
+								echo "</tr>"; 
+							echo "</table>";
+							}
+							
+							drawSessions($sessions);
+						?>
                     </div>
                     <div class="column side"></div>
                 </div>
