@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+OCTYPE HTML>
 <?php 
     session_start();
 
@@ -55,8 +55,7 @@
             </div>
             <!-- Contents -->
             <div class="row">
-                <div class="column side"></div>
-                    <div class="column side">
+                    <div class="column left">
                         <?php
 							class Session {
 								public $hour;
@@ -83,29 +82,60 @@
 							$s3->title = 'Los vengativos:final del juego';
 							$s3->format = 'Comic Sans';
 							$s3->lang = 'Castellano';
+							
+							$s4 = new Session();
+							$s4->hour = '16:00';
+							$s4->title = 'Los vengativos:final del juego';
+							$s4->format = 'Comic Sans';
+							$s4->lang = 'Castellano';
+							
+							$s5 = new Session();
+							$s5->hour = '18:00';
+							$s5->title = 'Los vengativos:final del juego';
+							$s5->format = 'Comic Sans';
+							$s5->lang = 'Castellano';
+							
+							$s6 = new Session();
+							$s6->hour = '20:00';
+							$s6->title = 'Los vengativos:final del juego';
+							$s6->format = 'Comic Sans';
+							$s6->lang = 'Castellano';
+							
+							$s7 = new Session();
+							$s7->hour = '22:00';
+							$s7->title = 'Los vengativos:final del juego';
+							$s7->format = 'Comic Sans';
+							$s7->lang = 'Castellano';
+							
+							$s8 = new Session();
+							$s8->hour = '23:59';
+							$s8->title = 'Los vengativos:final del juego';
+							$s8->format = 'Comic Sans';
+							$s8->lang = 'Castellano';
 
-
-							$sessions = array($s1, $s2, $s3);							
-							$num_s = 3; 
+							$sessions = array($s1, $s2, $s3, $s4, $s5, $s6, $s7, $s8);							
 							
 							function drawSessions($ses){
+							echo "<div class=\"table_container\">";
 							echo "<table border='1'>"; 
-
 								foreach($ses as $s){ 
-								echo "<tr>"; 
-								
+									echo "<tr>"; 
+									
 									echo "<td> <td align='center'>". $s->hour."</td>"; 
 									echo "<td> <td align='center'>". $s->title."</td>"; 
 									echo "<td> <td align='center'>". $s->format."</td>"; 
 									echo "<td> <td align='center'>". $s->lang."</td>"; 
-									echo "<td> <td align='center'> <button type=\"button\">Editar</button> </td>"; 
+									echo "<td> <td align='center'><button type=\"button\">Editar</button></td>"; 
+									
 									echo "</tr>"; 
 									
 								} 
-								echo "<tr>"; 
-								echo "<td> <td align='center'> <button type=\"button\">Añadir</button> </td>"; 
-								echo "</tr>"; 
+							echo "<tr>"; 
+							echo "<td> <td align='center' colspan=\"9\"> <button type=\"button\">Añadir</button> </td>"; 
+							echo "</tr>"; 
+							
 							echo "</table>";
+							echo "</div>";
 							}
 							
 							drawSessions($sessions);
