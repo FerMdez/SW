@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <?php 
     session_start();
-
+    require('manage_cinemas.php');
     require_once('../assets/php/template.php');
     $template = new Template();
-
+ 
     // IMPORTANTE:
     //  VERIFICAR QUE ES ADMIN, SI NO, MOSTRAR MENSAJE DE "ERROR"
 ?>
@@ -54,16 +54,15 @@
                 </ul>
             </div>
             <!-- Contents -->
+
             <div class="row">
-                <div class="column side"></div>
-                    <div class="column middle">
-                        <h2>AQUÍ EL CONTENIDO DE CADA FUNCIONALIDAD.</h2>
-                        <p>Debe variar dinámicamente según el botón del panel izquierdo que se pulse (sin cargar una página diferente, aunque tendrá que recargar el contido, eso sí).</p>
-                        <p>Tendréis que rehacer todo el "PANEL" con PHP.</p>
-                    </div>
-                    <div class="column side"></div>
-                </div>
+                <?php 
+                echo $delete_cinemas; 
+                echo $add_cinemas;
+                ?>
+
             </div>
+        </div>
 
         <!-- Footer -->
         <?php
