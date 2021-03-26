@@ -1,12 +1,20 @@
 <!DOCTYPE HTML>
 <?php 
     session_start();
-    require('manage_cinemas.php');
+
     require_once('../assets/php/template.php');
+    require_once('../panel_admin/panelAdmin.php');
     $template = new Template();
- 
+   
+    if(isset($_REQUEST['state'])) {
+        $panel = new Panel($_REQUEST['state']);
+    }
+    else {
+        $panel = new Panel('');
+    }
     // IMPORTANTE:
     //  VERIFICAR QUE ES ADMIN, SI NO, MOSTRAR MENSAJE DE "ERROR"
+    
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
@@ -35,40 +43,40 @@
                 <ul>
                 <li>Funcionalidad:</li>
                     <ul>
-                        <li>Subfuncionalidad</li>
-                        <li>Subfuncionalidad</li>
+                        <li><a href="index.php?state=">Subfuncionalidad </a></li>
+                        <li><a href="index.php?state=">Subfuncionalidad</a></li>
                     </ul><br />
                     <li>Ver como:</li>
                     <ul>
-                        <li>Usuario no registrado</li>
-                        <li>Usuario registrado</li>
-                        <li>Gerente</li>
+                        <li><a href="index.php?state=">Usuario no registrado</a></li>
+                        <li><a href="index.php?state=">Usuario registrado</a></li>
+                        <li><a href="index.php?state=">Gerente</a></li>
                     </ul><br />
                     <li>Añadir/Editar/Eliminar:</li>
                     <ul>
-                        <li>Cines</li>
-                        <li>Películas</li>
-                        <li>Promociones</li>
-                        <li>Gerente</li>
+                        <li><a href="index.php?state=mc">Cines</a></li>
+                        <li><a href="index.php?state=mf">Películas</a></li>
+                        <li><a href="index.php?state=">Promociones</a></li>
+                        <li><a href="index.php?state=">Gerente</a></li>
                     </ul>
                 </ul>
             </div>
             <!-- Contents -->
-
             <div class="row">
-                <?php 
-                echo $delete_cinemas; 
-                echo $add_cinemas;
-                ?>
-
+                <div class="column side"></div>
+                    <div class="column middle">
+                        <?php
+                            $panel->showPanel();
+                        ?>
+                    </div>
+                    <div class="column side"></div>
+                </div>
             </div>
-        </div>
 
         <!-- Footer -->
         <?php
             $template->print_footer();
         ?>
-       
     </body>
 
 </html>
