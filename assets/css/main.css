@@ -29,7 +29,7 @@ h4 {
 }
 
 /* Buttons */
-button {
+button, .button.large {
   display: inline-block;
   margin: 10px;
   width: 150px;
@@ -42,13 +42,15 @@ button {
   font-weight: bold;
   position: relative;
 }
-button:hover{
+.button.large {
+  width: 95%;
+}
+button:hover, .button:hover {
   cursor: pointer;
   background-color:#d3ebff;
   color:#1f2c3d;
   border-color: #1f2c3d;
 } 
-
 
 /* Header */
 .header {
@@ -164,9 +166,30 @@ table a{
     font-weight: 600;
     padding: 0 0.85em 0.85em 0.85em;
   }
-  table thead {
+  table thead, table tfoot {
     border-bottom: solid 2px #1f2c3d;
   }
+  table.alt {
+    border-collapse: separate;
+  }
+  table.alt tbody tr td {
+    border: solid 1px #1f2c3d;
+    border-left-width: 0;
+    border-top-width: 0;
+  }
+
+    table.alt tbody tr td:first-child {
+      border-left-width: 1px;
+    }
+
+  table.alt tbody tr:first-child td {
+    border-top-width: 1px;
+  }
+
+  table.alt thead, table.alt tfoot {
+    border-top: 0;
+  }
+
 
 /* Main */
 .main {
