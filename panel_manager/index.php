@@ -8,10 +8,10 @@
 	$template = new Template();
 
 	if(isset($_REQUEST['state'])) {
-        $panel = new Panel($_REQUEST['state']);
+        $panel = new Panel($_REQUEST['state']); //CHICOS, UNA CLASE CREADA ASÍ ESTÁ HORRIBLE, ADEMÁS NO SÉ QUÉ FUNCIÓN TIENE EXCACTAMENTE ESTA CLASE, PERO DEBÉIS REHACERLA
     }
     else {
-        $panel = new Panel('');
+        $panel = new Panel('');  //ESTO NO PUEDE SER ASÍ
     }
     // IMPORTANTE:
     //  VERIFICAR QUE ES MANAGER(GERENTE), SI NO, MOSTRAR MENSAJE DE "ERROR"
@@ -55,12 +55,14 @@
             </div>
             <!-- Contents -->
             <div class="row">
+                <div class="column side"></div>
                 <div class="column middle">
 					<?php
 						$panel->showPanel();
 					?>  
                 </div>
             </div>
+            <div class="column side"></div>
 		</div>
         <!-- Footer -->
         <?php

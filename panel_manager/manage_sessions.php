@@ -2,6 +2,9 @@
 	require('room_dto.php');
 	require('session_dto.php');
 ?>
+<!-- DEBEIS RECOLOCAR LAS COLUMNAS, ESTÁIS METIENDO UN COLUMN LEFT Y COLUMN RIGHT DENTRO DEL COLUMN MIDDLE DE PANEL_MANAGER -->
+<!-- ESO HACE QUE QUEDE TODO EN EL MEDIO APELOTONADO Y LO DE LA DERECHA VACÍO -->
+<!-- DEBÉIS QUITAR LOS COLUMN LEFT Y RIGHT Y METER LO DEL COLUMN LEFT DENTRO DEL COLUMN MIDDLE DE PANEL_MANAGER Y EL CONTENIDO DEL COLUMN RIGHT DENTRO DEL SEGUNDO COLUMN SIDE DE PANEL_MANAGER -->
 <div class="column left">
 	<input type="date" name="fecha" min="2021-01-01" max="2031-12-31">
 	<?php								
@@ -37,22 +40,33 @@
 				
 		function drawSessions($ses){
 		
-			echo "<table>"; 
-				foreach($ses as $s){ 
-				echo "
+		echo "
+		<table class='alt'>
+			<thead>
+				<tr>
+					<th>Hora</th>
+					<th>Película</th>
+					<th>Tipo</th>
+					<th>Precio</th>
+					<!-- <th>Opción</th> --> <!-- HAY QUE ELIMINAR ESTA COLUMNA, COMO EXPLICÓ IVÁN EN CLASE, -->
+												<!-- LAS TABLAS TIENEN EL PROBLEMA DE QUE CON MUCHAS COLUMNAS SE EXPANDEN FUERA DE LOS LÍMITES -->
+				</tr>
+			</thead>
+			<tbody>"; 
+			foreach($ses as $s){ 
+			echo "
 					<tr>
 						<td>" . $s->getStartTime() . "</td>
 						<td>" . $s->getFilm() . "</td>
 						<td>" . $s->getFormat() . "</td>
 						<td>". $s->getSeatPrice() . "</td>
-						<td> <button type=\"button\" onClick=\"Javascript:window.location.href = 'index.php?edit_sessions=true';\")\">Editar</button> </td>
+						<!-- <td> <button type=\"button\" onClick=\"Javascript:window.location.href = 'index.php?edit_sessions=true';\")\">Editar</button> </td> --> 
+										<!-- LA SOLUCIÓN PUEDE SER PONER EN ELACE DE EDICIÓN EN CADA UNO DE LOS ELEMENTOS DE LA COLUMNA -->
 					</tr>"; 
-				} 
-				echo "
-					<tr>
-						<td> <button type=\"button\" onClick=\"Javascript:window.location.href = 'index.php?edit_sessions=true';\")\">Añadir</button> </td>
-					</tr>
-		</table>";
+			} 
+			echo "<tbody>
+			</table>\n";
+			echo "<a href=\"index.php?edit_sessions=true\" class='button large'>Añadir</a>";
 		}
 		drawSessions($sessions);
 	?>	
