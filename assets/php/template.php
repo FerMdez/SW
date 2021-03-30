@@ -79,7 +79,7 @@
         $session_route =$this->session_route;
         $user_route = $this->user_route;
         $panel =$this->panel;
-        
+
         if(isset($_SESSION["nombre"])){
             if($_SESSION["rol"] == "admin") $user_route = 'panel_admin/';
             else if($_SESSION["rol"] == "manager") $user_route = 'panel_manager/';

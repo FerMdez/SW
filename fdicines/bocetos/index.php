@@ -30,8 +30,8 @@
                 <h2>FLUJO DE NAVEGACIÓN</h2>
                 <hr>
                 <!-- User Flow -->
-                <fieldset>
-                    <legend>Usuario</legend>
+                <div class="textbox">
+                    <h2>Usuario</h2>
                     <p>
                         El Usuario puede tomar dos caminos a la hora de seleccionar la película, el cine, y la sesión a la que quiere asistir. La diferencia es puramente
                         de orden entre la elección de cine y de la película, a conveniencia del usuario; se procede a explicar ambos:
@@ -59,24 +59,24 @@
                     <p>
                         Una vez elegidos película y cine, el flujo es idéntico al anterior.
                     </p>
-                </fieldset>
+                </div>
                 <!-- Manager Flow -->
-                <fieldset>
-                    <legend>Gerente</legend>
+                <div class="textbox">
+                    <h2>Gerente</h2>
                     <p>
                         El Gerente es el encargado de gestionar las sesiones y salas de cada cine. La forma de proceder es la misma que el administrador, con vistas equivalentes.
                         En el caso de la gestión de salas, se administrarán los asientos disponibles (por temas de Covid-19) y si está o no habilitada para su uso.
                     </p>
-                </fieldset>
+                </div>
                 <!-- Admin Flow -->
-                <fieldset>
-                    <legend>Administrador</legend>
+                <div class="textbox">
+                    <h2>Administrador</h2>
                     <p>El Administrador es el encargado de gestionar las: películas, cines, promociones, otros administradores y gerentes de cada cine.</p>
                     <p>Para cada categoría tiene un panel en el que puede seleccionar, a partir de una lista, el elemento que quiere modificar, también hay otro panel al lado, en donde
                     puede modificar los datos de un elemento ya existente o crear uno nuevo introduciendo datos que no existan en la BD. También hay una opción de Eliminar en caso de que
                     quiera eliminar un elemento.</p>
                     <p>También cuenta con un botón de "Vista de Usuario", con el que puede navegar por la página con la vista que tendrá el usuario final.</p>
-                </fieldset>
+                </div>
             </div>
         </section>
 

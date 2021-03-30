@@ -24,7 +24,9 @@
             <div class="image"><img src="../../img/logo_trasparente.png" /></div>
             <!-- Terminos y Condiciones -->
             <h1>Términos y Condiciones</h1>
-            <div class="header">
+            </div>
+
+            <div class="code">
             <p>Todo usuario que desee acceder a la compra de entradas a través del servicio, primero debe leer y aceptar los Términos y Condiciones de compra que a continuación se detallan.
         Una vez que inicie la navegación a través de esta web el internauta adquiere la condición de USUARIO, y una vez que cumplimente los pasos establecidos para la compra de
         entradas de cine, tendrá la consideración de CLIENTE. En cumplimiento de lo dispuesto en el Real Decreto 1906/99 de diecisiete de diciembre, por la que se regula la
@@ -216,7 +218,7 @@
                 <br>
             </ul>
             </div>
-        </div>
+        
 
         <!-- Footer -->
         <?php

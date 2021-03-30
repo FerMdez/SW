@@ -31,8 +31,8 @@
                     <div class="code plan">
                         <h2>Tareas</h2>
                         <hr />
-                        <fieldset>
-                            <legend>Implementaciones Generales de la Web</legend>
+                        <div class="textbox">
+                            <h2>Implementaciones Generales de la Web</h2>
                             <ul>
                                 <li>Pantalla de Inicio (incluye promociones y estrenos) [Fer && Adrián]</li>
                                 <li>Cartelera Dinámica [Fer --> Marian && Daniel]</li>
@@ -44,25 +44,25 @@
                                 <li>Formulario de Contacto [Fer]</li>
                                 <li>Términos y Condiciones [Fer && Adrián]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Paneles de Usuario Registrado</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Paneles de Usuario Registrado</h2>
                             <ul>
                                 <li>Registrarse e Iniciar sesión [Adrián]</li>
                                 <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Adrián]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Paneles de Gerente</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Paneles de Gerente</h2>
                             <ul>
                                 <li>Pantalla de inicio de gerente [Marco && Óscar]</li>
                                 <li>Eliminar sesión de una película [Marco && Óscar]</li>
                                 <li>Deshabilitar salas [Marco && Óscar]</li>
                                 <li>Deshabilitar asientos en una sala [Marco && Óscar]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Paneles de Administrador</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Paneles de Administrador</h2>
                             <ul>
                                 <li>Panel de inicio administrador (ver todas la funcionalidades de admin de un vistazo) [Daniel && Marian]</li>
                                 <li>Ver como >> Usuario no registrado || Usuario registrado || (Gerente: Añadir si vamos bien de tiempo) [Daniel && Marian]</li>
@@ -71,15 +71,15 @@
                                 <li>Panel añadir/editar/eliminar promociones [Marian && Daniel]</li>
                                 <li>Panel añadir/editar/eliminar gerentes [Marian && Daniel]</li>
                             </ul>
-                        </fieldset>
+                        </div>
                     </div>
                 </div>
                 <div class="column middle">
                     <div class="code plan">
                         <h2>Divisón del trabajo</h2>
                         <hr />
-                        <fieldset>
-                            <legend>Marco Expósito Pérez</legend>
+                        <div class="textbox">
+                            <h2>Marco Expósito Pérez</h2>
                             <ul>
                                 <li>Pantalla de inicio de gerente [Gerente]</li>
                                 <li>Eliminar sesión de una película [Gerente]</li>
@@ -87,9 +87,9 @@
                                 <li>Deshabilitar asientos en una sala [Gerente]</li>
                                 <li>Selección de butacas [General (de apoyo)]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Fernando Méndez Torrubiano</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Fernando Méndez Torrubiano</h2>
                             <ul>
                                 <li>Pantalla de Inicio (incluye promociones y estrenos) [General]</li>
                                 <li>Cartelera Dinámica [General]</li>
@@ -101,9 +101,9 @@
                                 <li>Formulario de Contacto [General]</li>
                                 <li>Términos y Condiciones [General (de apoyo)]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Daniel Muñoz García</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Daniel Muñoz García</h2>
                             <ul>
                                 <li>Panel de inicio administrador (ver todas la funcionalidades de admin de un vistazo) [Administrador]</li>
                                 <li>Ver como >> Usuario no registrado || Usuario registrado || (Gerente: Añadir si vamos bien de tiempo) [Administrador]</li>
@@ -112,9 +112,9 @@
                                 <li>Panel añadir/editar/eliminar promociones [Administrador]</li>
                                 <li>Panel añadir/editar/eliminar gerentes [Administrador]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Ioan Marian Tulai</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Ioan Marian Tulai</h2>
                             <ul>
                                 <li>Panel de inicio administrador (ver todas la funcionalidades de admin de un vistazo) [Administrador]</li>
                                 <li>Ver como >> Usuario no registrado | Usuario registrado | (Gerente: Añadir si vamos bien de tiempo) [Administrador]</li>
@@ -123,9 +123,9 @@
                                 <li>Panel añadir/editar/eliminar promociones [Administrador]</li>
                                 <li>Panel añadir/editar/eliminar gerentes [Administrador]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Óscar Ruiz de Pedro</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Óscar Ruiz de Pedro</h2>
                             <ul>
                                 <li>Pantalla de inicio de gerente [Gerente]</li>
                                 <li>Eliminar sesión de una película [Gerente]</li>
@@ -133,9 +133,9 @@
                                 <li>Deshabilitar asientos en una sala [Gerente]</li>
                                 <li>Selección de butacas [General (de apoyo)]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Adrian Real del Noval</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Adrian Real del Noval</h2>
                             <ul>
                                 <li>Registrarse e Iniciar sesión [Usuario Registrado]</li>
                                 <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Usuario Registrado]</li>
@@ -143,15 +143,15 @@
                                 <li>Términos y Condiciones [General]</li>
                                 <li>Pantalla de Inicio (incluye promociones y estrenos) [General (de apoyo)]</li>
                             </ul>
-                        </fieldset>
+                        </div>
                     </div>
                 </div>
                 <div class="column side">
                     <div class="code plan">
                         <h2>Plazos</h2>
                         <hr />
-                        <fieldset>
-                            <legend>Práctica 1 [HTML]</legend>
+                        <div class="textbox">
+                            <h2>Práctica 1 [HTML]</h2>
                             <div class="bar">100%</div>
                             <ul>
                                 <li>Inicio</li>
@@ -161,9 +161,9 @@
                                 <li>Planificación</li>
                                 <li>Contacto</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Práctica 2 [HTML + PHP]</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Práctica 2 [HTML + PHP]</h2>
                             <div class="bar">100%</div>
                             <ul>
                                 <li>Sobre FDI-Cines (About us) [Fer && Adrián]</li>
@@ -193,9 +193,9 @@
                                 <li>Panel añadir/editar/eliminar promociones [Marian && Dani]</li>
                                 <li>Panel añadir/editar/eliminar gerentes [Marian && Dani]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Práctica 3 [HTML + PHP + CSS]</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Práctica 3 [HTML + PHP + CSS]</h2>
                             <div class="bar">100%</div>
                             <ul>
                                 <li>Eliminar sesión de una película [Marco && Óscar]</li>
@@ -216,14 +216,14 @@
                                 <li>Panel añadir/editar/eliminar promociones [Marian && Dani]</li>
                                 <li>Panel añadir/editar/eliminar gerentes [Marian && Dani]</li>
                             </ul>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Entrega Final [HTML + PHP + CSS + JS]</legend>
+                        </div>
+                        <div class="textbox">
+                            <h2>Entrega Final [HTML + PHP + CSS + JS]</h2>
                             <div class="bar">100%</div>
                             <ul>
                                 <li>Todo el trabajo restante.</li>
                             </ul>
-                        </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>

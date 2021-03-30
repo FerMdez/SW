@@ -366,6 +366,20 @@ table a{
   }
 }
 
+/* Text Box */
+.textbox {
+  color: #d3ebff;
+  padding: 15px 15px 10px 15px;
+  margin: 10px 0 10px;
+  overflow: hidden;
+  border-radius: 25px 0px 25px 0px;
+  border: 2px solid #d3ebff;
+}
+.textbox h1, .textbox h2, .textbox h3 {
+  color: #d3ebff;
+  text-align: left;
+}
+
 /* Galery */
 .galery {
   box-sizing: border-box;
@@ -396,6 +410,7 @@ table a{
   font-size: 13px;
   font-weight: bold;
   width: 100%;
+  color: #00020f;
   background-color: #d3ebff;
   text-align: right;
 }

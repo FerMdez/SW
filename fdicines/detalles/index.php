@@ -52,37 +52,37 @@
 					<div class = "code details">
 						<h2>Tipos de usuario</h2>
 						<hr />	
-						<fieldset>
-							<legend>Usuario No Registrado</legend>
+						<div class="textbox">
+							<h2>Usuario No Registrado</h2>
 							<p>
 								Este tipo de usuario, puede interactuar con la web sin necesidad de estar registrado. Podrá realizar compras, ver horarios y cartelera, sin necesidad de realizar ningún registro.
 								No podrá usar ninguna de las promociones, pues estas estarán únicamente destinadas a los usuarios registrados.
 							</p>
-						</fieldset>
-						<fieldset>
-							<legend>Usuario Registrado</legend>
+						</div>
+						<div class="textbox">
+							<h2>Usuario Registrado</h2>
 							<p>
 								Estos usuarios son aquellos que previamente han realizado un registro en la base de datos del sistema. Tendrán las mismas funcionalidades básicas 
 								que un usuario no registrado y además, podrán acceder a ofertas y aplicar promociones y descuentos y ver el historial de sus compras.
 								Además, estos usuarios podrán cancelar una compra previamente hecha, pues estas se asociarían a su cuenta, algo que sería imposible
 								con un usuario no registrado.
 							</p>
-						</fieldset>
-						<fieldset>
-							<legend>Gerente de Cine</legend>
+						</div>
+						<div class="textbox">
+							<h2>Gerente de Cine</h2>
 							<p>
 								Un administrador de rango bajo capaz de acceder a la vista de administradores, puede ver las peliculas que hay en la base de datos. 
 								Este usuario está asociado a un cine, sobre el cual puede añadir sesiones con peliculas existentes y modificar la disposicion de butacas.
 							</p>
-						</fieldset>
-						<fieldset>
-						<legend>Administrador</legend>
+						</div>
+						<div class="textbox">
+						<h2>Administrador</h2>
 							<p>
 								El administrador es capaz de ascender cuentas de usuario registradas a cuentas de gerente de cine. Ademas es el encargado de añadir nuevos cines y peliculas.
 								Para comprobar el correcto funcionamiento de la pagina podrá cambiar entre distintas vistas de usuario. 
 								Las cuales le permitirán comprobar que cada usuario tiene acceso únicamente a sus funcionalidades y no a funcionalidades de otro rango superior.
 							</p>
-						</fieldset>
+						</div>
 					</div>
 				</div>
 				<div class="column right">
