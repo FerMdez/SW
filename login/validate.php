@@ -10,7 +10,6 @@
     $login = new FormLogin();
     $login->processesForm($_POST["name"], $_POST["pass"]);
     $reply = $login->getReply();
-
 ?>
 <!DOCTYPE HTML>
 <!--
