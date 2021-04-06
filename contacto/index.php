@@ -32,10 +32,10 @@
                     <fieldset id="datos_personales">
                         <legend>Datos personales</legend>
                         <div class="_name">
-                            <input type="text" name="name" id="name" value="" placeholder="Nombre" />
+                            <input type="text" name="name" id="name" value="" placeholder="Nombre" required/>
                         </div>
                         <div class="_email">
-                            <input type="email" name="email" id="email" value="" placeholder="Email" />
+                            <input type="email" name="email" id="email" value="" placeholder="Email" required/>
                         </div>
                     </fieldset>
                     <fieldset id="motivo">
@@ -57,7 +57,7 @@
                         <textarea name="message" id="message" placeholder="Escribe aquí tu mensaje..."></textarea> <!-- rows="5"  -->
                     </div>
                     <div class="verify">
-                        <input type="checkbox" id="checkbox" name="terms">
+                        <input type="checkbox" id="checkbox" name="terms" required>
                         <label for="terms">Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</label>
                     </div>
                     <div class="actions"> 
