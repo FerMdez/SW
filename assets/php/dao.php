@@ -14,8 +14,8 @@
         public function __construct($bd_name){
             try{
                 if (!$this->mysqli) {
-                    $this->mysqli = new mysqli(_SERVERNAME, _USERNAME, 
-                                                _PASSWORD, $bd_name);
+                    $this->mysqli = new mysqli("localhost", "sw", 
+                                                "_admin_", $bd_name);
                 }
                 // echo "Conexión a la BD, satisfactoria.";
             } catch (Exception $e){

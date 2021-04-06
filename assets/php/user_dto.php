@@ -30,8 +30,8 @@
 		public function getEmail(){ return $this->_email; }
 		public function setPass($passwd){	$this->_password = $passwd; }
 		public function getPass(){ return $this->_password; }
-        public function setRoles($rol){ $this->_rol = $rol; }
-		public function getRoles(){ return $this->_rol; }
+        public function setRol($rol){ $this->_rol = $rol; }
+		public function getRol(){ return $this->_rol; }
 
     }
 ?>

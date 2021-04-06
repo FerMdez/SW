@@ -8,7 +8,7 @@
 		public function getEmail();
 		public function setPass($passwd);
 		public function getPass();
-        public function setRoles($rol);
-		public function getRoles();
+        public function setRol($rol);
+		public function getRol();
     }
 ?>

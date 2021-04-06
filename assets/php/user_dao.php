@@ -1,4 +1,7 @@
 <?php
+	require_once('dao.php');
+	include_once('user_dto.php');
+
     class UserDAO extends DAO {
 		
 		//Constants:
@@ -10,7 +13,7 @@
 
 		//Constructor:
         function __construct($bd_name){
-			parent::__construct();
+			parent::__construct($bd_name);
         }
 
 		//Methods:
@@ -37,14 +40,24 @@
 		public function selectUser($username){
 			$sql = sprintf( "SELECT * FROM users WHERE username = '%s'", $username );
 
-			return $sql;
+			//return $sql;
+			return $result = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+		}
+
+		//Returns a query to check if the user pass matches:
+		public function selectPass($password){
+			$sql = sprintf( "SELECT * FROM users WHERE passwd = '%s'", $password );
+
+			//return $sql;
+			return $result = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 		}
 
 		//Returns a query to get the user's data:
 		public function userData($id){
 			$sql = sprintf( "SELECT * FROM users WHERE id = '%d'", $id );
 
-			return $sql;
+			//return $sql;
+			return $result = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 		}
 
 		//Create a new User Data Transfer Object:
