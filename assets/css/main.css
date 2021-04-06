@@ -287,7 +287,7 @@ table a{
 .code a {
   text-decoration: underline; 
 }
-.code ul {
+.code ul, .code ol {
   color: #dadada;
 }
 .code img{

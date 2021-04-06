@@ -1,13 +1,21 @@
 <?php
     // TO-DO: Completar
     class DAO {
+        //Constants:
+        private const _SERVERNAME = "localhost";
+        private const _USERNAME = "sw";
+        private const _PASSWORD = "_admin_";
+        //private const _BD = "complucine";
+
+        //Atributes:
         public $mysqli;
-    
-        public function __construct(){
+
+        //Constructor:
+        public function __construct($bd_name){
             try{
                 if (!$this->mysqli) {
-                    $this->mysqli = new mysqli('127.0.0.1', 'sw', 
-                                            '_admin_', 'complucine');
+                    $this->mysqli = new mysqli(_SERVERNAME, _USERNAME, 
+                                                _PASSWORD, $bd_name);
                 }
                 // echo "Conexión a la BD, satisfactoria.";
             } catch (Exception $e){
@@ -18,8 +26,11 @@
             /* ... */
         }
 
+        //Destructor:
         public function __destruct(){
             $this->mysqli->close();
         }
+
+        //Methods:
     }
 ?>

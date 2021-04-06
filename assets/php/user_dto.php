@@ -1,4 +1,6 @@
 <?php
+    include_once('users_dto_interface.php');
+    
     class UserDTO implements UsersDTO {
 
         //Attributes:
@@ -9,12 +11,12 @@
         private $_rol;          //Type of user: user | manager | admin.
 
 		//Constructor:
-        function __construct($id, $username, $email, $password, $roles){
+        function __construct($id, $username, $email, $password, $rol){
             $this->_id = $id;
             $this->_username = $username;
             $this->_email = $email;
             $this->_password = $password;
-            $this->_rol = $roles;
+            $this->_rol = $rol;
         }
 
 		//Methods:

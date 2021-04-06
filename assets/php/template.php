@@ -36,7 +36,7 @@
             case strpos($this->page, 'showtimes'): $this->page = 'Cartelera'; break;
             case strpos($this->page, 'cinemas'): $this->page = 'Nuestros Cines'; break;
             case strpos($this->page, 'about_us'): $this->page = 'Sobre FDI-Cines'; $this->prefix = '../../'; break;
-            case strpos($this->page, 'terms'): $this->page = 'Terminos y Condiciones'; $this->prefix = '../../'; break;
+            case strpos($this->page, 'terms'): $this->page = 'Términos y Condiciones'; $this->prefix = '../../'; break;
             case strpos($this->page, 'detalles'): $this->page = 'Detalles'; $this->prefix = '../../'; break;
             case strpos($this->page, 'bocetos'): $this->page = 'Bocetos'; $this->prefix = '../../'; break;
             case strpos($this->page, 'miembros'): $this->page = 'Miembros'; $this->prefix = '../../'; break;
@@ -44,7 +44,6 @@
             case strpos($this->page, 'contacto'): $this->page = 'Contacto'; break;
             default: $this->page = 'FDI-Cines'; $this->prefix = './'; break;
         }
-
     }
 
     //Returns page name:

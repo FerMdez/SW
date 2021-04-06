@@ -2,14 +2,14 @@
     class UserDAO extends DAO {
 		
 		//Constants:
-		private $_USER = "user";
-		private $_MANAGER = "manager";
-		private $_ADMIN = "admin";
+		private const _USER = "user";
+		private const _MANAGER = "manager";
+		private const _ADMIN = "admin";
 
         //Attributes:
 
 		//Constructor:
-        function __construct(){
+        function __construct($bd_name){
 			parent::__construct();
         }
 
