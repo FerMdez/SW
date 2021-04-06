@@ -21,20 +21,20 @@
                             <fieldset id="datos_personales">
                                 <legend>Datos personales</legend>
                                 <div class="_name">
-                                    <input type="text" name="name" id="name" value="" placeholder="Nombre" />
+                                    <input type="text" name="name" id="name" value="" placeholder="Nombre" required/>
                                 </div>
                                 <div class="_email">
-                                    <input type="email" name="email" id="email" value="" placeholder="Email" />
+                                    <input type="email" name="email" id="email" value="" placeholder="Email" required/>
                                 </div>
                                 <div class="_passwd">
-                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" />
+                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
                                 </div>
                                 <div class="_passwd">
-                                    <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" />
+                                    <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
                                 </div>
                             </fieldset>
                             <div class="verify">
-                                <input type="checkbox" id="checkbox" name="terms">
+                                <input type="checkbox" id="checkbox" name="terms" required>
                                 <label for="terms">Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</label>
                             </div>
                             <div class="actions"> 
@@ -75,15 +75,15 @@
                             <fieldset id="datos_personales">
                                 <legend>Datos personales</legend>
                                 <div class="_name">
-                                    <input type="text" name="name" id="name" value="" placeholder="Nombre" />
+                                    <input type="text" name="name" id="name" value="" placeholder="Nombre" required/>
                                 </div>
                                 <!--
                                 <div class="_email">
-                                    <input type="email" name="email" id="email" value="" placeholder="Email" />
+                                    <input type="email" name="email" id="email" value="" placeholder="Email" required/>
                                 </div>
                                 -->
                                 <div class="_passwd">
-                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" />
+                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
                                 </div>
                             </fieldset>
                             <div class="actions"> 

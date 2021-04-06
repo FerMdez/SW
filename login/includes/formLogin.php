@@ -23,18 +23,19 @@ class FormLogin extends Form {
     public function getReply() {
         
         if(isset($_SESSION["login"])){
+            $name = strtoupper($_SESSION['nombre']);
             $this->reply = "<h1>Bienvenido {$_SESSION['nombre']}</h1><hr />
-                                <p>{$_SESSION['nombre']} has iniciado sesión correctamente.</p>
-                                <p>Usa los botones para navegar</p>
-                                <a href='../'><button>Inicio</button></a>
-                                <a href='../../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
+                        <p>{$name}, has iniciado sesión correctamente.</p>
+                        <p>Usa los botones para navegar</p>
+                        <a href='../'><button>Inicio</button></a>
+                        <a href='../../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
         }   
         else if(!isset($_SESSION["login"])){
             $this->reply = "<h1>ERROR</h1><hr />".
-                            "<p>El usuario o contraseña no son válidos.</p>
-                            <p>Vuelve a intetarlo o regístrate si no lo habías hecho previamente.</p>
-                            <a href='./'><button>Iniciar Sesión</button></a>
-                            <form method='post' action='./'><button name='register' id='register'>Registro</button></form>\n";
+                        "<p>El usuario o contraseña no son válidos.</p>
+                        <p>Vuelve a intetarlo o regístrate si no lo habías hecho previamente.</p>
+                        <a href='./'><button>Iniciar Sesión</button></a>
+                        <form method='post' action='./'><button name='register' id='register'>Registro</button></form>\n";
         }
 
         return $this->reply;
