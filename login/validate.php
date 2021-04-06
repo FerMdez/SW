@@ -1,11 +1,6 @@
 <?php
     session_start();
 
-    //Depuración (BORRAR):
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
     //HTML template:
     require_once('../assets/php/template.php');
     $template = new Template();
