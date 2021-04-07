@@ -68,24 +68,29 @@ class FormLogin extends Form {
             $bd = new UserDAO('complucine');
             if($bd){
                 $selectUser = $bd->selectUser($username);
-
                 $selectUser->data_seek(0);
                 while ($fila = $selectUser->fetch_assoc()) {
                     if($username === $fila['username'] && $bd->verifyPass($password, $fila['passwd'])){ 
-                       $this->user = $bd->loadUser($fila['id'], $fila['username'], $fila['email'], $fila['passwd'], $fila['rol']);
+                        $this->user = $bd->loadUser($fila['id'], $fila['username'], $fila['email'], $fila['passwd'], $fila['rol']);
                     }
                 }
                 
+                try{
+                    if ($this->user) {
+                        $_SESSION['user'] = $this->user;
+                        $_SESSION["nombre"] = $this->user->getName();
+                        $_SESSION["login"] = $login;
+                        $_SESSION["rol"] = $this->user->getRol();
+                    }
+                }
+                catch (Exception $e){
+                    $_SESSION["login"] = $login;
+                }
+
                 mysqli_free_result($selectUser);
                 //$selectUser->free();
             }
 
-            if ($this->user->getName()) {
-                $_SESSION['user'] = $this->user;
-                $_SESSION["nombre"] = $this->user->getName();
-                $_SESSION["login"] = $login;
-                $_SESSION["rol"] = $this->user->getRol();
-            }
         }
 
     }
