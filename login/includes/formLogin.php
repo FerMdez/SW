@@ -48,41 +48,36 @@ class FormLogin extends Form {
         $pass = $this->test_input($pass);
 
         $username = isset($name) ? $name : null ;
-        if (!$username || !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $username)) {
+        if (!$username) {
           $login = false;
         }
-        else{
-            $login = true;
+        
+        /*
+        $email = isset($mail) ? $mail : null ;
+        if (!$email || !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $email)) {
+          $login = false;
         }
+        */
     
         $password = isset($pass) ? $pass : null ;
         if (!$password || mb_strlen($password) < 4) {
           $login = false;
-        }
-        else{
-            $login = true;
         }
         
         if ($login) {
             $bd = new UserDAO('complucine');
             if($bd){
                 $selectUser = $bd->selectUser($username);
-                if($selectUser){
-                    /*
-                    while($row = mysqli_fetch_array($selectUser)){
-                        $id = $row['id'];
-                        $username = $row['username'];
-                        $email = $row['email'];
-                        $password = $row['passwd'];
-                        $rol = $row['rol'];
+
+                $selectUser->data_seek(0);
+                while ($fila = $selectUser->fetch_assoc()) {
+                    if($username === $fila['username'] && $bd->verifyPass($password, $fila['passwd'])){ 
+                       $this->user = $bd->loadUser($fila['id'], $fila['username'], $fila['email'], $fila['passwd'], $fila['rol']);
                     }
-                    $this->user = $bd->loadUser($id, $username, $email, $password, $rol);
-                    */
-                    //ARREGLAR LO DE ARRIBA Y BORRAR:
-                    if($username == "admin") $this->user = $bd->loadUser("0", "admin", "admin@complucine.sytes.net", "adminpass", "admin");
-                    else if($username == "manager") $this->user = $bd->loadUser("1", "manager", "manager@complucine.sytes.net", "managerpass", "manager");
-                    else $this->user = $bd->loadUser("2", "user", "user@complucine.sytes.net", "userpass", "user");
                 }
+                
+                mysqli_free_result($selectUser);
+                //$selectUser->free();
             }
 
             if ($this->user->getName()) {
@@ -92,7 +87,7 @@ class FormLogin extends Form {
                 $_SESSION["rol"] = $this->user->getRol();
             }
         }
-        //mysqli_free_result($selectUser);
+
     }
 
     protected function test_input($input){

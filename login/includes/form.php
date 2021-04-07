@@ -207,10 +207,8 @@ class Form {
 	  return $result;
   }
 }
-?>
 
-<!--
-
+/*
 class Formulario {
 
     private $formId;
@@ -236,5 +234,5 @@ class Formulario {
         }
     }
 }
-
--->
+*/
+?>
