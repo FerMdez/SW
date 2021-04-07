@@ -46,7 +46,8 @@
 
 		//Returns a query to check if the user pass matches:
 		public function selectPass($password){
-			$sql = sprintf( "SELECT * FROM users WHERE passwd = '%s'", $password );
+			//$sql = sprintf( "SELECT * FROM users WHERE passwd = '%s'", $password );
+			$sql = sprintf( "SELECT * FROM users WHERE user = '%s' AND pass = '%s'", $username, $password);
 
 			//return $sql;
 			return $result = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
