@@ -34,3 +34,4 @@
 	}
 	drawRooms($rooms);
 ?>
+</div>

@@ -14,7 +14,8 @@
                 case 'sessions': require('manage_sessions.php'); break;
                 default: echo "<h1>BIENVENIDO AL PANEL DE GERENTE </h1>
 						<br>
-							<p> Espero que este pasando un buen dia </p>\n"; break;
+						<p> Espero que este pasando un buen dia </p>
+				</div>"; break;
             }
         }
     }

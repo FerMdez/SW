@@ -55,15 +55,20 @@
             </div>
             <!-- Contents -->
             <div class="row">
-                <div class="column side"></div>
                 <div class="column middle">
 					<?php
-						$panel->showPanel();
-					?>  
-                </div>
-            </div>
-            <div class="column side"></div>
-		</div>
+						if(isset($_GET['edit_rooms']) == "true"){ 
+							echo "<p> Esto esta editando </p>";
+							if(isset($_GET['new_rooms']) == "true"){ 
+								echo "<p> Ademas es nueva </p>";
+							}
+						echo "</div>";
+						} else {
+							$panel->showPanel();
+						}
+					?>
+				
+			</div>
         <!-- Footer -->
         <?php
             $template->print_footer();
