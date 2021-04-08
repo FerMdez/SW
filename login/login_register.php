@@ -16,7 +16,7 @@
     $register = '<!-- Register -->
                 <div class="column left">
                     <h2>Registro</h2>
-                    <form method="post" action="">
+                    <form method="post" action="register.php">
                         <div class="row">
                             <fieldset id="datos_personales">
                                 <legend>Datos personales</legend>
