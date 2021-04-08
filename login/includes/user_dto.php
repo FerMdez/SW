@@ -1,7 +1,7 @@
 <?php
     include_once('users_dto_interface.php');
     
-    class UserDTO implements UsersDTO {
+    class UserDTO implements UsersInterface {
 
         //Attributes:
         private $_id;           //User Id.
