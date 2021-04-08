@@ -19,19 +19,19 @@
             $this->_rol = $rol;
         }
 
-		//Methods:
+	//Methods:
 
-		//Getters && Setters:
-        public function setId($id){	$this->_id = $id; }
-		public function getId(){ return $this->_id; }
-		public function setName($username){ $this->_username = $username; }
-		public function getName(){ return $this->_username; }
-        public function setEmail($email){ $this->_email = $email; }
-		public function getEmail(){ return $this->_email; }
-		public function setPass($passwd){	$this->_password = $passwd; }
-		public function getPass(){ return $this->_password; }
-        public function setRol($rol){ $this->_rol = $rol; }
-		public function getRol(){ return $this->_rol; }
+	//Getters && Setters:
+	public function setId($id){	$this->_id = $id; }
+	public function getId(){ return $this->_id; }
+	public function setName($username){ $this->_username = $username; }
+	public function getName(){ return $this->_username; }
+	public function setEmail($email){ $this->_email = $email; }
+	public function getEmail(){ return $this->_email; }
+	public function setPass($passwd){	$this->_password = $passwd; }
+	public function getPass(){ return $this->_password; }
+	public function setRol($rol){ $this->_rol = $rol; }
+	public function getRol(){ return $this->_rol; }
 
     }
 ?>
