@@ -1,5 +1,5 @@
 <?php	
-	require('room_dto.php');
+	require('./includes/room_dto.php');
 	
 	$r1 = new RoomDTO(0,20,20);
 	$r2 = new RoomDTO(1,10,30);
