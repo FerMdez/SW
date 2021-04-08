@@ -1,7 +1,7 @@
 <?php
 
-include_once('../assets/php/user_dao.php');
-include_once('form.php');
+include_once('user_dao.php');
+include_once('../assets/php/form.php');
 
 class FormLogin extends Form {
     //Constants:
