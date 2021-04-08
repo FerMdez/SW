@@ -8,10 +8,10 @@
 	$template = new Template();
 
 	if(isset($_REQUEST['state'])) {
-        $panel = new Panel($_REQUEST['state']); //CHICOS, UNA CLASE CREADA ASÍ ESTÁ HORRIBLE, ADEMÁS NO SÉ QUÉ FUNCIÓN TIENE EXCACTAMENTE ESTA CLASE, PERO DEBÉIS REHACERLA
+        $panel = new Panel($_REQUEST['state']); 
     }
     else {
-        $panel = new Panel('');  //ESTO NO PUEDE SER ASÍ
+        $panel = new Panel('');  
     }
     // IMPORTANTE:
     //  VERIFICAR QUE ES MANAGER(GERENTE), SI NO, MOSTRAR MENSAJE DE "ERROR"
@@ -57,17 +57,8 @@
             <div class="row">
                 <div class="column middle">
 					<?php
-						if(isset($_GET['edit_rooms']) == "true"){ 
-							echo "<p> Esto esta editando </p>";
-							if(isset($_GET['new_rooms']) == "true"){ 
-								echo "<p> Ademas es nueva </p>";
-							}
-						echo "</div>";
-						} else {
-							$panel->showPanel();
-						}
+						$panel->showPanel();
 					?>
-				
 			</div>
         <!-- Footer -->
         <?php

@@ -62,7 +62,7 @@
 							} 
 							echo "<tbody>
 							</table>\n";
-							echo "<a href=\"index.php?edit_sessions=true&new_session=true\" class='button large'>Añadir</a>";
+							echo "<a href=\"index.php?state=edit_session&option=new\" class='button large'>Añadir</a>";
 						}
 						drawSessions($sessions);
 					?>	
