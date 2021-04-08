@@ -1,6 +1,6 @@
 <?php
-	require('room_dto.php');
-	require('session_dto.php');
+	require('./includes/room_dto.php');
+	require('./includes/session_dto.php');
 ?>			
 					<input type="date" name="fecha" min="2021-01-01" max="2031-12-31">
 					<?php								
