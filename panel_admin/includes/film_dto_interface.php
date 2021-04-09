@@ -1,5 +1,5 @@
 <?php
-    interface FilmDTO {
+    interface FilmDTOs {
         public function setId($id);
 		public function getId();
         public function setTittle($tittle);

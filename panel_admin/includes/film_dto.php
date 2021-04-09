@@ -1,7 +1,7 @@
 <?php
     include_once('film_dto_interface.php');
     
-    class FilmDTO implements FilmDTO {
+    class FilmDTO implements FilmDTOs {
 
         //Attributes:
         private $_id;           //User Id.
