@@ -5,18 +5,20 @@
 
         //Attributes:
         private $_id;           //Session Id.
-        private $_idfilm;       //Film Id
-        private $_idhall        //Hall id
+        private $_idfilm;       //Film Id  -> deberia ser un objeto tipo pelicula? para poder sacar el nombre de la pelicula en cuestion
+        private $_idhall;       //Hall id  -> deberia ser un objeto tipo room/hall/sala de cine por lo mismo
+		private $_idcinema;			
         private $_date;         //Session date.
         private $_startTime;    //Session start time.
         private $_seatPrice;    //Seat price.
         private $_format;       //Type of film: 3D | 4D | normal | subtitle | mute.
 
 		//Constructor:
-        function __construct($id, $idfilm, $idhall, $date, $startTime, $seatPrice, $format){
+        function __construct($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
             $this->_id = $id;
             $this->_idfilm = $idfilm;
             $this->_idhall = $idhall;
+			$this->_idcinema = $idcinema;
             $this->_date = $date;
             $this->_startTime = $startTime;
             $this->_seatPrice = $seatPrice;
@@ -32,8 +34,11 @@
         public function setIdfilm($idfilm){ $this->_idfilm = $idfilm; }
 		public function getIdfilm(){ return $this->_idfilm; }
         
-        public function setIdhall($film){ $this->_idhall = $idhall; }
+        public function setIdhall($idhall){ $this->_idhall = $idhall; }
 		public function getIdhall(){ return $this->_idhall; }
+		
+		public function setIdcinema($cinema){ $this->_idcinema = $idcinema; }
+		public function getIdcinema(){ return $this->_idcinema; }
 
 		public function setDate($date){ $this->_date = $date; }
 		public function getDate(){ return $this->_date; }

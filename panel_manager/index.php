@@ -6,12 +6,15 @@
 	require_once('./panel_manager.php');
     
 	$template = new Template();
+    $login = false;
+
+    if(isset($_SESSION["login"]) && $_SESSION["nombre"] == "manager") $login = true;
 
 	if(isset($_REQUEST['state'])) {
-        $panel = new Panel($_REQUEST['state']); 
+        $panel = new Panel($_REQUEST['state'],$login); 
     }
-    else {
-        $panel = new Panel('');  
+    else { 
+        $panel = new Panel('',$login); 
     }
     // IMPORTANTE:
     //  VERIFICAR QUE ES MANAGER(GERENTE), SI NO, MOSTRAR MENSAJE DE "ERROR"
@@ -38,28 +41,31 @@
 
 		<!-- Panel -->
         <div class="row">
-            <!-- Left Sidebar -->
+        
+             <!--Left Sidebar --> 
 			<div class="sidebar left">
                 <ul>
                     <li>Ver como:</li>
                     <ul>
-                        <li><a href="index.php?state=us_u">Usuario no registrado</a></li>
-                        <li><a href="index.php?state=us_r">Usuario registrado</a></li>
+                        <li><a href='./?state=us_u'>Usuario no registrado</a></li>
+                        <li><a href='./?state=us_r'>Usuario registrado</a></li>
                     </ul><br />
                     <li>Añadir/Editar/Eliminar:</li>
                     <ul>
-                        <li><a href="index.php?state=rooms">Salas</a></li>
-                        <li><a href="index.php?state=sessions">Películas</a></li>
+                        <li><a href='./?state=rooms'>Salas</a></li>
+                        <li><a href='./?state=sessions&login=".$this->login."'>Sesiones</a></li>
                     </ul>
                 </ul>
             </div>
-            <!-- Contents -->
+             <!--Contents -->
             <div class="row">
                 <div class="column middle">
-					<?php
+                    <?php
 						$panel->showPanel();
 					?>
+                
 			</div>
+        </div>
         <!-- Footer -->
         <?php
             $template->print_footer();

@@ -1,10 +1,10 @@
 <?php	
 	require('./includes/room_dto.php');
 	
-	$r1 = new RoomDTO(0,20,20);
-	$r2 = new RoomDTO(1,10,30);
-	$r3 = new RoomDTO(2,30,10);
-	$r4 = new RoomDTO(3,15,15);
+	$r1 = new RoomDTO(0,20,20,30);
+	$r2 = new RoomDTO(1,10,30,30);
+	$r3 = new RoomDTO(2,30,10,30);
+	$r4 = new RoomDTO(3,15,15,30);
 	$rooms = array($r1, $r2, $r3, $r4);							
 
 	function drawRooms($ros){
