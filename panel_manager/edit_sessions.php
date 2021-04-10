@@ -6,7 +6,7 @@
 		echo "<p> Este es el panel de editar o eliminar una sesion. Deberia tener el formulario de crear una sesion nueva pero con los datos ya situados y quizas que solo aqui aparezca el boton de eliminar </p>";
     }
     else{
-		echo "<h2>Crear Session</h2>
+		echo "<h2>Crear Sesion</h2>
 				<form method=\"post\" action=\"validate.php\">
 					<div class=\"row\">
 						<fieldset id=\"datos\">
