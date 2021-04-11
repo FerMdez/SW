@@ -1,21 +1,23 @@
 <?php
     include_once('film_dto_interface.php');
     
-    class FilmDTO implements FilmDTOs {
+    class Film_DTO implements FilmDTO {
 
         //Attributes:
-        private $_id;           //User Id.
-        private $_tittle;     //User name.
-        private $_duration;        //User email.
-        private $_language;     //User password.
+        private $_id;          //Film ID.
+        private $_tittle;     //Film tittle.
+        private $_duration;        //Film duration.
+        private $_language;     //Film language.
+        private $_description;   //Film description.
       
 
 		//Constructor:
-        function __construct($id, $tittle, $duration, $language){
+        function __construct($id, $tittle, $duration, $language, $description){
             $this->_id = $id;
             $this->_tittle = $tittle;
             $this->_duration = $duration;
             $this->_language = $language;
+            $this->_description = $description;
         }
 
 		//Methods:
@@ -29,5 +31,7 @@
 		public function getDuration() {return $this->_duration;}
         public function setLanguage($language) {$this->_language = $language; }
 		public function getLanguage(){return $this->_language;}
+        public function setDescription($description){  $this->_description = $description;}
+		public function getDescription(){return  $this->_description;}
     }
 ?>
