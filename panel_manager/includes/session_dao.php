@@ -30,6 +30,30 @@
 
 			return $resul;
 		}
+
+		//Edit Session.
+		public function editSession($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
+
+			$sql = sprintf( "UPDATE `session`
+							 SET `idfilm` = '%d' , `idhall` = '%d', `idcinema` = '%d', `date` = '%s',
+							 	 `start_time` = '%s', `seat_price` = '%d', `format` = '%s'
+							 WHERE `session`.`id` = '%d';", 
+				$idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $id);
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
+
+		//Delete Session.
+		public function deleteSession($id){
+
+			$sql = sprintf( "DELETE FROM `session` WHERE `session`.`id` = '%d'",$id);
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
 		
 		//Returns a query to check if the session in this cinema, hall and scheudle exists.
 		public function selectSession($cinema, $hall, $start, $date){
@@ -45,7 +69,6 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;
 		}
-		
 		
 		
 		

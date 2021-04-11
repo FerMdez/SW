@@ -15,7 +15,7 @@
 		public function createRoom($id, $idcinema, $numCol, $numRows){
 
 			$sql = sprintf( "INSERT INTO rooms( id, idcinema, numCol, numRows) 
-								VALUES ( '%s', '%s', '%i', '%i')", 
+								VALUES ( '%d', '%d', '%i', '%i')", 
 									$id, $idcinema, $numCol, $numRows );
 
 			return $sql;
@@ -32,6 +32,29 @@
 		//Create a new Room Data Transfer Object.
 		public function loadRoom($id, $idcinema, $numCol, $numRows){
 			return new RoomDTO($id, $idcinema, $numCol, $numRows);
+		}
+
+		//Edit Hall.
+		public function editHall($id, $idcinema, $numCol, $numRows){
+
+			$sql = sprintf( "UPDATE `hall`
+							SET `numrows` = '%i' , `numcolumns` = '%i'
+							WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';", 
+							$numRows,$numCol,$id, $idcinema );
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
+
+		//Delete Hall.
+		public function deleteHall($id, $idcinema){
+
+			$sql = sprintf( "DELETE FROM `hall` WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';",$id,$idcinema);
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
 		}
 
     }
