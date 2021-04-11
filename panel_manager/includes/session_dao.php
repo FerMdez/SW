@@ -25,7 +25,7 @@
 
 		//Returns a query to get the session's data.
 		public function sessionData($id){
-			$sql = sprintf( "SELECT * FROM sessions WHERE id = '%d'", $id );
+			$sql = sprintf( "SELECT * FROM `session` WHERE id = '%d'", $id );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $resul;
