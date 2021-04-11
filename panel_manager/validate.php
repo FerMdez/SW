@@ -9,11 +9,22 @@
     //HTML template:
     require_once('../assets/php/template.php');
     $template = new Template();
-
+	$action ="";
+	$id = null;
+	if(isset($_POST['new'])){
+		$action = "new";
+	} else if (isset($_POST['edit'])){
+		$action = "edit";
+		$id = $_POST["id"];
+	} else if (isset($_POST['del'])){
+		$action = "del";
+		$id = $_POST["id"];
+	}
+	
     //Login form validate:
     require_once('./includes/formSession.php');
     $session = new FormSession();
-    $session->processesForm($_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"]);
+    $session->processesForm($id, $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],$_POST["repeat"], $action);
     $reply = $session->getReply();
 
 ?>

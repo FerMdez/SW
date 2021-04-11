@@ -60,10 +60,10 @@
 			$fila =  ($bd->FilmData($s->getIdfilm()))->fetch_assoc();	
 		echo "
 							<tr>
-								<td><a href=\"./?state=edit_session&option=edit\">" . $s->getStartTime() . "</a></td>
-								<td><a href=\"./?state=edit_session&option=edit\">" .$fila['tittle']  . "</a></td>
-								<td><a href=\"./?state=edit_session&option=edit\">" . $s->getFormat() . "</a></td>
-								<td><a href=\"./?state=edit_session&option=edit\">". $s->getSeatPrice() . "</a></td>
+								<td> <a href=\"./?state=edit_session&option=edit\">" . $s->getStartTime() . "</a></td>
+								<td> <a href=\"./?state=edit_session&option=edit\">" .$fila['tittle']  . "</a></td>
+								<td> <a href=\"./?state=edit_session&option=edit\">". $s->getSeatPrice() . "</a></td>
+								<td> <input type=\"submit\" name=\"submit\" value=\"Editar\" class=\"button\" formaction=\"./?state=edit_session&option=edit&id=". $s->getid() ."\"/> </td>
 							</tr>"; 
 		} 
 		echo "
@@ -75,8 +75,9 @@
 		if($bd){
 			drawSessions($sessions,$bd);
 			echo "
-						<input type=\"submit\" name=\"submit\" value=\"Añadir\" class=\"button large\" formaction=\"./?state=edit_session&option=new\"/>\n";
+						<input type=\"submit\" name=\"submit\" value=\"Añadir\" class=\"button large\" formaction=\"./?state=edit_session&option=new\">";
 		}
+		
 	}
 	echo "					</form>
 				</div>";

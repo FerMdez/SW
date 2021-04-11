@@ -26,31 +26,7 @@
 		//Returns a query to get the session's data.
 		public function sessionData($id){
 			$sql = sprintf( "SELECT * FROM `session` WHERE id = '%d'", $id );
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
-			return $resul;
-		}
-
-		//Edit Session.
-		public function editSession($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
-
-			$sql = sprintf( "UPDATE `session`
-							 SET `idfilm` = '%d' , `idhall` = '%d', `idcinema` = '%d', `date` = '%s',
-							 	 `start_time` = '%s', `seat_price` = '%d', `format` = '%s'
-							 WHERE `session`.`id` = '%d';", 
-				$idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $id);
-
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
-			return $resul;
-		}
-
-		//Delete Session.
-		public function deleteSession($id){
-
-			$sql = sprintf( "DELETE FROM `session` WHERE `session`.`id` = '%d'",$id);
-
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $id);
 
 			return $resul;
 		}
@@ -70,6 +46,29 @@
 			return $resul;
 		}
 		
+		//Edit Session.
+        public function editSession($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
+
+            $sql = sprintf( "UPDATE `session`
+                             SET `idfilm` = '%d' , `idhall` = '%d', `idcinema` = '%d', `date` = '%s',
+                                  `start_time` = '%s', `seat_price` = '%d', `format` = '%s'
+                             WHERE `session`.`id` = '%d';", 
+                $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $id);
+
+            $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+            return $resul;
+        }
+
+        //Delete Session.
+        public function deleteSession($id){
+
+            $sql = sprintf( "DELETE FROM `session` WHERE `session`.`id` = '%d';",$id);
+
+            $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+            return $resul;
+        }
 		
 		
 		//Create a new Session Data Transfer Object.
