@@ -28,12 +28,20 @@
 
 			return $resul;
 		}
+		
+	    	//Returns a query to get All the films.
+		public function allFilmData(){
+			$sql = sprintf( "SELECT * FROM film ");
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
+			return $resul;
+		}
+	    
 		//Create a new film Data Transfer Object.
 		public function loadFilm($id, $tittle, $duration, $language){
 			return new FilmDTO( $id, $tittle, $duration, $language);
 		}
-
+	    	
     }
 
 ?>
