@@ -35,11 +35,8 @@ class FormSession extends Form {
     }
 
     //Process form:
-    public function processesForm($price, $film, $format, $start) {
+    public function processesForm($film, $hall, $cinema, $date, $start, $price, $format) {
         $this->correct = true;
-		$hall = 2;
-		$cinema = 1;
-		$date = "2021-04-10";
 		//Habria que validar todo para que encaje en la base de datos
 		
 		$start = date('H:i:s', strtotime( $start ) );

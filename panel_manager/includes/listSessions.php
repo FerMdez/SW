@@ -8,18 +8,10 @@ class ListSessions{
     //Atributes:
 	private $array;
 	private $size;
-	
-	private $cinema;
-	private $hall;
-	private $date;
 
     //Constructor:
-    public function __construct($cinema,$hall,$date) {
+    public function __construct() {
         $this->array = array();
-		
-		$this->cinema = $cinema;
-		$this->hall = $hall;
-		$this->date = $date;
     }
     //Methods:
 
@@ -37,24 +29,20 @@ class ListSessions{
 		}
 		
     }
-	//Change the patterns of the filter
-	public function setCinema($cinema){$this->cinema = $cinema;}
-	public function setHall($hall){$this->hall = $hall;}
-	public function setDate($date){$this->date = $date;}
-	
-    //Update the array with current filter values
-    public function filterList() {
-		
-        $this->date = date('Y-m-d', strtotime( $this->date ) );
+
+    //Update the array with new values
+    public function filterList($cinema, $hall, $date) {
+
+        $date = date('Y-m-d', strtotime( $date ) );
 		
 		$bd = new sessionDAO('complucine');
 		
 		if($bd){
-			$selectSession = $bd->selectSession($this->cinema, $this->hall, null, $this->date);
+			$selectSession = $bd->selectSession($cinema, $hall, null, $date);
 			$selectSession->data_seek(0);
 			$this->size = 0;
 			while ($fila = $selectSession->fetch_assoc()) {
-                $this->array[]= new SessionDTO($fila['id'], $fila['idfilm'], $fila['idhall'], $fila['idcinema'], $fila['date'], date('h:i', strtotime( $fila['start_time'])) , $fila['seat_price'], $fila['format']);
+                $this->array[]= new SessionDTO($fila['id'], $fila['idfilm'], $fila['idhall'], $fila['idcinema'], $fila['date'], date('H:i', strtotime( $fila['start_time'])) , $fila['seat_price'], $fila['format']);
 				$this->size++;
 			}
 			mysqli_free_result($selectSession);	

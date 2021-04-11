@@ -13,7 +13,7 @@
     //Login form validate:
     require_once('./includes/formSession.php');
     $session = new FormSession();
-    $session->processesForm($_POST["price"], $_POST["film"], $_POST["format"],$_POST["start"]);
+    $session->processesForm($_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"]);
     $reply = $session->getReply();
 
 ?>

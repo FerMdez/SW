@@ -53,17 +53,14 @@
                     <li>Añadir/Editar/Eliminar:</li>
                     <ul>
                         <li><a href='./?state=rooms'>Salas</a></li>
-                        <li><a href='./?state=sessions&login=".$this->login."'>Sesiones</a></li>
+                        <li><a href='./?state=sessions'>Sesiones</a></li>
                     </ul>
                 </ul>
             </div>
              <!--Contents -->
             <div class="row">
                 <div class="column middle">
-                    <?php
-						$panel->showPanel();
-					?>
-                
+                    <?php $panel->showPanel(); ?>
 			</div>
         </div>
         <!-- Footer -->
