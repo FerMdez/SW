@@ -50,6 +50,28 @@
 			return $resul;
 		}*/
 
+		public function deleteFilm($id){
+			
+			$sql = sprintf( "DELETE FROM `film` WHERE `film`.`id` = '%d' ;",$id);
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
+		
+		public function editFilm($id, $title, $duration, $lenguaje,$description){
+
+			$sql = sprintf( "UPDATE film
+							SET title = '%s' , duration = '%d', lenguaje ='%s' ,`description` ='%s'
+							WHERE `film`.`id` = '%d';", 
+							$title,$duration,$lenguaje, $description,$id );
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
+
+	
 		//Returns a query to get all films tittles.
 		public function tittleFilmData(){
 			$sql = sprintf( "SELECT tittle FROM film ");
