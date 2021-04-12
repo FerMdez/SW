@@ -38,8 +38,10 @@
 			$sql = sprintf( "INSERT INTO users( id, username, email, passwd, rol) 
 								VALUES ( '%s', '%s', '%s', '%s', '%s')", 
 									$id, $username, $email, $password, $rol );
+			
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
-			return $sql;
+			return $resul;
 		}
 
 		//Returns a query to check if the user name exists.
