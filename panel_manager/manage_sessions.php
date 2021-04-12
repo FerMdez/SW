@@ -1,5 +1,5 @@
 <?php
-	require('./includes/room_dto.php');
+	require('./includes/hall_dto.php');
 	require('./includes/session_dto.php');
 	require('../panel_admin/includes/film_dto.php');
 	require('../panel_admin/includes/film_dao.php');
@@ -20,8 +20,8 @@
 	
 	$sessions = $sessionList->getArray();
 							
-	$r1 = new RoomDTO(1,20,20,30); //Esto se deberia cambiar por una llamada a una lista de salas
-	$r2 = new RoomDTO(2,10,30,30);
+	$r1 = new HallDTO(1,20,20,30); //Esto se deberia cambiar por una llamada a una lista de salas
+	$r2 = new HallDTO(2,10,30,30);
 	$rooms = array($r1, $r2);							
 	echo"
 					<form method=\"post\">
@@ -29,12 +29,12 @@
 						<select name=\"hall\" class=\"button large\">";
 	
 	foreach($rooms as $r){ 
-		if($r->getid() == $placeholder_hall){
+		if($r->getNumber() == $placeholder_hall){
 			echo "
-							<option value=\"". $r->getid() ." \"selected> Sala ". $r->getid() . "</option>";
+							<option value=\"". $r->getNumber() ." \"selected> Sala ". $r->getNumber() . "</option>";
 		}else{
 			echo "
-							<option value=\"". $r->getid() ." \"> Sala ". $r->getid() . "</option>";
+							<option value=\"". $r->getNumber() ." \"> Sala ". $r->getNumber() . "</option>";
 		}
 	}
 			

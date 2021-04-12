@@ -1,16 +1,16 @@
 <?php
-	require('./includes/room_dto.php');
+	require('./includes/hall_dto.php');
 	require('./includes/session_dto.php');
 	require('../panel_admin/includes/film_dto.php');
 	include_once('./includes/session_dao.php');
 	
-	$r1 = new RoomDTO(1,20,20,30);	//Esto se deberia cambiar por una llamada a una lista de salas
-	$r2 = new RoomDTO(2,10,30,30);
+	$r1 = new HallDTO(1,20,20,30);	//Esto se deberia cambiar por una llamada a una lista de salas
+	$r2 = new HallDTO(2,10,30,30);
 	$rooms = array($r1, $r2);	
 	
 	require_once('./includes/listFilms.php');
-	$filmList = new ListFilms();
-	$films = $filmList->getArray();	
+	$filmList = new Film_DAO('complucine');
+	$films = $filmList->allFilmData();	
 
 	//DISCLAIMER; sabemos que si se edita la ulr se pueden acceder a datos de una sesion que no pertenece al usuario y que incluso puede hasta editarlas/borrarlas en la base de datos
 	if(isset($_REQUEST['option']) && $_REQUEST['option'] == 'edit') {
@@ -29,10 +29,10 @@
 							</div>
 							<select name=\"hall\" class=\"button large\">";
 							foreach($rooms as $r){ 
-								if($r->getid() == $session['idhall']){
-									echo "<option value=\"". $r->getid() ." \"selected> Sala ". $r->getid() . "</option>";
+								if($r->getNumber() == $session['idhall']){
+									echo "<option value=\"". $r->getNumber() ." \"selected> Sala ". $r->getNumber() . "</option>";
 								}else{
-									echo "<option value=\"". $r->getid() ." \"> Sala ". $r->getid() . "</option>";
+									echo "<option value=\"". $r->getNumber() ." \"> Sala ". $r->getNumber() . "</option>";
 									}
 							}
 							echo "<div class=\"_format\">
