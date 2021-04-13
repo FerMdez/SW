@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <?php 
     session_start();
+
+    //HTML template:
     require_once('../assets/php/template.php');
     $template = new Template();
 ?>
