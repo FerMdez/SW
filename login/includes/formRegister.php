@@ -25,8 +25,10 @@
             $this->rol = "user";
             $this->id = "xxxx";
 
-            // Creamos objetos
+            // Creamos DAO
             $instanceDAO = new UserDAO('complucine');
+
+            // Creamos DTO
             $uDTO = $instanceDAO->loadUser($this->id, $this->name, $this->email, $this->password, $this->rol);
 
             if($this->password == $this->repassword) { // Comprobacion de contrasenyas iguales
@@ -48,6 +50,7 @@
                     <a href='./'><button>Iniciar Sesión</button></a>
                     <form method='post' action='./'><button name='register' id='register'>Registro</button></form>\n";
                 }
+                $resultado->free();
             }
             else {
                 $this->reply = "<h1>¡Ha ocurrido un error!</h1><hr/>".
