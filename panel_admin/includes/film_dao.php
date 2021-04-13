@@ -51,14 +51,6 @@
 			return $resul;
 		}
 
-		//Returns a query to get all films descriptions.
-		public function descriptionFilmData(){
-			$sql = sprintf( "SELECT description FROM film ");
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
-			return $resul;
-		}
-
 		/*
 		public function addFilm($films) {
 			$resul =  mysqli_query($this->mysqli, $this->createFilm($film.getId(), $film.getTittle(), $film.getDuration(), $film.getLanguage(), $film.getDescription())) or die ('Error into query database');
