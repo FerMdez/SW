@@ -44,7 +44,16 @@
                         <input type="submit" id="submit" value="Editar" name="edit_film" class="primary" />
                     </form> 
                 </td> 
-                <td> <input type=submit name="submit" value="Borrar" class="button" formaction="delete_film.php">  </td> 
+                <td> 
+                    <form method="post" action="./index.php?state=df">
+                        <input  name="id" type="hidden" value="'.$f->getId().'">
+                        <input  name="tittle" type="hidden" value="'.$f->getTittle().'">
+                        <input  name="duration" type="hidden" value="'.$f->getDuration().'">
+                        <input  name="language" type="hidden" value="'.$f->getLanguage().'">
+                        <input  name="description" type="hidden" value="'.$f->getDescription().'">
+                        <input type="submit" id="submit" value="Eliminar" name="delete_film" class="primary" />
+                    </form> 
+                </td> 
                 </tr>'; 
                 } 
         echo'<tbody>
