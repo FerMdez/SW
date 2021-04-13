@@ -58,9 +58,8 @@
                 </ul>
             </div>
              <!--Contents -->
-            <div class="row">
-                <div class="column middle">
-                    <?php $panel->showPanel(); ?>
+            <div class="row"> 
+				<?php $panel->showPanel(); ?>
 			</div>
         </div>
         <!-- Footer -->

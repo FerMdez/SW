@@ -9,6 +9,7 @@
 
 	function drawHalls($ros){
 		echo "
+	<div class=\"column middle\">
 		<table class='alt'>
 			<thead>
 				<tr>
@@ -30,8 +31,9 @@
 		}
 		echo "<tbody>
 		</table>\n";
-	echo "<a href=\"index.php?edit_sessions=true\" class='button large'>Añadir</a>";
+	echo "<a href=\"index.php?edit_sessions=true\" class='button large'>Añadir</a>
+	</div>";
 	}
 	drawHalls($rooms);
 ?>
-</div>
+

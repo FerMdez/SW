@@ -16,17 +16,11 @@
                     case 'rooms': require('manage_rooms.php');  break;
                     case 'sessions': require('manage_sessions.php'); break;
                     case 'edit_session': require('edit_sessions.php'); break;
-                    default: echo "<h1>BIENVENIDO AL PANEL DE GERENTE </h1>
-                            <br>
-                            <p> Espero que este pasando un buen dia </p>
-                    </div>"; break;
+                    default: require('hello_panel.php'); break;
                 }
             }
             else{
-                echo "<h1>ERROR </h1>
-                            <br>
-                            <p> No tiene permiso en esta sección de la pagina web </p>
-                    </div>";
+                require('no_permisions_panel.php');
             }
         }
     }

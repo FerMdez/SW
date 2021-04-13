@@ -18,7 +18,7 @@
 		if($bd){
 			$session = ($bd->sessionData($_GET["id"]))->fetch_assoc();
 		echo "<h2>Editar/Eliminar Sesion</h2>
-				<form method=\"post\" id=\"new_ses\" action=\"validate.php\">
+				<form method=\"post\" id=\"edit_ses\" action=\"validate.php\">
 					<div class=\"row\">
 						<fieldset id=\"datos\">
 							<legend>Datos</legend>
@@ -61,7 +61,7 @@
 				</form>
 			<div>
 			<div class=\"column side\">
-				<select name=\"film\" form=\"new_ses\" class=\"button large\">";
+				<select name=\"film\" form=\"edit_ses\" class=\"button large\">";
 				foreach($films as $f){ 
 					if($f->getId() == $session['idfilm']){
 						echo "<option value=\"". $f->getId() ." \"selected> " . $f->getId() . "|" . $f->getTittle() ." Idioma: " . $f->getLanguage() . "</option>";
@@ -74,7 +74,7 @@
 	}
     else{
 		echo "<h2>Crear Sesion</h2>
-				<form method=\"post\" id=\"new_ses\" action=\"validate.php\">
+				<form method=\"post\" id=\"new_ses\" action=\"validateSession.php\">
 					<div class=\"row\">
 						<fieldset id=\"datos\">
 							<legend>Datos</legend>
