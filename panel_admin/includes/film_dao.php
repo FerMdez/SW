@@ -79,8 +79,8 @@
 		}
 	    
 		//Create a new film Data Transfer Object.
-		public function loadFilm($id, $tittle, $duration, $language){
-			return new FilmDTO( $id, $tittle, $duration, $language);
+		public function loadFilm($id, $tittle, $duration, $language, $description){
+			return new Film_DTO( $id, $tittle, $duration, $language, $description );
 		}
 	    	
     }
