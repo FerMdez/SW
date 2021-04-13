@@ -14,12 +14,11 @@
         //Create a new Session.
 		public function createFilm($id, $tittle, $duration, $language, $description){
 
-			$sql = sprintf( "INSERT INTO film( $id, $tittle, $duration, $language, $description) 
-								VALUES ( '%d', '%s', '%d', '%s', '%d')", 
-									$id, $tittle, $duration, $language, $description);
-
-
-			return $sql;
+			$sql = sprintf( "INSERT INTO film(tittle, duration, language, description) 
+								VALUES ('%s', '%d', '%s', '%s')", 
+									$tittle, $duration, $language, $description);
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			return $resul;
 		}
 
 		//Returns a query to get the film's data.
@@ -52,19 +51,18 @@
 
 		public function deleteFilm($id){
 			
-			$sql = sprintf( "DELETE FROM `film` WHERE `film`.`id` = '%d' ;",$id);
+			$sql = sprintf( "DELETE FROM film WHERE film.id = '%d' ;",$id);
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $resul;
 		}
 		
-		public function editFilm($id, $title, $duration, $lenguaje,$description){
-
+		public function editFilm($id, $tittle, $duration, $language,$description){
 			$sql = sprintf( "UPDATE film
-							SET title = '%s' , duration = '%d', lenguaje ='%s' ,`description` ='%s'
-							WHERE `film`.`id` = '%d';", 
-							$title,$duration,$lenguaje, $description,$id );
+							SET tittle = '%s' , duration = '%d', language ='%s' , description ='%s'
+							WHERE film.id = '%d';", 
+							$tittle,$duration,$language, $description,$id);
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
