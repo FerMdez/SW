@@ -22,18 +22,27 @@
 		}
 
 		//Returns a query to get the halls data.
-		public function hallData($id,$idcinema){
-			$sql = sprintf( "SELECT * FROM `hall` 
-							WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';", 
-							$id, $idcinema );
+		public function getAllHalls($cinema){
+			$sql = sprintf( "SELECT * FROM hall WHERE 
+							idcinema = '%s'", 
+							$cinema);	
+							
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
-			return $resul;
+			
+			$hall = null;
+			
+			while($fila=mysqli_fetch_array($resul)){
+				$hall[] = $this->loadHall($fila["number"], $fila["idcinema"], $fila["numrows"], $fila["numcolumns"]);
+			}
+			
+			mysqli_free_result($resul);
+			
+			return $hall;
 		}
 
 		//Create a new Hall Data Transfer Object.
-		public function loadHall($id, $idcinema, $numCol, $numRows){
-			return new HallDTO($id, $idcinema, $numCol, $numRows);
+		public function loadHall($number, $idcinema, $numrows, $numcolumns){
+			return new HallDTO($number, $idcinema, $numrows, $numcolumns);
 		}
 
 		//Edit Hall.

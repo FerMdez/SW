@@ -1,14 +1,14 @@
 <?php
-include_once('session_dao.php');
+include_once('hall_dao.php');
 include_once('../assets/php/form.php');
 
-class FormSession extends Form {
+class FormHall extends Form {
 
     //Atributes:
     private $correct;  // Indicates if the session is correct.
     private $reply; // Validation response
 	private $option;
-	private $sessions;
+	private $halls;
 	
     //Constructor:
     public function __construct() {
@@ -24,18 +24,18 @@ class FormSession extends Form {
 		if($this->correct){
 			if($this->option == "new"){
 				$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha añadido la sesion correctamente en la base de datos.</p>
+						<p> Se ha añadido la sala correctamente en la base de datos.</p>
 						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
 			}else if($this->option == "edit"){
 								$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha editado la sesion correctamente en la base de datos.</p>
+						<p> Se ha editado la sala correctamente en la base de datos.</p>
 						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
 			}else if($this->option == "del"){
 								$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha eliminado la sesion correctamente en la base de datos.</p>
+						<p> Se ha eliminado la sala correctamente en la base de datos.</p>
 						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
 			}else if($this->option == "list"){
-								$this->reply = $this->sessions;
+								$this->reply = $this->halls;
 			}
 		} else {
 			$this->reply = "<h1> ERROR  </h1><hr />
@@ -46,18 +46,17 @@ class FormSession extends Form {
     }
 
     //Process form:
-    public function processesForm($id, $film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option) {
+    public function processesForm($number, $cinema, $rows, $cols, $option) {
 		$this->option = $option;
 		$this->correct = true;
-		$bd = new sessionDAO('complucine');
+		$bd = new HallDAO('complucine');
 		
-		$date = date('Y-m-d', strtotime( $date ) ); 
 		
 		if($bd ){
 			if($option == "list"){
-				$this->sessions = $bd->getAllSessionsFromDateHallAndCinema($cinema, $hall, $date);
+				$this->halls = $bd->getAllHalls($cinema);
 			}else {
-				
+				/*
 				$start = date('H:i:s', strtotime( $start ) );
 				
 				if($option == "new"){
@@ -83,6 +82,7 @@ class FormSession extends Form {
 					$date = date('Y-m-d', strtotime( $date. ' +1 day') );
 					$this->processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat);
 				}		
+				*/
 			}		
 			
 		} else {$this->correct = false;}	

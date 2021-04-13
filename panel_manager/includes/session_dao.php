@@ -46,6 +46,24 @@
 			return $resul;
 		}
 		
+		
+		public function getAllSessionsFromDateHallAndCinema($cinema, $hall, $date){
+			$sql = sprintf( "SELECT * FROM session WHERE 
+							idcinema = '%s' AND idhall = '%s' AND date = '%s'", 
+							$cinema, $hall, $date);	
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			
+			$sessions = null;
+			
+			while($fila=mysqli_fetch_array($resul)){
+				$sessions[] = $this->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"]);
+			}
+			
+			mysqli_free_result($resul);
+			
+			return $sessions;
+		}
+		
 		//Edit Session.
         public function editSession($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
 
@@ -72,8 +90,8 @@
 		
 		
 		//Create a new Session Data Transfer Object.
-		public function loadSession( $id, $idfilm, $idhall, $date, $startTime, $seatPrice, $format){
-			return new SessionDTO( $id, $idfilm, $idhall, $date, $startTime, $seatPrice, $format);
+		public function loadSession( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
+			return new SessionDTO( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
 		}
 
     }
