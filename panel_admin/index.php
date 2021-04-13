@@ -6,6 +6,8 @@
     require_once('../panel_admin/panelAdmin.php');
     $template = new Template();
    
+    if(isset($_SESSION["login"]) && $_SESSION["rol"] == "admin") $login = true;
+
     if(isset($_REQUEST['state'])) {
         $panel = new Panel($_REQUEST['state']);
     }
