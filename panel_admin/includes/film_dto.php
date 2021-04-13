@@ -1,13 +1,14 @@
 <?php
     include_once('film_dto_interface.php');
-    class FilmDTO implements Film_DTO {
+    
+    class Film_DTO implements FilmDTO {
 
         //Attributes:
-        private $_id;          //Film ID.
-        private $_tittle;     //Film tittle.
-        private $_duration;        //Film duration.
-        private $_language;     //Film language.
-        private $_description;   //Film description.
+        private $_id;               //Film ID.
+        private $_tittle;           //Film tittle.
+        private $_duration;         //Film duration.
+        private $_language;         //Film language.
+        private $_description;      //Film description.
       
 
 		//Constructor:
