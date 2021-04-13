@@ -315,7 +315,12 @@ table a{
   text-align: center;
   height: 250px;
 }
+.code.showtimes{
+  height: 550px;
+}
 
+
+/* BlockQuotes */
 .blockquote {
   border-left: solid 4px #dadada;
 	margin: 0 0 2em 0;
@@ -325,7 +330,6 @@ table a{
 .blockquote.bio {
   height: 250px;
 }
-
 
 /* Sketches */
 .sketches {

@@ -5,13 +5,14 @@
         private const _SERVERNAME = "localhost";
         private const _USERNAME = "sw";
         private const _PASSWORD = "_admin_";
-        //private const _BD = "complucine";
+        private const _BD = "complucine";
 
         //Atributes:
         public $mysqli;
 
         //Constructor:
         public function __construct($bd_name){
+            if($bd_name == null) $bd_name = self::_BD;
             try{
                 if (!$this->mysqli) {
                     $this->mysqli = new mysqli(self::_SERVERNAME, self::_USERNAME, 

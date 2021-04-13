@@ -33,6 +33,7 @@
             case strpos($this->page, 'panel_admin'): $this->page = 'Panel de Administrador'; break;
             case strpos($this->page, 'login'): $this->page = 'Acceso'; break;
             case strpos($this->page, 'logout'): $this->page = 'Cerrar Sesión'; break;
+            case strpos($this->page, 'register'): $this->page = 'Registro de Usuario'; break;
             case strpos($this->page, 'showtimes'): $this->page = 'Cartelera'; break;
             case strpos($this->page, 'cinemas'): $this->page = 'Nuestros Cines'; break;
             case strpos($this->page, 'about_us'): $this->page = 'Sobre FDI-Cines'; $this->prefix = '../../'; break;
