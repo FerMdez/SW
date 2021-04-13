@@ -55,6 +55,7 @@ class FormFilm extends Form {
 		$bd = new Film_DAO('complucine');
 		if($bd ){
 			if($option == "new"){
+				//Primero comprobar si existe una pelicula con el mismo titulo e idioma
 				$bd->createFilm(null, $title,$duration,$languaje,$description);
 			} else if ($option == "del"){
 				$bd->deleteFilm($id);

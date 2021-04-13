@@ -35,7 +35,7 @@
                 <td>'. $f->getLanguage() .'</td>
                 <td>'. $f->getDescription().'</td>
                 <td>
-                    <form method="post" action="./index.php?state=ef">
+                    <form method="post" action="./index.php?state=uf">
                         <input  name="id" type="hidden" value="'.$f->getId().'">
                         <input  name="tittle" type="hidden" value="'.$f->getTittle().'">
                         <input  name="duration" type="hidden" value="'.$f->getDuration().'">
@@ -45,7 +45,7 @@
                     </form> 
                 </td> 
                 <td> 
-                    <form method="post" action="./index.php?state=df">
+                    <form method="post" action="./index.php?state=uf">
                         <input  name="id" type="hidden" value="'.$f->getId().'">
                         <input  name="tittle" type="hidden" value="'.$f->getTittle().'">
                         <input  name="duration" type="hidden" value="'.$f->getDuration().'">
@@ -62,7 +62,7 @@
     function addFilm(){
         echo'<div class="column size">
         <h2>Añadir pelicula</h2>
-        <form method="post" action="add_film.php">
+        <form method="post" action="update_film.php">
             <div class="row">
             <fieldset id="film_form">
                 <legend>Datos de pelicula</legend>

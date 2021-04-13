@@ -8,8 +8,7 @@
 
         function showPanel() {
             switch($this->state) {
-                case 'df': require('deleteFilm.php');break;
-                case 'ef': require('editFilm.php');break;
+                case 'uf': require('updateFilm.php');break;
                 case 'mc': require('manage_cinemas.php'); break;
                 case 'mf': require('manage_films.php'); break;
                 case 'md': require('manage_discounts.php'); break;

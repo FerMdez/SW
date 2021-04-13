@@ -13,17 +13,11 @@
 
         //Create a new Session.
 		public function createFilm($id, $tittle, $duration, $language,$description){
-			$exist = sprintf( "SELECT * FROM film WHERE tittle = '%s'", $tittle );
-			$film =mysqli_query($this->mysqli, $exist) ;
-			if($film.is_null() ||$film["language"]!=$language){
 			$sql = sprintf( "INSERT INTO `film`( `id`, `tittle`, `duration`, `language`,`description`) 
 								VALUES ( '%d', '%s', '%d', '%s','%s')", 
 									$id, $tittle, $duration, $language,$description);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-			}else{
-				die ('Error into query database film already exist');
-			}
 			return $sql;
 		}
 
