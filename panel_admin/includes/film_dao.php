@@ -39,6 +39,8 @@
 			while($fila=mysqli_fetch_array($resul)){
 				$films[] = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
 			}
+			
+			$resul->free();
 
 			return $resul;
 		}
