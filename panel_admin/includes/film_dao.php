@@ -65,14 +65,13 @@
 							$tittle,$duration,$language, $description,$id);
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
 			return $resul;
 		}
 
 	
 		//Returns a query to get all films tittles.
 		public function tittleFilmData(){
-			$sql = sprintf( "SELECT tittle FROM film ");
+			$sql = sprintf( "SELECT DISTINCT tittle FROM film ");
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $resul;
