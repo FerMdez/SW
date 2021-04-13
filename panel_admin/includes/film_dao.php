@@ -31,16 +31,16 @@
 			return $resul;
 		}
 		
-	    //Returns a query to get All the films.
+	    	//Returns a query to get All the films.
 		public function allFilmData(){
 			$sql = sprintf( "SELECT * FROM film ");
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
+			
 			while($fila=mysqli_fetch_array($resul)){
-				$films[] = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
+				$films[] = $this->loadFilm($fila["id"], $fila["tittle"],$fila["duration"],$fila["language"],$fila["description"]);
 			}
-
-			return $resul;
+			
+			return $films;
 		}
 
 		//Returns a query to get all films tittles.
