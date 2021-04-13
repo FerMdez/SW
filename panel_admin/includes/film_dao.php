@@ -17,6 +17,8 @@
 			$sql = sprintf( "INSERT INTO film( $id, $tittle, $duration, $language) 
 								VALUES ( '%d', '%s', '%d', '%s')", 
 									$id, $tittle, $duration, $language);
+			
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $sql;
 		}
@@ -33,6 +35,10 @@
 		public function allFilmData(){
 			$sql = sprintf( "SELECT * FROM film ");
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			while($fila=mysqli_fetch_array($resul)){
+				$films[] = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
+			}
 
 			return $resul;
 		}
@@ -69,7 +75,7 @@
 			return $resul;
 		}
 		
-
+		//Edit a film.
 		public function editFilm($id, $tittle, $duration, $language,$description){
 			$sql = sprintf( "UPDATE film SET tittle = '%s' , duration = '%d', language ='%s' , description ='%s'
 								WHERE film.id = '%d';", 
