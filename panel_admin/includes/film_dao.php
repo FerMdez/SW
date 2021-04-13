@@ -1,5 +1,5 @@
 <?php
-	require_once('../assets/php/dao.php');
+	require_once($prefix.'assets/php/dao.php');
 	include_once('film_dto.php');
 
     class Film_DAO extends DAO {
@@ -12,11 +12,11 @@
 		//Methods:
 
         //Create a new Session.
-		public function createFilm($id, $tittle, $duration, $language,$description){
+		public function createFilm($id, $tittle, $duration, $language){
 
-			$sql = sprintf( "INSERT INTO `film`( `id`, `tittle`, `duration`, `language`,`description`) 
-								VALUES ( '%d', '%s', '%d', '%s','%s')", 
-									$id, $tittle, $duration, $language,$description);
+			$sql = sprintf( "INSERT INTO film( $id, $tittle, $duration, $language) 
+								VALUES ( '%d', '%s', '%d', '%s')", 
+									$id, $tittle, $duration, $language);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
@@ -40,7 +40,7 @@
 				$films[] = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
 			}
 
-			return $films;
+			return $resul;
 		}
 
 		//Returns a query to get all films tittles.
@@ -87,8 +87,8 @@
 		}
 	    
 		//Create a new film Data Transfer Object.
-		public function loadFilm($id, $tittle, $duration, $language,$description){
-			return new Film_DTO( $id, $tittle, $duration, $language,$description);
+		public function loadFilm($id, $tittle, $duration, $language){
+			return new FilmDTO( $id, $tittle, $duration, $language);
 		}
 	    	
     }

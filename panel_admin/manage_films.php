@@ -60,7 +60,7 @@
             </table>';
 	}
     function addFilm(){
-        echo'<div class="column left">
+        echo'<div class="column size">
         <h2>Añadir pelicula</h2>
         <form method="post" action="add_film.php">
             <div class="row">

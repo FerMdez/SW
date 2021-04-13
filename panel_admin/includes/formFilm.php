@@ -52,7 +52,7 @@ class FormFilm extends Form {
 
 		//Habria que validar todo para que encaje en la base de datos
 		
-		$bd = new Film_DAO('complucine');
+		$bd = new FilmDAO('complucine');
 		if($bd ){
 			if($option == "new"){
 				$bd->createFilm(null, $title,$duration,$languaje,$description);
