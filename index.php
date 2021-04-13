@@ -1,22 +1,16 @@
 <!DOCTYPE HTML>
 <?php
     session_start();
-    // BORRAR CUANDO TENGAMOS BBDD:
-    $films = array(
-        "iron_man",
-        "iron_man_2",
-        "iron_man_3",
-        "capitan_america_el_primer_vengador",
-        "capitan_america_el_soldado_de_invierno",
-        "capitan_america_civil_war",
-        "marvel_avengers",
-        "avengers_age_of_ultron",
-        "avengers_inifinity_war",
-        "avengers_end_game"
-    );
 
+    //HTML template:
     require_once('./assets/php/template.php');
     $template = new Template();
+    $prefix = $template->get_prefix();
+
+    //List of the tittles of the movies:
+    include_once($prefix.'showtimes/includes/loadFilms.php');
+    $loadFilms = new loadFilms();
+    $films = $loadFilms->getFilms();
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
