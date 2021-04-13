@@ -20,7 +20,7 @@
                     <input type="text" name="language" id="language" value='.$_REQUEST['language'].' />
                 </div>
                 <div>
-                <input type="text" name="description" id="description" value='.$_REQUEST['description'].'/>
+                <input type="text" name="description" id="description" value="'.$_REQUEST['description'].'"/>
             </div>
                 </fieldset>
                 <div class="actions"> 
