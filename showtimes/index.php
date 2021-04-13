@@ -2,23 +2,17 @@
 <?php 
     session_start();
 
+    //HTML template:
     require_once('../assets/php/template.php');
     $template = new Template();
     $prefix = $template->get_prefix();
 
-    // BORRAR CUANDO TENGAMOS BBDD:
-    $films = array(
-        "iron_man",
-        "iron_man_2",
-        "iron_man_3",
-        "capitan_america_el_primer_vengador",
-        "capitan_america_el_soldado_de_invierno",
-        "capitan_america_civil_war",
-        "marvel_avengers",
-        "avengers_age_of_ultron",
-        "avengers_inifinity_war",
-        "avengers_end_game"
-    );
+    //List of the tittles and descriptions of the movies:
+    require_once('includes/loadFilms.php');
+    $loadFilms = new loadFilms();
+    $films = $loadFilms->getFilms();
+    $descriptions = $loadFilms->getDescription();
+    
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
@@ -46,6 +40,7 @@
             <?php
             for($i = 0; $i < count($films); $i++){
                 $title = str_replace('_', ' ', $films[$i]);
+                $description = $descriptions[$i];
                 if($i%2 === 0){
                     if($i != 0) echo "</div>
                 ";
@@ -60,9 +55,13 @@
                 }
                 echo "<section id='".$films[$i]."'>
                         <div class='zoom'>
-                            <div class='code'>
+                            <div class='code showtimes'>
                                 <div class='image'><img src='".$prefix."img/".$films[$i].".jpg' alt='".$films[$i]."' /></div>
                                 <h2>".$title."</h2>
+                                <hr />
+                                <div class='blockquote'>
+                                    <p>".$description."</p>
+                                </div>
                             </div>
                         </div>
                     </section>
