@@ -6,6 +6,7 @@
         function __construct($panel,$log){
             $this->state = $panel;
             $this->login = $log;
+
         }
 
         function showPanel() {

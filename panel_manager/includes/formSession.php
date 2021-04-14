@@ -37,7 +37,7 @@ class FormSession extends Form {
 			}else if($this->option == "list"){
 								$this->reply = $this->sessions;
 			}
-		} else {
+		} else if($this->correct == false) {
 			$this->reply = "<h1> ERROR  </h1><hr />
 						<p> Ha habido un error en la operacion. Revisa los datos introducidos o ponte en contacto con el administrador de la base de datos.</p>
 						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";

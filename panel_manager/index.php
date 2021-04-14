@@ -3,9 +3,11 @@
     session_start();
 
     require_once('../assets/php/template.php');
-	require_once('./panel_manager.php');
-    
 	$template = new Template();
+	$prefix = $template->get_prefix();
+	
+	include_once('panel_manager.php');
+	
     $login = false;
 
     if(isset($_SESSION["login"]) && $_SESSION["nombre"] == "manager") $login = true;
