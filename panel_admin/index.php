@@ -6,8 +6,8 @@
     require_once('../panel_admin/panelAdmin.php');
     $template = new Template();
    
-    if(isset($_REQUEST['state'])) {
-        $panel = new Panel($_REQUEST['state']);
+    if(isset($_GET['state'])) {
+        $panel = new Panel($_GET['state']);
     }
     else {
         $panel = new Panel('');
@@ -66,6 +66,7 @@
                 <div class="column side"></div>
                     <div class="column middle">
                         <?php
+                            $template->print_msg();
                             $panel->showPanel();
                         ?>
                     </div>

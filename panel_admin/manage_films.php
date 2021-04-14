@@ -87,15 +87,6 @@
                 </form>
                 </div>';
     }
-    function showmessage() {
-        if(isset($_SESSION['message'])){
-            echo '<div>
-                    <h3>'.$_SESSION["message"].'</h3>
-                </div>';
-            unset($_SESSION['message']);
-        }
-    }
-    showmessage();
 	drawFilms($film->getReply());
 	addFilm();
 
