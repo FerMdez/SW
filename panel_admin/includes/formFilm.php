@@ -84,7 +84,7 @@ class FormFilm extends Form {
 			} else if($this->option == "show") {
 				$this->array = $bd->allFilmData();
 			}
-			} else {$this->correct = false;}			
+			 else {$this->correct = false;}			
 		}
 	
 	}
