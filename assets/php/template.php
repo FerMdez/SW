@@ -173,5 +173,13 @@
         </footer>\n";
     }
 
+    //Print session MSG:
+    function print_msg() {
+        if(isset($_SESSION['message'])){
+            echo "<div>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    }
+
     }
 ?>
