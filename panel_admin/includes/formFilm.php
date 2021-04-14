@@ -55,14 +55,20 @@ class FormFilm extends Form {
 		$bd = new Film_DAO('complucine');
 		if($bd ){
 			if($option == "new"){
-				//Primero comprobar si existe una pelicula con el mismo titulo e idioma
-				$exist = $bd-> GetFilm($tittle,$language);
-				if( mysqli_num_rows($exist) != 0){
-					$this->correct =false;
+				 //Primero comprobar si los campos no son vacios y la duracion es mayor que 0
+				if(!empty($tittle)&&$duration>0&&!empty($language)&&!empty($description)){
+					// comprobar si existe una pelicula con el mismo titulo e idioma
+					$exist = $bd-> GetFilm($tittle,$language);
+					if( mysqli_num_rows($exist) != 0){
+						$this->correct =false;
+					}
+					else{
+						$bd->createFilm(null, $tittle,$duration,$language,$description);
+					}
 				}
 				else{
-					$bd->createFilm(null, $tittle,$duration,$language,$description);
-				}
+					$this->correct =false;
+				}	
 			} else if ($option == "del"){
 				//Primero comprobar si existe una pelicula con el mismo id
 				$exist = $bd-> FilmData($id);
@@ -73,10 +79,16 @@ class FormFilm extends Form {
 					$this->correct =false;
 				}
 			} else if ($option == "edit"){
-				//Primero comprobar si existe una pelicula con el mismo id
-				$exist = $bd-> FilmData($id);
-				if( mysqli_num_rows($exist) != 0){
-					$bd->editFilm($id,$tittle,$duration,$language,$description);
+				 //Primero comprobar si los campos no son vacios y la duracion es mayor que 0
+				if(!empty($tittle)&&$duration>0&&!empty($language)&&!empty($description)){
+					//comprobar si existe una pelicula con el mismo id
+					$exist = $bd-> FilmData($id);
+					if( mysqli_num_rows($exist) != 0){
+						$bd->editFilm($id,$tittle,$duration,$language,$description);
+					}
+					else{
+						$this->correct =false;
+					}
 				}
 				else{
 					$this->correct =false;
