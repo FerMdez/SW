@@ -18,7 +18,13 @@
 									$id, $tittle, $duration, $language,$description);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-			return $sql;
+			return $resul;
+		}
+		//Returns
+		public function GetFilm($tittle,$language){
+			$sql = sprintf( "SELECT * FROM film WHERE film.tittle = '%s'AND film.language='%s'", $tittle,$language );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			return $resul;
 		}
 
 		//Returns a query to get the film's data.
@@ -28,6 +34,8 @@
 
 			return $resul;
 		}
+
+		
 		
 	    //Returns a query to get All the films.
 		public function allFilmData(){

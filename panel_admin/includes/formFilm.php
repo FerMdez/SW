@@ -46,7 +46,7 @@ class FormFilm extends Form {
     }
 
     //Process form:
-    public function processesForm($id,$title,$duration,$languaje,$description, $option) {
+    public function processesForm($id,$tittle,$duration,$language,$description, $option) {
         $this->correct = true;
 		$this->option = $option;
 
@@ -56,11 +56,29 @@ class FormFilm extends Form {
 		if($bd ){
 			if($option == "new"){
 				//Primero comprobar si existe una pelicula con el mismo titulo e idioma
-				$bd->createFilm(null, $title,$duration,$languaje,$description);
+				$exist = $bd-> GetFilm($tittle,$language);
+				if( mysqli_num_rows($exist) != 0){
+					$this->correct =false;
+				}
+				else{
+				$bd->createFilm(null, $tittle,$duration,$language,$description);
+				}
 			} else if ($option == "del"){
-				$bd->deleteFilm($id);
+				$exist = $bd-> FilmData($id);
+				if( mysqli_num_rows($exist) != 0){
+					$bd->deleteFilm($id);
+				}
+				else{
+					$this->correct =false;
+				}
 			} else if ($option == "edit"){
-				$bd->editFilm($id,$title,$duration,$languaje,$description);
+				$exist = $bd-> FilmData($id);
+				if( mysqli_num_rows($exist) != 0){
+					$bd->editFilm($id,$tittle,$duration,$language,$description);
+				}
+				else{
+					$this->correct =false;
+				}
 			} else if($this->option == "show") {
 				$this->array = $bd->allFilmData();
 			}
