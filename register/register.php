@@ -1,6 +1,6 @@
 <?php
     //General Config File:
-    require_once('./assets/php/config.php');
+    require_once('../assets/php/config.php')
 
     require_once('./includes/formRegister.php');
 
