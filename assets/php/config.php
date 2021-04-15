@@ -3,7 +3,7 @@
     session_start();
 
     //HTML template:
-    require_once('./assets/php/template.php');
+    require_once('template.php');
     $template = new Template();
     $prefix = $template->get_prefix();
 ?>
