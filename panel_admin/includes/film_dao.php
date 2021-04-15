@@ -1,6 +1,7 @@
 <?php
 	include_once('film_dto.php');
-	include_once('../assets/php/config.php');
+	$template = new Template();
+    $prefix = $template->get_prefix();
 	include_once($prefix.'assets/php/dao.php');
 
     class Film_DAO extends DAO {

@@ -1,5 +1,5 @@
 <?php
-
+include_once('../assets/php/config.php');
 include_once('film_dao.php');
 include_once('film_dto.php');
 include_once('../assets/php/form.php');

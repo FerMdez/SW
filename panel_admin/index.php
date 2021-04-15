@@ -2,9 +2,10 @@
 <?php 
     session_start();
 
-    require_once('../assets/php/template.php');
+    include_once('../assets/php/config.php');
+
     require_once('../panel_admin/panelAdmin.php');
-    $template = new Template();
+    
     $login=false;
     if(isset($_SESSION["login"]) && $_SESSION["rol"] == "admin") $login = true;
     if(isset($_GET['state'])) {
