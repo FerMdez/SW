@@ -1,6 +1,7 @@
 <?php
-	require_once('../assets/php/dao.php');
 	include_once('film_dto.php');
+	include_once('../assets/php/config.php');
+	include_once($prefix.'assets/php/dao.php');
 
     class Film_DAO extends DAO {
 
