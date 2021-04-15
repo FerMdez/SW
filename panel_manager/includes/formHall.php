@@ -5,8 +5,8 @@ include_once('../assets/php/form.php');
 class FormHall extends Form {
 
     //Atributes:
-    private $correct;  // Indicates if the session is correct.
-    private $reply; // Validation response
+    private $correct;  
+    private $reply; 
 	private $option;
 	private $halls;
 	
@@ -20,7 +20,8 @@ class FormHall extends Form {
 
     //Returns validation response:
     public function getReply() {
-		//Habria que comprobar si realmente se ha validado la respuesta antes de escribir una respuesta correcta
+		
+		echo "<p> se va a devolver una respuesta </p>";
 		if($this->correct){
 			if($this->option == "new"){
 				$this->reply = "<h1> Operacion realizada con exito </h1><hr />
@@ -35,6 +36,7 @@ class FormHall extends Form {
 						<p> Se ha eliminado la sala correctamente en la base de datos.</p>
 						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
 			}else if($this->option == "list"){
+								echo "<p> se va a devolver la lista </p>";
 								$this->reply = $this->halls;
 			}
 		} else {
@@ -56,7 +58,7 @@ class FormHall extends Form {
 			if($option == "list"){
 				$this->halls = $bd->getAllHalls($cinema);
 			}else {
-				/*
+				/* TODO
 				$start = date('H:i:s', strtotime( $start ) );
 				
 				if($option == "new"){

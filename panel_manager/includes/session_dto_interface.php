@@ -6,6 +6,8 @@
 		public function getIdfilm();
         public function setIdhall($film);
 		public function getIdhall();
+		public function setIdcinema($cinema);
+		public function getIdcinema();
 		public function setDate($date);
 		public function getDate();
 		public function setStartTime($startTime);

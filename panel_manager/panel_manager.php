@@ -12,16 +12,16 @@
         function showPanel() {
             if($this->login){
                 switch($this->state) {
-                    case 'us_u': require('user_unregistered_view.php'); break;
-                    case 'us_r': require('user_registered_view.php'); break;
-                    case 'rooms': require('manage_rooms.php');  break;
-                    case 'sessions': require('manage_sessions.php'); break;
-                    case 'edit_session': require('edit_sessions.php'); break;
+                    case 'us_u': echo "<p> Esta vista no esta implementada </p>"; break;
+                    case 'us_r': echo "<p> Esta vista no esta implementada </p>"; break;
+                    case 'rooms': require_once('manage_rooms.php');  break;
+                    case 'sessions': require_once('manage_sessions.php'); break;
+                    case 'edit_session': require_once('edit_sessions.php'); break;
                     default: require('hello_panel.php'); break;
                 }
             }
             else{
-                require('no_permisions_panel.php');
+                echo "<h1> Error no tienes los permisos necesarios de gerente</h1>";
             }
         }
     }

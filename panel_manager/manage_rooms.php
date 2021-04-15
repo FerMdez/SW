@@ -8,7 +8,7 @@
 	$rooms = array($r1, $r2, $r3, $r4);							
 
 	function drawHalls($ros){
-		echo "
+		echo " <p> Esta vista esta en desarrollo <p>
 	<div class=\"column middle\">
 		<table class='alt'>
 			<thead>
@@ -21,17 +21,13 @@
 		foreach($ros as $r){ 
 		echo "
 			<tr>
-				<!-- AUN NO HEMOS VISTO JAVASCRIPT -->
-				<!-- ADEMÁS, AUNQUE USÁSEMOS JS, ESO NO SE HARÍA CON UN WINDOWS.LOCATION.HREF, DE MOMENTO, USAD LOS BOTONES COMO OS PONGO EL DE AÑADIR -->
-				<!--<td> <button type=\"button\"> Sala ". $r->getNumber() ."</button> </td> -->
 				<td><a href=\"\" class='button'>Sala". $r->getNumber() ."</a></td>
-				<!--<td> <button type=\"button\" onClick=\"Javascript:window.location.href = 'index.php?edit_rooms=true';\")\">Editar</button> </td> MAL, POR LO MISMO-->
-				<td><a href=\"index.php?edit_rooms=true\" class='button'>Editar</a></td>
+				<td><a href=\"index.php?state=rooms\" class='button'>Editar</a></td>
 			</tr>";
 		}
 		echo "<tbody>
 		</table>\n";
-	echo "<a href=\"index.php?edit_sessions=true\" class='button large'>Añadir</a>
+	echo "<a href=\"index.php?state=rooms\" class='button large'>Añadir</a>
 	</div>";
 	}
 	drawHalls($rooms);

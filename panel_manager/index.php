@@ -1,16 +1,13 @@
 <!DOCTYPE HTML>
 <?php 
-    session_start();
-
-    require_once('../assets/php/template.php');
-	$template = new Template();
-	$prefix = $template->get_prefix();
+	//General Config File:
+    require_once('../assets/php/config.php');
 	
 	include_once('panel_manager.php');
 	
     $login = false;
 
-    if(isset($_SESSION["login"]) && $_SESSION["nombre"] == "manager") $login = true;
+    if(isset($_SESSION["login"]) && $_SESSION["rol"] == "manager") $login = true;
 
 	if(isset($_REQUEST['state'])) {
         $panel = new Panel($_REQUEST['state'],$login); 
@@ -18,8 +15,6 @@
     else { 
         $panel = new Panel('',$login); 
     }
-    // IMPORTANTE:
-    //  VERIFICAR QUE ES MANAGER(GERENTE), SI NO, MOSTRAR MENSAJE DE "ERROR"
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D

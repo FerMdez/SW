@@ -4,14 +4,14 @@
     class SessionDTO  implements SessionsDTO {
 
         //Attributes:
-        private $_id;           //Session Id.
-        private $_idfilm;       //Film Id  -> deberia ser un objeto tipo pelicula? para poder sacar el nombre de la pelicula en cuestion
-        private $_idhall;       //Hall id  -> deberia ser un objeto tipo room/hall/sala de cine por lo mismo
+        private $_id;          
+        private $_idfilm;
+        private $_idhall;
 		private $_idcinema;			
-        private $_date;         //Session date.
-        private $_startTime;    //Session start time.
-        private $_seatPrice;    //Seat price.
-        private $_format;       //Type of film: 3D | 4D | normal | subtitle | mute.
+        private $_date;
+        private $_startTime;
+        private $_seatPrice;
+        private $_format;
 
 		//Constructor:
         function __construct($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){

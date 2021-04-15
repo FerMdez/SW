@@ -1,31 +1,22 @@
 <?php
-    session_start();
-
-    //Depuración (BORRAR):
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    
-    //HTML template:
-    require_once('../assets/php/template.php');
-    $template = new Template();
-	$action ="";
-	$id = null;
-	if(isset($_POST['new'])){
-		$action = "new";
-	} else if (isset($_POST['edit'])){
-		$action = "edit";
-		$id = $_POST["id"];
-	} else if (isset($_POST['del'])){
-		$action = "del";
-		$id = $_POST["id"];
-	}
-	
-    //Login form validate:
+	//General Config File:
+    require_once('../assets/php/config.php');
     require_once('./includes/formSession.php');
     $session = new FormSession();
-    $session->processesForm($id, $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],$_POST["repeat"], $action);
-    $reply = $session->getReply();
+	$reply = "<p> ERROR DE ACCESO </p>" ;
+	
+	if(isset($_POST['new'])){
+		$session->processesForm(null, $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],$_POST["repeat"], "new");
+		$reply = $session->getReply();
+		
+	} else if (isset($_POST['edit'])){
+		$session->processesForm($_POST["id"], $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],"0", "edit");
+		$reply = $session->getReply();
+		 
+	} else if (isset($_POST['del'])){
+		$session->processesForm($_POST["id"], $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],"0", "del");
+		$reply = $session->getReply();
+	}
 
 ?>
 <!DOCTYPE HTML>

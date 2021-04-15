@@ -2,25 +2,22 @@
 include_once('session_dao.php');
 include_once('../assets/php/form.php');
 
+//Receive data from froms and prepare the correct response
 class FormSession extends Form {
-
-    //Atributes:
-    private $correct;  // Indicates if the session is correct.
-    private $reply; // Validation response
+	//Atributes
+    private $correct;
+    private $reply; 
 	private $option;
 	private $sessions;
 	
-    //Constructor:
+//Constructor:	
     public function __construct() {
         parent::__construct('formSession');
         $this->reply = array();
     }
-
-    //Methods:
-
-    //Returns validation response:
+	
+	//Methods:
     public function getReply() {
-		//Habria que comprobar si realmente se ha validado la respuesta antes de escribir una respuesta correcta
 		if($this->correct){
 			if($this->option == "new"){
 				$this->reply = "<h1> Operacion realizada con exito </h1><hr />
@@ -45,46 +42,39 @@ class FormSession extends Form {
         return $this->reply;
     }
 
-    //Process form:
     public function processesForm($id, $film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option) {
 		$this->option = $option;
 		$this->correct = true;
+
 		$bd = new sessionDAO('complucine');
-		
-		$date = date('Y-m-d', strtotime( $date ) ); 
-		
+				
 		if($bd ){
 			if($option == "list"){
-				$this->sessions = $bd->getAllSessionsFromDateHallAndCinema($cinema, $hall, $date);
+				$this->sessions = $bd->getAllSessionsFromACinemaHallDate($cinema, $hall, $date);
+				
 			}else {
-				
-				$start = date('H:i:s', strtotime( $start ) );
-				
 				if($option == "new"){
-					
-					$selectSession = $bd->selectSession($cinema, $hall, $start, $date);
-					if($selectSession && $selectSession->num_rows >= 1)	{
+					$searchSession = $bd->searchSession($cinema, $hall, $start, $date);
+					if($searchSession)	{
 						$this->correct = false;
 					} else{	
 						$bd->createSession(null, $film, $hall,$cinema, $date, $start, $price, $format);
 					}
-					
-				mysqli_free_result($selectSession);
 				
 				} else if ($option == "del"){
 					$bd->deleteSession($id);
 					
 				} else if ($option == "edit"){
 					$bd->editSession($id, $film, $hall, $cinema, $date, $start, $price, $format);
+		
 				}
 				
 				if($repeat > "0"){
 					$repeat--;
 					$date = date('Y-m-d', strtotime( $date. ' +1 day') );
-					$this->processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat);
+					$this->processesForm($id, $film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option);
 				}		
 			}		
-			
 		} else {$this->correct = false;}	
     }
 }
