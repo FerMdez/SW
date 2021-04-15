@@ -36,7 +36,7 @@
 							<fieldset id=\"datos\">
 								<legend>Datos</legend>
 								<div class=\"_price\">
-									<input type=\"number\" name=\"price\" id=\"price\" value=\"". $_POST['price'] ."\"min=\"0\" placeholder=\"Precio de la entrada\" required/>
+									<input type=\"number\" name=\"price\" step=\"0.01\"id=\"price\" value=\"". $_POST['price'] ."\"min=\"0\" placeholder=\"Precio de la entrada\" required/>
 								</div>
 								<select name=\"hall\" class=\"button large\">";
 								foreach($formHall->getReply() as $r){ 
@@ -89,7 +89,7 @@
 								<legend>Datos</legend>
 								<input type=\"hidden\" name=\"cinema\" value =\"1\" />
 								<div class=\"_price\">
-									<input type=\"number\" name=\"price\" id=\"price\" min=\"0\" placeholder=\"Precio de la entrada\" required/>
+									<input type=\"number\" name=\"price\" step=\"0.01\" id=\"price\" min=\"0\" placeholder=\"Precio de la entrada\" required/>
 								</div>
 								<select name=\"hall\" class=\"button large\">";
 								foreach($formHall->getReply() as $r){ 

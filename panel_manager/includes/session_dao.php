@@ -15,7 +15,7 @@
 			$startTime = date('H:i:s', strtotime( $startTime ) );
 			
 			$sql = sprintf( "INSERT INTO `session` (`id`, `idfilm`, `idhall`, `idcinema`, `date`, `start_time`, `seat_price`, `format`) 
-				VALUES ('%d', '%d', '%d', '%d', '%s', '%s', '%d', '%s')",
+				VALUES ('%d', '%d', '%d', '%d', '%s', '%s', '%f', '%s')",
 					$id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
@@ -75,7 +75,7 @@
 			
             $sql = sprintf( "UPDATE `session`
                              SET `idfilm` = '%d' , `idhall` = '%d', `idcinema` = '%d', `date` = '%s',
-                                  `start_time` = '%s', `seat_price` = '%d', `format` = '%s'
+                                  `start_time` = '%s', `seat_price` = '%f', `format` = '%s'
                              WHERE 
 								idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
                 $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $_SESSION["cinema"],$_SESSION["hall"],$_SESSION["date"],$_SESSION["start"]);
