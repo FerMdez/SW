@@ -16,15 +16,16 @@
 	
 	$placeholder_date = date("Y-m-d");
 	$placeholder_hall = "1";
-	$cinema = "1";
+	
+	$_SESSION["cinema"] = "1";
 
 	if(isset($_POST['filter']))	{
 		$placeholder_date = $_POST["date"];
 		$placeholder_hall = $_POST["hall"];
 	}
 	
-	$formHall->processesForm(null, $cinema, null, null, "list");
-	$formSession->processesForm(null, null, $placeholder_hall, $cinema, $placeholder_date, null, null, null, null, "list");
+	$formHall->processesForm(null, $_SESSION["cinema"], null, null, "list");
+	$formSession->processesForm(null, $placeholder_hall, $_SESSION["cinema"], $placeholder_date, null, null, null, null, "list");
 		
 	echo"				
 				<!--Session Filter -->
@@ -72,10 +73,8 @@
 								<td> " . $s->getFormat() . "</a></td>
 								<td> " . $s->getSeatPrice() . "</a></td>
 								<form method=\"post\" action=\"./?state=edit_session&option=edit\">
-									<input  name=\"id\" type=\"hidden\" value=\"".$s->getId()."\">
 									<input  name=\"idfilm\" type=\"hidden\" value=\"".$s->getIdfilm()."\">
 									<input  name=\"hall\" type=\"hidden\" value=\"".$s->getIdhall()."\">
-									<input  name=\"idcinema\" type=\"hidden\" value=\"".$s->getIdcinema()."\">
 									<input  name=\"date\" type=\"hidden\" value=\"".$s->getDate()."\">
 									<input  name=\"start\" type=\"hidden\" value=\"".$s->getStartTime()."\">
 									<input  name=\"price\" type=\"hidden\" value=\"".$s->getSeatPrice()."\">

@@ -1,7 +1,7 @@
 <?php
 	require_once('../assets/php/dao.php');
 	include_once('session_dto.php');
-
+	
     class SessionDAO extends DAO {
 		//Constructor:
         function __construct($bd_name){
@@ -68,7 +68,7 @@
 			return $sessions;
 		}
 		
-        public function editSession($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
+        public function editSession($idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
 			$format = $this->mysqli->real_escape_string($format);
 			$date = date('Y-m-d', strtotime( $date ) ); 
 			$startTime = date('H:i:s', strtotime( $startTime ) );
@@ -76,17 +76,20 @@
             $sql = sprintf( "UPDATE `session`
                              SET `idfilm` = '%d' , `idhall` = '%d', `idcinema` = '%d', `date` = '%s',
                                   `start_time` = '%s', `seat_price` = '%d', `format` = '%s'
-                             WHERE `session`.`id` = '%d';", 
-                $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $id);
+                             WHERE 
+								idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
+                $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $_SESSION["cinema"],$_SESSION["hall"],$_SESSION["date"],$_SESSION["start"]);
 
             $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
             return $resul;
         }
 
-        public function deleteSession($id){
+        public function deleteSession($hall, $cinema, $date, $startTime){
 
-            $sql = sprintf( "DELETE FROM `session` WHERE `session`.`id` = '%d';",$id);
+            $sql = sprintf( "DELETE FROM `session` WHERE 
+							idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
+							$cinema, $hall, $date, $startTime);	
 
             $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 

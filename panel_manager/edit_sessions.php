@@ -10,10 +10,11 @@
 	
 	require_once('../panel_admin/includes/film_dto.php');
 	include_once('../panel_admin/includes/film_dao.php');
-	$cinema = "1";
 	
 	$formHall = new FormHall();
-	$formHall->processesForm(null, $cinema, null, null, "list");
+	$formHall->processesForm(null, $_SESSION["cinema"], null, null, "list");
+	
+
 	
 	$filmList = new Film_DAO('complucine');
 	
@@ -24,14 +25,16 @@
 	}
 
 	if(isset($_REQUEST['option']) && $_REQUEST['option'] == 'edit') { 
+		$_SESSION["hall"] =	$_POST['hall'];
+		$_SESSION["date"] = $_POST['date'];
+		$_SESSION["start"] = $_POST['start'];
+	
 		echo "				<div class = \"column middle\">
 					<h2>Editar/Eliminar Sesion</h2>
 					<form method=\"post\" id=\"edit_ses\" action=\"validateSession.php\">
 						<div class=\"row\">
 							<fieldset id=\"datos\">
 								<legend>Datos</legend>
-								<input  name=\"cinema\" type=\"hidden\" value=\"". $_POST['idcinema']."\">
-								<input  name=\"id\" type=\"hidden\" value=\"". $_POST['id']."\">
 								<div class=\"_price\">
 									<input type=\"number\" name=\"price\" id=\"price\" value=\"". $_POST['price'] ."\"min=\"0\" placeholder=\"Precio de la entrada\" required/>
 								</div>

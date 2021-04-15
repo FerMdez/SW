@@ -6,16 +6,28 @@
 	$reply = "<p> ERROR DE ACCESO </p>" ;
 	
 	if(isset($_POST['new'])){
-		$session->processesForm(null, $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],$_POST["repeat"], "new");
+		$session->processesForm($_POST["film"], $_POST["hall"], $_SESSION["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],$_POST["repeat"], "new");
 		$reply = $session->getReply();
+		$_SESSION["cinema"] = "";
+		$_SESSION["hall"] =	"";
+		$_SESSION["date"] = "";
+		$_SESSION["start"] = "";
 		
 	} else if (isset($_POST['edit'])){
-		$session->processesForm($_POST["id"], $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],"0", "edit");
+		$session->processesForm($_POST["film"], $_POST["hall"], $_SESSION["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],"0", "edit");
 		$reply = $session->getReply();
+				$_SESSION["cinema"] = "";
+		$_SESSION["hall"] =	"";
+		$_SESSION["date"] = "";
+		$_SESSION["start"] = "";
 		 
 	} else if (isset($_POST['del'])){
-		$session->processesForm($_POST["id"], $_POST["film"], $_POST["hall"], $_POST["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],"0", "del");
+		$session->processesForm($_POST["film"], $_POST["hall"], $_SESSION["cinema"],$_POST["date"],$_POST["start"],$_POST["price"],$_POST["format"],"0", "del");
 		$reply = $session->getReply();
+		$_SESSION["cinema"] = "";
+		$_SESSION["hall"] =	"";
+		$_SESSION["date"] = "";
+		$_SESSION["start"] = "";
 	}
 
 ?>

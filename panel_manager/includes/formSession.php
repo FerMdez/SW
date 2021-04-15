@@ -42,7 +42,7 @@ class FormSession extends Form {
         return $this->reply;
     }
 
-    public function processesForm($id, $film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option) {
+    public function processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option) {
 		$this->option = $option;
 		$this->correct = true;
 
@@ -58,21 +58,21 @@ class FormSession extends Form {
 					if($searchSession)	{
 						$this->correct = false;
 					} else{	
-						$bd->createSession(null, $film, $hall,$cinema, $date, $start, $price, $format);
+						$bd->createSession(null,$film, $hall,$cinema, $date, $start, $price, $format);
 					}
 				
 				} else if ($option == "del"){
-					$bd->deleteSession($id);
+					$bd->deleteSession($hall, $cinema, $date, $start);
 					
 				} else if ($option == "edit"){
-					$bd->editSession($id, $film, $hall, $cinema, $date, $start, $price, $format);
+					$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format);
 		
 				}
 				
 				if($repeat > "0"){
 					$repeat--;
 					$date = date('Y-m-d', strtotime( $date. ' +1 day') );
-					$this->processesForm($id, $film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option);
+					$this->processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option);
 				}		
 			}		
 		} else {$this->correct = false;}	

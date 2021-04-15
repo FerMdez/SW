@@ -21,7 +21,6 @@ class FormHall extends Form {
     //Returns validation response:
     public function getReply() {
 		
-		echo "<p> se va a devolver una respuesta </p>";
 		if($this->correct){
 			if($this->option == "new"){
 				$this->reply = "<h1> Operacion realizada con exito </h1><hr />
@@ -36,7 +35,6 @@ class FormHall extends Form {
 						<p> Se ha eliminado la sala correctamente en la base de datos.</p>
 						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
 			}else if($this->option == "list"){
-								echo "<p> se va a devolver la lista </p>";
 								$this->reply = $this->halls;
 			}
 		} else {
