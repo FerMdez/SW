@@ -1,10 +1,8 @@
 <?php
-    session_start();
+    //General Config File:
+    require_once('./assets/php/config.php');
 
-    require_once('../assets/php/template.php');
     require_once('./includes/formRegister.php');
-
-    $template = new Template();
 
     $reg = new Register();
     $reg->testReg();
