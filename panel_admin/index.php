@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <?php 
-    session_start();
+
 
     include_once('../assets/php/config.php');
 
     require_once('../panel_admin/panelAdmin.php');
-    
+
     $login=false;
     if(isset($_SESSION["login"]) && $_SESSION["rol"] == "admin") $login = true;
     if(isset($_GET['state'])) {
