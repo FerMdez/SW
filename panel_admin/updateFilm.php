@@ -11,13 +11,13 @@
                 <legend>Datos de pelicula</legend>
                 <input type="hidden" name="id" value='.$_POST['id'].'/>
                 <div>
-                    <input type="text" name="tittle" value='.$_POST['tittle'].' />
+                    <input type="text" name="tittle" value="'.$_POST['tittle'].'" />
                 </div>
                 <div>
                     <input type="number" name="duration" id="duration" value='.$_POST['duration'].' />
                 </div>
                 <div>
-                    <input type="text" name="language" id="language" value='.$_POST['language'].' />
+                    <input type="text" name="language" id="language" value="'.$_POST['language'].'" />
                 </div>
                 <div>
                 <input type="text" name="description" id="description" value="'.$_POST['description'].'"/>
