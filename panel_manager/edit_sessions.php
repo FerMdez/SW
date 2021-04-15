@@ -1,6 +1,6 @@
 <?php
 	//General Config File:
-    require_once('../assets/php/config.php');
+  	require_once('../assets/php/config.php');
 
 	include_once('./includes/formHall.php');	
 	require_once('./includes/hall_dto.php');
@@ -22,7 +22,6 @@
 		$films = null;
 	}
 
-	//DISCLAIMER; sabemos que si se edita la ulr se pueden acceder a datos de una sesion que no pertenece al usuario y que incluso puede hasta editarlas/borrarlas en la base de datos
 	if(isset($_REQUEST['option']) && $_REQUEST['option'] == 'edit') {
 		echo "<div class = \"column middle\">
 				<h2>Editar/Eliminar Sesion</h2>
