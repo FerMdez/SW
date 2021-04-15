@@ -1,5 +1,4 @@
 <?php
-    session_start();
     include_once('./includes/film_dto.php');	
     include_once('./includes/formFilm.php');	
     
