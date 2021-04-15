@@ -28,7 +28,7 @@ class FormLogin extends Form {
                         <p>{$name}, has iniciado sesión correctamente.</p>
                         <p>Usa los botones para navegar</p>
                         <a href='../'><button>Inicio</button></a>
-                        <a href='../../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
+                        <a href='../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
         }   
         else if(!isset($_SESSION["login"])){
             $this->reply = "<h1>ERROR</h1><hr />".
