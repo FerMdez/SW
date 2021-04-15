@@ -11,9 +11,8 @@
 
     $film = new FormFilm();	
     $film->processesForm(null, null, null, null, null, "show");
-    
-	function drawFilms($films){	
-        			
+
+	function drawFilms($films){			
         echo "
         <table class='alt'>
             <thead>

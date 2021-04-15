@@ -47,15 +47,21 @@ class FormFilm extends Form {
     }
 
     //Process form:
-	public function processesForm($id,$tittle,$duration,$language,$description, $option) {
+	public function processesForm($_id,$_tittle,$_duration,$_language,$_description, $_option) {
 		$this->correct = true;
-		$this->option = $option;
+		$this->option = $_option;
+
+		$id= $this->test_input($_id);
+		$tittle=$this->test_input($_tittle);
+		$duration=$this->test_input($_duration);
+		$language=$this->test_input($_language);
+		$description=$this->test_input($_description);
 	
 		//Habria que validar todo para que encaje en la base de datos
 			
 		$bd = new Film_DAO('complucine');
-		if($bd ){
-			if($option == "new"){
+		if($bd){
+			if($this->option == "new"){
 				 //Primero comprobar si los campos no son vacios y la duracion es mayor que 0
 				if(!empty($tittle)&&$duration>0&&!empty($language)&&!empty($description)){
 					// comprobar si existe una pelicula con el mismo titulo e idioma
@@ -64,15 +70,15 @@ class FormFilm extends Form {
 						$this->correct =false;
 					}
 					else{
-						$resul=$bd->createFilm(null, $tittle,$duration,$language,$description);
-						$resul->free();
+						$bd->createFilm(null, $tittle,$duration,$language,$description);
+
 					}
 					$exist->free();
 				}
 				else{
 					$this->correct =false;
 				}	
-			} else if ($option == "del"){
+			} else if ($this->option == "del"){
 				//Primero comprobar si existe una pelicula con el mismo id
 				$exist = $bd-> FilmData($id);
 				if( mysqli_num_rows($exist) == 1){
@@ -81,14 +87,13 @@ class FormFilm extends Form {
 				else{
 					$this->correct =false;
 				}
-			} else if ($option == "edit"){
+			} else if ($this->option == "edit"){
 				 //Primero comprobar si los campos no son vacios y la duracion es mayor que 0
 				if(!empty($tittle)&&$duration>0&&!empty($language)&&!empty($description)){
 					//comprobar si existe una pelicula con el mismo id
 					$exist = $bd-> FilmData($id);
 					if( mysqli_num_rows($exist) == 1){
-						$resul = $bd->editFilm($id,$tittle,$duration,$language,$description);
-						$resul->free();
+						$bd->editFilm($id,$tittle,$duration,$language,$description);
 					}
 					else{
 						$this->correct =false;
@@ -98,18 +103,19 @@ class FormFilm extends Form {
 				else{
 					$this->correct =false;
 				}
-			} else if($this->option == "show") {
-				$resul = $bd->allFilmData();
-				while($fila=mysqli_fetch_assoc($resul)){
-					$this->array = new FilmDTO($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
-				}
-				$resul->free();
+			}  else if($this->option == "show") {
+				$this->array = $bd->allFilmData();
 			}
-			 else {$this->correct = false;}			
+			else {$this->correct = false;}			
 		}
-		$bd->__destruct();
+		
 	
 	}
+
+	protected function test_input($input){
+		return htmlspecialchars(trim(strip_tags($input)));
+	}
 }
+
 
 ?>

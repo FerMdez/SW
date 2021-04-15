@@ -5,12 +5,13 @@
     require_once('../assets/php/template.php');
     require_once('../panel_admin/panelAdmin.php');
     $template = new Template();
-   
+    $login=false;
+    if(isset($_SESSION["login"]) && $_SESSION["rol"] == "admin") $login = true;
     if(isset($_GET['state'])) {
-        $panel = new Panel($_GET['state']);
+        $panel = new Panel($_GET['state'], $login);
     }
     else {
-        $panel = new Panel('');
+        $panel = new Panel('', $login);
     }
     // IMPORTANTE:
     //  VERIFICAR QUE ES ADMIN, SI NO, MOSTRAR MENSAJE DE "ERROR"
