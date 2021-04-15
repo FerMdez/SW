@@ -1,7 +1,7 @@
 <?php
-    include_once('./includes/film_dto.php');	
-    include_once('./includes/formFilm.php');	
-    
+    require_once('../assets/php/dao.php');
+    include_once('./includes/formFilm.php');
+        
     if(isset($_POST['edit_film'])) {
         echo'<div class="column size">
         <h2>Editar pelicula</h2>
@@ -30,7 +30,6 @@
                 </div>
                 </form>
                 </div>';
-
     }
     else if(isset($_POST['delete_film'])) {
         echo'<div class="column size">

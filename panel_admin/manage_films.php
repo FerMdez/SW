@@ -1,6 +1,6 @@
 <?php
-	require('./includes/film_dto.php');	
-    require('./includes/formFilm.php');	
+	include_once('./includes/film_dto.php');	
+    include_once('./includes/formFilm.php');	
 	/*$f1 = new FilmDTO(1000,"Los vengadores",183,"español","");
 	$f2 = new FilmDTO(2001,"Mecernarios",140,"español","");
 	$f3 = new FilmDTO(3022,"Monster hunter",104,"español","");

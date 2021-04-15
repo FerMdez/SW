@@ -39,12 +39,7 @@
 		public function allFilmData(){
 			$sql = sprintf( "SELECT * FROM film ");
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
-			while($fila=mysqli_fetch_array($resul)){
-				$films[] = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
-			}
-			$resul->free();
-			return $films;
+			return $resul;
 		}
 
 		//Returns a query to get all films tittles.

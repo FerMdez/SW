@@ -1,6 +1,7 @@
 <?php
 
 include_once('film_dao.php');
+include_once('film_dto.php');
 include_once('../assets/php/form.php');
 
 class FormFilm extends Form {
@@ -63,8 +64,10 @@ class FormFilm extends Form {
 						$this->correct =false;
 					}
 					else{
-						$bd->createFilm(null, $tittle,$duration,$language,$description);
+						$resul=$bd->createFilm(null, $tittle,$duration,$language,$description);
+						$resul->free();
 					}
+					$exist->free();
 				}
 				else{
 					$this->correct =false;
@@ -72,7 +75,7 @@ class FormFilm extends Form {
 			} else if ($option == "del"){
 				//Primero comprobar si existe una pelicula con el mismo id
 				$exist = $bd-> FilmData($id);
-				if( mysqli_num_rows($exist) != 0){
+				if( mysqli_num_rows($exist) == 1){
 					$bd->deleteFilm($id);
 				}
 				else{
@@ -83,21 +86,28 @@ class FormFilm extends Form {
 				if(!empty($tittle)&&$duration>0&&!empty($language)&&!empty($description)){
 					//comprobar si existe una pelicula con el mismo id
 					$exist = $bd-> FilmData($id);
-					if( mysqli_num_rows($exist) != 0){
-						$bd->editFilm($id,$tittle,$duration,$language,$description);
+					if( mysqli_num_rows($exist) == 1){
+						$resul = $bd->editFilm($id,$tittle,$duration,$language,$description);
+						$resul->free();
 					}
 					else{
 						$this->correct =false;
 					}
+					$exist->free();
 				}
 				else{
 					$this->correct =false;
 				}
 			} else if($this->option == "show") {
-				$this->array = $bd->allFilmData();
+				$resul = $bd->allFilmData();
+				while($fila=mysqli_fetch_assoc($resul)){
+					$this->array = new FilmDTO($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
+				}
+				$resul->free();
 			}
 			 else {$this->correct = false;}			
 		}
+		$bd->__destruct();
 	
 	}
 }
