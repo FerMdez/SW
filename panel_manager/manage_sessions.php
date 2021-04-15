@@ -50,46 +50,45 @@
 				</div>";
 				
 	function drawSessions($sessions,$bd){
-	echo "			<!--Session List -->
-					<div class=\"column side\">
-						<table class='alt'>
-							<thead>
-								<tr>
-									<th>Hora</th>
-									<th>Pelicula</th>
-									<th>Formato</th>
-									<th>Precio</th>
-								</tr>
-							</thead>
-							<tbody>"; 
+	echo "			
+				<!--Session List -->
+				<div class=\"column side\">
+					<table class='alt'>
+						<thead>
+							<tr>
+								<th>Hora</th>
+								<th>Pelicula</th>
+								<th>Formato</th>
+								<th>Precio</th>
+							</tr>
+						</thead>
+						<tbody>"; 
 		foreach($sessions as $s){ 
 			$film = mysqli_fetch_array($bd->FilmData($s->getIdfilm()));
 		echo "
-								<tr>
-									<td> " . date('H:i', strtotime( $s->getStartTime()))  . "</a></td>
-									<td> " . str_replace('_', ' ', $film["tittle"])  . "</a></td>
-									<td> " . $s->getFormat() . "</a></td>
-									<td> " . $s->getSeatPrice() . "</a></td>
-									<form method=\"post\" action=\"./?state=edit_session&option=edit\">
-									
-										<input  name=\"id\" type=\"hidden\" value=\"".$s->getId()."\">
-										<input  name=\"idfilm\" type=\"hidden\" value=\"".$s->getIdfilm()."\">
-										<input  name=\"idhall\" type=\"hidden\" value=\"".$s->getIdhall()."\">
-										<input  name=\"idcinema\" type=\"hidden\" value=\"".$s->getIdcinema()."\">
-										<input  name=\"date\" type=\"hidden\" value=\"".$s->getDate()."\">
-										<input  name=\"start\" type=\"hidden\" value=\"".$s->getStartTime()."\">
-										<input  name=\"price\" type=\"hidden\" value=\"".$s->getSeatPrice()."\">
-										<input  name=\"format\" type=\"hidden\" value=\"".$s->getFormat()."\">
-										
-									<td> <input type=\"submit\" id=\"submit\" value=\"Editar\" class=\"button\" > </td>
-									</form>
-								</tr>"; 
+							<tr>
+								<td> " . date('H:i', strtotime( $s->getStartTime()))  . "</a></td>
+								<td> " . str_replace('_', ' ', $film["tittle"])  . "</a></td>
+								<td> " . $s->getFormat() . "</a></td>
+								<td> " . $s->getSeatPrice() . "</a></td>
+								<form method=\"post\" action=\"./?state=edit_session&option=edit\">
+									<input  name=\"id\" type=\"hidden\" value=\"".$s->getId()."\">
+									<input  name=\"idfilm\" type=\"hidden\" value=\"".$s->getIdfilm()."\">
+									<input  name=\"hall\" type=\"hidden\" value=\"".$s->getIdhall()."\">
+									<input  name=\"idcinema\" type=\"hidden\" value=\"".$s->getIdcinema()."\">
+									<input  name=\"date\" type=\"hidden\" value=\"".$s->getDate()."\">
+									<input  name=\"start\" type=\"hidden\" value=\"".$s->getStartTime()."\">
+									<input  name=\"price\" type=\"hidden\" value=\"".$s->getSeatPrice()."\">
+									<input  name=\"format\" type=\"hidden\" value=\"".$s->getFormat()."\">	
+								<td> <input type=\"submit\" id=\"submit\" value=\"Editar\" class=\"button\" > </td>
+								</form>
+							</tr>"; 
 		} 
 		echo "
-							<tbody>
-						</table>
-						<input type=\"submit\" name=\"submit\" form=\"addfilter\"  value=\"Añadir\" class=\"button large\" formaction=\"./?state=edit_session&option=new\">
-					</div>";	
+						<tbody>
+					</table>
+					<input type=\"submit\" name=\"submit\" form=\"addfilter\"  value=\"Añadir\" class=\"button large\" formaction=\"./?state=edit_session&option=new\">
+				</div>\n";	
 		
 	}
 	if($formSession->getReply()){
@@ -107,6 +106,6 @@
 				<div class=\"column side\">
 					<p> No hay ninguna session en la sala ". $placeholder_hall . " el dia ". $placeholder_date . "</p>
 					<input type=\"submit\" name=\"submit\" form=\"addfilter\"  value=\"Añadir\" class=\"button large\" formaction=\"./?state=edit_session&option=new\">
-				</div>";
+				</div>\n";
 	}
 ?>	
