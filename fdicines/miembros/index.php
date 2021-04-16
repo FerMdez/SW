@@ -1,10 +1,7 @@
 <!DOCTYPE HTML>
 <?php 
-    session_start(); 
-
-    //HTML template:
-    require_once('../../assets/php/template.php');
-    $template = new Template();    
+    //General Config File:
+    require_once('../../assets/php/config.php');       
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
