@@ -1,18 +1,20 @@
 <!DOCTYPE HTML>
-<?php 
-    session_start();
-
-    //HTML template:
-    require_once('../assets/php/template.php');
-    $template = new Template();
-    $prefix = $template->get_prefix();
+<?php
+    //General Config File:
+    require_once('../assets/php/config.php');
 
     //List of the tittles and descriptions of the movies:
-    require_once('includes/loadFilms.php');
-    $loadFilms = new loadFilms();
-    $films = $loadFilms->getFilms();
-    $descriptions = $loadFilms->getDescription();
-    
+    require_once($prefix.'panel_admin/includes/film_dao.php');
+    $loadFilms = new Film_DAO("complucine");
+    $films = $loadFilms->allFilmData();
+    $titles = array();
+    $descriptions = array();
+    $times = array();
+    foreach($films as $key => $value){
+        $titles[$key] = $value->getTittle();
+        $descriptions[$key] = $value->getDescription();
+        $times[$key] = $value->getDuration();
+    }
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
@@ -39,8 +41,7 @@
             <div class='row'>
             <?php
             for($i = 0; $i < count($films); $i++){
-                $title = str_replace('_', ' ', $films[$i]);
-                $description = $descriptions[$i];
+                $title = str_replace('_', ' ', $titles[$i]);
                 if($i%2 === 0){
                     if($i != 0) echo "</div>
                 ";
@@ -53,15 +54,16 @@
                     echo "<div class='column middle'>
                     ";
                 }
-                echo "<section id='".$films[$i]."'>
+                echo "<section id='".$titles[$i]."'>
                         <div class='zoom'>
                             <div class='code showtimes'>
-                                <div class='image'><img src='".$prefix."img/".$films[$i].".jpg' alt='".$films[$i]."' /></div>
+                                <div class='image'><img src='".$prefix."img/".$titles[$i].".jpg' alt='".$titles[$i]."' /></div>
                                 <h2>".$title."</h2>
                                 <hr />
                                 <div class='blockquote'>
-                                    <p>".$description."</p>
+                                    <p>".$descriptions[$i]."</p>
                                 </div>
+                                <p>Duración: ".$times[$i]." minutos</p>
                             </div>
                         </div>
                     </section>

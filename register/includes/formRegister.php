@@ -1,73 +1,100 @@
 <?php
-    require_once('user_dao.php');
-?>
 
-<?php
-    class Register {
-        // ATRIBUTOS
-        private $name;
-        private $email;
-        private $password;
-        private $repassword;
-        private $rol; // Desde aqui solo se registran usuarios finales, seran rol "user"
-        private $id; // Generado en la BD? Aleatorio?
-        private $reply;
+include_once($prefix.'login/includes/user_dao.php');
+include_once($prefix.'assets/php/form.php');
 
-        // CONSTRUCTOR
-        function __construct() {}
+class FormRegister extends Form {
+    //Constants:
+    const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
 
-        // METODOS
-        public function testReg() {
-            $this->name = $this->test_input($_POST["name"]);
-            $this->email = $this->test_input($_POST["email"]);
-            $this->password = $this->test_input($_POST["pass"]);
-            $this->repassword = $this->test_input($_POST["repass"]);
-            $this->rol = "user";
-            $this->id = "xxxx";
+    //Atributes:
+    private $user;      // User who is going to log-in.
+    private $reply;     // Validation response
 
-            // Creamos DAO
-            $instanceDAO = new UserDAO('complucine');
+    //Constructor:
+    public function __construct() {
+        parent::__construct('formRegister');
+        $this->reply = array();
+    }
 
-            // Creamos DTO
-            $uDTO = $instanceDAO->loadUser($this->id, $this->name, $this->email, $this->password, $this->rol);
+    //Methods:
 
-            if($this->password == $this->repassword) { // Comprobacion de contrasenyas iguales
-                $resultado = $instanceDAO->selectUser($uDTO->getName());
-                if($resultado->num_rows == 0) { // Comprobacion de que el usuario no existe ya en la BD
-                    // Se manda el usuario al DAO, que lo creara en la BD
-                    $instanceDAO->createUser($uDTO->getId(), $uDTO->getName(), $uDTO->getEmail(), $uDTO->getPass(), $uDTO->getRol());
+    //Returns validation response:
+    public function getReply() {
         
-                    $this->reply = "<h1>¡Éxito en el registro!</h1><hr/>
-                    <p>{$_POST['name']}, te has registrado correctamente.</p>
-                    <p>Puedes iniciar sesión en el siguiente enlace.</p>
-                    <br>
-                    <a href='./index.php'><button>Iniciar sesión</button></a>\n";
-                }
-                else {
-                    $this->reply = "<h1>¡Ha ocurrido un error!</h1><hr/>".
-                    "<p>¡Ya existe un usuario con este nombre!</p>
-                    <p>Vuelve a intetarlo o prueba a inicia sesión.</p>
-                    <a href='./'><button>Iniciar Sesión</button></a>
-                    <form method='post' action='./'><button name='register' id='register'>Registro</button></form>\n";
-                }
-                $resultado->free();
-            }
-            else {
-                $this->reply = "<h1>¡Ha ocurrido un error!</h1><hr/>".
-                "<p>Los datos introducidos no son válidos.</p>
-                <p>Vuelve a intetarlo o prueba a inicia sesión.</p>
-                <a href='./'><button>Iniciar Sesión</button></a>
-                <form method='post' action='./'><button name='register' id='register'>Registro</button></form>\n";
-            }
+        if(isset($_SESSION["login"])){
+            $name = strtoupper($_SESSION['nombre']);
+            $this->reply = "<h1>Bienvenido {$_SESSION['nombre']}</h1><hr />
+                        <p>{$name}, has creado tu cuenta de usuario correctamente.</p>
+                        <p>Usa los botones para navegar</p>
+                        <a href='../'><button>Inicio</button></a>
+                        <a href='../../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
+        }   
+        else if(!isset($_SESSION["login"])){
+            $this->reply = "<h1>ERROR</h1><hr />".
+                        "<p>Ha ocurrido un problema y no hemos podido completar el registro.</p>
+                        <p>Vuelve a intetarlo o inicia sesión si tienesuna cuenta de usuario.</p>
+                        <a href='../login/'><button>Iniciar Sesión</button></a>
+                        <form method='post' action='../login/'><button name='register' id='register'>Registro</button></form>\n";
         }
 
-        // Metodo auxiliar que comprueba la validez de los parametros
-        private function test_input($input){
-            return htmlspecialchars(trim(strip_tags($input)));
-        }
+        return $this->reply;
+    }
 
-        public function getReply() {
-            return $this->reply;
+    //Process form:
+    public function processesForm($name, $mail, $pass, $repass) {
+        $register = true;
+        $name = $this->test_input($name);
+        $mail = $this->test_input($mail);
+        $pass = $this->test_input($pass);
+        $repass = $this->test_input($repass);
+
+        $username = isset($name) ? $name : null ;
+        if (!$username) {
+          $register = false;
+        }
+        
+        $email = isset($mail) ? $mail : null ;
+        if (!$email || !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $email)) {
+          $register = false;
+        }
+        
+        $password = isset($pass) ? $pass : null ;
+        $repassword = isset($repass) ? $repass : null ;
+        if($password != $repassword){
+            if (!$password || mb_strlen($password) < 4) {
+                $register = false;
+            }
+            if(!$repassword || mb_strlen($repassword) < 4){
+                $register = false;
+            }
+        }
+        
+        if ($register) {
+            $bd = new UserDAO('complucine');
+            if($bd){
+                $this->user = $bd->selectUser($username, $password);
+                try{
+                    if (!$this->user) {
+                        $bd->createUser("", $username, $email, $password, "user");
+                        $this->user = $bd->selectUser($username, $password);
+                        if ($this->user) {
+                            $_SESSION["nombre"] = $this->user->getName();
+                            $_SESSION["rol"] = $this->user->getRol();
+                            $_SESSION["login"] = $register;
+                        }
+                    }
+                }
+                catch (Exception $e){
+                    $_SESSION["login"] = $register;
+                }
+            }
         }
     }
+
+    protected function test_input($input){
+        return htmlspecialchars(trim(strip_tags($input)));
+    }
+
+}
 ?>

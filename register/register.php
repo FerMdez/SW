@@ -1,13 +1,14 @@
 <?php
     //General Config File:
-    require_once('../assets/php/config.php')
-
+    require_once('../assets/php/config.php');
+    
+    //Login form validate:
     require_once('./includes/formRegister.php');
+    $register = new FormRegister();
+    $register->processesForm($_POST["name"], $_POST["email"], $_POST["pass"], $_POST["repass"]);
+    $reply = $register->getReply();
 
-    $reg = new Register();
-    $reg->testReg();
 ?>
-
 <!DOCTYPE HTML>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
@@ -15,14 +16,15 @@
 -->
 <html lang="es">
     <!-- Head -->
-        <?php
-            $template->print_head();
-        ?>
+    <?php
+        $template->print_head();
+    ?>
     <body>
         <!-- Header -->
-            <?php
-                $template->print_header();
-            ?>
+        <?php
+            $template->print_header();
+        ?>
+
         <!-- Main -->
         <div class="main">
             <div class="image"><img src="../img/logo_trasparente.png" /></div>
@@ -34,9 +36,9 @@
                 <div class="column side"></div>
                 <div class="column middle">
                     <div class="code info">
-                            <?php
-                                echo $reg->getReply();
-                            ?>
+                        <?php
+                            echo $reply;
+                        ?>
                     </div>
                 </div>
                 <div class="column side"></div>    
@@ -44,8 +46,10 @@
         </section>
 
         <!-- Footer -->
-            <?php
-                $template->print_footer();
-            ?>
+        <?php
+            $template->print_footer();
+        ?>
+
     </body>
+
 </html>

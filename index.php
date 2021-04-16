@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <?php
-    session_start();
-
-    //HTML template:
-    require_once('./assets/php/template.php');
-    $template = new Template();
-    $prefix = $template->get_prefix();
+   //General Config File:
+   require_once('./assets/php/config.php');
 
     //List of the tittles of the movies:
-    include_once($prefix.'showtimes/includes/loadFilms.php');
-    $loadFilms = new loadFilms();
-    $films = $loadFilms->getFilms();
+    require_once($prefix.'panel_admin/includes/film_dao.php');
+    $films = new Film_DAO("complucine");
+    $films_array = $films->allFilmData();
+    $tittles = array();
+    foreach($films_array as $key => $value){
+        $tittles[$key] = $value->getTittle();
+    }
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
@@ -50,7 +50,7 @@
                         <h1>Últimos Estrenos</h1><hr />
                         <?php
                         $count = 0;
-                        for($i = count($films)-4; $i < count($films); $i++){
+                        for($i = count($tittles)-4; $i < count($tittles); $i++){
                             if($count%2===0){
                                 if($count != 0) echo "</div>
                             ";
@@ -59,7 +59,7 @@
                             }
                             echo "<div class='zoom'>
                                 <div class='columna'>
-                                    <a href='".$prefix."showtimes/#".$films[$i]."'><div class='image'><img src='img/".$films[$i].".jpg' alt='".$films[$i]."' /></div></a>
+                                    <a href='".$prefix."showtimes/#".$tittles[$i]."'><div class='image'><img src='img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div></a>
                                 </div>
                             </div>
                             ";
@@ -72,11 +72,11 @@
                     <div class="column right">
                         <div class="galery">
                         <?php
-                        $count = rand(0, count($films)-1);
-                        $title = str_replace('_', ' ', $films[$count]); 
+                        $count = rand(0, count($tittles)-1);
+                        $title = str_replace('_', ' ', $tittles[$count]); 
                         echo "<h1>{$title}</h1><hr />
                             <div class='zoom'>
-                                <a href='".$prefix."showtimes/#".$films[$count]."'><div class='image main'><img src='img/".$films[$count].".jpg' alt='".$films[$count]."' /></div></a>
+                                <a href='".$prefix."showtimes/#".$tittles[$count]."'><div class='image main'><img src='img/".$tittles[$count].".jpg' alt='".$tittles[$count]."' /></div></a>
                             </div>\n";
                         ?>
                         </div>
