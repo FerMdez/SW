@@ -157,6 +157,14 @@
         </div>\n";
     }
 
+    //Print session MSG:
+    function print_msg() {
+        if(isset($_SESSION['message'])){
+            echo "<div>".$_SESSION['message']."</div>";
+            unset($_SESSION['message']);
+        }
+    }
+
     //Print generic Footer:
     function print_footer(){
         //$page = $this->page;
@@ -171,14 +179,6 @@
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |
             <a href='{$prefix}contacto/'>Contacto</a>
         </footer>\n";
-    }
-
-    //Print session MSG:
-    function print_msg() {
-        if(isset($_SESSION['message'])){
-            echo "<div>".$_SESSION['message']."</div>";
-            unset($_SESSION['message']);
-        }
     }
 
     }

@@ -316,7 +316,7 @@ table a{
   height: 250px;
 }
 .code.showtimes{
-  height: 550px;
+  height: 600px;
 }
 
 
@@ -506,6 +506,12 @@ textarea {
 
 .verify {
   font-size: 11px;
+}
+.verify a {
+  color: #1f2c3d;
+}
+.verify a:hover {
+  color: rgb(138, 150, 32);
 }
 
 #submit {
