@@ -45,13 +45,23 @@
 		}
 
 		//Returns a query to check if the user name exists.
-		public function selectUser($username){
+		public function selectUser($username, $password){
 			$username = $this->mysqli->real_escape_string($username);
 
 			$sql = sprintf( "SELECT * FROM users WHERE username = '%s'", $username );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
-			return $resul;
+			$resul->data_seek(0);
+			while ($fila = $resul->fetch_assoc()) {
+				if($username === $fila['username'] && $this->verifyPass($password, $fila['passwd'])){
+					$user = $this->loadUser($fila['id'], $fila['username'], $fila['email'], $fila['passwd'], $fila['rol']);
+				}
+			}
+
+			//mysqli_free_result($selectUser);
+			$resul->free();
+
+			return $user;
 		}
 
 		//Returns a query to check if the user pass matches.

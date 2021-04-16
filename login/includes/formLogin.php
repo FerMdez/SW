@@ -28,7 +28,7 @@ class FormLogin extends Form {
                         <p>{$name}, has iniciado sesión correctamente.</p>
                         <p>Usa los botones para navegar</p>
                         <a href='../'><button>Inicio</button></a>
-                        <a href='../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
+                        <a href='../../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
         }   
         else if(!isset($_SESSION["login"])){
             $this->reply = "<h1>ERROR</h1><hr />".
@@ -67,28 +67,19 @@ class FormLogin extends Form {
         if ($login) {
             $bd = new UserDAO('complucine');
             if($bd){
-                $selectUser = $bd->selectUser($username);
-                $selectUser->data_seek(0);
-                while ($fila = $selectUser->fetch_assoc()) {
-                    if($username === $fila['username'] && $bd->verifyPass($password, $fila['passwd'])){ 
-                        $this->user = $bd->loadUser($fila['id'], $fila['username'], $fila['email'], $fila['passwd'], $fila['rol']);
-                    }
-                }
-                
+                $this->user = $bd->selectUser($username, $password);
+
                 try{
                     if ($this->user) {
-                        $_SESSION['user'] = $this->user;
+                        //$_SESSION["user"] = $this->user; //¿? No funcionan los getters con el objeto.
                         $_SESSION["nombre"] = $this->user->getName();
-                        $_SESSION["login"] = $login;
                         $_SESSION["rol"] = $this->user->getRol();
+                        $_SESSION["login"] = $login;
                     }
                 }
                 catch (Exception $e){
                     $_SESSION["login"] = $login;
                 }
-
-                mysqli_free_result($selectUser);
-                //$selectUser->free();
             }
 
         }

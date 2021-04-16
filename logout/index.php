@@ -1,21 +1,25 @@
 <?php
     header("refresh:4;url=../");
-	session_start(); 
+
+    //General Config File:
+    require_once('../assets/php/config.php');
+    
+    //Session:
+	//session_start(); /* Inicializada en config.php */
 	unset($_SESSION);
 	session_destroy();
 	if(!isset($_SESSION["nombre"])){
 		$reply = "<h1>Se ha cerrado la sesión</h1><hr />".
                     "<p>Serás redirigido al inicio en unos segundos.<br />
-                        Haz clic <a href='/'>aquí</a> si tu navegador no te redirige automáticamente.</p>\n";
+                        Haz clic <a href='{$prefix}'>aquí</a> si tu navegador no te redirige automáticamente.</p>\n";
 	}
 	else{
 		$reply = "<h1>Ha ocurrido un problema y no hemos podido finalizar la sesión</h1>".
 					"<p>Serás redirigido al inicio en unos segundos.<br />
-                        Haz clic <a href='/'>aquí</a> si tu navegador no te redirige automáticamente.</p>\n";
+                        Haz clic <a href='{$prefix}'>aquí</a> si tu navegador no te redirige automáticamente.</p>\n";
 	}
 
-    require_once('../assets/php/template.php');
-    $template = new Template();
+    
 ?>
 <!DOCTYPE HTML>
 <!--

@@ -1,10 +1,7 @@
 <!DOCTYPE HTML>
 <?php
-    session_start();
-
-    //HTML template:
-    require_once('../assets/php/template.php');
-    $template = new Template();    
+    //General Config File:
+    require_once('../assets/php/config.php');        
 
     //Change the view of the "Login page" to "Registration page":
     require('login_register_view.php');

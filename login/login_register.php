@@ -1,49 +1,22 @@
 <?php
-    class LoginRegisterView {
+    $isLogin = setLogin(true);
 
-        //Atributes:
-        private $isLogin;
-        private $login;
-        private $register;
+    if(array_key_exists('register',$_POST)){
+        $isLogin = setLogin(false);
+    }
+    else if(array_key_exists('login',$_POST)){
+        $isLogin = setLogin(true);
+    }
 
-        //Constructor:
-        public function __construct() {
-            $this->setIsLogin(true);
-            
-            if(array_key_exists('register', $_POST)){
-               $this->setIsLogin(false);
-            }
-            else if(array_key_exists('login', $_POST)){
-                $this->setIsLogin(true);
-            }
+    function setLogin($set){
+       return $set;
+    }
+    
 
-            $this->initLoginRegister();
-            
-        }
-
-        //Methods:
-        private function setIsLogin($set){
-            return  $this->isLogin = $set;
-        }
-
-        public function getIsLogin(){
-            return $this->isLogin;
-        }
-
-        public function getLogin(){
-            return $this->login;
-        }
-
-        public function getRegister(){
-            return $this->register;
-        }
-
-        private function initLoginRegister(){
-            
-            $this->register = '<!-- Register -->
+    $register = '<!-- Register -->
                 <div class="column left">
                     <h2>Registro</h2>
-                    <form method="post" action="../register/register.php">
+                    <form method="post" action="">
                         <div class="row">
                             <fieldset id="datos_personales">
                                 <legend>Datos personales</legend>
@@ -62,7 +35,7 @@
                             </fieldset>
                             <div class="verify">
                                 <input type="checkbox" id="checkbox" name="terms" required>
-                                <label for="terms"><a href ="../fdicines/terms_conditions/">Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</a></label>
+                                <label for="terms">Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</label>
                             </div>
                             <div class="actions"> 
                                 <input type="submit" id="submit" value="Registrarse" class="primary" />
@@ -83,7 +56,7 @@
                     </div>
                 </div>'."\n";
 
-            $this->login = '<!-- Login -->
+    $login = '<!-- Login -->
                 <div class="column left">
                     <div class="code info">
                         <h2>¿No tienes una cuenta?</h2>
@@ -120,6 +93,4 @@
                         </div>
                     </form>
                 </div>'."\n";
-        }
-    }
 ?>

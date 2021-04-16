@@ -18,7 +18,7 @@
             $this->_password = $password;
             $this->_rol = $rol;
         }
-
+        
 		//Methods:
 
 		//Getters && Setters:
