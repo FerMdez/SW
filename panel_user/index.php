@@ -1,9 +1,7 @@
 <!DOCTYPE HTML>
 <?php 
-    session_start();
-
-    require_once('../assets/php/template.php');
-    $template = new template();
+    //General Config File:
+    require_once('../assets/php/config.php');
 
     // IMPORTANTE:
     //  VERIFICAR QUE EL USUARIO HA INICIADO SESIÓN, SI NO, MOSTRAR MENSAJE DE "ERROR"
