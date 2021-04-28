@@ -1,6 +1,6 @@
 <?php
 
-include_once('user_dao.php');
+include_once($prefix.'assets/php/common/user_dao.php');
 include_once($prefix.'assets/php/form.php');
 
 class FormLogin extends Form {

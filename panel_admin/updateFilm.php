@@ -1,5 +1,5 @@
 <?php
-    require_once('../assets/php/dao.php');
+    require_once($prefix.'assets/php/dao.php');
     include_once('./includes/formFilm.php');
         
     if(isset($_POST['edit_film'])) {

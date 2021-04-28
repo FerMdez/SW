@@ -1,5 +1,5 @@
 <?php
-include_once('session_dao.php');
+include_once('../assets/php/common/session_dao.php');
 include_once('../assets/php/form.php');
 
 //Receive data from froms and prepare the correct response

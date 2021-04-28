@@ -1,6 +1,6 @@
 <?php
-    include_once('./includes/film_dto.php');	
-    include_once('./includes/formFilm.php');	
+    include_once($prefix.'assets/php/common/film_dto.php');	
+    include_once($prefix.'assets/php/common/formFilm.php');	
     
     if(isset($_POST['add_film'])) {
         $film = new FormFilm();

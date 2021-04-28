@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <?php
-   //General Config File:
-   require_once('./assets/php/config.php');
+    //General Config File:
+    require_once(__DIR__.'/assets/php/config.php');
 
     //List of the tittles of the movies:
-    require_once($prefix.'panel_admin/includes/film_dao.php');
+    require_once($prefix.'assets/php/common/film_dao.php');
     $films = new Film_DAO("complucine");
     $films_array = $films->allFilmData();
     $tittles = array();

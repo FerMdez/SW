@@ -1,5 +1,5 @@
 <?php
-include_once('hall_dao.php');
+include_once('../assets/php/common/hall_dao.php');
 include_once('../assets/php/form.php');
 
 class FormHall extends Form {

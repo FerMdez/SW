@@ -1,5 +1,5 @@
 <?php	
-	require('./includes/hall_dto.php');
+	require('../assets/php/common/hall_dto.php');
 	
 	$r1 = new HallDTO(0,20,20,30);
 	$r2 = new HallDTO(1,10,30,30);

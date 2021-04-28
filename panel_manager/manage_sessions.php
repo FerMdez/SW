@@ -2,14 +2,14 @@
 	//General Config File:
     require_once('../assets/php/config.php');
 	
-	include_once('./includes/hall_dto.php');
+	include_once('../assets/php/common/hall_dto.php');
 	include_once('./includes/formHall.php');	
 	
-	include_once('./includes/session_dto.php');
+	include_once('../assets/php/common/session_dto.php');
 	include_once('./includes/formSession.php');	
 	
-	include_once('../panel_admin/includes/film_dto.php');
-	include_once('../panel_admin/includes/film_dao.php');
+	include_once('../assets/php/common/film_dto.php');
+	include_once('../assets/php/common/film_dao.php');
 	
 	$formSession = new FormSession();	
 	$formHall = new FormHall();

@@ -1,15 +1,15 @@
 <?php
 	//General Config File:
-    require_once('../assets/php/config.php');
+    require_once($prefix.'assets/php/config.php');
 
 	include_once('./includes/formHall.php');	
-	require_once('./includes/hall_dto.php');
+	require_once($prefix.'assets/php/common/hall_dto.php');
 	
-	require_once('./includes/session_dto.php');
-	include_once('./includes/session_dao.php');
+	require_once($prefix.'assets/php/common/session_dto.php');
+	include_once($prefix.'assets/php/common/session_dao.php');
 	
-	require_once('../panel_admin/includes/film_dto.php');
-	include_once('../panel_admin/includes/film_dao.php');
+	require_once($prefix.'assets/php/common/film_dto.php');
+	include_once($prefix.'assets/php/common/film_dao.php');
 	
 	$formHall = new FormHall();
 	$formHall->processesForm(null, $_SESSION["cinema"], null, null, "list");

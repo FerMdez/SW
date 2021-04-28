@@ -1,7 +1,8 @@
 <?php
+
 include_once('../assets/php/config.php');
-include_once('film_dao.php');
-include_once('film_dto.php');
+include_once('../assets/php/common/film_dao.php');
+include_once('../assets/php/common/film_dto.php');
 include_once('../assets/php/form.php');
 
 class FormFilm extends Form {

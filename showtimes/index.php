@@ -4,7 +4,7 @@
     require_once('../assets/php/config.php');
 
     //List of the tittles and descriptions of the movies:
-    require_once($prefix.'panel_admin/includes/film_dao.php');
+    require_once($prefix.'assets/php/common/film_dao.php');
     $loadFilms = new Film_DAO("complucine");
     $films = $loadFilms->allFilmData();
     $titles = array();
