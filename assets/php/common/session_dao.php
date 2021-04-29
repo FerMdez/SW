@@ -1,6 +1,6 @@
 <?php
 	require_once('../assets/php/dao.php');
-	include_once('session_dto.php');
+	include_once('../panel_manager/includes/session.php');
 	
     class SessionDAO extends DAO {
 		//Constructor:
@@ -98,7 +98,7 @@
 		
 		//Create a new Session Data Transfer Object.
 		public function loadSession( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
-			return new SessionDTO( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
+			return new Session( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
 		}
 
     }
