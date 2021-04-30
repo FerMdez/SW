@@ -160,7 +160,7 @@
     //Print panel menu:
     function print_panelMenu($panel){
         $prefix = $this->prefix;
-        $menus = array("<a href='{$prefix}'><li>Panel Principal</li></a>");
+        $menus = array("<a href='./'><li>Panel Principal</li></a>");
 
         switch($panel){
             case "admin": array_push($menus, "<li>Ver como...
