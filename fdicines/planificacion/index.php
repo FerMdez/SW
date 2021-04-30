@@ -261,12 +261,12 @@
                     <tr>
                         <td>Práctica 2</td>
                         <td>15 de Abril de 2021</td>
-                        <td>EN PROCESO</td>
+                        <td>ENTREGADO</td>
                     </tr>
                     <tr>
                         <td>Práctica 3</td>
                         <td>7 de Mayo de 2021</td>
-                        <td>PENDIENTE</td>
+                        <td>EN PROCESO</td>
                     </tr>
                     <tr>
                         <td>Entrega Final</td>

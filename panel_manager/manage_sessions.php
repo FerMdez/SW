@@ -29,7 +29,7 @@
 		
 	echo"				
 				<!--Session Filter -->
-				<div class = \"column middle\"> 
+				<div class = \"column left\"> 
 					<form method=\"post\" id=\"addfilter\">	
 						<input type=\"date\" name=\"date\" value=\"". $placeholder_date . "\" min=\"2021-01-01\" max=\"2031-12-31\">
 						<select name=\"hall\" class=\"button large\">";
@@ -53,7 +53,7 @@
 	function drawSessions($sessions,$bd){
 	echo "			
 				<!--Session List -->
-				<div class=\"column side\">
+				<div class=\"column right\">
 					<table class='alt'>
 						<thead>
 							<tr>

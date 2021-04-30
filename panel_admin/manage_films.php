@@ -17,7 +17,7 @@
     $film->processesForm(null, null, null, null, null, "show");
 
 	function drawFilms($films){			
-        echo "
+        echo "<div class='column left'>
         <table class='alt'>
             <thead>
             <tr>
@@ -60,10 +60,11 @@
                 </tr>'; 
                 } 
         echo'<tbody>
-            </table>';
+            </table>
+            </div>';
 	}
     function addFilm(){
-        echo'<div class="column size">
+        echo'<div class="column right">
         <h2>Añadir pelicula</h2>
         <form method="post" action="update_film.php">
             <div class="row">

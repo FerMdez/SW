@@ -28,29 +28,10 @@
 
         <!-- Panel -->
         <div class="row">
-            <!-- Left Sidebar -->
-            <div class="sidebar left">
-                <ul>
-                <li>Funcionalidad:</li>
-                    <ul>
-                        <li>Subfuncionalidad</li>
-                        <li>Subfuncionalidad</li>
-                    </ul><br />
-                    <li>Ver como:</li>
-                    <ul>
-                        <li>Usuario no registrado</li>
-                        <li>Usuario registrado</li>
-                        <li>Gerente</li>
-                    </ul><br />
-                    <li>Añadir/Editar/Eliminar:</li>
-                    <ul>
-                        <li>Cines</li>
-                        <li>Películas</li>
-                        <li>Promociones</li>
-                        <li>Gerente</li>
-                    </ul>
-                </ul>
-            </div>
+            <!-- Panel Menu -->
+            <?php
+                $template->print_panelMenu("user");
+            ?>
             <!-- Contents -->
             <div class="row">
                 <div class="column side"></div>

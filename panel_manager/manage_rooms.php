@@ -8,7 +8,8 @@
 	$rooms = array($r1, $r2, $r3, $r4);							
 
 	function drawHalls($ros){
-		echo " <p> Esta vista esta en desarrollo <p>
+		echo " <div class='column side'></div>
+		<p> Esta vista esta en desarrollo <p>
 	<div class=\"column middle\">
 		<table class='alt'>
 			<thead>
@@ -28,7 +29,8 @@
 		echo "<tbody>
 		</table>\n";
 	echo "<a href=\"index.php?state=rooms\" class='button large'>Añadir</a>
-	</div>";
+	</div>
+	<div class='column side'></div>";
 	}
 	drawHalls($rooms);
 ?>

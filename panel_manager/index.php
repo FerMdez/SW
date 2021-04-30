@@ -38,22 +38,11 @@
 
 		<!-- Panel -->
         <div class="row">
-             <!--Left Sidebar --> 
-			<div class="sidebar left">
-                <ul>
-                    <li>Ver como:</li>
-                    <ul>
-                        <li><a href='./?state=us_u'>Usuario no registrado</a></li>
-                        <li><a href='./?state=us_r'>Usuario registrado</a></li>
-                    </ul><br />
-                    <li>Añadir/Editar/Eliminar:</li>
-                    <ul>
-                        <li><a href='./?state=rooms'>Salas</a></li>
-                        <li><a href='./?state=sessions'>Sesiones</a></li>
-                    </ul>
-                </ul>
-            </div>
-             <!--Contents -->
+            <!-- Panel Menu -->
+            <?php
+                $template->print_panelMenu("manager");
+            ?>
+            <!--Contents -->
             <div class="row"> 
 				<?php $panel->showPanel(); ?>
 			</div>

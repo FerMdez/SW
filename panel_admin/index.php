@@ -39,37 +39,18 @@
 
         <!-- Panel -->
         <div class="row">
-            <!-- Left Sidebar -->
-            <div class="sidebar left">
-                <ul>
-                    <li>Ver como:</li>
-                    <ul>
-                        <li><a href="index.php?state=un">Usuario no registrado</a></li>
-                        <li><a href="index.php?state=ur">Usuario registrado</a></li>
-                        <li><a href="index.php?state=ag">Gerente</a></li>
-                    </ul><br />
-                    <li>Añadir/Editar/Eliminar:</li>
-                    <ul>
-                        <li><a href="index.php?state=mc">Cines</a></li>
-                        <li><a href="index.php?state=mf">Películas</a></li>
-                        <li><a href="index.php?state=md">Promociones</a></li>
-                        <li><a href="index.php?state=mg">Gerente</a></li>
-                    </ul>
-                </ul>
-            </div>
+           <!-- Panel Menu -->
+           <?php
+                $template->print_panelMenu("admin");
+            ?>
             <!-- Contents -->
             <div class="row">
-                <div class="column side"></div>
-                    <div class="column middle">
-                        <?php
-                            $template->print_msg();
-                            $panel->showPanel();
-                        ?>
-                    </div>
-                    <div class="column side"></div>
-                </div>
+                <?php
+                    $template->print_msg();
+                    $panel->showPanel();
+                ?>
             </div>
-
+        </div>
         <!-- Footer -->
         <?php
             $template->print_footer();
