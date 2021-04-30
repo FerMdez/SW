@@ -203,18 +203,6 @@
             default: $menus = array(); break;
         }
 
-        /*
-            <li>Menú
-                <ul>
-                    <a href='{$prefix}'><li>Inicio</li></a>
-                    <a href='{$prefix}showtimes/'><li>Cartelera</li></a>
-                    <a href='{$prefix}cinemas/'><li>Nuestros Cines</li></a>
-                    <a href='{$prefix}fdicines/miembros/'><li>Quiénes somos</li></a>
-                    <a href='{$prefix}contacto/'><li>Contacto</li></a>
-                <ul>
-            </li>
-        */
-
         echo"<div class='header sub'>
             <div class='menu'>
                 <nav>";
