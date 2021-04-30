@@ -159,59 +159,61 @@
 
     //Print panel menu:
     function print_panelMenu($panel){
-        $prefix = $this->prefix;
-        $menus = array("<a href='./'><li>Panel Principal</li></a>");
+        if($_SESSION["login"]){
+            $prefix = $this->prefix;
+            $menus = array("<a href='./'><li>Panel Principal</li></a>");
 
-        switch($panel){
-            case "admin": array_push($menus, "<li>Ver como...
-                                                    <ul>
-                                                        <a href='./?state=un'><li>Usuario</li></a>
-                                                        <a href='./?state=ur'><li>Usuario registrado</li></a>
-                                                        <a href='./?state=ag'><li>Gerente</li></a>
-                                                    </ul>
-                                                </li>");
-                            array_push($menus, "<li>Modificar
-                                                    <ul>
-                                                        <a href='./?state=mc'><li>Cines</li></a>
-                                                        <a href='./?state=mf'><li>Películas</li></a>
-                                                        <a href='./?state=md'><li>Promociones</li></a>
-                                                        <a href='./?state=mg'><li>Gerentes</li></a>
-                                                    </ul>
-                                                </li>");
-                            break;
+            switch($panel){
+                case "admin": array_push($menus, "<li>Ver como...
+                                                        <ul>
+                                                            <a href='./?state=un'><li>Usuario</li></a>
+                                                            <a href='./?state=ur'><li>Usuario registrado</li></a>
+                                                            <a href='./?state=ag'><li>Gerente</li></a>
+                                                        </ul>
+                                                    </li>");
+                                array_push($menus, "<li>Modificar
+                                                        <ul>
+                                                            <a href='./?state=mc'><li>Cines</li></a>
+                                                            <a href='./?state=mf'><li>Películas</li></a>
+                                                            <a href='./?state=md'><li>Promociones</li></a>
+                                                            <a href='./?state=mg'><li>Gerentes</li></a>
+                                                        </ul>
+                                                    </li>");
+                                break;
 
-            case "manager": array_push($menus, "<li>Ver como...
-                                                    <ul>
-                                                        <a href='./?state=us_u'><li>Usuario</li></a>
-                                                        <a href='./?state=us_r'><li>Usuario registrado</li></a>
-                                                    </ul>
-                                                </li>");
-                            array_push($menus, "<li>Modificar
-                                                    <ul>
-                                                        <a href='./?state=rooms'><li>Salas</li></a>
-                                                        <a href='./?state=sessions'><li>Sesiones</li></a>
-                                                    </ul>
-                                                </li>");
-                            break;
+                case "manager": array_push($menus, "<li>Ver como...
+                                                        <ul>
+                                                            <a href='./?state=us_u'><li>Usuario</li></a>
+                                                            <a href='./?state=us_r'><li>Usuario registrado</li></a>
+                                                        </ul>
+                                                    </li>");
+                                array_push($menus, "<li>Modificar
+                                                        <ul>
+                                                            <a href='./?state=rooms'><li>Salas</li></a>
+                                                            <a href='./?state=sessions'><li>Sesiones</li></a>
+                                                        </ul>
+                                                    </li>");
+                                break;
 
-            case "user": array_push($menus, "<a href='{$prefix}'><li>Historial Compras</li></a>");
-                            array_push($menus, "<a href='{$prefix}'><li>Datos Pago</li></a>");
-                                array_push($menus, "<a href='{$prefix}'><li>Contraseña</li></a>");
-                                    array_push($menus, "<a href='{$prefix}'><li>Eliminar Usuario</li></a>");
-                                        break;
+                case "user": array_push($menus, "<a href='{$prefix}'><li>Historial Compras</li></a>");
+                                array_push($menus, "<a href='{$prefix}'><li>Datos Pago</li></a>");
+                                    array_push($menus, "<a href='{$prefix}'><li>Contraseña</li></a>");
+                                        array_push($menus, "<a href='{$prefix}'><li>Eliminar Usuario</li></a>");
+                                            break;
 
-            default: $menus = array(); break;
+                default: $menus = array(); break;
+            }
+
+            echo"<div class='header sub'>
+                <div class='menu'>
+                    <nav>";
+                    foreach($menus as $value){
+                        echo $value;
+                    }  
+                    echo"</nav>
+                </div>
+            </div>\n";
         }
-
-        echo"<div class='header sub'>
-            <div class='menu'>
-                <nav>";
-                foreach($menus as $value){
-                    echo $value;
-                }  
-                echo"</nav>
-            </div>
-        </div>\n";
     }
 
     //Print session MSG:
