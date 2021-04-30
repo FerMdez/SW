@@ -19,7 +19,7 @@
         ?>
 
         <!-- Main -->
-        <div class="main">
+        <main>
             <div class="image"><img src="../../img/logo_trasparente.png" /></div>
             <!-- Sub Header -->
             <?php
@@ -63,7 +63,7 @@
                     </tbody>
                 </table>
             </section>
-        </div>
+        </main>
         
         <!-- Members -->
         <section id="members">

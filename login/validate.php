@@ -26,9 +26,9 @@
         ?>
 
         <!-- Main -->
-        <div class="main">
-            <div class="image"><img src="../img/logo_trasparente.png" /></div>
-        </div>
+        <?php
+            $template->print_main();
+        ?>
         
         <!-- Reply -->
         <section class="reply">

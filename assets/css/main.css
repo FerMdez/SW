@@ -192,15 +192,15 @@ table a{
 
 
 /* Main */
-.main {
+main {
   padding: 30px;
   text-align: center;
   font-size: 35px;
 }
-.main h1, h2, h3, h4 {
+main h1, h2, h3, h4 {
   color: #363636;
 }
-.main img {
+main img {
   width: 50%;
 }
 

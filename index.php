@@ -28,7 +28,7 @@
         ?>
 
         <!-- Main -->
-        <div class="main">
+        <main>
             <div class="image"><a href='./'><img src="./img/logo_trasparente.png" alt="logo_FDI-Cines" /></a></div>
             <?php
                 if(isset($_SESSION["nombre"])){
@@ -39,7 +39,7 @@
                 }
             ?>
             <hr />
-        </div>
+        </main>
         
         <!-- Undercard -->
         <section id="cartelera">

@@ -1,5 +1,14 @@
 <!DOCTYPE HTML>
 <?php
+
+    /**
+     * USUARIOS DE PRUEBAS:
+     * user | userpass
+     * fernando | ferpass
+     * manager | managerpass
+     * admin | adminpass
+     */
+    
     //General Config File:
     require_once('../assets/php/config.php');        
 
@@ -26,11 +35,9 @@
         ?>
 
         <!-- Main -->
-        <div class="main">
-            <div class="image"><img src="../img/logo_trasparente.png" /></div>
-            <h1>Acceso</h1>
-            <hr />
-        </div>
+        <?php
+            $template->print_main();
+        ?>
         
         <!-- Login / Register -->
         <section id="login_register">

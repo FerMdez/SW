@@ -19,13 +19,9 @@
         ?>
 
         <!-- Main -->
-        <div class="main">
-            <div class="image"><a href='../../'><img src="../../img/logo_trasparente.png" alt="logo_FDI-Cines" /></a></div>
-			<!-- Sub Header -->
-            <?php
-                $template->print_subheader();
-            ?>
-        </div>
+        <?php
+            $template->print_main();
+        ?>
 
         <!-- Details -->
 		<section id="details">

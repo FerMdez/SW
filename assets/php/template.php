@@ -149,12 +149,12 @@
         }
 
         /* MAIN */
-        echo"<div class='main'>
+        echo"<main>
             <div class='image'><a href='{$prefix}'><img src='{$prefix}img/logo_trasparente.png' alt='logo_FDI-Cines' /></a></div>
             {$sub_header}
             <h1>{$page}</h1>
             <hr />
-        </div>\n";
+        </main>\n";
     }
 
     //Print panel menu:
