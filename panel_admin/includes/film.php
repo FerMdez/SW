@@ -1,5 +1,4 @@
 <?php
-    include_once('film_dto_interface.php');
     
     class Film{
 
@@ -33,5 +32,7 @@
 		public function getLanguage(){return $this->_language;}
         public function setDescription($description){  $this->_description = $description;}
 		public function getDescription(){return  $this->_description;}
+
+
     }
 ?>

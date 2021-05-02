@@ -11,12 +11,55 @@
         function showPanel($template) {
             if($this->login){
                 switch($this->state) {
-                    case 'uf': require_once('updateFilm.php'); break;
-                    case 'mc': /*require_once('manage_cinemas.php')*/;echo"<h1>En construcción</h1>"; break;
+                    case 'mc': require_once('manage_cinemas.php');
+                                if(isset($_POST['edit_cinema'])) {
+                                    editCinema();
+                                }
+                                else if(isset($_POST['delete_cinema'])) {
+                                    deleteCinema();
+                                }
+                                else if(isset($_POST['add_cinema'])) {
+                                    confirmAdd();
+                                    header('Location: ../panel_admin/index.php?state=mc');
+                                }
+                                else if(isset($_POST['confirm_delete_cinema'])) {
+                                    confirmDelete();
+                                    header('Location: ../panel_admin/index.php?state=mc');
+                                }
+                                else if(isset($_POST['confirm_edit_cinema'])) {
+                                    confirmEdit();
+                                    header('Location: ../panel_admin/index.php?state=mc');
+                                }
+                                else {
+                                    addCinema();
+                                    $template->print_cinemas();
+                                   
+                                }; 
+                    break;
                     case 'mf': require_once('manage_films.php'); 
+                            if(isset($_POST['edit_film'])) {
+                                editFilm();
+                            }
+                            else if(isset($_POST['delete_film'])) {
+                                deleteFilm();
+                            }
+                            else if(isset($_POST['add_film'])) {
+                                confirmAdd();
+                            }
+                            else if(isset($_POST['confirm_delete_film'])) {
+                                confirmDelete();
+                                header('Location: ../panel_admin/index.php?state=mf');
+                            }
+                            else if(isset($_POST['confirm_edit_film'])) {
+                                confirmEdit();
+                                header('Location: ../panel_admin/index.php?state=mf');
+                            }
+                            else {
                                 addFilm();
-                                $template->print_fimls();  
-                            break;
+                                $template->print_fimls();
+                                
+                            };  
+                    break;
                     case 'md': /*require_once('manage_discounts.php')*/;echo"<h1>En construcción</h1>"; break;
                     case 'mm': /*require_once('manage_managers.php')*/;echo"<h1>En construcción</h1>"; break;
                     case 'un': echo"<h1>En construcción</h1>"; break;

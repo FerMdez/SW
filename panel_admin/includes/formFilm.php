@@ -18,8 +18,6 @@ class FormFilm extends Form {
         $this->reply = array();
     }
 
-
-
     public function getReply() {
 		if($this->correct){
 			if($this->option == "new"){
@@ -34,8 +32,6 @@ class FormFilm extends Form {
 								$this->reply = "<h1> Operacion realizada con exito </h1><hr />
 						<p> Se ha eliminado la pelicula correctamente en la base de datos.</p>
 						<a href='../panel_admin/index.php?state=mf'><button>Cerrar Mensaje</button></a>";
-			} else if($this->option == "show"){
-					$this->reply= $this->array;
 			}
 
 		} else {
@@ -104,9 +100,7 @@ class FormFilm extends Form {
 				else{
 					$this->correct =false;
 				}
-			}  else if($this->option == "show") {
-				$this->array = $bd->allFilmData();
-			}
+			} 
 			else {$this->correct = false;}			
 		}
 		
