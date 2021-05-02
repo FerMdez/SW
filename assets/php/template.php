@@ -216,6 +216,149 @@
         }
     }
 
+    //Print Films Cards:
+    function print_fimls(){
+        //List of the tittles of the movies:
+        require_once(__DIR__.'/common/film_dao.php');
+
+        $prefix= $this->get_prefix();
+
+        $films = new Film_DAO("complucine");
+        $films_array = $films->allFilmData();
+        $ids = array();
+        $tittles = array();
+        $descriptions = array();
+        $times = array();
+        $languages = array();
+
+        foreach($films_array as $key => $value){
+            $ids[$key] = $value->getId();
+            $tittles[$key] = $value->getTittle();
+            $descriptions[$key] = $value->getDescription();
+            $times[$key] = $value->getDuration();
+            $languages[$key] = $value->getLanguage();
+        }
+
+        switch($this->page){
+            case "Cartelera": 
+                for($i = 0; $i < count($films_array); $i++){
+                    $tittle = str_replace('_', ' ', $tittles[$i]);
+                    if($i%2 === 0){
+                        if($i != 0) echo "</div>
+                    ";
+                        echo "<div class='column side'>
+                        ";
+                    }
+                    else{
+                        if($i != 0) echo "</div>
+                    ";
+                        echo "<div class='column middle'>
+                        ";
+                    }
+                    echo "<section id='".$tittles[$i]."'>
+                            <div class='zoom'>
+                                <div class='code showtimes'>
+                                    <div class='image'><img src='".$prefix."img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
+                                    <h2>".$tittle."</h2>
+                                    <hr />
+                                    <div class='blockquote'>
+                                        <p>".$descriptions[$i]."</p>
+                                    </div>
+                                    <p>Duración: ".$times[$i]." minutos</p>
+                                </div>
+                            </div>
+                        </section>
+                    ";
+                }
+                echo "</div>\n";
+                break;
+
+            case "Panel de Administrador":
+                echo"<div class='column'>";
+                for($i = 0; $i < count($films_array); $i++){
+                    $tittle = str_replace('_', ' ', $tittles[$i]);
+                    if($i%2 === 0){
+                        if($i != 0) echo "</div>
+                    ";
+                        echo "<div class='column side'>
+                        ";
+                    }
+                    else{
+                        if($i != 0) echo "</div>
+                    ";
+                        echo "<div class='column middle'>
+                        ";
+                    }
+                    echo "<section id='".$tittles[$i]."'>
+                            <div class='zoom'>
+                                <div class='code showtimes'>
+                                    <div class='image'><img src='".$prefix."img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
+                                    <h2>".$tittle."</h2>
+                                    <hr />
+                                    <form method='post' action='./index.php?state=uf'>
+                                        <input name='id' type='hidden' value='".$ids[$i]."'>
+                                        <input name='tittle' type='hidden' value='".$tittles[$i]."'>
+                                        <input  name='duration' type='hidden' value='".$times[$i]."'>
+                                        <input  name='language' type='hidden' value='".$languages[$i]."'>
+                                        <input name='description' type='hidden' value='".$descriptions[$i]."'>
+                                        <input type='submit' id='submit' value='Editar' name='edit_film' class='primary' />
+                                    </form>
+                                    <form method='post' action='./index.php?state=uf'>
+                                        <input name='id' type='hidden' value='".$ids[$i]."'>
+                                        <input name='tittle' type='hidden' value='".$tittles[$i]."'>
+                                        <input  name='duration' type='hidden' value='".$times[$i]."'>
+                                        <input  name='language' type='hidden' value='".$languages[$i]."'>
+                                        <input name='description' type='hidden' value='".$descriptions[$i]."'>
+                                        <input type='submit' id='submit' value='Eliminar' name='delete_film' class='primary' />
+                                    </form>
+                                </div>
+                            </div>
+                        </section>
+                    ";
+                }
+                echo "</div>
+                </div>\n";                
+                break;
+
+            default: 
+                    echo'<div class="column left">
+                         <div class="galery">
+                            <h1>Últimos Estrenos</h1><hr />';
+                    $count = 0;
+                    for($i = count($tittles)-4; $i < count($tittles); $i++){
+                        if($count%2===0){
+                            if($count != 0) echo "
+                            </div>";
+                        echo "
+                            <div class='fila'>";
+                        }
+                        echo "
+                                <div class='zoom'>
+                                    <div class='columna'>
+                                        <a href='".$prefix."showtimes/#".$tittles[$i]."'><div class='image'><img src='img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div></a>
+                                    </div>
+                                </div>";
+                        $count++;
+                    }
+                    echo "
+                            </div>
+                        </div>
+                    </div>
+                    <div class='column right'>
+                        <div class='galery'>";
+                    $count = rand(0, count($tittles)-1);
+                    $title = str_replace('_', ' ', $tittles[$count]); 
+                    echo "
+                            <h1>{$title}</h1><hr />
+                            <div class='zoom'>
+                                <a href='".$prefix."showtimes/#".$tittles[$count]."'><div class='image main'><img src='img/".$tittles[$count].".jpg' alt='".$tittles[$count]."' /></div></a>
+                            </div>
+                        </div>
+                    </div>\n";
+                    break;
+        }
+    }
+
     //Print session MSG:
     function print_msg() {
         if(isset($_SESSION['message'])){

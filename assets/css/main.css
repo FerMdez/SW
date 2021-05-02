@@ -116,7 +116,7 @@ button:hover, .button:hover {
 }
 /* Responsive layout */
 @media (max-width: 850px) {
-  .menu nav li:hover>ul{
+  .header.sub .menu nav li:hover>ul{
     display: block;
     position: relative;
     top: 5px;

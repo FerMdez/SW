@@ -1,9 +1,10 @@
 <?php
-    require_once($prefix.'assets/php/dao.php');
+    require_once('../assets/php/dao.php');
     include_once('./includes/formFilm.php');
         
     if(isset($_POST['edit_film'])) {
-        echo'<div class="column size">
+        echo'<div class="column side"></div>
+        <div class="column middle">
         <h2>Editar pelicula</h2>
         <form method="post" action="update_film.php">
             <div class="row">
@@ -29,10 +30,12 @@
                     </div>
                 </div>
                 </form>
-                </div>';
+                </div>
+        <div class="column side"></div>';
     }
     else if(isset($_POST['delete_film'])) {
-        echo'<div class="column size">
+        echo'<div class="column side"></div>
+        <div class="column middle">
         <h2>Editar pelicula</h2>
         <form method="post" action="update_film.php">
             <div class="row">
@@ -51,7 +54,8 @@
                     </div>
                 </div>
                 </form>
-                </div>';
+                </div>
+        <div class="column side"></div>';
 
     }
    

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<?php 
+<?php
     //General Config File:
     include_once('../assets/php/config.php');
     
@@ -47,7 +47,7 @@
             <div class="row">
                 <?php
                     $template->print_msg();
-                    $panel->showPanel();
+                    $panel->showPanel($template);
                 ?>
             </div>
         </div>

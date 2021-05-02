@@ -1,8 +1,5 @@
 <?php
 
-    //General Config File:
-    include_once('../assets/php/config.php');
-
 	include_once('../assets/php/common/film_dto.php');	
     include_once(__DIR__.'/includes/formFilm.php');	
 	/*$f1 = new FilmDTO(1000,"Los vengadores",183,"español","");
@@ -16,8 +13,9 @@
     $film = new FormFilm();	
     $film->processesForm(null, null, null, null, null, "show");
 
+    /*    
 	function drawFilms($films){			
-        echo "<div class='column left'>
+        echo "<div class='column'>
         <table class='alt'>
             <thead>
             <tr>
@@ -63,8 +61,11 @@
             </table>
             </div>';
 	}
+    */
+    
     function addFilm(){
-        echo'<div class="column right">
+        echo'<div class="column side"></div>
+        <div class="column middle">
         <h2>Añadir pelicula</h2>
         <form method="post" action="update_film.php">
             <div class="row">
@@ -89,9 +90,11 @@
                     </div>
                 </div>
                 </form>
-                </div>';
+                </div>
+        <div class="column side"></div>';
     }
-	drawFilms($film->getReply());
-	addFilm();
+    //addFilm();
+	//drawFilms($film->getReply());
+	
 
 ?>
