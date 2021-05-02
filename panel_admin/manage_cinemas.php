@@ -142,7 +142,7 @@
     }
     function confirmAdd() {
         $cine = new FormCinema();
-        $cine->processesForm($_POST['id'], $_POST['name'], $_POST['direction'], $_POST['phone'],"new");
+        $cine->processesForm(null, $_POST['name'], $_POST['direction'], $_POST['phone'],"new");
         $_SESSION['message'] = $cine->getReply();
         header('Location: ../panel_admin/index.php?state=mc');
     }

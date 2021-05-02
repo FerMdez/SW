@@ -20,15 +20,12 @@
                                 }
                                 else if(isset($_POST['add_cinema'])) {
                                     confirmAdd();
-                                    header('Location: ../panel_admin/index.php?state=mc');
                                 }
                                 else if(isset($_POST['confirm_delete_cinema'])) {
                                     confirmDelete();
-                                    header('Location: ../panel_admin/index.php?state=mc');
                                 }
                                 else if(isset($_POST['confirm_edit_cinema'])) {
                                     confirmEdit();
-                                    header('Location: ../panel_admin/index.php?state=mc');
                                 }
                                 else {
                                     addCinema();
@@ -47,17 +44,14 @@
                                 confirmAdd();
                             }
                             else if(isset($_POST['confirm_delete_film'])) {
-                                confirmDelete();
-                                header('Location: ../panel_admin/index.php?state=mf');
+                                confirmDelete();    
                             }
                             else if(isset($_POST['confirm_edit_film'])) {
                                 confirmEdit();
-                                header('Location: ../panel_admin/index.php?state=mf');
                             }
                             else {
                                 addFilm();
                                 $template->print_fimls();
-                                
                             };  
                     break;
                     case 'md': /*require_once('manage_discounts.php')*/;echo"<h1>En construcción</h1>"; break;
