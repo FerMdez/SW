@@ -218,7 +218,7 @@
 
     //Print Films Cards:
     function print_fimls(){
-        //List of the tittles of the movies:
+        //List of the movies:
         require_once(__DIR__.'/common/film_dao.php');
 
         $prefix= $this->get_prefix();
@@ -360,7 +360,7 @@
     }
 
     function print_cinemas(){
-        //List of the tittles of the movies:
+        //List of the cinemas:
         require_once(__DIR__.'/common/cinema_dao.php');
 
         $prefix= $this->get_prefix();
@@ -381,48 +381,52 @@
 
         switch($this->page){
             case "Panel de Administrador":
-                echo "<div class='column left'>
-                <table class='alt'>
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Direccion</th>
-                        <th>Telefono</th>
-                    </tr>
-                    </thead>
-                    <tbody>"; 
+                echo "<div class='row'>
+                    <div class='column side'></div>
+                    <div class='column middle'>
+                        <table class='alt'>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Direccion</th>
+                            <th>Telefono</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        "; 
                 for($i = 0; $i < count($cinemas); $i++){
-                    echo '
-                    <tr>
-                        <td>'. $ids[$i] .'</td>
-                        <td>'. $names[$i] .'</td>
-                        <td>'. $directions[$i] .'</td>
-                        <td>'. $phones[$i] .'</td>
-                        <td>
-                            <form method="post" action="index.php?state=mc">
-                                <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                <input  name="name" type="hidden" value="'.$names[$i].'">
-                                <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
-                            </form> 
-                        </td> 
-                        <td> 
-                            <form method="post" action="index.php?state=mc">
-                                <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                <input  name="name" type="hidden" value="'.$names[$i].'">
-                                <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
-                            </form> 
-                        </td> 
-                        </tr>'; 
-                        } 
-                echo'<tbody>
-                    </table>
-                    </div>';
-                echo "</div>\n";
+                    echo '<tr>
+                            <td>'. $ids[$i] .'</td>
+                            <td>'. $names[$i] .'</td>
+                            <td>'. $directions[$i] .'</td>
+                            <td>'. $phones[$i] .'</td>
+                            <td>
+                                <form method="post" action="index.php?state=mc">
+                                    <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                    <input  name="name" type="hidden" value="'.$names[$i].'">
+                                    <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                    <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                    <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
+                                </form> 
+                            </td> 
+                            <td> 
+                                <form method="post" action="index.php?state=mc">
+                                    <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                    <input  name="name" type="hidden" value="'.$names[$i].'">
+                                    <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                    <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                    <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
+                                </form> 
+                            </td> 
+                        </tr>
+                        '; 
+                } 
+                echo'</tbody>
+                        </table>
+                    </div>
+                    <div class="column side"></div>
+                ';
                 break;
 
         }

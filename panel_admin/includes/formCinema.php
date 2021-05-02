@@ -21,23 +21,55 @@ class FormCinema extends Form {
     public function getReply() {
 		if($this->correct){
 			if($this->option == "new"){
-				$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha añadido el cine correctamente en la base de datos.</p>
-						<a href='../panel_admin/index.php?state=mc'><button>Cerrar Mensaje</button></a>";
+				$this->reply = "<div class='row'>
+									<div class='column side'></div>
+									<div class='column middle'>
+										<div class='code info'>
+											<h1> Operacion realizada con exito </h1><hr />
+											<p> Se ha añadido el cine correctamente en la base de datos.</p>
+											<a href='../panel_admin/index.php?state=mc'><button>Cerrar Mensaje</button></a>
+										</div>
+									<div class='column side'></div>
+								</div>
+								";
 			}else if($this->option == "edit"){
-								$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha editado el cine correctamente en la base de datos.</p>
-						<a href='../panel_admin/index.php?state=mc'><button>Cerrar Mensaje</button></a>";
+								$this->reply = "<div class='row'>
+													<div class='column side'></div>
+													<div class='column middle'>
+														<div class='code info'>
+															<h1> Operacion realizada con exito </h1><hr />
+															<p> Se ha editado el cine correctamente en la base de datos.</p>
+															<a href='../panel_admin/index.php?state=mc'><button>Cerrar Mensaje</button></a>
+														</div>
+													<div class='column side'></div>
+												</div>
+												";
 			}else if($this->option == "del"){
-								$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha eliminado el cine correctamente en la base de datos.</p>
-						<a href='../panel_admin/index.php?state=mc'><button>Cerrar Mensaje</button></a>";
+								$this->reply = "<div class='row'>
+													<div class='column side'></div>
+													<div class='column middle'>
+														<div class='code info'>
+															<h1> Operacion realizada con exito </h1><hr />
+															<p> Se ha eliminado el cine correctamente en la base de datos.</p>
+															<a href='../panel_admin/index.php?state=mc'><button>Cerrar Mensaje</button></a>
+														</div>
+													<div class='column side'></div>
+												</div>
+												";
 			}
 
 		} else {
-			$this->reply = "<h1> ERROR  </h1><hr />
-						<p> Ha habido un error en la operacion. Revisa los datos introducidos</p>
-						<a href='../panel_admin/index.php?state=mc'><button>Panel Admin</button></a>";
+			$this->reply = "<div class='row'>
+								<div class='column side'></div>
+								<div class='column middle'>
+									<div class='code info'>
+										<h1> ERROR  </h1><hr />
+										<p> Ha habido un error en la operacion. Revisa los datos introducidos</p>
+										<a href='../panel_admin/index.php?state=mc'><button>Panel Admin</button></a>
+									</div>
+								<div class='column side'></div>
+							</div>
+							";
 			
 		}
         return $this->reply;

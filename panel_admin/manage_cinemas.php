@@ -9,122 +9,85 @@
  
    
     // View functions
-	/*function drawCinema(){	
-        $cine = new Cinema_DAO("complucine");
-        $cinemas = $cine->allCinemaData();
-        echo "<div class='column left'>
-        <table class='alt'>
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Direccion</th>
-                <th>Telefono</th>
-            </tr>
-            </thead>
-            <tbody>"; 
-        foreach($cinemas as $f){ 
-        echo '
-            <tr>
-                <td>'. $f->getId() .'</td>
-                <td>'. $f->getName() .'</td>
-                <td>'. $f->getDirection() .'</td>
-                <td>'. $f->getPhone() .'</td>
-                <td>
-                    <form method="post" action="index.php?state=mc">
-                        <input  name="id" type="hidden" value="'.$f->getId().'">
-                        <input  name="name" type="hidden" value="'.$f->getName().'">
-                        <input  name="direction" type="hidden" value="'.$f->getDirection().'">
-                        <input  name="phone" type="hidden" value="'.$f->getPhone().'">
-                        <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
-                    </form> 
-                </td> 
-                <td> 
-                    <form method="post" action="index.php?state=mc">
-                        <input  name="id" type="hidden" value="'.$f->getId().'">
-                        <input  name="name" type="hidden" value="'.$f->getName().'">
-                        <input  name="direction" type="hidden" value="'.$f->getDirection().'">
-                        <input  name="phone" type="hidden" value="'.$f->getPhone().'">
-                        <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
-                    </form> 
-                </td> 
-                </tr>'; 
-                } 
-        echo'<tbody>
-            </table>
-            </div>';
-	}*/
     function addCinema(){
-        echo'<div class="column">
-        <h2>Añadir cine</h2>
-        <form method="post" action="index.php?state=mc">
-            <div class="row">
-            <fieldset id="cinema_form">
-                <legend>Datos del Cine</legend>
-                <div>
-                    <input type="text" name="name" id="name" placeholder="Nombre" />
+        echo'   <div class="column side"></div>
+                <div class="column middle">
+                    <h2>Añadir cine</h2>
+                    <form method="post" action="index.php?state=mc">
+                        <fieldset id="cinema_form">
+                        <legend>Datos del Cine</legend>
+                        <div>
+                            <input type="text" name="name" id="name" placeholder="Nombre" />
+                        </div>
+                        <div>
+                            <input type="text" name="direction" id="direction" placeholder="Direccion" />
+                        </div>
+                        <div>
+                            <input type="text" name="phone" id="phone" placeholder="Teléfono" />
+                        </div>
+                        </fieldset>
+                        <div class="actions"> 
+                            <input type="submit" id="submit" value="Añadir cine" name="add_cinema" class="primary" />
+                            <input type="reset" id="reset" value="Borrar" />       
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <input type="text" name="direction" id="direction" placeholder="Direccion" />
-                </div>
-                <div>
-                    <input type="text" name="phone" id="phone" placeholder="Teléfono" />
-                </div>
-                </fieldset>
-                <div class="actions"> 
-                    <input type="submit" id="submit" value="Añadir cine" name="add_cinema" class="primary" />
-                    <input type="reset" id="reset" value="Borrar" />       
-                    </div>
-                </div>
-                </form>
-                </div>';
+                <div class="column side"></div>
+            </div>
+            ';
     }
     function deleteCinema() {
-        echo'<div class="column">
-        <h2>Editar cine</h2>
-        <form method="post" action="index.php?state=mc">
-            <div class="row">
-            <fieldset id="cinema_form">
-                <legend>¿Estás seguro de que quieres eliminar este cine?</legend>
-                <input type="hidden" name="id" value='.$_POST['id'].'/>
-                <p>Id: '.$_POST['id'].' </p>
-                <p>Nombre: '.$_POST['name'].' </p>
-                <p>Dirección: '.$_POST['direction'].' </p>
-                <p>Teléfono: '.$_POST['phone'].' </p>
-                </fieldset>
-                <div class="actions"> 
-                    <input type="submit" id="submit" value="Eliminar" name="confirm_delete_film" class="primary" />
-                    <input type="submit" id="submit" value="Cancelar" name="cancel_delete_film" class="primary" />
+        echo'<div class="column side"></div>
+            <div class="column middle">
+                <h2>Eliminar cine</h2>
+                <form method="post" action="index.php?state=mc">
+                    <div class="row">
+                    <fieldset id="cinema_form">
+                    <legend>¿Estás seguro de que quieres eliminar este cine?</legend>
+                    <input type="hidden" name="id" value='.$_POST['id'].'/>
+                    <p>Id: '.$_POST['id'].' </p>
+                    <p>Nombre: '.$_POST['name'].' </p>
+                    <p>Dirección: '.$_POST['direction'].' </p>
+                    <p>Teléfono: '.$_POST['phone'].' </p>
+                    </fieldset>
+                    <div class="actions"> 
+                        <input type="submit" id="submit" value="Eliminar" name="confirm_delete_film" class="primary" />
+                        <input type="submit" id="submit" value="Cancelar" name="cancel_delete_film" class="primary" />
+                        </div>
                     </div>
-                </div>
                 </form>
-                </div>';
+            </div>
+            <div class="column side"></div>
+            ';
     }
     function editCinema() {
-        echo'<div class="column">
-        <h2>Editar cine</h2>
-        <form method="post" action="index.php?state=mc">
-            <div class="row">
-            <fieldset id="cinema_form">
-                <legend>Datos del cine</legend>
-                <input type="hidden" name="id" value='.$_POST['id'].'/>
-                <div>
-                    <input type="text" name="name" value="'.$_POST['name'].'" />
-                </div>
-                <div>
-                    <input type="text" name="direction" value='.$_POST['direction'].' />
-                </div>
-                <div>
-                    <input type="text" name="phone"  value='.$_POST['phone'].' />
-                </div>
-                </fieldset>
-                <div class="actions"> 
-                    <input type="submit" id="submit" value="Editar" name="confirm_edit_cinema" class="primary" />
-                    <input type="reset" id="reset" value="Borrar" />       
+        echo'<div class="column side"></div>
+            <div class="column middle">
+                <h2>Editar cine</h2>
+                <form method="post" action="index.php?state=mc">
+                <div class="row">
+                <fieldset id="cinema_form">
+                    <legend>Datos del cine</legend>
+                    <input type="hidden" name="id" value='.$_POST['id'].'/>
+                    <div>
+                        <input type="text" name="name" value="'.$_POST['name'].'" />
                     </div>
-                </div>
+                    <div>
+                        <input type="text" name="direction" value='.$_POST['direction'].' />
+                    </div>
+                    <div>
+                        <input type="text" name="phone"  value='.$_POST['phone'].' />
+                    </div>
+                    </fieldset>
+                    <div class="actions"> 
+                        <input type="submit" id="submit" value="Editar" name="confirm_edit_cinema" class="primary" />
+                        <input type="reset" id="reset" value="Borrar" />       
+                        </div>
+                    </div>
                 </form>
-                </div>';
+            </div>
+            <div class="column side"></div>
+            ';
     }
 
     // Logic Functions

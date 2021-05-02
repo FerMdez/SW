@@ -13,8 +13,6 @@
     else {
         $panel = new Panel('', $login);
     }
-    // IMPORTANTE:
-    //  VERIFICAR QUE ES ADMIN, SI NO, MOSTRAR MENSAJE DE "ERROR"
     
 ?>
 <!--
@@ -45,10 +43,10 @@
             ?>
             <!-- Contents -->
             <div class="row">
-                <?php
-                    $template->print_msg();
-                    $panel->showPanel($template);
-                ?>
+            <?php
+                $template->print_msg();
+                $panel->showPanel($template);
+            ?>
             </div>
         </div>
         <!-- Footer -->
