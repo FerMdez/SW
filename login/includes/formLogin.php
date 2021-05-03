@@ -24,7 +24,7 @@ class FormLogin extends Form {
         
         if(isset($_SESSION["login"])){
             $name = strtoupper($_SESSION['nombre']);
-            $this->reply = "<h1>Bienvenido {$_SESSION['nombre']}</h1><hr />
+            $this->reply = "<h1>Bienvenido {$name}</h1><hr />
                         <p>{$name}, has iniciado sesión correctamente.</p>
                         <p>Usa los botones para navegar</p>
                         <a href='../'><button>Inicio</button></a>
@@ -71,7 +71,8 @@ class FormLogin extends Form {
 
                 try{
                     if ($this->user) {
-                        //$_SESSION["user"] = $this->user; //¿? No funcionan los getters con el objeto.
+                        $this->user->setPass(null);
+                        $_SESSION["user"] = serialize($this->user);
                         $_SESSION["nombre"] = $this->user->getName();
                         $_SESSION["rol"] = $this->user->getRol();
                         $_SESSION["login"] = $login;

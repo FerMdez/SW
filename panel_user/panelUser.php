@@ -1,4 +1,6 @@
 <?php
+    require_once('../assets/php/common/user_dto.php');
+
     class UserPanel {
         //Atributes:
         
@@ -9,8 +11,12 @@
 
         //Welcome view.
         static function panel(){
+            $name = strtoupper($_SESSION['nombre']);
+            $email = unserialize($_SESSION['user'])->getEmail();
             return $reply = '<div class="code info">
-                                <h1>Bienvenido al Panel de Usuario.</h1><hr />
+                                <h1>Bienvenido '.$name.' al Panel de Usuario.</h1><hr />
+                                <p>Usuario: '.$name.'</p>
+                                <p>Email: '.$email.'</p>
                             </div>'."\n";
         }
 
