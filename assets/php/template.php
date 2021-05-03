@@ -195,10 +195,10 @@
                                                     </li>");
                                 break;
 
-                case "user": array_push($menus, "<a href='{$prefix}'><li>Historial Compras</li></a>");
-                                array_push($menus, "<a href='{$prefix}'><li>Datos Pago</li></a>");
-                                    array_push($menus, "<a href='{$prefix}'><li>Contraseña</li></a>");
-                                        array_push($menus, "<a href='{$prefix}'><li>Eliminar Usuario</li></a>");
+                case "user": array_push($menus, "<a href='./?option=manage_profile'><li>Cuenta de usuario</li></a>");
+                                array_push($menus, "<a href='./?option=purchases'><li>Historial Compras</li></a>");
+                                    array_push($menus, "<a href='./?option=payment'><li>Datos Pago</li></a>");
+                                        array_push($menus, "<a href='./?option=delete_user'><li>Eliminar Usuario</li></a>");
                                             break;
 
                 default: $menus = array(); break;

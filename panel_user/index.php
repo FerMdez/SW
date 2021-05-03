@@ -3,8 +3,39 @@
     //General Config File:
     require_once('../assets/php/config.php');
 
-    // IMPORTANTE:
-    //  VERIFICAR QUE EL USUARIO HA INICIADO SESIÓN, SI NO, MOSTRAR MENSAJE DE "ERROR"
+    //Controller file:
+    include_once('panelUser.php');
+
+    if($_SESSION["login"]){
+        switch($_GET["option"]){
+            case "manage_profile":
+                $reply = UserPanel::manage();
+                break;
+            case "purchases":
+                $reply = UserPanel::purchases();
+                break;
+            case "payment": 
+                $reply = UserPanel::payment();
+                break;
+            case "delete_user"; 
+                $reply = UserPanel::delete();
+                break;
+            default:  
+                $reply = '<div class="code info">
+                            <h1>Bienvenido al Panel de Usuario.</h1><hr />
+                        </div>'."\n";
+                    break;
+        }
+    }
+    else{
+        $reply = '<div class="code info">
+                            <h1>Debes iniciar sesión para ver tu Panel de Usuario.</h1><hr />
+                            <p>Inicia Sesión si estás registrado.</p>
+                            <a href="'.$prefix.'login/"><button>Iniciar Sesión</button></a>
+                            <p>Registrate si no lo habías hecho previamente.</p>
+                            <form method="post" action="'.$prefix.'login/"><button name="register" id="register">Registro</button></form>
+                        </div>'."\n";
+    }
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D
@@ -34,14 +65,9 @@
             ?>
             <!-- Contents -->
             <div class="row">
-                <div class="column side"></div>
-                    <div class="column middle">
-                        <h2>AQUÍ EL CONTENIDO DE CADA FUNCIONALIDAD.</h2>
-                        <p>Debe variar dinámicamente según el botón del panel izquierdo que se pulse (sin cargar una página diferente, aunque tendrá que recargar el contido, eso sí).</p>
-                        <p>Tendréis que rehacer todo el "PANEL" con PHP.</p>
-                    </div>
-                    <div class="column side"></div>
-                </div>
+                <?php
+                    echo $reply;
+                ?>
             </div>
 
         <!-- Footer -->
