@@ -33,7 +33,7 @@
         <div class="row">
             <!-- Panel Menu -->
             <?php
-                $template->print_panelMenu("manager");
+                $template->print_panelMenu($_SESSION["rol"]);
             ?>
             <!--Contents -->
             <div class="row"> 

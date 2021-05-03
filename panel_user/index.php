@@ -6,7 +6,7 @@
     //Controller file:
     include_once('panelUser.php');
 
-    if($_SESSION["login"]){
+    if($_SESSION["login"] && $_SESSION["rol"] === "user"){
         switch($_GET["option"]){
             case "manage_profile":
                 $reply = UserPanel::manage();
@@ -63,7 +63,7 @@
         <div class="row">
             <!-- Panel Menu -->
             <?php
-                $template->print_panelMenu("user");
+                $template->print_panelMenu($_SESSION["rol"]);
             ?>
             <!-- Contents -->
             <div class="row">

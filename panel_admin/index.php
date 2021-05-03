@@ -39,7 +39,7 @@
         <div class="row">
            <!-- Panel Menu -->
            <?php
-                $template->print_panelMenu("admin");
+                $template->print_panelMenu($_SESSION["rol"]);
             ?>
             <!-- Contents -->
             <div class="row">

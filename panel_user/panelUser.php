@@ -1,5 +1,5 @@
 <?php
-    require_once('../assets/php/common/user_dto.php');
+    require_once($prefix.'assets/php/common/user_dto.php');
 
     class UserPanel {
         //Atributes:
