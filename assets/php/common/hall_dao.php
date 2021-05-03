@@ -1,6 +1,6 @@
 <?php
 	require_once('../assets/php/dao.php');
-	include_once('hall_dto.php');
+	include_once('hall.php');
 
     class HallDAO extends DAO {
 
@@ -42,7 +42,7 @@
 
 		//Create a new Hall Data Transfer Object.
 		public function loadHall($number, $idcinema, $numrows, $numcolumns){
-			return new HallDTO($number, $idcinema, $numrows, $numcolumns);
+			return new Hall($number, $idcinema, $numrows, $numcolumns);
 		}
 
 		//Edit Hall.
