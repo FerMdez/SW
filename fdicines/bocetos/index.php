@@ -4,7 +4,7 @@
     require_once('../../assets/php/config.php');    
 ?>
 <!--
-    Práctica 2 - Sistemas Web | Grupo D
+    Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines
 -->
 <html lang="es">

@@ -14,10 +14,13 @@
             $name = strtoupper($_SESSION['nombre']);
             $email = unserialize($_SESSION['user'])->getEmail();
             return $reply = '<div class="code info">
-                                <h1>Bienvenido '.$name.' al Panel de Usuario.</h1><hr />
-                                <p>Usuario: '.$name.'</p>
-                                <p>Email: '.$email.'</p>
-                            </div>'."\n";
+                    <h1>Bienvenido '.$name.' a tu Panel de Usuario.</h1>
+                    <hr />
+                    <h3>'.strftime("%A %e de %B de %Y | %H:%M").'</h3>
+                    <br />
+                    <p>Usuario: '.$name.'</p>
+                    <p>Email: '.$email.'</p>
+                </div>'."\n";
         }
 
         //Manage the user account.

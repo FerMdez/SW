@@ -11,7 +11,7 @@
 ?>
 <!DOCTYPE HTML>
 <!--
-    Práctica 2 - Sistemas Web | Grupo D
+    Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines
 -->
 <html lang="es">
@@ -26,9 +26,9 @@
         ?>
 
         <!-- Main -->
-        <div class="main">
-            <div class="image"><img src="../img/logo_trasparente.png" /></div>
-        </div>
+        <?php
+            $template->print_main();
+        ?>
         
         <!-- Reply -->
         <section class="reply">

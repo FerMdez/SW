@@ -80,6 +80,8 @@ class FormRegister extends Form {
                         $bd->createUser("", $username, $email, $password, "user");
                         $this->user = $bd->selectUser($username, $password);
                         if ($this->user) {
+                            $this->user->setPass(null);
+                            $_SESSION["user"] = serialize($this->user);
                             $_SESSION["nombre"] = $this->user->getName();
                             $_SESSION["rol"] = $this->user->getRol();
                             $_SESSION["login"] = $register;

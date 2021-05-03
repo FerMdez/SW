@@ -7,7 +7,7 @@
     $template = new Template();    
 ?>
 <!--
-    Práctica 2 - Sistemas Web | Grupo D
+    Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines
 -->
 <html lang="es">
