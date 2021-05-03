@@ -21,20 +21,22 @@
                 $reply = UserPanel::delete();
                 break;
             default:  
-                $reply = '<div class="code info">
-                            <h1>Bienvenido al Panel de Usuario.</h1><hr />
-                        </div>'."\n";
-                    break;
+                $reply = UserPanel::panel();
+                break;
         }
     }
     else{
-        $reply = '<div class="code info">
+        $reply = '<div class="column side"></div>
+                    <div class="column middle">
+                        <div class="code info">
                             <h1>Debes iniciar sesión para ver tu Panel de Usuario.</h1><hr />
                             <p>Inicia Sesión si estás registrado.</p>
                             <a href="'.$prefix.'login/"><button>Iniciar Sesión</button></a>
                             <p>Registrate si no lo habías hecho previamente.</p>
                             <form method="post" action="'.$prefix.'login/"><button name="register" id="register">Registro</button></form>
-                        </div>'."\n";
+                        </div>
+                    </div>
+                    <div class="column side"></div>'."\n";
     }
 ?>
 <!--

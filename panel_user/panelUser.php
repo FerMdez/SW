@@ -7,6 +7,13 @@
 
         //Methods:
 
+        //Welcome view.
+        static function panel(){
+            return $reply = '<div class="code info">
+                                <h1>Bienvenido al Panel de Usuario.</h1><hr />
+                            </div>'."\n";
+        }
+
         //Manage the user account.
         static function manage(){
             return $reply = '<div class="column side">
