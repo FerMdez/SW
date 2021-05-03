@@ -5,16 +5,9 @@
 	
 	include_once('panel_manager.php');
 	
-    $login = false;
+	$login = (isset($_SESSION["login"]) && $_SESSION["rol"] == "manager") ? true : false;
+	$panel = isset($_REQUEST['state']) ? new Panel($_REQUEST['state'],$login) : $panel = new Panel('',$login); 
 
-    if(isset($_SESSION["login"]) && $_SESSION["rol"] == "manager") $login = true;
-
-	if(isset($_REQUEST['state'])) {
-        $panel = new Panel($_REQUEST['state'],$login); 
-    }
-    else { 
-        $panel = new Panel('',$login); 
-    }
 ?>
 <!--
     Práctica 2 - Sistemas Web | Grupo D

@@ -2,13 +2,13 @@
 	//General Config File:
     require_once('../assets/php/config.php');
 	
-	include_once('../assets/php/common/hall_dto.php');
+	include_once('../assets/php/common/hall.php');
 	include_once('./includes/formHall.php');	
 	
-	include_once('../assets/php/common/session_dto.php');
+	include_once('../assets/php/common/session.php');
 	include_once('./includes/formSession.php');	
 	
-	include_once('../assets/php/common/film_dto.php');
+	include_once('../assets/php/common/film.php');
 	include_once('../assets/php/common/film_dao.php');
 	
 	$formSession = new FormSession();	
@@ -28,7 +28,7 @@
 	$formSession->processesForm(null, $placeholder_hall, $_SESSION["cinema"], $placeholder_date, null, null, null, null, "list");
 		
 	echo"				
-				<!--Session Filter -->
+				<!--Session Filter by Hall -->
 				<div class = \"column left\"> 
 					<form method=\"post\" id=\"addfilter\">	
 						<input type=\"date\" name=\"date\" value=\"". $placeholder_date . "\" min=\"2021-01-01\" max=\"2031-12-31\">

@@ -3,12 +3,12 @@
     require_once($prefix.'assets/php/config.php');
 
 	include_once('./includes/formHall.php');	
-	require_once($prefix.'assets/php/common/hall_dto.php');
+	require_once($prefix.'assets/php/common/hall.php');
 	
-	require_once($prefix.'assets/php/common/session_dto.php');
+	require_once($prefix.'assets/php/common/session.php');
 	include_once($prefix.'assets/php/common/session_dao.php');
 	
-	require_once($prefix.'assets/php/common/film_dto.php');
+	require_once($prefix.'assets/php/common/film.php');
 	include_once($prefix.'assets/php/common/film_dao.php');
 	
 	$formHall = new FormHall();

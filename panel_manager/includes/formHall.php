@@ -15,7 +15,35 @@ class FormHall extends Form {
         parent::__construct('formSession');
         $this->reply = array();
     }
-
+	
+	protected function generaCamposFormulario($datos, $errores = array()){
+		$this->option = $_SESSION['option'];
+		$_SESSION['option'] = "";
+		$htmlform = "";
+		
+		
+		
+		if($this->option == "new"){
+			$number = $datos['number'] ?? '';
+			$rows = $datos['rows'] ?? '';
+			$cols = $datos['cols'] ?? '';
+			$seats = $datos['seats'] ?? '';
+			
+			
+			$htmlform .= '
+				<fieldset>
+					<label>Numero de sala:</label> <input type="text" name="number" value="'.$number.'"/> <br>
+					<label>Filas:</label> <input type="text" name="rows" value= "'.$rows.'"/><br>
+					<label>Columnas:</label> <input type="text" name="cols" value= "'.$cols.'"/><br>
+					<label>Butacas totales:</label> <input type="text" name="seats" value= "'.$seats.'"/><br>
+					<button type="submit" name="newHall">Crear</button></div><br>
+				</fieldset>
+				';
+		}
+		
+		
+		return $htmlform;	
+	}
     //Methods:
 
     //Returns validation response:
@@ -46,8 +74,7 @@ class FormHall extends Form {
     }
 
     //Process form:
-    public function processesForm($number, $cinema, $rows, $cols, $option) {
-		$this->option = $option;
+    public function processesForm($datos){
 		$this->correct = true;
 		$bd = new HallDAO('complucine');
 		
