@@ -47,6 +47,7 @@ class FormLogin extends Form {
         $name = $this->test_input($name); 
         $pass = $this->test_input($pass);
 
+        $name = strtolower($name);
         $username = isset($name) ? $name : null ;
         if (!$username) {
           $login = false;

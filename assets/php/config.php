@@ -8,6 +8,11 @@
     define('BD_PASS', '_admin_');
 
     /**
+     * Temprarl files directory.
+     */
+    define('TMP_DIR', __DIR__.'/img/');
+
+    /**
     * Utf-8 support settings, location (language and country) and time zone.
     */
     ini_set('default_charset', 'UTF-8');
@@ -23,7 +28,7 @@
     $prefix = $template->get_prefix();
 
     //Depuración (BORRAR):
-    //ini_set('display_errors', 1);
-    //ini_set('display_startup_errors', 1);
-    //error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 ?>

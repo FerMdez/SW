@@ -62,10 +62,16 @@ class FormFilm extends Form {
 			}
 
 		} else {
-			$this->reply = "<div class='column middle'>
-								<h1>ERROR</h1><hr />
-								<p> Ha habido un error en la operacion. Revisa los datos introducidos</p>
-								<a href='../panel_admin/index.php?state=mf'><button>Panel Admin</button></a>
+			$this->reply = "<div class='row'>
+								<div class='column side'></div>
+								<div class='column middle'>
+									<div class='code info'>
+										<h1>ERROR</h1><hr />
+										<p> Ha habido un error en la operacion. Revisa los datos introducidos</p>
+										<a href='../panel_admin/index.php?state=mf'><button>Panel Admin</button></a>
+									</div>
+								</div>
+								<div class='column side'></div>
 							</div>";
 			
 		}
@@ -73,7 +79,7 @@ class FormFilm extends Form {
     }
 
     //Process form:
-	public function processesForm($_id,$_tittle,$_duration,$_language,$_description, $_option) {
+	public function processesForm($_id, $_tittle, $_duration, $_language, $_description, $_img, $_option) {
 		$this->correct = true;
 		$this->option = $_option;
 
@@ -82,6 +88,20 @@ class FormFilm extends Form {
 		$duration=$this->test_input($_duration);
 		$language=$this->test_input($_language);
 		$description=$this->test_input($_description);
+
+		//Validate promotional film image.
+		$file_name = $_FILES['file']['name'];
+		$file_type = $_FILES['file']['type'];
+		$file_size = $_FILES['file']['size'];
+		if (strpos($file_type, "jpg") && $file_size < 100000) {
+			$uploadFile = TMP_DIR . basename($_FILES['file'][$_tittle]);
+			if (!move_uploaded_file($file_name, $uploadFile)){
+				print_r($_FILES);
+			}
+		}
+		else{
+			$this->correct =false;
+		}
 	
 		//Habria que validar todo para que encaje en la base de datos
 			

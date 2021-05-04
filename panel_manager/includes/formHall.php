@@ -1,6 +1,6 @@
 <?php
-include_once($prefix.'assets/php/common/hall_dao.php');
-include_once($prefix.'assets/php/form.php');
+include_once('../assets/php/common/hall_dao.php');
+include_once('../assets/php/form.php');
 
 class FormHall extends Form {
 
@@ -16,8 +16,14 @@ class FormHall extends Form {
         $this->reply = array();
     }
 	
-	public static function generaCampoFormulario($datos, $errores = array(), $option){
-		if($option == "new"){
+	protected function generaCamposFormulario($datos, $errores = array()){
+		$this->option = $_SESSION['option'];
+		$_SESSION['option'] = "";
+		$htmlform = "";
+		
+		
+		
+		if($this->option == "new"){
 			$number = $datos['number'] ?? '';
 			$rows = $datos['rows'] ?? '';
 			$cols = $datos['cols'] ?? '';
@@ -25,15 +31,13 @@ class FormHall extends Form {
 			
 			
 			$htmlform .= '
-				<form method="post" id="new_hall" action="./includes/processForm.php"\>
-					<fieldset>
-						<label>Numero de sala:</label> <input type="number" name="number" value="'.$number.'" required/> <br>
-						<label>Filas:</label> <input type="number" name="rows" value= "'.$rows.'" required/><br>
-						<label>Columnas:</label> <input type="number" name="cols" value= "'.$cols.'" required/><br>
-						<label>Butacas totales:</label> <input type="number" name="seats" value= "'.$seats.'"/><br>
-						<button type="submit" name="new_hall" class="button large">Crear</button></div><br>
-					</fieldset>
-				</form>
+				<fieldset>
+					<label>Numero de sala:</label> <input type="text" name="number" value="'.$number.'"/> <br>
+					<label>Filas:</label> <input type="text" name="rows" value= "'.$rows.'"/><br>
+					<label>Columnas:</label> <input type="text" name="cols" value= "'.$cols.'"/><br>
+					<label>Butacas totales:</label> <input type="text" name="seats" value= "'.$seats.'"/><br>
+					<button type="submit" name="newHall">Crear</button></div><br>
+				</fieldset>
 				';
 		}
 		
@@ -70,40 +74,45 @@ class FormHall extends Form {
     }
 
     //Process form:
-    public static function processesForm($data){
-		if($data["option"] == "new"){
-			Hall::create_hall($data);
-			$_SESSION['msg'] = "La sala se ha añadido correctamente";
-			header( "Location: ../?state=success" );
-		}else {
-			/* TODO
-			$start = date('H:i:s', strtotime( $start ) );
-			
-			if($option == "new"){
+    public function processesForm($datos){
+		$this->correct = true;
+		$bd = new HallDAO('complucine');
+		
+		
+		if($bd ){
+			if($option == "list"){
+				$this->halls = $bd->getAllHalls($cinema);
+			}else {
+				/* TODO
+				$start = date('H:i:s', strtotime( $start ) );
 				
-				$selectSession = $bd->selectSession($cinema, $hall, $start, $date);
-				if($selectSession && $selectSession->num_rows >= 1)	{
-					$this->correct = false;
-				} else{	
-					$bd->createSession(null, $film, $hall,$cinema, $date, $start, $price, $format);
+				if($option == "new"){
+					
+					$selectSession = $bd->selectSession($cinema, $hall, $start, $date);
+					if($selectSession && $selectSession->num_rows >= 1)	{
+						$this->correct = false;
+					} else{	
+						$bd->createSession(null, $film, $hall,$cinema, $date, $start, $price, $format);
+					}
+					
+				mysqli_free_result($selectSession);
+				
+				} else if ($option == "del"){
+					$bd->deleteSession($id);
+					
+				} else if ($option == "edit"){
+					$bd->editSession($id, $film, $hall, $cinema, $date, $start, $price, $format);
 				}
 				
-			mysqli_free_result($selectSession);
-			
-			} else if ($option == "del"){
-				$bd->deleteSession($id);
-				
-			} else if ($option == "edit"){
-				$bd->editSession($id, $film, $hall, $cinema, $date, $start, $price, $format);
-			}
-			
-			if($repeat > "0"){
-				$repeat--;
-				$date = date('Y-m-d', strtotime( $date. ' +1 day') );
-				$this->processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat);
+				if($repeat > "0"){
+					$repeat--;
+					$date = date('Y-m-d', strtotime( $date. ' +1 day') );
+					$this->processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat);
+				}		
+				*/
 			}		
-			*/
-		}			
+			
+		} else {$this->correct = false;}	
     }
 }
 

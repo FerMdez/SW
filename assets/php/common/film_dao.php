@@ -14,10 +14,10 @@
 		//Methods:
 
         //Create a new Session.
-		public function createFilm($id, $tittle, $duration, $language,$description){
+		public function createFilm($id, $tittle, $duration, $language, $description){
 			$sql = sprintf( "INSERT INTO `film`( `id`, `tittle`, `duration`, `language`,`description`) 
 								VALUES ( '%d', '%s', '%d', '%s','%s')", 
-									$id, $tittle, $duration, $language,$description);
+									$id, $tittle, $duration, $language, $description);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;

@@ -556,6 +556,12 @@ textarea {
   border:#000000;
   background-color: #791515;
 }
+.file{
+  margin-top: 10px;
+}
+.file input{
+  height: 110%;
+}
 
 
 /* Footer */

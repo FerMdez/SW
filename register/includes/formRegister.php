@@ -49,6 +49,7 @@ class FormRegister extends Form {
         $pass = $this->test_input($pass);
         $repass = $this->test_input($repass);
 
+        $name = strtolower($name);
         $username = isset($name) ? $name : null ;
         if (!$username) {
           $register = false;

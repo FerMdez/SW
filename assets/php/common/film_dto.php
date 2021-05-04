@@ -9,7 +9,6 @@
         private $_duration;         //Film duration.
         private $_language;         //Film language.
         private $_description;      //Film description.
-      
 
 		//Constructor:
         function __construct($id, $tittle, $duration, $language, $description){
