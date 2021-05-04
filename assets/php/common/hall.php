@@ -1,5 +1,5 @@
 <?php
-	include_once('../assets/php/common/hall_dao.php');
+	include_once($prefix.'assets/php/common/hall_dao.php');
 
     class Hall{
 
@@ -23,6 +23,18 @@
 			if($bd )
 				return $bd->getAllHalls($cinema);
 			return "";
+		}
+		
+		public static function create_hall($hall){
+			$bd = new HallDAO('complucine');
+			if($bd ){
+				if(!$bd->searchHall($hall['cinema'], $hall['number'])){
+					$bd->createHall($hall['number'], $hall['cinema'], $hall['cols'], $hall['rows']);
+					return "Se ha creado la sala con exito";
+				} else {
+					return "Esta sala ya existe";
+				}
+			} else { return "Error al conectarse a la base de datos"; }
 		}
 		
 		//Getters && Setters:
