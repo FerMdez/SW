@@ -178,7 +178,7 @@
                                                         <ul>
                                                             <a href='./?state=mc'><li>Cines</li></a>
                                                             <a href='./?state=mf'><li>Películas</li></a>
-                                                            <a href='./?state=md'><li>Promociones</li></a>
+                                                            <a href='./?state=mp'><li>Promociones</li></a>
                                                             <a href='./?state=mg'><li>Gerentes</li></a>
                                                         </ul>
                                                     </li>");
