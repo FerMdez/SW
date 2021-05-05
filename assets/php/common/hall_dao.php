@@ -15,7 +15,7 @@
 		public function createHall($number, $idcinema, $numCol, $numRows){
 
 			$sql = sprintf( "INSERT INTO `hall`( `number`, `idcinema`, `numrows`, `numcolumns`) 
-								VALUES ( '%d', '%d', '%i', '%i')", 
+								VALUES ( '%d', '%d', '%d', '%d')", 
 								$number, $idcinema, $numRows, $numCol );
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error BD createhall');

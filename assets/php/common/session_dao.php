@@ -1,6 +1,6 @@
 <?php
-	require_once('../assets/php/dao.php');
-	include_once('session_dto.php');
+	require_once($prefix.'assets/php/dao.php');
+	include_once('session.php');
 	
     class SessionDAO extends DAO {
 		//Constructor:
@@ -48,13 +48,12 @@
 			
 			return $session[0];
 		}
-		
 		//Returns a query to get all the session's data.
-		public function getAllSessionsFromACinemaHallDate($cinema, $hall, $date){
+		public function getAllSessions($hall, $cinema, $date){
 			$date = date('Y-m-d', strtotime( $date ) ); 
 			
 			$sql = sprintf( "SELECT * FROM session WHERE 
-							idcinema = '%s' AND idhall = '%s' AND date = '%s'", 
+							idcinema = '%s' AND idhall = '%s' AND date = '%s' ORDER BY start_time ASC;", 
 							$cinema, $hall, $date);	
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
@@ -98,7 +97,7 @@
 		
 		//Create a new Session Data Transfer Object.
 		public function loadSession( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
-			return new SessionDTO( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
+			return new Session( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
 		}
 
     }

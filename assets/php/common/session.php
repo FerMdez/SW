@@ -1,4 +1,8 @@
 <?php
+	include_once($prefix.'assets/php/common/session_dao.php');
+	include_once($prefix.'panel_admin/includes/film.php');
+	include_once($prefix.'assets/php/common/film_dao.php');
+
     class Session{
 
         private $_id;          
@@ -9,7 +13,7 @@
         private $_startTime;
         private $_seatPrice;
         private $_format;
-
+		
         function __construct($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
             $this->_id = $id;
             $this->_idfilm = $idfilm;
@@ -21,6 +25,46 @@
             $this->_format = $format;
         }
 
+		public static function getListSessions($hall,$cinema,$date){
+			$bd = new SessionDAO('complucine');
+			if($bd ) {
+				return $bd->getAllSessions($hall, $cinema, $date);
+			}
+			return "";
+		}
+		
+		public static function create_session($session){
+			$bd = new SessionDAO('complucine');
+			if($bd ){
+				if(!$bd->searchSession($session['cinema'], $session['hall'],$session['start'],$session['date'])){
+					$bd->createSession(null,$session['film'], $session['hall'], $session['cinema'], $session['date'], 
+						$session['start'], $session['price'], $session['format']);
+						
+					if($session['repeat'] > "0") {
+						$repeat = $session['repeat'];
+						$session['repeat'] = $session['repeat'] - 1;
+						$session['date'] = date('Y-m-d', strtotime( $session['date'] . ' +1 day') );
+						self::create_session($session);
+						return "Se han creado las ".$repeat ." sesiones con exito";
+					}
+						
+					else
+						return "Se ha creado la session con exito";
+				} else 
+					return "Esta session ya existe";
+				
+			} else return "Error al conectarse a la base de datos";
+		}
+		//Esto deberia estar en film.php? seguramente
+		public static function getFilmTitle($idfilm){
+			$bd = new Film_DAO('complucine');
+			if($bd ) {
+				$film = mysqli_fetch_array($bd->FilmData($idfilm));
+				return $film["tittle"];
+			}
+			return "";
+		}
+		
         public function setId($id){	$this->_id = $id; }
 		public function getId(){ return $this->_id; }
 
