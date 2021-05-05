@@ -1,81 +1,94 @@
 <?php
-include_once('../assets/php/common/session_dao.php');
-include_once('../assets/php/form.php');
+require_once($prefix.'assets/php/common/session_dao.php');
+require_once($prefix.'assets/php/common/session.php');
+require_once($prefix.'assets/php/form.php');
 
+require_once($prefix.'panel_admin/includes/film.php');
+require_once($prefix.'assets/php/common/film_dao.php');
+	
 //Receive data from froms and prepare the correct response
 class FormSession extends Form {
-	//Atributes
-    private $correct;
-    private $reply; 
-	private $option;
-	private $sessions;
-	
-//Constructor:	
+
+    //Constructor:
     public function __construct() {
         parent::__construct('formSession');
-        $this->reply = array();
     }
 	
-	//Methods:
-    public function getReply() {
-		if($this->correct){
-			if($this->option == "new"){
-				$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha añadido la sesion correctamente en la base de datos.</p>
-						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
-			}else if($this->option == "edit"){
-								$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha editado la sesion correctamente en la base de datos.</p>
-						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
-			}else if($this->option == "del"){
-								$this->reply = "<h1> Operacion realizada con exito </h1><hr />
-						<p> Se ha eliminado la sesion correctamente en la base de datos.</p>
-						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
-			}else if($this->option == "list"){
-								$this->reply = $this->sessions;
-			}
-		} else if($this->correct == false) {
-			$this->reply = "<h1> ERROR  </h1><hr />
-						<p> Ha habido un error en la operacion. Revisa los datos introducidos o ponte en contacto con el administrador de la base de datos.</p>
-						<a href='../panel_manager/index.php'><button>Panel Gerente</button></a>";
-		}
-        return $this->reply;
-    }
-
-    public function processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option) {
-		$this->option = $option;
-		$this->correct = true;
-
-		$bd = new sessionDAO('complucine');
-				
-		if($bd ){
-			if($option == "list"){
-				$this->sessions = $bd->getAllSessionsFromACinemaHallDate($cinema, $hall, $date);
-				
-			}else {
-				if($option == "new"){
-					$searchSession = $bd->searchSession($cinema, $hall, $start, $date);
-					if($searchSession)	{
-						$this->correct = false;
-					} else{	
-						$bd->createSession(null,$film, $hall,$cinema, $date, $start, $price, $format);
-					}
-				
-				} else if ($option == "del"){
-					$bd->deleteSession($hall, $cinema, $date, $start);
-					
-				} else if ($option == "edit"){
-					$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format);
+	public static function generaCampoFormulario($data, $errores = array()){
 		
+		$cinema = $data['cinema'] ?? '';
+		$film = $data['film'] ?? '1';
+		$hall = $data['hall'] ?? '1';
+		$date = $data['date'] ?? '';
+		$start = $data['start'] ?? '';
+		$price = $data['price'] ?? '';
+		$format = $data['format'] ?? '';
+		
+		$filmList = new Film_DAO('complucine');
+		$films = $filmList->allFilmData();
+		
+		$htmlform .= '<div class="column left">
+				<form method="post" id="'.$data['option'].'" action="./includes/processForm.php"\>
+					<fieldset>
+						<legend>Datos</legend>
+						<input type="number" name="price" value="'.$number.'" min="0" placeholder="Precio de la entrada" required/> <br>
+						<input type="text" name="format" value="'.$format.'" placeholder="Formato de pelicula" required/> <br>
+						<select name="hall" class="button large">';
+		foreach(Hall::getListHalls($cinema) as $hll){
+				if($hll->getNumber() == $hall){
+					$htmlform.= '
+							<option value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
+				}else{ 
+					$htmlform.= '
+							<option value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
 				}
-				
-				if($repeat > "0"){
-					$repeat--;
-					$date = date('Y-m-d', strtotime( $date. ' +1 day') );
-					$this->processesForm($film, $hall, $cinema, $date, $start, $price, $format, $repeat, $option);
-				}		
-			}		
-		} else {$this->correct = false;}	
+			}
+		$htmlform.= '
+						</select>
+					</fieldset>
+					<fieldset>
+						<legend>Horario</legend>
+						<input type="time" name="start" value="'.$start.'" placeholder="Hora de inicio" required/> <br>
+						<input type="date" name="date" value="'.$date.'" placeholder="Fecha de inicio" required/> <br>
+					</fieldset>
+						<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
+						<input type="reset" value="Limpiar Campos" >
+						';		
+		if($data['option'] == "new_session")
+			$htmlform .= '<button type="submit" name="new_session" class="button large">Crear</button><br>';
+		if($data['option'] == "edit_session")
+			$htmlform .= '<button type="submit" name="edit_session" class="button large">Editar</button><br>
+			<button type="submit" name="delete_session" class="primary">Borrar</button><br>';
+		$htmlform .= '
+				</form>
+				</div>
+				<div class="column right">
+					<select name="film" form="'.$data['option'].'" class="button large">';
+		foreach($films as $f){
+			if($f->getId() == $film){
+					$htmlform.= '
+						<option value="'. $f->getId() .'" selected> '.$f->getId().' | '.str_replace('_', ' ',$f->getTittle()).' Idioma: '.$f->getLanguage().' </option>';
+			}else {	
+					$htmlform.= '
+						<option value="'. $f->getId() .'"> '.$f->getId().' | '.str_replace('_', ' ',$f->getTittle()).' Idioma: '.$f->getLanguage().' </option>';
+			}
+		}
+		$htmlform .= '
+					</select>
+				</div>
+';
+		return $htmlform;	
+	}
+    //Methods:
+
+    //Process form:
+    public static function processesForm($data){
+		if($data["option"] == "new_session"){
+			$_SESSION['msg'] = Session::create_session($data);
+			header( "Location: ../?state=success" );
+		}else {
+			
+		}			
     }
 }
 

@@ -9,6 +9,7 @@
     include_once('panel_manager.php');
 
     if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
+		$_SESSION["cinema"] = "1";
         switch($_GET["state"]){
 			case "view_ruser":
 			case "view_user":
@@ -31,6 +32,12 @@
                 break;	
             case "manage_sessions":
                 $panel = Manager_panel::manage_sessions();
+                break;
+			case "new_session":
+                $panel = Manager_panel::new_session();
+                break;
+			case "edit_session":
+                $panel = Manager_panel::edit_session();
                 break;
 			case "success":
                 $panel = Manager_panel::success();
@@ -75,14 +82,13 @@
 		<!-- Panel -->
         <div class="row">
             <!-- Panel Menu -->
-            <?php
-                $template->print_panelMenu($_SESSION["rol"]);
-            ?>
+            <?php $template->print_panelMenu($_SESSION["rol"]); ?>
+		</div>
             <!--Contents -->
-            <div class="row"> 
-				<?php echo $panel; ?>
-			</div>
-        </div>
+        <div class="row"> 
+			<?php echo $panel; ?>
+		</div>
+        
         <!-- Footer -->
         <?php
             $template->print_footer();
