@@ -79,7 +79,28 @@
                                 
                                 }; 
                     break;
-                    case 'mm': /*require_once('manage_managers.php')*/;echo"<h1>En construcción</h1>"; break;
+                    case 'mg': require_once('manage_managers.php');
+                    if(isset($_POST['edit_manager'])) {
+                        editManager();
+                    }
+                    else if(isset($_POST['delete_manager'])) {
+                        deleteManager();
+                    }
+                    else if(isset($_POST['add_manager'])) {
+                        confirmAdd();
+                    }
+                    else if(isset($_POST['confirm_delete_manager'])) {
+                        confirmDelete();
+                    }
+                    else if(isset($_POST['confirm_edit_manager'])) {
+                        confirmEdit();
+                    }
+                    else {
+                        addManager();
+                        print_managers();
+                    
+                    }; 
+                    break;
                     case 'un': echo"<h1>En construcción</h1>"; break;
                     case 'ur': echo"<h1>En construcción</h1>";; break;
                     case 'ag': echo"<h1>En construcción</h1>";; break;
