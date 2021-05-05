@@ -15,14 +15,22 @@
 
         //Create a new user Manager.
 		public function createManager($id, $username, $email, $pass, $rol){
-			$sql = sprintf( "INSERT INTO `users`( `id`, `username`, `email`, `password`, `rol`) 
+			$password = $this->encryptPass($pass);
+			$sql = sprintf( "INSERT INTO `users`( `id`, `username`, `email`, `passwd`, `rol`) 
 								VALUES ( '%d', '%s', '%s', '%s', '%s')", 
-									$id, $username, $email, $pass, $rol);
+									$id, $username, $email, $password, $rol);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;
 		}
 		
+		private function encryptPass($password){
+			//$password = hash('sha256', $password);
+			$password = password_hash($password, PASSWORD_DEFAULT);
+
+			return $password;
+		}
+
 		
 	    //Returns a query to get All the managers.
 		public function allManagersData(){
@@ -72,9 +80,10 @@
 		
 		//Edit manager.
 		public function editManager($id, $username, $email, $pass, $rol){
-			$sql = sprintf( "UPDATE users SET email = '%s' , pass = '%s',
+			$password = $this->encryptPass($pass);
+			$sql = sprintf( "UPDATE users SET email = '%s' , passwd = '%s',
 								WHERE users.id = '%d';", 
-									 $email, $pass, $id);
+									 $email, $password, $id);
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 

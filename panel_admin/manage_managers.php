@@ -84,10 +84,10 @@
     function addManager(){
         echo'   <div class="column side"></div>
                 <div class="column middle">
-                    <h2>Añadir promoción</h2>
+                    <h2>Añadir gerente</h2>
                     <form method="post" action="index.php?state=mp">
-                        <fieldset id="promotion_form">
-                        <legend>Datos dela Promoción</legend>
+                        <fieldset id="manager_form">
+                        <legend>Datos del manager </legend>
                         <div>
                             <input type="text" name="username" id="username" placeholder="Nombre" />
                         </div>
@@ -95,7 +95,10 @@
                             <input type="email" name="email" id="email" placeholder="email" />
                         </div>
                         <div>
-                            <input type="text" name="password" id="pass" placeholder="pass" />
+                            <input type="text" name="pass" id="pass" placeholder="password" />
+                        </div>
+                        <div>
+                            <input type="text" name="pass2" id="pass2" placeholder="confirm password" />
                         </div>
                         </fieldset>
                         <div class="actions"> 
@@ -111,7 +114,7 @@
     function deleteManager() {
         echo'<div class="column side"></div>
             <div class="column middle">
-                <h2>Editar Promoción</h2>
+                <h2>Borrar gerente</h2>
                 <form method="post" action="index.php?state=mp">
                     <div class="row">
                         <fieldset id="promotion_form">
@@ -136,7 +139,7 @@
     function editManager() {
         echo'<div class="column side"></div>
             <div class="column middle">
-                <h2>Editar promoción</h2>
+                <h2>Editar gerente</h2>
                 <form method="post" action="index.php?state=mp">
                 <div class="row">
                 <fieldset id="promotion_form">
