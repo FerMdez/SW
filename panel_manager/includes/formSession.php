@@ -51,15 +51,15 @@ class FormSession extends Form {
 						<input type="time" name="start" value="'.$start.'" placeholder="Hora de inicio" required/> <br>
 						<input type="date" name="date" value="'.$date.'" placeholder="Fecha de inicio" required/> <br>
 					</fieldset>
-						<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
-						<input type="reset" value="Limpiar Campos" >
 						';		
 		if($data['option'] == "new_session")
-			$htmlform .= '<button type="submit" name="new_session" class="button large">Crear</button><br>';
+			$htmlform .= '<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
+			<button type="submit" name="new_session" class="button large">Crear</button><br>';
 		if($data['option'] == "edit_session")
 			$htmlform .= '<button type="submit" name="edit_session" class="button large">Editar</button><br>
 			<button type="submit" name="delete_session" class="primary">Borrar</button><br>';
 		$htmlform .= '
+		<input type="reset" value="Limpiar Campos" >
 				</form>
 				</div>
 				<div class="column right">
