@@ -34,6 +34,9 @@
                                 }; 
                     break;
                     case 'mf': require_once('manage_films.php'); 
+                    //echo $_SERVER['DOCUMENT_ROOT']."/../img";
+                    echo TMP_DIR;
+                    //echo $_SERVER['PHP_SELF'];
                             if(isset($_POST['edit_film'])) {
                                 editFilm();
                             }
@@ -54,7 +57,28 @@
                                 $template->print_fimls();
                             };  
                     break;
-                    case 'md': /*require_once('manage_discounts.php')*/;echo"<h1>En construcción</h1>"; break;
+                    case 'mp': require_once('manage_promotions.php');
+                                if(isset($_POST['edit_promotion'])) {
+                                    editPromotion();
+                                }
+                                else if(isset($_POST['delete_promotion'])) {
+                                    deletePromotion();
+                                }
+                                else if(isset($_POST['add_promotion'])) {
+                                    confirmAdd();
+                                }
+                                else if(isset($_POST['confirm_delete_promotion'])) {
+                                    confirmDelete();
+                                }
+                                else if(isset($_POST['confirm_edit_promotion'])) {
+                                    confirmEdit();
+                                }
+                                else {
+                                    addPromotion();
+                                    print_promotions();
+                                
+                                }; 
+                    break;
                     case 'mm': /*require_once('manage_managers.php')*/;echo"<h1>En construcción</h1>"; break;
                     case 'un': echo"<h1>En construcción</h1>"; break;
                     case 'ur': echo"<h1>En construcción</h1>";; break;
