@@ -3,8 +3,9 @@
     //General Config File:
     include_once('../assets/php/config.php');
 
-	include_once('../assets/php/common/promotion.php');	
-    include_once(__DIR__.'/includes/formPromotion.php');	
+    include_once('../assets/php/common/manager.php');
+
+    include_once(__DIR__.'/includes/formManager.php');	
 
  
    
