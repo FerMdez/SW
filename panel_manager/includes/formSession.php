@@ -31,7 +31,7 @@ class FormSession extends Form {
 				<form method="post" id="'.$data['option'].'" action="./includes/processForm.php"\>
 					<fieldset>
 						<legend>Datos</legend>
-						<input type="number" name="price" value="'.$number.'" min="0" placeholder="Precio de la entrada" required/> <br>
+						<input type="number" name="price" value="'.$price.'" min="0" placeholder="Precio de la entrada" required/> <br>
 						<input type="text" name="format" value="'.$format.'" placeholder="Formato de pelicula" required/> <br>
 						<select name="hall" class="button large">';
 		foreach(Hall::getListHalls($cinema) as $hll){
@@ -56,7 +56,11 @@ class FormSession extends Form {
 			$htmlform .= '<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
 			<button type="submit" name="new_session" class="button large">Crear</button><br>';
 		if($data['option'] == "edit_session")
-			$htmlform .= '<button type="submit" name="edit_session" class="button large">Editar</button><br>
+			$htmlform .= '
+			<input  name="origin_hall" type="hidden" value="'.$hall.'">
+			<input  name="origin_date" type="hidden" value="'.$date.'">
+			<input  name="origin_start" type="hidden" value="'.$start.'">
+			<button type="submit" name="edit_session" class="button large">Editar</button><br>
 			<button type="submit" name="delete_session" class="primary">Borrar</button><br>';
 		$htmlform .= '
 		<input type="reset" value="Limpiar Campos" >
@@ -86,8 +90,13 @@ class FormSession extends Form {
 		if($data["option"] == "new_session"){
 			$_SESSION['msg'] = Session::create_session($data);
 			header( "Location: ../?state=success" );
-		}else {
-			
+		}else if($data["option"] == "edit_session"){
+			$_SESSION['msg'] = Session::edit_session($data);
+			header( "Location: ../?state=success" );
+		}
+		else if($data["option"] == "delete_session") {
+			$_SESSION['msg'] = Session::delete_session($data);
+			header( "Location: ../?state=success" );
 		}			
     }
 }
