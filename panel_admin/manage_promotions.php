@@ -18,14 +18,15 @@
         $codes = array();
         $actives = array();
 
-        foreach($promos as $key => $value){
-            $ids[$key] = $value->getId();
-            $tittles[$key] = $value->getTittle();
-            $descriptions[$key] = $value->getDescription();
-            $codes[$key] = $value->getCode();
-            $actives[$key] = $value->getActive();
+        if(is_array($promos)){ 
+            foreach($promos as $key => $value){
+                $ids[$key] = $value->getId();
+                $tittles[$key] = $value->getTittle();
+                $descriptions[$key] = $value->getDescription();
+                $codes[$key] = $value->getCode();
+                $actives[$key] = $value->getActive();
+            }
         }
-
         
         echo "<div class='row'>
             <div class='column side'></div>
@@ -42,6 +43,7 @@
                 </thead>
                 <tbody>
                 "; 
+        if(is_array($promos)){         
         for($i = 0; $i < count($promos); $i++){
             echo '<tr>
                     <td>'. $ids[$i] .'</td>
@@ -72,6 +74,7 @@
                 </tr>
                 '; 
         } 
+        }
         echo'</tbody>
                 </table>
             </div>
