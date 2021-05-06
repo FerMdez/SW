@@ -26,8 +26,8 @@ class FormManager extends Form {
 									<div class='column middle'>
 										<div class='code info'>
 											<h1> Operacion realizada con exito </h1><hr />
-											<p> Se ha añadido la promoción correctamente en la base de datos.</p>
-											<a href='../panel_admin/index.php?state=mp'><button>Cerrar Mensaje</button></a>
+											<p> Se ha añadido el gerente correctamente en la base de datos.</p>
+											<a href='../panel_admin/index.php?state=mg'><button>Cerrar Mensaje</button></a>
 										</div>
 									<div class='column side'></div>
 								</div>
@@ -38,8 +38,8 @@ class FormManager extends Form {
 													<div class='column middle'>
 														<div class='code info'>
 															<h1> Operacion realizada con exito </h1><hr />
-															<p> Se ha editado la promoción correctamente en la base de datos.</p>
-															<a href='../panel_admin/index.php?state=mp'><button>Cerrar Mensaje</button></a>
+															<p> Se ha editado el gerente correctamente en la base de datos.</p>
+															<a href='../panel_admin/index.php?state=mg'><button>Cerrar Mensaje</button></a>
 														</div>
 													<div class='column side'></div>
 												</div>
@@ -50,8 +50,8 @@ class FormManager extends Form {
 													<div class='column middle'>
 														<div class='code info'>
 															<h1> Operacion realizada con exito </h1><hr />
-															<p> Se ha eliminado la promoción correctamente en la base de datos.</p>
-															<a href='../panel_admin/index.php?state=mp'><button>Cerrar Mensaje</button></a>
+															<p> Se ha eliminado el gerente correctamente en la base de datos.</p>
+															<a href='../panel_admin/index.php?state=mg'><button>Cerrar Mensaje</button></a>
 														</div>
 													<div class='column side'></div>
 												</div>
@@ -65,7 +65,7 @@ class FormManager extends Form {
 									<div class='code info'>
 										<h1> ERROR  </h1><hr />
 										<p> Ha habido un error en la operacion. Revisa los datos introducidos</p>
-										<a href='../panel_admin/index.php?state=mp'><button>Panel Admin</button></a>
+										<a href='../panel_admin/index.php?state=mg'><button>Panel Admin</button></a>
 									</div>
 								<div class='column side'></div>
 							</div>
@@ -76,15 +76,13 @@ class FormManager extends Form {
     }
 
     //Process form:
-	public function processesForm($_id, $_username, $_email, $_pass, $_rol) {
+	public function processesForm($_id, $_idcinema, $_option) {
 		$this->correct = true;
 		$this->option = $_option;
 
 		$id= $this->test_input($_id);
-		$tittle=$this->test_input($_username);
-		$description=$this->test_input($_email);
-		$code=$this->test_input($_pass);
-        $active=$this->test_input($_rol);
+		$idcinema=$this->test_input($_idcinema);
+		
 	
 		//Habria que validar todo para que encaje en la base de datos
 			
@@ -92,14 +90,14 @@ class FormManager extends Form {
 		if($bd){
 			if($this->option == "new"){
 				//Check if any var is empty
-				if(!empty($_username)&&!empty($_email)&&!empty($_pass)&&!empty($_rol)){
+				if(!is_null($id)&&!empty($idcinema)){
 					// check if already exist a manager with same name
-					$exist = $bd->selectManager($_username);
+					$exist = $bd->GetManagerCinema($id, $idcinema);
 					if( mysqli_num_rows($exist) != 0){
 						$this->correct =false;
 					}
 					else{
-						$bd->createManager(null, $_username, $_email, $_pass, $_rol);
+						$bd->createManager($id, $idcinema);
 
 					}
 					$exist->free();
@@ -118,11 +116,11 @@ class FormManager extends Form {
 				}
 			} else if ($this->option == "edit"){
 				 //Check if any var is  empty
-                 if(!empty($_username)&&!empty($_email)&&!empty($_pass)&&!empty($_rol)){
+                 if(!empty($idcinema)){
 					//Check if exist a manager with this id
-					$exist = $bd-> PromotionData($id);
+					$exist = $bd-> GetManager($id);
 					if( mysqli_num_rows($exist) == 1){
-						$bd->editManager($id,$_username, $_email, $_pass, $_rol);
+						$bd->editManager($id,$idcinema);
 					}
 					else{
 						$this->correct =false;
