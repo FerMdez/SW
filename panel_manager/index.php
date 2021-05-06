@@ -7,7 +7,7 @@
     require_once('../assets/php/config.php');
     //Controller file:
     include_once('panel_manager.php');
-
+	
     if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
 		$_SESSION["cinema"] = "1";
         switch($_GET["state"]){
@@ -64,9 +64,11 @@
     CompluCine - FDI-cines
 -->
 <html lang="es">
+<link id='estilo' rel='stylesheet' type='text/css' href='includes/manager.css'>
     <!-- Head -->
     <?php
         $template->print_head();
+		
     ?>
     <body>
         <!-- Header -->
