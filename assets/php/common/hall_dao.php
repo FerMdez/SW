@@ -1,7 +1,8 @@
 <?php
 	require_once($prefix.'assets/php/dao.php');
 	include_once('hall.php');
-
+	include_once('seat_dao.php');
+	
     class HallDAO extends DAO {
 
 		//Constructor:
@@ -12,13 +13,15 @@
 		//Methods:
 
         //Create a new Hall.
-		public function createHall($number, $idcinema, $numCol, $numRows){
-
-			$sql = sprintf( "INSERT INTO `hall`( `number`, `idcinema`, `numrows`, `numcolumns`) 
-								VALUES ( '%d', '%d', '%d', '%d')", 
-								$number, $idcinema, $numRows, $numCol );
+		public function createHall($hall){
+			
+			$sql = sprintf( "INSERT INTO `hall`( `number`, `idcinema`, `numrows`, `numcolumns`, `total_seats`) 
+								VALUES ( '%d', '%d', '%d', '%d', '%d')", 
+								$hall['number'], $hall['cinema'], $hall['rows'], $hall['cols'], $hall['seats'] );
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error BD createhall');
+			
+			Seat::createSeats($hall);
 			
 			return $sql;
 		}
@@ -43,11 +46,11 @@
 		}
 		
 		//Returns the count of the hall searched
-		public function searchHall($number, $cinema){
+		public function searchHall($hall){
 			
 			$sql = sprintf( "SELECT COUNT(*) FROM hall WHERE 
 							idcinema = '%s' AND number = '%s'", 
-							$cinema, $number);	
+							$hall['cinema'], $hall['number']);	
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
 			$hall = mysqli_fetch_array($resul);

@@ -1,7 +1,7 @@
 <?php
-	include_once('session_dao.php');
-	include_once('film.php');
-	include_once('film_dao.php');
+	include_once($prefix.'assets/php/common/session_dao.php');
+	include_once($prefix.'panel_admin/includes/film.php');
+	include_once($prefix.'assets/php/common/film_dao.php');
 
     class Session{
 
@@ -55,7 +55,7 @@
 				
 			} else return "Error al conectarse a la base de datos";
 		}
-
+		
 		public static function edit_session($session){
 			$bd = new SessionDAO('complucine');
 			if($bd ){

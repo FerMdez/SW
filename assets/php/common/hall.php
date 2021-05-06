@@ -25,6 +25,18 @@
 			return "";
 		}
 		
+		public static function create_hall($hall){
+			$bd = new HallDAO('complucine');
+			if($bd ){
+				if(!$bd->searchHall($hall)){
+					$bd->createHall($hall);
+					return "Se ha creado la sala con exito";
+				} else {
+					return "Esta sala ya existe";
+				}
+			} else { return "Error al conectarse a la base de datos"; }
+		}
+		
 		//Getters && Setters:
         public function setNumber($number){	$this->_number = $number; }
 		public function getNumber(){ return $this->_number; }
