@@ -31,6 +31,18 @@
 			return password_verify($password, $passwd);
 		}
 
+
+		//All users
+		public function allUsersNotM(){
+			$sql = sprintf( "SELECT * FROM `users` WHERE users.id NOT IN (SELECT id FROM `manager`)");
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			while($fila=$resul->fetch_assoc()){
+				$users[] = $this->loadUser($fila['id'], $fila['username'], $fila['email'], $fila['passwd'], $fila['rol']);
+			}
+			$resul->free();
+			return $users;
+		}
         //Create a new User.
 		public function createUser($id, $username, $email, $password, $rol){
 			$password = $this->encryptPass($password);
