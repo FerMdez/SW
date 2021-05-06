@@ -91,16 +91,17 @@ class FormFilm extends Form {
 
 		//Validate promotional film image.
 		$file_name = $_FILES['file']['name'];
-		$file_type = $_FILES['file']['type'];
+		//$file_type = $_FILES['file']['type'];
 		$file_size = $_FILES['file']['size'];
-		if (strpos($file_type, "jpg") && $file_size < 100000) {
-			$uploadFile = TMP_DIR . basename($_FILES['file'][$_tittle]);
+		if(isset($file_name) && $file_name != ""
+			&& strpos($file_name, "jpg") && $file_size < 100000){
+			$uploadFile = IMG_DIR . basename($_FILES['file'][$_tittle]);
 			if (!move_uploaded_file($file_name, $uploadFile)){
 				print_r($_FILES);
 			}
 		}
 		else{
-			$this->correct =false;
+			$this->correct = false;
 		}
 	
 		//Habria que validar todo para que encaje en la base de datos

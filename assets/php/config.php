@@ -7,10 +7,15 @@
     define('BD_USER', 'sw');
     define('BD_PASS', '_admin_');
 
+    /*
+    * Configuration parameters used to generate URLs and file paths in the application
+    */
+    define('ROUTE_APP', '/'); //Change if it´s necessary.
+
     /**
-     * Temprarl files directory.
-     */
-    define('TMP_DIR', __DIR__.'/img/');
+    * Image files directory.
+    */
+    define('IMG_DIR', ROUTE_APP.'img/');
 
     /**
     * Utf-8 support settings, location (language and country) and time zone.

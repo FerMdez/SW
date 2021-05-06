@@ -186,14 +186,14 @@
 
                 case "manager": array_push($menus, "<li>Ver como...
                                                         <ul>
-                                                            <a href='./?state=view_user'><li>Usuario</li></a>
-                                                            <a href='./?state=view_ruser'><li>Usuario registrado</li></a>
+                                                            <a href='./?state=us_u'><li>Usuario</li></a>
+                                                            <a href='./?state=us_r'><li>Usuario registrado</li></a>
                                                         </ul>
                                                     </li>");
                                 array_push($menus, "<li>Modificar
                                                         <ul>
-                                                            <a href='./?state=manage_halls'><li>Salas</li></a>
-                                                            <a href='./?state=manage_sessions'><li>Sesiones</li></a>
+                                                            <a href='./?state=rooms'><li>Salas</li></a>
+                                                            <a href='./?state=sessions'><li>Sesiones</li></a>
                                                         </ul>
                                                     </li>");
                                 break;

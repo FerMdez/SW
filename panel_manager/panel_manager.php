@@ -141,16 +141,7 @@
 								<td> '. str_replace('_', ' ', Session::getFilmTitle($session->getIdfilm())) .' </td>
 								<td> '.$session->getFormat().' </td>
 								<td> '.$session->getSeatPrice().' </td>
-								<td> <input type="date" name="date" value="'.$date.'">
-								<form method="post" action="./?state=edit_session">
-									<input  name="film" type="hidden" value="'.$session->getIdfilm().'">
-									<input  name="hall" type="hidden" value="'.$session->getIdhall().'">
-									<input  name="date" type="hidden" value="'.$session->getDate().'">
-									<input  name="start" type="hidden" value="'.$session->getStartTime().'">
-									<input  name="price" type="hidden" value="'.$session->getSeatPrice().'">
-									<input  name="format" type="hidden" value="'.$session->getFormat().'">	
 								<td> <input type="submit" name="edit" value="Editar" class="button" ></td>
-								</form>
 							</tr>';
 					}
 				$panel.='
@@ -178,9 +169,12 @@
 		}
 		
 		static function edit_session(){		
-			$data = array("option" => "edit_session","hall" => $_POST["hall"],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $_POST['film'],"start" => $_POST['start'],"price" => $_POST['price'],"format" => $_POST['format']);
-			$panel = '<h1>Editar una sesión.</h1><hr /></br>
-			'.FormSession::generaCampoFormulario($data, null);
+			$panel = '<div class="column side"></div>
+			   <div class="column middle">
+					<h1>Editar una session.</h1><hr /></br>
+					<p> En desarrollo... </p>
+				</div>
+			<div class="column side"></div>'."\n";
 			
 			return $panel;
 		}

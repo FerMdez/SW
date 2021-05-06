@@ -1,7 +1,7 @@
 <?php
-	include_once($prefix.'assets/php/common/session_dao.php');
-	include_once($prefix.'panel_admin/includes/film.php');
-	include_once($prefix.'assets/php/common/film_dao.php');
+	include_once('session_dao.php');
+	include_once('film.php');
+	include_once('film_dao.php');
 
     class Session{
 
@@ -55,34 +55,6 @@
 				
 			} else return "Error al conectarse a la base de datos";
 		}
-
-		public static function edit_session($session){
-			$bd = new SessionDAO('complucine');
-			if($bd ){
-				if($bd->searchSession($session['cinema'], $session['origin_hall'],$session['origin_start'],$session['origin_date'])){
-					$origin = array("cinema" => $session['cinema'],"hall" => $session['origin_hall'],"start" => $session['origin_start'],"date" => $session['origin_date']);
-					$bd->editSession($session['film'], $session['hall'], $session['cinema'], $session['date'], 
-						$session['start'], $session['price'], $session['format'],$origin);
-					return "Se ha editado la session con exito";						
-				} else 
-					return "Esta session no existe";
-				
-			} else return "Error al conectarse a la base de datos";
-		}
-
-		public static function delete_session($session){
-			$bd = new SessionDAO('complucine');
-			if($bd ){
-				if($bd->searchSession($session['cinema'], $session['hall'],$session['start'],$session['date'])){
-					$bd->deleteSession($session['hall'], $session['cinema'], $session['date'], $session['start']);
-					return "Se ha eliminado la session con exito";						
-				} else 
-					return "Esta session no existe";
-				
-			} else return "Error al conectarse a la base de datos";
-		}
-
-
 		//Esto deberia estar en film.php? seguramente
 		public static function getFilmTitle($idfilm){
 			$bd = new Film_DAO('complucine');

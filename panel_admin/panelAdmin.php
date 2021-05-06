@@ -34,9 +34,6 @@
                                 }; 
                     break;
                     case 'mf': require_once('manage_films.php'); 
-                    //echo $_SERVER['DOCUMENT_ROOT']."/../img";
-                    echo TMP_DIR;
-                    //echo $_SERVER['PHP_SELF'];
                             if(isset($_POST['edit_film'])) {
                                 editFilm();
                             }

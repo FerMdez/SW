@@ -19,7 +19,7 @@
                                 <input type="number" name="duration" id="duration" placeholder="Duración" />
                                 <input type="text" name="language" id="language" placeholder="Idioma" />
                                 <input type="text" name="description" id="description" placeholder="Descripción" />
-                                <div class="file">Imagen promocional:<input type="file" name="file" placeholder="Imagen promocional" /></div>
+                                <div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div>
                             </fieldset>
                             <div class="actions"> 
                                 <input type="submit" id="submit" value="Añadir pelicula" name="add_film" class="primary" />
@@ -61,7 +61,7 @@
         echo'<div class="column side"></div>
                 <div class="column middle">
                 <h2>Editar pelicula</h2>
-                <form method="post" action="index.php?state=mf">
+                <form method="post" enctype="multipart/form-data" action="index.php?state=mf">
                     <div class="row">
                         <fieldset id="film_form">
                         <legend>Datos de pelicula</legend>
@@ -70,7 +70,7 @@
                             <input type="number" name="duration" id="duration" value='.$_POST['duration'].' />
                             <input type="text" name="language" id="language" value="'.$_POST['language'].'" />
                             <input type="text" name="description" id="description" value="'.$_POST['description'].'"/>
-                            <div class="file">Imagen promocional:<input type="file" name="file" placeholder="Imagen promocional" /></div>
+                            <div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div>
                         </fieldset>
                         <div class="actions"> 
                             <input type="submit" id="submit" value="Editar" name="confirm_edit_film" class="primary" />
