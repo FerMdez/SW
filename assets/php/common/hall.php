@@ -1,5 +1,5 @@
 <?php
-	include_once('../assets/php/common/hall_dao.php');
+	include_once($prefix.'assets/php/common/hall_dao.php');
 
     class Hall{
 
