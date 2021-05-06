@@ -34,6 +34,9 @@
                                 }; 
                     break;
                     case 'mf': require_once('manage_films.php'); 
+                    //echo $_SERVER['DOCUMENT_ROOT']."/../img";
+                    echo TMP_DIR;
+                    //echo $_SERVER['PHP_SELF'];
                             if(isset($_POST['edit_film'])) {
                                 editFilm();
                             }
@@ -83,9 +86,16 @@
                     else if(isset($_POST['delete_manager'])) {
                         deleteManager();
                     }
+                    else if(isset($_POST['select_user'])) {
+                        selectUser();
+                    }
+                    else if(isset($_POST['select_cinema'])) {
+                        selectCinema();
+                    }
                     else if(isset($_POST['add_manager'])) {
                         confirmAdd();
                     }
+                   
                     else if(isset($_POST['confirm_delete_manager'])) {
                         confirmDelete();
                     }
