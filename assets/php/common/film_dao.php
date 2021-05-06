@@ -1,7 +1,7 @@
 <?php
 	include_once('film.php');
 	$template = new Template();
-    $prefix = $template->get_prefix();
+ //  $prefix = $template->get_prefix();
 	include_once($prefix.'assets/php/dao.php');
 
 
