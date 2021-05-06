@@ -67,7 +67,7 @@
 			return $sessions;
 		}
 		
-        public function editSession($idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
+        public function editSession($idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $origin){
 			$format = $this->mysqli->real_escape_string($format);
 			$date = date('Y-m-d', strtotime( $date ) ); 
 			$startTime = date('H:i:s', strtotime( $startTime ) );
@@ -77,7 +77,7 @@
                                   `start_time` = '%s', `seat_price` = '%d', `format` = '%s'
                              WHERE 
 								idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
-                $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $_SESSION["cinema"],$_SESSION["hall"],$_SESSION["date"],$_SESSION["start"]);
+                $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $origin["cinema"],$origin["hall"],$origin["date"],$origin["start"]);
 
             $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
