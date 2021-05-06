@@ -376,14 +376,14 @@
         $names = array();
         $directions = array();
         $phones = array();
-
-        foreach($cinemas as $key => $value){
-            $ids[$key] = $value->getId();
-            $names[$key] = $value->getName();
-            $directions[$key] = $value->getDirection();
-            $phones[$key] = $value->getPhone();
+        if(is_array($cinemas)){
+            foreach($cinemas as $key => $value){
+                $ids[$key] = $value->getId();
+                $names[$key] = $value->getName();
+                $directions[$key] = $value->getDirection();
+                $phones[$key] = $value->getPhone();
+            }
         }
-
         switch($this->page){
             case "Panel de Administrador":
                 echo "<div class='row'>
@@ -400,6 +400,7 @@
                         </thead>
                         <tbody>
                         "; 
+            if(is_array($cinemas)){      
                 for($i = 0; $i < count($cinemas); $i++){
                     echo '<tr>
                             <td>'. $ids[$i] .'</td>
@@ -427,6 +428,7 @@
                         </tr>
                         '; 
                 } 
+            }  
                 echo'</tbody>
                         </table>
                     </div>
