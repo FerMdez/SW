@@ -1,8 +1,8 @@
 <?php
 	include_once('../assets/php/common/hall.php');
-	//include_once('./assets/php/common/session.php');
+	include_once('../assets/php/common/session.php');
 	include_once('./includes/formHall.php');	
-	//include_once('./includes/formSession.php');	
+	include_once('./includes/formSession.php');	
 	
 	
     class Manager_panel {
@@ -84,7 +84,7 @@
 			
 			return $panel;
 		}
-		/*	
+			
 		static function manage_sessions(){
 			//Base filtering values
 			$date = isset($_POST['date']) ? $_POST['date'] : date("Y-m-d");
@@ -174,11 +174,11 @@
 		}
 		
 		static function edit_session(){		
-			/*$data = array("option" => "edit_session","hall" => $_POST["hall"],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $_POST['film'],"start" => $_POST['start'],"price" => $_POST['price'],"format" => $_POST['format']);
+			$data = array("option" => "edit_session","hall" => $_POST["hall"],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $_POST['film'],"start" => $_POST['start'],"price" => $_POST['price'],"format" => $_POST['format']);
 			$panel = '<h1>Editar una sesión.</h1><hr /></br>
 			'.FormSession::generaCampoFormulario($data, null);
 			
 			return $panel;
-		}*/
+		}
     }
 ?>
