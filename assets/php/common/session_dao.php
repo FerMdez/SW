@@ -14,9 +14,9 @@
 			$date = date('Y-m-d', strtotime( $date ) ); 
 			$startTime = date('H:i:s', strtotime( $startTime ) );
 			
-			$sql = sprintf( "INSERT INTO `session` (`id`, `idfilm`, `idhall`, `idcinema`, `date`, `start_time`, `seat_price`, `format`) 
-				VALUES ('%d', '%d', '%d', '%d', '%s', '%s', '%d', '%s')",
-					$id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
+			$sql = sprintf( "INSERT INTO `session` (`id`, `idfilm`, `idhall`, `idcinema`, `date`, `start_time`, `seat_price`, `format`, `seats_full`) 
+				VALUES ('%d', '%d', '%d', '%d', '%s', '%s', '%d', '%s', '%d')",
+					$id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, "0");
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
@@ -28,25 +28,35 @@
 			$sql = sprintf( "SELECT * FROM `session` WHERE id = '%d'", $id );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $id);
 
+			$resul = mysqli_fetch_array($resul);
+
 			return $resul;
 		}	
 		
-		//Returns the count of the session searched
+		public function filmTittle($idfilm){
+			$sql = sprintf("SELECT * FROM film JOIN  session ON film.id = session.idfilm WHERE session.idfilm = '%d' ", $idfilm );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $idfilm);
+			
+			$resul = mysqli_fetch_array($resul);
+			
+			return $resul;
+		}	
+		
+		//Returns a session
 		public function searchSession($cinema, $hall, $startTime, $date){
 			$date = date('Y-m-d', strtotime( $date ) ); 
 			$startTime = date('H:i:s', strtotime( $startTime ) );
 			
-			$sql = sprintf( "SELECT COUNT(*) FROM session WHERE 
+			$sql = sprintf( "SELECT * FROM session WHERE 
 							idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
 							$cinema, $hall, $date, $startTime);	
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
-			$session = null;
 			$session = mysqli_fetch_array($resul);
 			
 			mysqli_free_result($resul);
 			
-			return $session[0];
+			return $session;
 		}
 		//Returns a query to get all the session's data.
 		public function getAllSessions($hall, $cinema, $date){
@@ -60,7 +70,7 @@
 			$sessions = null;
 			
 			while($fila=mysqli_fetch_array($resul)){
-				$sessions[] = $this->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"]);
+				$sessions[] = $this->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"], $fila["seats_full"]);
 			}
 			mysqli_free_result($resul);
 			
@@ -96,8 +106,8 @@
         }
 		
 		//Create a new Session Data Transfer Object.
-		public function loadSession( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
-			return new Session( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format);
+		public function loadSession( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $seats_full){
+			return new Session( $id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $seats_full);
 		}
 
     }

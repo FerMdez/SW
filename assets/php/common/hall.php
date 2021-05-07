@@ -8,6 +8,7 @@
         private $_idcinema;    //Cinema Id
 		private $_numRows;     //Num rows.
         private $_numCol;      //Num columns.
+		private $_total_seats;
 
 		//Constructor:
         function __construct($number, $idcinema, $numRows, $numCol){

@@ -1,7 +1,5 @@
 <?php
 	include_once($prefix.'assets/php/common/session_dao.php');
-	include_once($prefix.'panel_admin/includes/film.php');
-	include_once($prefix.'assets/php/common/film_dao.php');
 
     class Session{
 
@@ -13,8 +11,9 @@
         private $_startTime;
         private $_seatPrice;
         private $_format;
+		private $_seats_full;
 		
-        function __construct($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
+        function __construct($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $seats_full){
             $this->_id = $id;
             $this->_idfilm = $idfilm;
             $this->_idhall = $idhall;
@@ -23,6 +22,7 @@
             $this->_startTime = $startTime;
             $this->_seatPrice = $seatPrice;
             $this->_format = $format;
+			$this->_seats_full = $seats_full;
         }
 
 		public static function getListSessions($hall,$cinema,$date){
@@ -83,11 +83,26 @@
 		}
 		
 		//Esto deberia estar en film.php? seguramente
-		public static function getFilmTitle($idfilm){
-			$bd = new Film_DAO('complucine');
+		public static function getThisSessionFilm($idfilm){
+			$bd = new SessionDAO('complucine');
 			if($bd ) {
-				$film = mysqli_fetch_array($bd->FilmData($idfilm));
-				return $film["tittle"];
+				return $bd->filmTittle($idfilm);
+			}
+			return "";
+		}
+		
+		public static function getThisSessionId($cinema, $hall, $start, $date){
+			$bd = new SessionDAO('complucine');
+			if($bd ) {
+				return $bd->searchSession($cinema, $hall, $start, $date);
+			}
+			return "";
+		}
+		
+		public static function getThisSessionFromId($id){
+			$bd = new SessionDAO('complucine');
+			if($bd ) {
+				return $bd->sessionData($id);
 			}
 			return "";
 		}
