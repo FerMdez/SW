@@ -41,6 +41,7 @@
 							<th>Numero</th>
 							<th>Filas</th>
 							<th>Columnas</th>
+							<th>Asientos Disponibles</th>
 						</tr>
 					</thead>
 					<tbody>'; 
@@ -50,7 +51,14 @@
 							<td> '. $hall->getNumber().'</td>
 							<td> '. $hall->getNumRows().'</td>
 							<td> '. $hall->getNumCol().'</td>
+							<td> '.$hall->getTotalSeats().' </td>
+							<form method="post" action="./?state=edit_session">
+								<input  name="number" type="hidden" value="'. $hall->getNumber().'">
+								<input  name="rows" type="hidden" value="'. $hall->getNumRows().'">
+								<input  name="cols" type="hidden" value="'. $hall->getNumCol().'">
+								<input  name="seats" type="hidden" value="'.$hall->getTotalSeats().'">
 							<td> <input type="submit" name="edit" value="Editar" class="button" formaction="./?state=edit_hall&number='.$hall->getNumber().'" ></td>
+							</form>
 						</tr>';
 				}
 			$panel.='
@@ -71,12 +79,9 @@
 		}
 		
 		static function edit_hall(){		
-			$panel = '<div class="column side"></div>
-			   <div class="column middle">
-					<h1>Editar una sala.</h1><hr /></br>
-					<p> En desarrollo... </p>
-				</div>
-			<div class="column side"></div>'."\n";
+			$data = array("option" => "edit_hall", "number" => $_POST["number"],"cols" => $_POST["cols"], "rows" => $_POST["rows"], "seats" => $_POST["seats"]);
+			$panel = '<h1>Editar una sala.</h1><hr/></br>
+					'. FormHall::generaCampoFormulario($data, null);
 			
 			return $panel;
 		}
