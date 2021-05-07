@@ -35,6 +35,11 @@ class FormHall extends Form {
 							';
 		if($data['option'] == "new_hall")
 			$htmlform .= '<button type="submit" name="new_hall" class="button large">Crear</button><br>';
+		if($data['option'] == "edit_hall"){
+			$htmlform .= '
+			<button type="submit" name="edit_hall" class="button large">Editar</button><br>
+			<button type="submit" name="delete_hall" class="primary">Borrar</button><br>';
+		}
 		
 		$htmlform .= '
 						</fieldset>
@@ -80,9 +85,14 @@ class FormHall extends Form {
 		if($data["option"] == "new_hall"){
 			$_SESSION['msg'] = Hall::create_hall($data);
 			header( "Location: ../?state=success" );
-		}else {
-			
-		}			
+		}else if($data["option"] == "edit_hall"){
+			$_SESSION['msg'] = Hall::edit_hall($data);
+			header( "Location: ../?state=success" );
+		}
+		else if($data["option"] == "delete_hall") {
+			$_SESSION['msg'] = Hall::delete_hall($data);
+			header( "Location: ../?state=success" );
+		}		
     }
 }
 
