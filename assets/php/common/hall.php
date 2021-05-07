@@ -11,11 +11,12 @@
 		private $_total_seats;
 
 		//Constructor:
-        function __construct($number, $idcinema, $numRows, $numCol){
+        function __construct($number, $idcinema, $numRows, $numCol, $total_seats){
             $this->_number = $number;
             $this->_idcinema = $idcinema;
             $this->_numRows = $numRows;
 			$this->_numCol = $numCol;
+			$this->_total_seats = $total_seats;
         }
 
 		//Methods:
@@ -37,6 +38,30 @@
 				}
 			} else { return "Error al conectarse a la base de datos"; }
 		}
+
+		public static function edit_hall($hall){
+			$bd = new HallDAO('complucine');
+			if($bd ){
+				if($bd->searchHall($hall)){
+					$bd->editHall($hall);
+					return "Se ha editado la sala con exito";
+				} else {
+					return "Esta sala no existe";
+				}
+			} else { return "Error al conectarse a la base de datos"; }
+		}
+
+		public static function delete_hall($hall){
+			$bd = new HallDAO('complucine');
+			if($bd ){
+				if($bd->searchHall($hall)){
+					$bd->deleteHall($hall);
+					return "Se ha eliminado la sala con exito";
+				} else {
+					return "Esta sala no existe";
+				}
+			} else { return "Error al conectarse a la base de datos"; }
+		}
 		
 		//Getters && Setters:
         public function setNumber($number){	$this->_number = $number; }
@@ -50,6 +75,9 @@
 		
 		public function setNumCol($numCol){ $this->_numCol = $numCol; }
 		public function getNumCol(){ return $this->_numCol; }
+
+		public function setTotalSeats($totalSeat){ $this->_total_seats = $totalSeat; }
+		public function getTotalSeats(){ return $this->_total_seats; }
 
 
 

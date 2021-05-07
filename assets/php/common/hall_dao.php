@@ -37,7 +37,7 @@
 			$hall = null;
 			
 			while($fila=mysqli_fetch_array($resul)){
-				$hall[] = $this->loadHall($fila["number"], $fila["idcinema"], $fila["numrows"], $fila["numcolumns"]);
+				$hall[] = $this->loadHall($fila["number"], $fila["idcinema"], $fila["numrows"], $fila["numcolumns"], $fila["total_seats"]);
 			}
 			
 			mysqli_free_result($resul);
@@ -63,17 +63,17 @@
 		
 		
 		//Create a new Hall Data Transfer Object.
-		public function loadHall($number, $idcinema, $numrows, $numcolumns){
-			return new Hall($number, $idcinema, $numrows, $numcolumns);
+		public function loadHall($number, $idcinema, $numrows, $numcolumns,$total_seats){
+			return new Hall($number, $idcinema, $numrows, $numcolumns,$total_seats);
 		}
 
 		//Edit Hall.
-		public function editHall($id, $idcinema, $numCol, $numRows){
+		public function editHall($hall){
 
 			$sql = sprintf( "UPDATE `hall`
-							SET `numrows` = '%i' , `numcolumns` = '%i'
+							SET `numrows` = '%d' , `numcolumns` = '%d' , `total_seats` = %d
 							WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';", 
-							$numRows,$numCol,$id, $idcinema );
+							$hall['rows'], $hall['cols'], $hall['seats'], $hall['number'], $hall['cinema'] );
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
@@ -81,9 +81,9 @@
 		}
 
 		//Delete Hall.
-		public function deleteHall($id, $idcinema){
+		public function deleteHall($hall){
 
-			$sql = sprintf( "DELETE FROM `hall` WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';",$id,$idcinema);
+			$sql = sprintf( "DELETE FROM `hall` WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';",$hall['number'], $hall['cinema']);
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
