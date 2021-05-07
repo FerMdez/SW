@@ -7,11 +7,7 @@
 	
     class Manager_panel {
         
-        function __construct($panel,$log){
-            $this->state = $panel;
-            $this->login = $log;
-
-        }
+        function __construct(){}
 
 		static function welcome(){
             $name = strtoupper($_SESSION['nombre']);
@@ -84,7 +80,7 @@
 			
 			return $panel;
 		}
-			
+		
 		static function manage_sessions(){
 			//Base filtering values
 			$date = isset($_POST['date']) ? $_POST['date'] : date("Y-m-d");
@@ -134,7 +130,7 @@
 					$panel .='
 							<tr>
 								<td> '.date("H:i", strtotime( $session->getStartTime())).' </td>
-								<td> '. str_replace('_', ' ', Session::getFilmTitle($session->getIdfilm())) .' </td>
+								<td> '. str_replace('_', ' ', Session::getThisSessionFilm($session->getIdfilm())["tittle"]) .' </td>
 								<td> '.$session->getFormat().' </td>
 								<td> '.$session->getSeatPrice().' </td>
 								<td> <input type="date" name="date" value="'.$date.'">
@@ -145,7 +141,7 @@
 									<input  name="start" type="hidden" value="'.$session->getStartTime().'">
 									<input  name="price" type="hidden" value="'.$session->getSeatPrice().'">
 									<input  name="format" type="hidden" value="'.$session->getFormat().'">	
-								<td> <input type="submit" name="edit" value="Editar" class="button" ></td>
+								<td> <input type="submit" name="edit_session" value="Editar" class="button" ></td>
 								</form>
 							</tr>';
 					}
@@ -173,12 +169,51 @@
 			return $panel;
 		}
 		
-		static function edit_session(){		
-			$data = array("option" => "edit_session","hall" => $_POST["hall"],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $_POST['film'],"start" => $_POST['start'],"price" => $_POST['price'],"format" => $_POST['format']);
-			$panel = '<h1>Editar una sesión.</h1><hr /></br>
-			'.FormSession::generaCampoFormulario($data, null);
+		static function edit_session(){	
+			if(isset($_POST["edit_session"])){
+				$film = Session::getThisSessionFilm($_POST["film"]);
+				$data = array("option" => "edit_session","hall" => $_POST["hall"],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $film,
+					"start" => $_POST['start'],"price" => $_POST['price'],"format" => $_POST['format']);
+					
+			}else if(isset($_SESSION["session"])){
+				$session = Session::getThisSessionFromId($_SESSION["session"]);
+				$_SESSION["session"] = "";
+				$film = array("idfilm" => $_POST["id"],"tittle" => $_POST["tittle"], "description" => $_POST["description"], "duration" => $_POST["duration"]);
+				
+				echo $film["id"] . " y el titulo es: " . $film["tittle"];
+				$data = array("option" => "edit_session","hall" => $session["idhall"],"cinema" => $_SESSION["cinema"],"date" => $session["date"],"film" => $film,
+					"start" => $session["start_time"],"price" => $session["seat_price"],"format" => $session["format"]);
+			}
+			
+			if($data){
+				$panel = '<h1>Editar una sesión.</h1><hr /></br>
+				'.FormSession::generaCampoFormulario($data, null);
+			} else $panel = self::warning();
+			return $panel;
+		}
+		
+		static function select_film($template){		
+			if(isset($_GET["option"])){
+				$_SESSION["option"] = $_GET["option"];
+				$panel = '<h1>Seleccionar Pelicula.</h1><hr /></br>';
+				$panel .= $template->print_fimls();
+				$_SESSION["option"] = "";
+			} else $panel = self::warning();
 			
 			return $panel;
 		}
+		
+		//Funcion que se envia cuando hay inconsistencia en el panel manager, principalmente por tocar cosas con la ulr
+		static function warning(){
+			$panel = '<div class="code info">
+                    <h1>No deberias poder acceder aqui.</h1>
+                    <hr />
+                    <p> No uses la url para toquitear cosas >.< </p>
+                </div>'."\n";
+				
+			return $panel;
+		}
+		
+	
     }
 ?>

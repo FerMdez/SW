@@ -39,6 +39,9 @@
 			case "edit_session":
                 $panel = Manager_panel::edit_session();
                 break;
+			case "select_film":
+                $panel = Manager_panel::select_film($template);
+                break;
 			case "success":
                 $panel = Manager_panel::success();
                 break;

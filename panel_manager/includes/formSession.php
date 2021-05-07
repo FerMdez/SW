@@ -2,9 +2,6 @@
 require_once($prefix.'assets/php/common/session_dao.php');
 require_once($prefix.'assets/php/common/session.php');
 require_once($prefix.'assets/php/form.php');
-
-require_once($prefix.'assets/php/common/film.php');
-require_once($prefix.'assets/php/common/film_dao.php');
 	
 //Receive data from froms and prepare the correct response
 class FormSession extends Form {
@@ -17,15 +14,12 @@ class FormSession extends Form {
 	public static function generaCampoFormulario($data, $errores = array()){
 		
 		$cinema = $data['cinema'] ?? '';
-		$film = $data['film'] ?? '1';
-		$hall = $data['hall'] ?? '1';
+		$film = $data['film'] ?? '';
+		$hall = $data['hall'] ?? '';
 		$date = $data['date'] ?? '';
 		$start = $data['start'] ?? '';
 		$price = $data['price'] ?? '';
 		$format = $data['format'] ?? '';
-		
-		$filmList = new Film_DAO('complucine');
-		$films = $filmList->allFilmData();
 		
 		$htmlform .= '<div class="column left">
 				<form method="post" id="'.$data['option'].'" action="./includes/processForm.php"\>
@@ -33,6 +27,7 @@ class FormSession extends Form {
 						<legend>Datos</legend>
 						<input type="number" name="price" value="'.$price.'" min="0" placeholder="Precio de la entrada" required/> <br>
 						<input type="text" name="format" value="'.$format.'" placeholder="Formato de pelicula" required/> <br>
+						<input type="text" name="film" value="'.$film["idfilm"].'" placeholder="Selecciona una Pelicula" readonly/> 
 						<select name="hall" class="button large">';
 		foreach(Hall::getListHalls($cinema) as $hll){
 				if($hll->getNumber() == $hall){
@@ -55,30 +50,37 @@ class FormSession extends Form {
 		if($data['option'] == "new_session")
 			$htmlform .= '<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
 			<button type="submit" name="new_session" class="button large">Crear</button><br>';
-		if($data['option'] == "edit_session")
+		if($data['option'] == "edit_session"){
+			$_SESSION["session"] = $data['id'] ?? Session::getThisSessionId($cinema, $hall, $start, $date)["id"];
+			
 			$htmlform .= '
 			<input  name="origin_hall" type="hidden" value="'.$hall.'">
 			<input  name="origin_date" type="hidden" value="'.$date.'">
 			<input  name="origin_start" type="hidden" value="'.$start.'">
 			<button type="submit" name="edit_session" class="button large">Editar</button><br>
 			<button type="submit" name="delete_session" class="primary">Borrar</button><br>';
-		$htmlform .= '
-		<input type="reset" value="Limpiar Campos" >
+			
+		}
+		$htmlform .= "
+		<input type='reset' value='Limpiar Campos' >
 				</form>
 				</div>
-				<div class="column right">
-					<select name="film" form="'.$data['option'].'" class="button large">';
-		foreach($films as $f){
-			if($f->getId() == $film){
-					$htmlform.= '
-						<option value="'. $f->getId() .'" selected> '.$f->getId().' | '.str_replace('_', ' ',$f->getTittle()).' Idioma: '.$f->getLanguage().' </option>';
-			}else {	
-					$htmlform.= '
-						<option value="'. $f->getId() .'"> '.$f->getId().' | '.str_replace('_', ' ',$f->getTittle()).' Idioma: '.$f->getLanguage().' </option>';
-			}
-		}
-		$htmlform .= '
-					</select>
+				<div class='column side'>";
+				if($film["tittle"]){
+					$htmlform .= " <section id='".$film["tittle"]."'>
+                                <div class='code showtimes'>
+                                    <div class='image'><img src='../img/".$film["tittle"].".jpg' alt='".$film["tittle"]."' /></div>
+                                    <h2>".$film["tittle"]."</h2>
+                                    <hr />
+                                    <div class='blockquote'>
+                                        <p>".$film["description"]."</p>
+                                    </div>
+                                    <p>Duración: ".$film["duration"]." minutos</p>
+                                </div>
+                        </section>
+";
+				}
+				$htmlform .= '<a href="?state=select_film&option='.$data['option'].'" <button name="select_film" class="button large">Seleccionar una Pelicula</button></a><br>
 				</div>
 ';
 		return $htmlform;	
