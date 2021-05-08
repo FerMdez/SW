@@ -1,6 +1,6 @@
 <?php
-	include_once('../assets/php/common/hall.php');
-	include_once('../assets/php/common/session.php');
+	include_once($prefix.'assets/php/common/hall.php');
+	include_once($prefix.'assets/php/common/session.php');
 	include_once('./includes/formHall.php');	
 	include_once('./includes/formSession.php');	
 	

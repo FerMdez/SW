@@ -31,4 +31,17 @@
     require_once('template.php');
     $template = new Template();
     $prefix = $template->get_prefix();
+
+    /**
+     * Initialize the application:
+     */
+    require_once('aplication.php');
+    $app = Aplicacion::getSingleton();
+    $app->init(array('host'=>BD_HOST, 'bd'=>BD_NAME, 'user'=>BD_USER, 'pass'=>BD_PASS));
+
+    /**
+     * @see http://php.net/manual/en/function.register-shutdown-function.php
+     * @see http://php.net/manual/en/language.types.callable.php
+     */
+    register_shutdown_function(array($app, 'shutdown'));
 ?>

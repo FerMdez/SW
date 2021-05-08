@@ -1,37 +1,24 @@
 <?php
-    // TO-DO: Completar
     class DAO {
-        //Constants:
-        private const _SERVERNAME = BD_HOST;
-        private const _USERNAME = BD_USER;
-        private const _PASSWORD = BD_PASS;
-        private const _BD = BD_NAME;
 
         //Atributes:
         public $mysqli;
 
         //Constructor:
         public function __construct($bd_name){
-            if($bd_name == null) $bd_name = self::_BD;
-            try{
-                if (!$this->mysqli) {
-                    $this->mysqli = new mysqli(self::_SERVERNAME, self::_USERNAME, 
-                                                self::_PASSWORD, $bd_name);
-                }
-                // echo "Conexión a la BD, satisfactoria.";
-            } catch (Exception $e){
-                echo "Error de conexión a la BD: ". mysqli_connect_error();
-                exit();
+            if($bd_name != BD_NAME) {
+                echo "Está intentando acceder a una base de datos que no existe, puede que la aplicación no funcione correctamente";
             }
-
-            /* ... */
+            $app = Aplicacion::getSingleton();
+            $this->mysqli = $app->conexionBd();
         }
 
-        //Destructor:
+        //Destructor (Ya no es necesdario):
+        /*
         public function __destruct(){
             $this->mysqli->close();
         }
+        */
 
-        //Methods:
     }
 ?>

@@ -113,7 +113,7 @@ class FormFilm extends Form {
 				if(!empty($tittle)&&$duration>0&&!empty($language)&&!empty($description)){
 					// comprobar si existe una pelicula con el mismo titulo e idioma
 					$exist = $bd-> GetFilm($tittle,$language);
-					if( mysqli_num_rows($exist) != 0){
+					if(mysqli_num_rows($exist) != 0){
 						$this->correct =false;
 					}
 					else{

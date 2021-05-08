@@ -2,7 +2,7 @@
     class Template {
 
     //Constants:
-    private const _NUMPAGES = 10;
+    //private const _NUMPAGES = 10; //Constant to page results.
 
     //Attributes:
     public $page;           //Page Name.
@@ -403,6 +403,7 @@
 
     }
 
+    //Print Cinemas info:
     function print_cinemas(){
         //List of the cinemas:
         require_once(__DIR__.'/common/cinema_dao.php');
@@ -423,6 +424,7 @@
                 $phones[$key] = $value->getPhone();
             }
         }
+
         switch($this->page){
             case "Panel de Administrador":
                 echo "<div class='row'>
@@ -439,45 +441,46 @@
                         </thead>
                         <tbody>
                         "; 
-            if(is_array($cinemas)){      
-                for($i = 0; $i < count($cinemas); $i++){
-                    echo '<tr>
-                            <td>'. $ids[$i] .'</td>
-                            <td>'. $names[$i] .'</td>
-                            <td>'. $directions[$i] .'</td>
-                            <td>'. $phones[$i] .'</td>
-                            <td>
-                                <form method="post" action="index.php?state=mc">
-                                    <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                    <input  name="name" type="hidden" value="'.$names[$i].'">
-                                    <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                    <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                    <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
-                                </form> 
-                            </td> 
-                            <td> 
-                                <form method="post" action="index.php?state=mc">
-                                    <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                    <input  name="name" type="hidden" value="'.$names[$i].'">
-                                    <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                    <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                    <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
-                                </form> 
-                            </td> 
-                        </tr>
-                        '; 
-                } 
-            }  
-                echo'</tbody>
-                        </table>
-                    </div>
-                    <div class="column side"></div>
-                ';
+                if(is_array($cinemas)){      
+                    for($i = 0; $i < count($cinemas); $i++){
+                        echo '<tr>
+                                <td>'. $ids[$i] .'</td>
+                                <td>'. $names[$i] .'</td>
+                                <td>'. $directions[$i] .'</td>
+                                <td>'. $phones[$i] .'</td>
+                                <td>
+                                    <form method="post" action="index.php?state=mc">
+                                        <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                        <input  name="name" type="hidden" value="'.$names[$i].'">
+                                        <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                        <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                        <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
+                                    </form> 
+                                </td> 
+                                <td> 
+                                    <form method="post" action="index.php?state=mc">
+                                        <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                        <input  name="name" type="hidden" value="'.$names[$i].'">
+                                        <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                        <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                        <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
+                                    </form> 
+                                </td> 
+                            </tr>
+                            '; 
+                    } 
+                }  
+                    echo'</tbody>
+                            </table>
+                        </div>
+                        <div class="column side"></div>
+                    ';
                 break;
+            
+            default: break;
 
         }
     }
-
 
     //Print session MSG:
     function print_msg() {
