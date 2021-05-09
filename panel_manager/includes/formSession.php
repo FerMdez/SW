@@ -11,6 +11,7 @@ class FormSession extends Form {
         parent::__construct('formSession');
     }
 	
+	//TODO Edit session no funciona correctamente con el seleccionar una pelicula distinta, hay que guardar la id de la sesion de alguna forma y usarla o guardar en la sesion
 	public static function generaCampoFormulario($data, $errores = array()){
 		
 		$cinema = $data['cinema'] ?? '';
@@ -25,9 +26,9 @@ class FormSession extends Form {
 				<form method="post" id="'.$data['option'].'" action="./includes/processForm.php"\>
 					<fieldset>
 						<legend>Datos</legend>
-						<input type="number" name="price" value="'.$price.'" min="0" placeholder="Precio de la entrada" required/> <br>
+						<input type="number" step="0.01" name="price" value="'.$price.'" min="0" placeholder="Precio de la entrada" required/> <br>
 						<input type="text" name="format" value="'.$format.'" placeholder="Formato de pelicula" required/> <br>
-						<input type="text" name="film" value="'.$film["idfilm"].'" placeholder="Selecciona una Pelicula" readonly/> 
+						<input type="hidden" name="film" value="'.$film["idfilm"].'"/> 
 						<select name="hall" class="button large">';
 		foreach(Hall::getListHalls($cinema) as $hll){
 				if($hll->getNumber() == $hall){
@@ -47,19 +48,20 @@ class FormSession extends Form {
 						<input type="date" name="date" value="'.$date.'" placeholder="Fecha de inicio" required/> <br>
 					</fieldset>
 						';		
-		if($data['option'] == "new_session")
-			$htmlform .= '<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
-			<button type="submit" name="new_session" class="button large">Crear</button><br>';
-		if($data['option'] == "edit_session"){
-			$_SESSION["session"] = $data['id'] ?? Session::getThisSessionId($cinema, $hall, $start, $date)["id"];
-			
-			$htmlform .= '
-			<input  name="origin_hall" type="hidden" value="'.$hall.'">
-			<input  name="origin_date" type="hidden" value="'.$date.'">
-			<input  name="origin_start" type="hidden" value="'.$start.'">
-			<button type="submit" name="edit_session" class="button large">Editar</button><br>
-			<button type="submit" name="delete_session" class="primary">Borrar</button><br>';
-			
+		if($film){
+			if($data['option'] == "new_session")
+				$htmlform .= '<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
+				<button type="submit" name="new_session" class="button large">Crear</button><br>';
+				
+			if($data['option'] == "edit_session"){
+				if(!$_SESSION["or_hall"]) $_SESSION["or_hall"] = $hall;
+				if(!$_SESSION["or_date"]) $_SESSION["or_date"] = $date;
+				if(!$_SESSION["or_start"])$_SESSION["or_start"] = $start;
+				
+				$htmlform .= '
+				<button type="submit" name="edit_session" class="button large">Editar</button><br>
+				<button type="submit" name="delete_session" class="primary">Borrar</button><br>';
+			}
 		}
 		$htmlform .= "
 		<input type='reset' value='Limpiar Campos' >
@@ -70,7 +72,7 @@ class FormSession extends Form {
 					$htmlform .= " <section id='".$film["tittle"]."'>
                                 <div class='code showtimes'>
                                     <div class='image'><img src='../img/".$film["tittle"].".jpg' alt='".$film["tittle"]."' /></div>
-                                    <h2>".$film["tittle"]."</h2>
+                                    <h2>".str_replace('_', ' ',$film["tittle"])."</h2>
                                     <hr />
                                     <div class='blockquote'>
                                         <p>".$film["description"]."</p>
@@ -80,7 +82,7 @@ class FormSession extends Form {
                         </section>
 ";
 				}
-				$htmlform .= '<a href="?state=select_film&option='.$data['option'].'" <button name="select_film" class="button large">Seleccionar una Pelicula</button></a><br>
+				$htmlform .= '<button type="submit" name="select_films" form="'.$data['option'].'" formaction="?state=select_film&option='.$data['option'].'" class="button large">Seleccionar una Pelicula</button><br>
 				</div>
 ';
 		return $htmlform;	

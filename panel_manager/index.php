@@ -5,9 +5,15 @@
     require_once('../assets/php/config.php');
     //Controller file:
     include_once('panel_manager.php');
+	//Manager data:
+	include_once('../assets/php/common/manager.php');
+	include_once('../assets/php/common/user.php');
 	
     if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
-		$_SESSION["cinema"] = "1";
+		
+		if(!$_SESSION["cinema"])
+			$_SESSION["cinema"] = Manager::getManager(unserialize($_SESSION['user'])->getId())->getIdcinema();
+		
         switch($_GET["state"]){
 			case "view_ruser":
 			case "view_user":
@@ -65,7 +71,7 @@
     CompluCine - FDI-cines
 -->
 <html lang="es">
-<link id='estilo' rel='stylesheet' type='text/css' href='includes/manager.css'>
+<link id='estilo' rel='stylesheet' type='text/css' href='../assets/css/manager.css'>
     <!-- Head -->
     <?php
         $template->print_head();

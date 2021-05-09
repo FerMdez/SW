@@ -11,11 +11,13 @@
 
 		static function welcome(){
             $name = strtoupper($_SESSION['nombre']);
+			$cinema = strtoupper($_SESSION['cinema']);
 
             $panel = '<div class="code info">
                     <h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
                     <hr />
                     <p>Usuario: '.$name.'</p>
+					<p>Cine: '.$cinema.'</p>
                     <p>Espero que estes pasando un buen dia</p>
                 </div>'."\n";
 				
@@ -138,7 +140,6 @@
 								<td> '. str_replace('_', ' ', Session::getThisSessionFilm($session->getIdfilm())["tittle"]) .' </td>
 								<td> '.$session->getFormat().' </td>
 								<td> '.$session->getSeatPrice().' </td>
-								<td> <input type="date" name="date" value="'.$date.'">
 								<form method="post" action="./?state=edit_session">
 									<input  name="film" type="hidden" value="'.$session->getIdfilm().'">
 									<input  name="hall" type="hidden" value="'.$session->getIdhall().'">
@@ -158,36 +159,50 @@
 				$panel.=' <h3> No hay ninguna sesion </h3>';
 			}
 			$panel.='
-				<input type="submit" name="submit" form="filter"  value="Añadir" class="button large" formaction="./?state=new_session">
+				<input type="submit" name="new_session" form="filter"  value="Añadir" class="button large" formaction="./?state=new_session">
 			</div>
 ';
 			
 			return $panel;
         }
 		
-		static function new_session(){		
-			$data = array("option" => "new_session","hall" => $_POST['hall'],"cinema" => $_SESSION["cinema"],"date" => $_POST['date']);
+		static function new_session(){	
+			echo "inicio";
+			if(isset($_POST["new_session"])){
+				
+				$data = array("option" => "new_session","hall" => $_POST['hall'],"cinema" => $_SESSION["cinema"],"date" => $_POST['date']);
+				
+			}else if(isset($_POST["select_film"])){
+				
+				$film = array("idfilm" => $_POST["id"],"tittle" => $_POST["tittle"], "description" => $_POST["description"], "duration" => $_POST["duration"]);
+				$data = array("option" => "new_session","hall" => $_POST['hall'],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $film, "start" => $_POST['start']
+					, "price" => $_POST['price'], "format" => $_POST['format']);
+			}
 			
-			$panel = '<h1>Crear una sesión.</h1><hr /></br>
-			'.FormSession::generaCampoFormulario($data, null);
+			if($data){
+				$panel = '<h1>Crear una sesión.</h1><hr /></br>
+				'.FormSession::generaCampoFormulario($data, null);
+			}else $panel = self::warning();
 			
 			return $panel;
 		}
 		
 		static function edit_session(){	
 			if(isset($_POST["edit_session"])){
+				
+				$_SESSION["or_hall"] = "";
+				$_SESSION["or_date"] = "";
+				$_SESSION["or_start"] = "";
+		
 				$film = Session::getThisSessionFilm($_POST["film"]);
 				$data = array("option" => "edit_session","hall" => $_POST["hall"],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $film,
 					"start" => $_POST['start'],"price" => $_POST['price'],"format" => $_POST['format']);
 					
 			}else if(isset($_SESSION["session"])){
-				$session = Session::getThisSessionFromId($_SESSION["session"]);
-				$_SESSION["session"] = "";
 				$film = array("idfilm" => $_POST["id"],"tittle" => $_POST["tittle"], "description" => $_POST["description"], "duration" => $_POST["duration"]);
-				
-				echo $film["id"] . " y el titulo es: " . $film["tittle"];
-				$data = array("option" => "edit_session","hall" => $session["idhall"],"cinema" => $_SESSION["cinema"],"date" => $session["date"],"film" => $film,
-					"start" => $session["start_time"],"price" => $session["seat_price"],"format" => $session["format"]);
+
+				$data = array("option" => "edit_session","hall" => $_POST['hall'],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $film, "start" => $_POST['start']
+					, "price" => $_POST['price'], "format" => $_POST['format']);
 			}
 			
 			if($data){
