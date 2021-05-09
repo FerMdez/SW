@@ -44,10 +44,12 @@
                     <h2>Cambiar nombre de usuario</h2>
                     '.$htmlFormChangeName.'
                 </div>
+                <!-- Change User Password -->
                 <div class="column middle">
                     <h2>Cambiar contraseña</h2>
                     '.$htmlFormChangePass.'
                 </div>
+                <!-- Change User Email -->
                 <div class="column side">
                     <h2>Cambiar email de usuario</h2>
                     '.$htmlFormChangeEmail.'

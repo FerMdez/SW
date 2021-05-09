@@ -21,23 +21,23 @@ class FormChangeEmail extends Form {
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = '<div class="row">'.$htmlErroresGlobales.'
-                    <fieldset id="email_usuario">
-                        <legend>Nuevo email de usuario</legend>
-                        <div class="_new_email">
-                            <input type="text" name="new_email" id="new_email" value="" placeholder="Nuevo Email" required/>
-                        </div>
-                        <div class="_passwd">
-                            <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
-                        </div>
-                        <div class="_passwd">
-                            <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
-                        </div>
-                    </fieldset>
-                    <div class="actions"> 
-                        <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
-                        <input type="reset" id="reset" value="Borrar" />       
-                    </div>
-                </div>';
+                            <fieldset id="email_usuario">
+                                <legend>Nuevo email de usuario</legend>
+                                <div class="_new_email">
+                                    <input type="text" name="new_email" id="new_email" value="" placeholder="Nuevo Email" required/>
+                                </div>
+                                <div class="_passwd">
+                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
+                                </div>
+                                <div class="_passwd">
+                                    <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
+                                </div>
+                            </fieldset>
+                            <div class="actions"> 
+                                <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
+                                <input type="reset" id="reset" value="Borrar" />       
+                            </div>
+                        </div>';
 
         return $html;
     }

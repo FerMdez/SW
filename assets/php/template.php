@@ -325,46 +325,6 @@
                 break;
 				
 			case "Panel de Gerente":
-                $html="<div class='column'>";
-                for($i = 0; $i < count($films_array); $i++){
-                    $tittle = str_replace('_', ' ', $tittles[$i]);
-                    if($i%2 === 0){
-                        if($i != 0) $html.= "</div>
-                    ";
-                        $html.= "<div class='column side'>
-                        ";
-                    }
-                    else{
-                        if($i != 0) $html.= "</div>
-                    ";
-                        $html.= "<div class='column middle'>
-                        ";
-                    }
-                    $html.= "<section id='".$tittles[$i]."'>
-                            <div class='zoom'>
-                                <div class='code showtimes'>
-                                    <div class='image'><img src='".$prefix."img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
-                                    <h2>".$tittle."</h2>
-                                    <hr />
-                                    <form method='post' action='./?state=".$_SESSION['option']."'>
-                                        <input name='id' type='hidden' value='".$ids[$i]."'>
-                                        <input name='tittle' type='hidden' value='".$tittles[$i]."'>
-                                        <input name='duration' type='hidden' value='".$times[$i]."'>
-                                        <input name='language' type='hidden' value='".$languages[$i]."'>
-                                        <input name='description' type='hidden' value='".$descriptions[$i]."'>
-					<input name='price' type='hidden' value='".$_POST["price"]."'>
-                                        <input name='format' type='hidden' value='".$_POST["format"]."'>
-                                        <input name='start' type='hidden' value='".$_POST["start"]."'>
-                                        <input name='date' type='hidden' value='".$_POST["date"]."'>
-					<input name='hall' type='hidden' value='".$_POST["hall"]."'>
-                                    </form>
-                                </div>
-                            </div>
-                        </section>
-                    ";
-                }
-                $html.= "</div>\n"; 
-				return $html;
                 break;
 				
             default: 

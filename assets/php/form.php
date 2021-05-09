@@ -18,7 +18,7 @@ abstract class Form {
      * envío del formulario.
      */
     private $action;
-
+    private $printed;
     /**
      * Crea un nuevo formulario.
      *
@@ -52,7 +52,7 @@ abstract class Form {
         $opcionesPorDefecto = array( 'action' => null, );
         $opciones = array_merge($opcionesPorDefecto, $opciones);
 
-        $this->action   = $opciones['action'];
+        $this->action = $opciones['action'];
         
         if ( !$this->action ) {
             $this->action = htmlentities($_SERVER['PHP_SELF']);
@@ -77,7 +77,7 @@ abstract class Form {
      * </ul>
      */
     public function gestiona()
-    {   
+    {
         if ( ! $this->formularioEnviado($_POST) ) {
             return $this->generaFormulario();
         } else {
@@ -88,7 +88,7 @@ abstract class Form {
                 header('Location: '.$result);
                 exit();
             }
-        }  
+        }
     }
 
     /**
@@ -152,10 +152,10 @@ abstract class Form {
         /* <<< Permite definir cadena en múltiples líneas.
          * Revisa https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
          */
-        $htmlForm = '<form method="POST" action="'.$this->action.'" id="'.$this->formId.'" >
-                        <input type="hidden" name="action" value="$this->formId" />
-                        '.$htmlCamposFormularios.'
-                    </form>';
+        $htmlForm = "<form method='POST' action='{$this->action}' id='{$this->formId}' >
+                        <input type='hidden' name='action' value='{$this->formId}' />
+                        ".$htmlCamposFormularios."
+                    </form>";
         return $htmlForm;
     }
 

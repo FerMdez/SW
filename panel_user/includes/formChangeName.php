@@ -1,6 +1,7 @@
 <?php
 require_once('../assets/php/form.php');
 include_once('../assets/php/common/user.php');
+include_once('../assets/php/common/user_dao.php');
 
 class FormChangeName extends Form {
 
@@ -19,23 +20,23 @@ class FormChangeName extends Form {
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = '<div class="row">'.$htmlErroresGlobales.'
-                    <fieldset id="nombre_usuario">
-                        <legend>Nuevo Nombre de usuario</legend>
-                        <div class="_new_name">
-                            <input type="text" name="new_name" id="new_name" value="" placeholder="Nuevo Nombre" required/>
-                        </div>
-                        <div class="_passwd">
-                            <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
-                        </div>
-                        <div class="_passwd">
-                            <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
-                        </div>
-                    </fieldset>
-                    <div class="actions"> 
-                        <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
-                        <input type="reset" id="reset" value="Borrar" />       
-                    </div>
-                </div>';
+                            <fieldset id="nombre_usuario">
+                                <legend>Nuevo Nombre de usuario</legend>
+                                <div class="_new_name">
+                                    <input type="text" name="new_name" id="new_name" value="" placeholder="Nuevo Nombre" required/>'.$errorNombre.'
+                                </div>
+                                <div class="_passwd">
+                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>'.$errorPassword.'
+                                </div>
+                                <div class="_passwd">
+                                    <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>'.$errorPassword2.'
+                                </div>
+                            </fieldset>
+                            <div class="actions"> 
+                                <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
+                                <input type="reset" id="reset" value="Borrar" />       
+                            </div>
+                        </div>';
 
         return $html;
     }
@@ -44,6 +45,7 @@ class FormChangeName extends Form {
         $result = array();
         
         $nombre = $datos['new_name'] ?? null;
+        $nombre = strtolower($nombre);
         if ( empty($nombre) || mb_strlen($nombre) < 4 ) {
             $result['new_name'] = "El nombre tiene que tener una longitud de al menos 4 caracteres.";
         }
@@ -63,8 +65,8 @@ class FormChangeName extends Form {
            if (!$user) {
             $result[] = "El usuario no existe.";
         } else {
-            $bd->changeUserName(unserialize($_SESSION['user'])->getId(), $username);
-            $user = $bd->selectUser($username, $password);
+            $bd->changeUserName(unserialize($_SESSION['user'])->getId(), $nombre);
+            $user = $bd->selectUser($nombre, $password);
             if (!$user){
                 $result[] = "Ha ocurrido un probrema al actualizar el nombre de usuario.";
             }else{

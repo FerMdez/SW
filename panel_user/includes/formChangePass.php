@@ -19,23 +19,23 @@ class FormChangePass extends Form {
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = '<div class="row">'.$htmlErroresGlobales.'
-                    <fieldset id="contraseña_usuario">
-                        <legend>Contraseña Actual</legend>
-                        <div class="_passwd">
-                            <input type="password" name="old_pass" id="old_pass" value="" placeholder="Contraseña Actual" required/>
-                        </div>
-                        <div class="_passwd">
-                            <input type="password" name="pass" id="pass" value="" placeholder="Nueva Contraseña" required/>
-                        </div>
-                        <div class="_passwd">
-                            <input type="password" name="repass" id="repass" value="" placeholder="Repita la nueva contraseña" required/>
-                        </div>
-                    </fieldset>
-                    <div class="actions"> 
-                        <input type="submit" id="submit" value="Cambiar Contraseña" class="primary" />
-                        <input type="reset" id="reset" value="Borrar" />       
-                    </div>
-                </div>';
+                            <fieldset id="contraseña_usuario">
+                                <legend>Contraseña Actual</legend>
+                                <div class="_passwd">
+                                    <input type="password" name="old_pass" id="old_pass" value="" placeholder="Contraseña Actual" required/>
+                                </div>
+                                <div class="_passwd">
+                                    <input type="password" name="pass" id="pass" value="" placeholder="Nueva Contraseña" required/>
+                                </div>
+                                <div class="_passwd">
+                                    <input type="password" name="repass" id="repass" value="" placeholder="Repita la nueva contraseña" required/>
+                                </div>
+                            </fieldset>
+                            <div class="actions"> 
+                                <input type="submit" id="submit" value="Cambiar Contraseña" class="primary" />
+                                <input type="reset" id="reset" value="Borrar" />       
+                            </div>
+                        </div>';
 
         return $html;
     }

@@ -18,7 +18,7 @@
 				VALUES ('%d', '%d', '%d', '%d', '%s', '%s', '%d', '%s', '%d')",
 					$id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, "0");
 			
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error createSession');
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
 			return $sql;
 		}
@@ -35,7 +35,7 @@
 		
 		public function filmTittle($idfilm){
 			$sql = sprintf("SELECT * FROM film JOIN  session ON film.id = session.idfilm WHERE session.idfilm = '%d' ", $idfilm );
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en filmTittle con idfilm= '. $idfilm);
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $idfilm);
 			
 			$resul = mysqli_fetch_array($resul);
 			
@@ -50,8 +50,7 @@
 			$sql = sprintf( "SELECT * FROM session WHERE 
 							idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
 							$cinema, $hall, $date, $startTime);	
-							
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error searchSession');
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
 			$session = mysqli_fetch_array($resul);
 			
