@@ -68,6 +68,7 @@
             <!-- Contents -->
             <div class="row">
                 <?php
+                    $template->print_msg();
                     echo $reply;
                 ?>
             </div>

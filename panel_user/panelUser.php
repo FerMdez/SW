@@ -25,6 +25,7 @@
 
         //Manage the user account.
         static function manage(){
+
             require_once('./includes/formChangePass.php');
             require_once('./includes/formChangeEmail.php');
             require_once('./includes/formChangeName.php');

@@ -44,8 +44,8 @@ class FormChangeName extends Form {
         $result = array();
         
         $nombre = $datos['new_name'] ?? null;
-        if ( empty($nombre) || mb_strlen($nombre) < 5 ) {
-            $result['new_name'] = "El nombre tiene que tener una longitud de al menos 5 caracteres.";
+        if ( empty($nombre) || mb_strlen($nombre) < 4 ) {
+            $result['new_name'] = "El nombre tiene que tener una longitud de al menos 4 caracteres.";
         }
         
         $password = $datos['pass'] ?? null;
@@ -54,7 +54,7 @@ class FormChangeName extends Form {
         }
         $password2 = $datos['repass'] ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
-            $result['repass'] = "Los passwords deben coincidir";
+            $result['repass'] = "Los passwords deben coincidir.";
         }
         
         if (count($result) === 0) {
@@ -70,6 +70,18 @@ class FormChangeName extends Form {
             }else{
                 $_SESSION['user'] = serialize($user);
                 $_SESSION["nombre"] = $user->getName();
+                $_SESSION['message'] = "<div class='row'>
+                                            <div class='column side'></div>
+                                            <div class='column middle'>
+                                                <div class='code info'>
+                                                    <h1>Operacion realizada con exito</h1><hr />
+                                                    <p>Se ha modificado su nombre de usuario correctamente.</p>
+                                                    <a href=''><button>Cerrar Mensaje</button></a>
+                                                </div>
+                                            </div>
+                                            <div class='column side'></div>
+                                        </div>
+                                        ";
                 $result = './?option=manage_profile';
             }
         }

@@ -44,9 +44,9 @@ class FormChangePass extends Form {
     protected function procesaFormulario($datos){
         $result = array();
         
-        $nombre = $datos['new_name'] ?? null;
-        if ( empty($nombre) || mb_strlen($nombre) < 5 ) {
-            $result['new_name'] = "El nombre tiene que tener una longitud de al menos 5 caracteres.";
+        $old_pass = $datos['old_pass'] ?? null;
+        if ( empty($old_pass) || mb_strlen($old_pass) < 5 ) {
+            $result['old_pass'] = "El password tiene que tener una longitud de al menos 5 caracteres.";
         }
         
         $password = $datos['pass'] ?? null;
@@ -55,7 +55,7 @@ class FormChangePass extends Form {
         }
         $password2 = $datos['repass'] ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
-            $result['repass'] = "Los passwords deben coincidir";
+            $result['repass'] = "Los passwords deben coincidir.";
         }
         
         if (count($result) === 0) {
@@ -64,13 +64,23 @@ class FormChangePass extends Form {
            if (!$user) {
             $result[] = "El usuario no existe.";
         } else {
-            $bd->changeUserName(unserialize($_SESSION['user'])->getId(), $username);
+            //$bd->changeUserName(unserialize($_SESSION['user'])->getId(), $username);
             $user = $bd->selectUser($username, $password);
             if (!$user){
-                $result[] = "Ha ocurrido un probrema al actualizar el nombre de usuario.";
+                $result[] = "Ha ocurrido un probrema al actualizar contraseña.";
             }else{
-                $_SESSION['user'] = serialize($user);
-                $_SESSION["nombre"] = $user->getName();
+                $_SESSION['message'] = "<div class='row'>
+                                            <div class='column side'></div>
+                                            <div class='column middle'>
+                                                <div class='code info'>
+                                                    <h1>Operacion realizada con exito</h1><hr />
+                                                    <p>Se ha modificado su contraseña correctamente.</p>
+                                                    <a href=''><button>Cerrar Mensaje</button></a>
+                                                </div>
+                                            </div>
+                                            <div class='column side'></div>
+                                        </div>
+                                        ";
                 $result = './?option=manage_profile';
             }
         }

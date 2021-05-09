@@ -3,6 +3,8 @@ require_once('../assets/php/form.php');
 include_once('../assets/php/common/user.php');
 
 class FormChangeEmail extends Form {
+    //Constants:
+    const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
 
     public function __construct() {
         $options = array("action" => "./?option=manage_profile");
@@ -44,9 +46,9 @@ class FormChangeEmail extends Form {
     protected function procesaFormulario($datos){
         $result = array();
         
-        $nombre = $datos['new_name'] ?? null;
-        if ( empty($nombre) || mb_strlen($nombre) < 5 ) {
-            $result['new_name'] = "El nombre tiene que tener una longitud de al menos 5 caracteres.";
+        $email = $datos['new_email'] ?? null;
+        if ( empty($email) || !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $email) ) {
+            $result['new_email'] = "El nuevo email no es válido.";
         }
         
         $password = $datos['pass'] ?? null;
@@ -64,13 +66,24 @@ class FormChangeEmail extends Form {
            if (!$user) {
             $result[] = "El usuario no existe.";
         } else {
-            $bd->changeUserName(unserialize($_SESSION['user'])->getId(), $username);
+            //$bd->changeUserName(unserialize($_SESSION['user'])->getId(), $username);
             $user = $bd->selectUser($username, $password);
             if (!$user){
-                $result[] = "Ha ocurrido un probrema al actualizar el nombre de usuario.";
+                $result[] = "Ha ocurrido un probrema al actualizar el email de usuario.";
             }else{
                 $_SESSION['user'] = serialize($user);
-                $_SESSION["nombre"] = $user->getName();
+                $_SESSION['message'] = "<div class='row'>
+                                            <div class='column side'></div>
+                                            <div class='column middle'>
+                                                <div class='code info'>
+                                                    <h1>Operacion realizada con exito</h1><hr />
+                                                    <p>Se ha modificado su email correctamente.</p>
+                                                    <a href=''><button>Cerrar Mensaje</button></a>
+                                                </div>
+                                            </div>
+                                            <div class='column side'></div>
+                                        </div>
+                                        ";
                 $result = './?option=manage_profile';
             }
         }
