@@ -1,6 +1,6 @@
 <?php
 	require_once('../assets/php/dao.php');
-	include_once('user_dto.php');
+	include_once('user.php');
 
     class UserDAO extends DAO {
 		
@@ -97,9 +97,21 @@
 			return $resul;
 		}
 
+		//Change username by id.
+		public function changeUserName($id, $username){
+			$id = $this->mysqli->real_escape_string($id);
+			$username = $this->mysqli->real_escape_string($username);
+
+			$sql = sprintf( "UPDATE users SET username = '%s' WHERE id = '%d'", $username, $id );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+
+		}
+
 		//Create a new User Data Transfer Object.
 		public function loadUser($id, $username, $email, $password, $rol){
-			return new UserDTO($id, $username, $email, $password, $rol);
+			return new User($id, $username, $email, $password, $rol);
 		}
 
     }

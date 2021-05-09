@@ -1,5 +1,5 @@
 <?php
-    require_once($prefix.'assets/php/common/user_dto.php');
+    require_once($prefix.'assets/php/common/user.php');
 
     class UserPanel {
         //Atributes:
@@ -25,30 +25,19 @@
 
         //Manage the user account.
         static function manage(){
-            return $reply = '<div class="column side">
-                                <h2>Cambiar nombre de usuario</h2>
-                                <form method="post" action="./includes/formChangeName.php">
-                                    <div class="row">
-                                        <fieldset id="nombre_usuario">
-                                            <legend>Nuevo Nombre de usuario</legend>
-                                            <div class="_new_name">
-                                                <input type="text" name="new_name" id="new_name" value="" placeholder="Nuevo Nombre" required/>
-                                            </div>
-                                            <div class="_passwd">
-                                                <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
-                                            </div>
-                                            <div class="_passwd">
-                                                <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
-                                            </div>
-                                        </fieldset>
-                                        <div class="actions"> 
-                                            <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
-                                            <input type="reset" id="reset" value="Borrar" />       
-                                        </div>
-                                    </div>
-                                </form>
-                        </div>
-                        <div class="column side">
+            require_once('./includes/formChangePass.php');
+            require_once('./includes/formChangeEmail.php');
+            require_once('./includes/formChangeName.php');
+
+            $formCN = new FormChangeName();
+            $htmlFormChangeName = $formCN->gestiona();
+
+            return $reply = '<!-- Change User Name -->
+                <div class="column side">
+                    <h2>Cambiar nombre de usuario</h2>
+                    '.$htmlFormChangeName.'
+                </div>
+                        <div class="column middle">
                                 <h2>Cambiar contraseña</h2>
                                 <form method="post" action="./includes/formChangePass.php">
                                     <div class="row">
