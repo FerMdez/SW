@@ -19,27 +19,27 @@ class FormChangeName extends Form {
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = '<div class="row">'.$htmlErroresGlobales.'
-                            <fieldset id="nombre_usuario">
-                                <legend>Nuevo Nombre de usuario</legend>
-                                <div class="_new_name">
-                                    <input type="text" name="new_name" id="new_name" value="" placeholder="Nuevo Nombre" required/>
-                                </div>
-                                <div class="_passwd">
-                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
-                                </div>
-                                <div class="_passwd">
-                                    <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
-                                </div>
-                            </fieldset>
-                            <div class="actions"> 
-                                <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
-                                <input type="reset" id="reset" value="Borrar" />       
-                            </div>
-                        </div>';
+                    <fieldset id="nombre_usuario">
+                        <legend>Nuevo Nombre de usuario</legend>
+                        <div class="_new_name">
+                            <input type="text" name="new_name" id="new_name" value="" placeholder="Nuevo Nombre" required/>
+                        </div>
+                        <div class="_passwd">
+                            <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
+                        </div>
+                        <div class="_passwd">
+                            <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
+                        </div>
+                    </fieldset>
+                    <div class="actions"> 
+                        <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
+                        <input type="reset" id="reset" value="Borrar" />       
+                    </div>
+                </div>';
+
         return $html;
     }
     
-
     protected function procesaFormulario($datos){
         $result = array();
         
@@ -81,3 +81,4 @@ class FormChangeName extends Form {
         return htmlspecialchars(trim(strip_tags($input)));
     }
 }
+?>

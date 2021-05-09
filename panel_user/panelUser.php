@@ -31,58 +31,26 @@
 
             $formCN = new FormChangeName();
             $htmlFormChangeName = $formCN->gestiona();
+            
+            $formCP = new FormChangePass();
+            $htmlFormChangePass = $formCP->gestiona();
+
+            $formCE = new FormChangeEmail();
+            $htmlFormChangeEmail = $formCE->gestiona();
 
             return $reply = '<!-- Change User Name -->
                 <div class="column side">
                     <h2>Cambiar nombre de usuario</h2>
                     '.$htmlFormChangeName.'
                 </div>
-                        <div class="column middle">
-                                <h2>Cambiar contraseña</h2>
-                                <form method="post" action="./includes/formChangePass.php">
-                                    <div class="row">
-                                        <fieldset id="contraseña_usuario">
-                                            <legend>Contraseña Actual</legend>
-                                            <div class="_passwd">
-                                                <input type="password" name="old_pass" id="old_pass" value="" placeholder="Contraseña Actual" required/>
-                                            </div>
-                                            <div class="_passwd">
-                                                <input type="password" name="pass" id="pass" value="" placeholder="Nueva Contraseña" required/>
-                                            </div>
-                                            <div class="_passwd">
-                                                <input type="password" name="repass" id="repass" value="" placeholder="Repita la nueva contraseña" required/>
-                                            </div>
-                                        </fieldset>
-                                        <div class="actions"> 
-                                            <input type="submit" id="submit" value="Cambiar Contraseña" class="primary" />
-                                            <input type="reset" id="reset" value="Borrar" />       
-                                        </div>
-                                    </div>
-                                </form>
-                        </div>
-                        <div class="column side">
-                                <h2>Cambiar email de usuario</h2>
-                                <form method="post" action="./includes/formChangeEmail.php">
-                                    <div class="row">
-                                        <fieldset id="email_usuario">
-                                            <legend>Nuevo email de usuario</legend>
-                                            <div class="_new_email">
-                                                <input type="text" name="new_email" id="new_email" value="" placeholder="Nuevo Email" required/>
-                                            </div>
-                                            <div class="_passwd">
-                                                <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
-                                            </div>
-                                            <div class="_passwd">
-                                                <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
-                                            </div>
-                                        </fieldset>
-                                        <div class="actions"> 
-                                            <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
-                                            <input type="reset" id="reset" value="Borrar" />       
-                                        </div>
-                                    </div>
-                                </form>
-                        </div>'."\n";
+                <div class="column middle">
+                    <h2>Cambiar contraseña</h2>
+                    '.$htmlFormChangePass.'
+                </div>
+                <div class="column side">
+                    <h2>Cambiar email de usuario</h2>
+                    '.$htmlFormChangeEmail.'
+                </div>'."\n";
         }
 
         //User purchase history.
