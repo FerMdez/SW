@@ -18,13 +18,6 @@
         }
 	
 		//Methods:
-	public static function getManager($id){
-		$bd = new Manager_DAO('complucine');
-		if($bd ) {
-			return $bd->GetManager($id);
-		}
-		return "";
-	}
 	    
 		//Getters && Setters:
         public function setId($id){	$this->_id = $id; }

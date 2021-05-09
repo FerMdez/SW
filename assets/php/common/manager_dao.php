@@ -1,8 +1,6 @@
 <?php
+	include_once('../dao.php');
 	include_once('manager.php');
-	$template = new Template();
-    $prefix = $template->get_prefix();
-	include_once($prefix.'assets/php/dao.php');
 
     class Manager_DAO extends DAO {
 

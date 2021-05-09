@@ -11,9 +11,6 @@
 	
     if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
 		
-		if(!$_SESSION["cinema"])
-			$_SESSION["cinema"] = Manager::getManager(unserialize($_SESSION['user'])->getId())->getIdcinema();
-		
         switch($_GET["state"]){
 			case "view_ruser":
 			case "view_user":
