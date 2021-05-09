@@ -52,8 +52,8 @@ class FormChangeEmail extends Form {
         }
         
         $password = $datos['pass'] ?? null;
-        if ( empty($password) || mb_strlen($password) < 5 ) {
-            $result['pass'] = "El password tiene que tener una longitud de al menos 5 caracteres.";
+        if ( empty($password) || mb_strlen($password) < 4 ) {
+            $result['pass'] = "El password tiene que tener una longitud de al menos 4 caracteres.";
         }
         $password2 = $datos['repass'] ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
@@ -65,6 +65,18 @@ class FormChangeEmail extends Form {
            $user = $bd->selectUser(unserialize($_SESSION['user'])->getName(), $password);
            if (!$user) {
             $result[] = "El usuario no existe.";
+            $_SESSION['message'] = "<div class='row'>
+                                        <div class='column side'></div>
+                                        <div class='column middle'>
+                                            <div class='code info'>
+                                                <h1>Ha ocurrido un probrema</h1><hr />
+                                                <p>No hemos podido actualizar su nombre de usuario.</p>
+                                                <a href=''><button>Cerrar Mensaje</button></a>
+                                            </div>
+                                        </div>
+                                        <div class='column side'></div>
+                                    </div>
+                                    ";
         } else {
             //$bd->changeUserName(unserialize($_SESSION['user'])->getId(), $username);
             $user = $bd->selectUser($username, $password);

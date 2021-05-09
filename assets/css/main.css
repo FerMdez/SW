@@ -563,6 +563,14 @@ textarea {
   height: 110%;
 }
 
+/* Preformatted Text */
+pre {
+  font-weight: bold;
+}
+
+fieldset pre {
+  color: red;
+}
 
 /* Footer */
 footer {
