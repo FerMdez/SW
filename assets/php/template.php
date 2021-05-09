@@ -352,7 +352,11 @@
                                         <input name='duration' type='hidden' value='".$times[$i]."'>
                                         <input name='language' type='hidden' value='".$languages[$i]."'>
                                         <input name='description' type='hidden' value='".$descriptions[$i]."'>
-                                        <input type='submit' id='submit' value='Seleccionar' name='select_film' class='primary' />
+					<input name='price' type='hidden' value='".$_POST["price"]."'>
+                                        <input name='format' type='hidden' value='".$_POST["format"]."'>
+                                        <input name='start' type='hidden' value='".$_POST["start"]."'>
+                                        <input name='date' type='hidden' value='".$_POST["date"]."'>
+					<input name='hall' type='hidden' value='".$_POST["hall"]."'>
                                     </form>
                                 </div>
                             </div>
