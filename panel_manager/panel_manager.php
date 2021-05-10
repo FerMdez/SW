@@ -3,10 +3,10 @@
 	include_once($prefix.'assets/php/common/session.php');
 	include_once('./includes/formHall.php');	
 	include_once('./includes/formSession.php');	
-	
+
 	
     class Manager_panel {
-        
+		
         function __construct(){}
 
 		static function welcome(){
@@ -35,8 +35,16 @@
 			return $panel;
         }
 		
-		static function manage_halls(){
-			$panel = '<form method="post" action="./?state=new_hall">
+		static function manage_halls(){	
+			
+			$panel = '<div class="column side"></div>
+			<div class="column middle">';
+			$listhall = Hall::getListHalls($_SESSION["cinema"]);
+			if(!$listhall){
+				$panel .= "<h2> No hay ninguna sala en este cine";
+			}else{
+			$panel .= '
+			
 				<table class="alt">
 					<thead>
 						<tr>
@@ -47,7 +55,8 @@
 						</tr>
 					</thead>
 					<tbody>'; 
-			foreach(Hall::getListHalls($_SESSION["cinema"]) as $hall){ 
+
+			foreach($listhall as $hall){ 
 				$panel .='
 						<tr>
 							<td> '. $hall->getNumber().'</td>
@@ -59,32 +68,39 @@
 								<input  name="rows" type="hidden" value="'. $hall->getNumRows().'">
 								<input  name="cols" type="hidden" value="'. $hall->getNumCol().'">
 								<input  name="seats" type="hidden" value="'.$hall->getTotalSeats().'">
-							<td> <input type="submit" name="edit" value="Editar" class="button" formaction="./?state=edit_hall&number='.$hall->getNumber().'" ></td>
+								<input  name="object" type="hidden" value="'.serialize($cinema).'">
+							<td> <input type="submit" name="edit_hall" value="Editar" class="button" formaction="./?state=edit_hall&number='.$hall->getNumber().'" ></td>
 							</form>
 						</tr>';
 				}
 			$panel.='
 					</tbody>
 				</table>
-				<input type="submit" name="new"  value="Añadir" class="button large" >
-			</form>
-';
+			';
+			}
+			$panel.='	<form method="post" action="./?state=new_hall">
+							<input type="submit" name="new_hall" value="Añadir Sala" class="button large" >
+						</form>
+			</div>
+			<div class="column side"></div>
+			';			
 			return $panel;
         }
 		
 		static function new_hall(){		
-			$data = array("option" => "new_hall", "cols" => $_POST["cols"], "rows" => $_POST["rows"]);
-			$panel = '<h1>Crear una sala.</h1><hr/></br>
-					'. FormHall::generaCampoFormulario($data, null);
-			
+		
+			$formHall = new FormHall("new_hall");
+		
+			$panel = '<h1>Crear una sala.</h1><hr/></br>'
+				.$formHall->gestiona();
 			return $panel;
 		}
 		
 		static function edit_hall(){		
-			$data = array("option" => "edit_hall", "number" => $_POST["number"],"cols" => $_POST["cols"], "rows" => $_POST["rows"], "seats" => $_POST["seats"]);
-			$panel = '<h1>Editar una sala.</h1><hr/></br>
-					'. FormHall::generaCampoFormulario($data, null);
-			
+			$formHall = new FormHall("edit_hall");
+		
+			$panel = '<h1>Editar una sala.</h1><hr/></br>'
+				.$formHall->gestiona();
 			return $panel;
 		}
 		

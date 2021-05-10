@@ -1,16 +1,16 @@
 <!DOCTYPE HTML>
 <?php
 
+	ini_set('display_errors', 0);
+	error_reporting(E_ERROR | E_WARNING | E_PARSE);
+
     //General Config File:
     require_once('../assets/php/config.php');
     //Controller file:
     include_once('panel_manager.php');
-	//Manager data:
-	include_once('../assets/php/common/manager.php');
-	include_once('../assets/php/common/user.php');
 	
     if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
-		
+		$_SESSION["cinema"] = 1;
         switch($_GET["state"]){
 			case "view_ruser":
 			case "view_user":
