@@ -3,15 +3,34 @@
 /**
  * Clase base para la gestión de formularios.
  *
- * Además de la gestión básica de los formularios.
+ * Gestión de token CSRF está basada en: https://www.owasp.org/index.php/PHP_CSRF_Guard
  */
 abstract class Form {
 
     /**
-     * @var string Cadena utilizada como valor del atributo "id" de la etiqueta &lt;form&gt; asociada al formulario y 
-     * como parámetro a comprobar para verificar que el usuario ha enviado el formulario.
+     * @var string Sufijo para el nombre del parámetro de la sesión del usuario donde se almacena el token CSRF.
+     */
+    const CSRF_PARAM = 'csrf';
+
+    /**
+     * @var string Identificador utilizado para construir el atributo "id" de la etiqueta &lt;form&gt; como <code>$tipoFormulario.$formId</code>.
      */
     private $formId;
+
+    /**
+     * @var string Valor del parámetro enctype del formulario.
+     */
+    private $enctype;
+
+    /**
+     * @var string Valor del atributo "class" de la etiqueta &lt;form&gt; asociada al formulario. Si este parámetro incluye la cadena "nocsrf" no se generá el token CSRF para este formulario.
+     */
+    private $classAtt;
+
+     /**
+     * @var string Parámetro de la petición utilizado para comprobar que el usuario ha enviado el formulario..
+     */
+    private $tipoFormulario;
 
     /**
      * @var string URL asociada al atributo "action" de la etiqueta &lt;form&gt; del fomrulario y que procesará el 
@@ -37,22 +56,35 @@ abstract class Form {
      *       <td><code>$_SERVER['PHP_SELF']</code></td>       
      *       <td>URL asociada al atributo "action" de la etiqueta &lt;form&gt; del fomrulario y que procesará el envío del formulario.</td>
      *     </tr>
+     *     <tr>
+     *        <td>class</td>
+     *        <td>""</td>       
+     *        <td>Valor del atributo "class" de la etiqueta &lt;form&gt; asociada al formulario. Si este parámetro incluye la cadena
+     *        "nocsrf" no se generá el token CSRF para este formulario.</td>
+     *     </tr>
+     *      <tr>
+     *       <td>enctype</td>
+     *       <td>""</td>       
+     *       <td>Valor del parámetro enctype del formulario.</td>
+     *     </tr>
      *   </tbody>
      * </table>
-
-     * @param string $formId    Identificador utilizado en el atributo "id" de la etiqueta &lt;form&gt; asociada al formulario y como parámetro
-     *                          a comprobar para verificar que el usuario ha enviado el formulario.
+     * @param string $tipoFormulario Parámetro de la petición utilizado para comprobar que el usuario ha enviado el formulario.
+     * @param string $formId (opcional) Identificador utilizado para construir el atributo "id" de la etiqueta &lt;form&gt; como <code>$tipoFormulario.$formId</code>. 
      *
      * @param array $opciones (ver más arriba).
      */
-    public function __construct($formId, $opciones = array() )
+    public function __construct($tipoFormulario, $opciones = array(), $formId = 1)
     {
-        $this->formId = $formId;
+        $this->tipoFormulario = $tipoFormulario;
+        $this->formId = $tipoFormulario.$formId;
 
-        $opcionesPorDefecto = array( 'action' => null, );
+        $opcionesPorDefecto = array( 'action' => null, 'class' => null, 'enctype' => null );
         $opciones = array_merge($opcionesPorDefecto, $opciones);
 
         $this->action = $opciones['action'];
+        $this->classAtt = $opciones['class'];
+        $this->enctype  = $opciones['enctype'];
         
         if ( !$this->action ) {
             $this->action = htmlentities($_SERVER['PHP_SELF']);
@@ -81,6 +113,13 @@ abstract class Form {
         if ( ! $this->formularioEnviado($_POST) ) {
             return $this->generaFormulario();
         } else {
+            // Valida el token CSRF si es necesario (hay un token en la sesión asociada al formulario)
+            $tokenRecibido = $_POST['CSRFToken'] ?? FALSE;
+            $errores = $this->csrfguard_ValidateToken($this->tipoFormulario, $tokenRecibido);
+
+            // limpia los tokens CSRF que no han sido utilizados en esta petición
+            self::limpiaCsrfTokens();
+
             $result = $this->procesaFormulario($_POST);
             if ( is_array($result) ) {
                 return $this->generaFormulario($_POST, $result);
@@ -133,7 +172,7 @@ abstract class Form {
      */
     private function formularioEnviado(&$params)
     {
-        return isset($params['action']) && $params['action'] == $this->formId;
+        return isset($params['action']) && $params['action'] == $this->tipoFormulario;
     } 
 
     /**
@@ -149,12 +188,29 @@ abstract class Form {
     {
         $htmlCamposFormularios = $this->generaCamposFormulario($datos, $errores);
 
+        $classAtt='';
+        if ( $this->classAtt ) {
+          $classAtt = " class=\"{$this->classAtt}\"";
+        }
+
+        $enctypeAtt='';
+        if ( $this->enctype ) {
+            $enctypeAtt = " enctype=\"{$this->enctype}\"";
+        }
+
+        // Se genera el token CSRF si el usuario no solicita explícitamente lo contrario.
+        $tokenCSRF = '';
+        if ( ! $this->classAtt || strpos($this->classAtt, 'nocsrf') === false ) {
+            $tokenValue = $this->csrfguard_GenerateToken($this->tipoFormulario);
+            $tokenCSRF = "<input type='hidden' name='CSRFToken' value='$tokenValue' />";
+        }
+
         /* <<< Permite definir cadena en múltiples líneas.
          * Revisa https://www.php.net/manual/en/language.types.string.php#language.types.string.syntax.heredoc
          */
-        $htmlForm = "<form method='POST' action='{$this->action}' id='{$this->formId}' >
-                        <input type='hidden' name='action' value='{$this->formId}' />
-                        ".$htmlCamposFormularios."
+        $htmlForm = "<form method='POST' action='{$this->action}' id='{$this->formId}{$classAtt}{$enctypeAtt}' >
+                        <input type='hidden' name='action' value='{$this->tipoFormulario}' />
+                        ".$tokenCSRF.$htmlCamposFormularios."
                     </form>";
         return $htmlForm;
     }
@@ -213,4 +269,70 @@ abstract class Form {
 
         return $html;
     }
+
+    /**
+     * Método para eliminar los tokens CSRF almecenados en la petición anterior que no hayan sido utilizados en la actual.
+     */
+    public static function limpiaCsrfTokens()
+    {
+        foreach(array_keys($_SESSION) as $key) {
+            if (strpos($key, self::CSRF_PARAM) === 0) {
+                unset($_SESSION[$key]);
+            }
+        }
+    }
+
+    private function csrfguard_GenerateToken($formParameter)
+  {
+    if ( ! session_id() ) {
+      throw new \Exception('La sesión del usuario no está definida.');
+    }
+
+    $paramSession = self::CSRF_PARAM.'_'.$formParameter;
+    if (isset($_SESSION[$paramSession])) {
+      $token = $_SESSION[$paramSession];
+    } else {
+      if ( function_exists('hash_algos') && in_array('sha512', hash_algos()) ) {
+        $token = hash('sha512', mt_rand(0, mt_getrandmax()));
+      } else {
+        $token=' ';
+        for ($i=0;$i<128;++$i) {
+          $r=mt_rand(0,35);
+          if ($r<26){
+            $c=chr(ord('a')+$r);
+          } else{ 
+            $c=chr(ord('0')+$r-26);
+          } 
+          $token.=$c;
+        }
+      }
+
+      $_SESSION[$paramSession]=$token;
+    }
+    return $token;
+  }
+
+  private function csrfguard_ValidateToken($formParameter, $tokenRecibido)
+  {
+    if ( ! session_id() ) {
+        throw new \Exception('La sesión del usuario no está definida.');
+    }
+    
+    $result = TRUE;
+    
+    $paramSession = self::CSRF_PARAM.'_'.$formParameter;
+    if ( isset($_SESSION[$paramSession]) ) {
+        if ( $_SESSION[$paramSession] !== $tokenRecibido ) {
+            $result = array();
+            $result[] = 'Has enviado el formulario dos veces';
+        }
+        $_SESSION[$paramSession] = ' ';
+        unset($_SESSION[$paramSession]);
+    } else {
+        $result = array();
+        $result[] = 'Formulario no válido';
+    }
+        return $result;
+  }
+
 }
