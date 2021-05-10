@@ -50,12 +50,12 @@
                 <hr />
                 <div class="blockquote">
                     <p>
-                        Somos un <a href="../../miembros/">grupo de estudiantes</a> de la asignatura de Sistemas Web
+                        Somos un <a href="../miembros/">grupo de estudiantes</a> de la asignatura de Sistemas Web
                         de la Facultad de Informática de la Universidad Complutense de Madrid.
                     </p>
                     <p>
                         CompluCine es un proyecto web universitario y en ningún momento pretende ofrecer una funcionalidad real.
-                        Para más información acerca del proyecto, haz click <a href="../../detalles/">aquí</a>.
+                        Para más información acerca del proyecto, haz click <a href="../detalles/">aquí</a>.
                     </p>
                 </div>
             </div>

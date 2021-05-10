@@ -51,7 +51,7 @@ class FormRegister extends Form {
 
         $name = strtolower($name);
         $username = isset($name) ? $name : null ;
-        if (!$username) {
+        if (!$username || mb_strlen($username) < 3 || mb_strlen($username) > 8) {
           $register = false;
         }
         

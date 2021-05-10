@@ -62,7 +62,7 @@
                             </fieldset>
                             <div class="verify">
                                 <input type="checkbox" id="checkbox" name="terms" required>
-                                <label for="terms"><a href ="../fdicines/terms_conditions/">Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</a></label>
+                                <label for="terms"><a href ="../fdicines/terms_conditions/" target="_blank">Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</a></label>
                             </div>
                             <div class="actions"> 
                                 <input type="submit" id="submit" value="Registrarse" class="primary" />

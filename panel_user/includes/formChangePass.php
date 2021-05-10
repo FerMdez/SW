@@ -34,7 +34,6 @@ class FormChangePass extends Form {
         return $html;
     }
     
-    /* TODO */
     protected function procesaFormulario($datos){
         $result = array();
         
@@ -62,8 +61,8 @@ class FormChangePass extends Form {
                                             <div class='column middle'>
                                                 <div class='code info'>
                                                     <h1>Ha ocurrido un probrema</h1><hr />
-                                                    <p>No hemos podido actualizar su contraseña de usuario, 
-                                                    revisa que la contraseña actual sea correcta.</p>
+                                                    <p>No hemos podido actualizar su contraseña de usuario. 
+                                                    Comprueba que la contraseña actual sea correcta.</p>
                                                     <a href=''><button>Cerrar Mensaje</button></a>
                                                 </div>
                                             </div>

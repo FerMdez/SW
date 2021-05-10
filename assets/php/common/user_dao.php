@@ -111,6 +111,18 @@
 
 		}
 
+		//Change user email by id.
+		public function changeUserEmail($id, $email){
+			$id = $this->mysqli->real_escape_string($id);
+			$email = $this->mysqli->real_escape_string($email);
+
+			$sql = sprintf( "UPDATE users SET email = '%s' WHERE id = '%d'", $email, $id );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+
+		}
+
 		//Create a new User Data Transfer Object.
 		public function loadUser($id, $username, $email, $password, $rol){
 			return new User($id, $username, $email, $password, $rol);

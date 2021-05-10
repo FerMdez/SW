@@ -16,15 +16,15 @@ class FormChangeName extends Form {
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorNombre = self::createMensajeError($errores, 'new_name', 'span', array('class' => 'error'));
+        $errorNombre2 = self::createMensajeError($errores, 'rename', 'span', array('class' => 'error'));
         $errorPassword = self::createMensajeError($errores, 'pass', 'span', array('class' => 'error'));
-        $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = "<div class='row'>
                             <fieldset id='nombre_usuario'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Nuevo Nombre de usuario</legend>
                                 <input type='text' name='new_name' id='new_name' value='' placeholder='Nuevo Nombre' required/><pre>".$errorNombre."</pre>
+                                <input type='text' name='rename' id='rename' value='' placeholder='Repita el nombre' required/><pre>".$errorNombre2."</pre>
                                 <input type='password' name='pass' id='pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
-                                <input type='password' name='repass' id='repass' value='' placeholder='Repita la contraseña' required/><pre>".$errorPassword2."</pre>
                             </fieldset>
                             <div class='actions'> 
                                 <input type='submit' id='submit' value='Cambiar Nombre de Usuario' class='primary' />
@@ -43,14 +43,15 @@ class FormChangeName extends Form {
         if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
             $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 8 caracteres.";
         }
+
+        $nombre2 = $datos['rename'] ?? null;
+        if ( empty($nombre2) || strcmp($nombre, $nombre2) !== 0 ) {
+            $result['rename'] = "Los nombres deben coincidir.";
+        }
         
         $password = $datos['pass'] ?? null;
         if ( empty($password) || mb_strlen($password) < 4 ) {
             $result['pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres.";
-        }
-        $password2 = $datos['repass'] ?? null;
-        if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
-            $result['repass'] = "Los passwords deben coincidir.";
         }
         
         if (count($result) === 0) {
@@ -63,8 +64,8 @@ class FormChangeName extends Form {
                                             <div class='column middle'>
                                                 <div class='code info'>
                                                     <h1>Ha ocurrido un probrema</h1><hr />
-                                                    <p>No hemos podido actualizar su nombre de usuario, 
-                                                    revisa que la contraseña introducida sea correcta.</p>
+                                                    <p>No hemos podido actualizar su nombre de usuario. 
+                                                    Comprueba que la contraseña introducida sea correcta.</p>
                                                     <a href=''><button>Cerrar Mensaje</button></a>
                                                 </div>
                                             </div>

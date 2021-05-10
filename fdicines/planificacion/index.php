@@ -265,7 +265,7 @@
                     </tr>
                     <tr>
                         <td>Práctica 3</td>
-                        <td>7 de Mayo de 2021</td>
+                        <td>14 de Mayo de 2021</td>
                         <td>EN PROCESO</td>
                     </tr>
                     <tr>
