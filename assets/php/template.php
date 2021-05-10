@@ -263,7 +263,7 @@
                     echo "<section id='".$tittles[$i]."'>
                             <div class='zoom'>
                                 <div class='code showtimes'>
-                                    <div class='image'><img src='".$prefix."img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
+                                    <div class='image'><img src='".$prefix."img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
                                     <h2>".$tittle."</h2>
                                     <hr />
                                     <div class='blockquote'>
@@ -297,7 +297,7 @@
                     echo "<section id='".$tittles[$i]."'>
                             <div class='zoom'>
                                 <div class='code showtimes'>
-                                    <div class='image'><img src='".$prefix."img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
+                                    <div class='image'><img src='".$prefix."img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
                                     <h2>".$tittle."</h2>
                                     <hr />
                                     <form method='post' action='./index.php?state=mf'>
@@ -342,7 +342,7 @@
                         echo "
                                 <div class='zoom'>
                                     <div class='columna'>
-                                        <a href='".$prefix."showtimes/#".$tittles[$i]."'><div class='image'><img src='img/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div></a>
+                                        <a href='".$prefix."showtimes/#".$tittles[$i]."'><div class='image'><img src='img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div></a>
                                     </div>
                                 </div>";
                         $count++;
@@ -358,7 +358,7 @@
                     echo "
                             <h1>{$title}</h1><hr />
                             <div class='zoom'>
-                                <a href='".$prefix."showtimes/#".$tittles[$count]."'><div class='image main'><img src='img/".$tittles[$count].".jpg' alt='".$tittles[$count]."' /></div></a>
+                                <a href='".$prefix."showtimes/#".$tittles[$count]."'><div class='image main'><img src='img/films/".$tittles[$count].".jpg' alt='".$tittles[$count]."' /></div></a>
                             </div>
                         </div>
                     </div>\n";

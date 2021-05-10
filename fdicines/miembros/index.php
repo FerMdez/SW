@@ -73,7 +73,7 @@
                     <section id="MEP">
                         <div class="zoom">
                             <div class="code">
-                                <img src="../../img/mep.jpg" />
+                                <img src="../../img/us/mep.jpg" />
                                 <p>~ Marco Expósito Pérez (marcoexp@ucm.es)</p>
                                 <div class="blockquote bio">  
                                     <p>Aficionado a todo tipo de videojuegos, principalmente la saga Zelda. Tambien me gusta leer tanto literatura fantastica como mangas y veo anime asiduamente.</p>
@@ -88,7 +88,7 @@
                     <section id="FMT">
                         <div class="zoom">
                             <div class="code">
-                                <img src="../../img/fmt.jpg" />
+                                <img src="../../img/us/fmt.jpg" />
                                 <p>~ Fernando Méndez (fernmend@ucm.es)</p>
                                 <div class="blockquote bio">  
                                     <p>Estudiante de Ingeniería de Computadores en la Universidad Complutense de Madrid.</p>
@@ -103,7 +103,7 @@
                     <section id="DMG">
                         <div class="zoom">
                             <div class="code">
-                                <img src="../../img/dmg.jpg" />
+                                <img src="../../img/us/dmg.jpg" />
                                 <p>~ Daniel Muñoz García (danimu03@ucm.es)</p>
                                 <div class="blockquote bio">  
                                     <p>Estudiante del grado en ingeniería informática en la Universidad Complutense de Madrid. Aficionado a la ciberseguridad y las nuevas tecnologías.</p>
@@ -120,7 +120,7 @@
                     <section id="IMT">
                         <div class="zoom">
                             <div class="code">
-                                <img src="../../img/imt.jpg" />
+                                <img src="../../img/us/imt.jpg" />
                                 <p>~ Ioan Marian Tulai (ioantula@ucm.es)</p>
                                 <div class="blockquote bio">  
                                     <p>Estudiante con mucha ilusion y ganas de trabajar  especialista en hardware.</p>
@@ -135,7 +135,7 @@
                     <section id="ORP">
                         <div class="zoom">
                             <div class="code">
-                                <img src="../../img/orp.jpg" />               
+                                <img src="../../img/us/orp.jpg" />               
                                 <p>~ Óscar Ruiz de Pedro (oscarrui@ucm.es)</p>
                                 <div class="blockquote bio">  
                                     <p>Estudiante de ingeniería de computadores en la Universidad Complutense de Madrid.</p>
@@ -151,7 +151,7 @@
                     <section id="ARN">
                         <div class="zoom">
                             <div class="code">
-                                <img src="../../img/arn.jpg" />
+                                <img src="../../img/us/arn.jpg" />
                                 <p>~ Adrian Real del Noval (adrireal@ucm.es)</p>
                                 <div class="blockquote bio">  
                                     <p>Estudiante de 3er año de Ingeniería de Computadores en la Universidad Complutense de Madrid.</p>

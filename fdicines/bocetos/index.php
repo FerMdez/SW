@@ -89,7 +89,7 @@
             <div class="row">
                 <div class="column left">
                     <div class="sketches">
-                        <img src="../../img/inicio.png" />
+                        <img src="../../img/bocetos/inicio.png" />
                         <div class="description">
                             <h3>Pantalla de inicio</h3>
                             <p>Pantalla de bienvenida al entrar en la web.</p>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="column right">
                     <div class="sketches">
-                        <img src="../../img/registrarse_iniciar_sesion.png" />
+                        <img src="../../img/bocetos/registrarse_iniciar_sesion.png" />
                         <div class="description">
                             <h3>Pantalla de Registro / Inicio de sesión</h3>
                             <p>Pantalla para que un usuario nuevo se registre o, en caso de ya tener una cuenta de usuario, inicie sesión.</p>
@@ -109,7 +109,7 @@
             <div class="row">
                 <div class="column left">
                     <div class="sketches">
-                        <img src="../../img/menu_usuario.png" />
+                        <img src="../../img/bocetos/menu_usuario.png" />
                         <div class="description">
                             <h3>Menú de usuario registrado</h3>
                             <p>Pantalla con todas las opciones disponibles, propias de un usuario registrado.</p>
@@ -118,7 +118,7 @@
                 </div>
                 <div class="column right">
                     <div class="sketches">
-                        <img src="../../img/peliculas.png" />
+                        <img src="../../img/bocetos/peliculas.png" />
                         <div class="description">
                             <h3>Cartelera</h3>
                             <p>Pantalla con información sobre todas las películas disponibles en ese momento.</p>
@@ -129,7 +129,7 @@
             <div class="row">
                 <div class="column left">
                     <div class="sketches">
-                        <img src="../../img/cine.png" />
+                        <img src="../../img/bocetos/cine.png" />
                         <div class="description">
                             <h3>Cines</h3>
                             <p>Pantalla con un mapa que indica la geolocalización de todos los cines de FDI-Cines.</p>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="column right">
                     <div class="sketches">
-                        <img src="../../img/selector_horario.png" />
+                        <img src="../../img/bocetos/selector_horario.png" />
                         <div class="description">
                             <h3>Selección de Horario</h3>
                             <p>Pantalla que muestra los horarios disponibles por salas para un cine y película elegidos.</p>
@@ -149,7 +149,7 @@
             <div class="row">
                 <div class="column left">
                     <div class="sketches">
-                        <img src="../../img/mapa_asientos.png" />
+                        <img src="../../img/bocetos/mapa_asientos.png" />
                         <div class="description">
                             <h3>Mapa de los Asientos</h3>
                             <p>Pantalla con un mapa para selccionar los asientos que se quieren escoger. Los asientos ocupados no pondrán ser seleccionados.</p>
@@ -158,7 +158,7 @@
                 </div>
                 <div class="column right">
                     <div class="sketches">
-                        <img src="../../img/pagar.png" />
+                        <img src="../../img/bocetos/pagar.png" />
                         <div class="description">
                             <h3>Pagar</h3>
                             <p>Pantalla para realizar el pago, después de haber selecionado película, cine, sala, horario y butacas.</p>
@@ -169,7 +169,7 @@
             <div class="row">
                 <div class="column left">
                     <div class="sketches">
-                        <img src="../../img/compra_realizada.png" />
+                        <img src="../../img/bocetos/compra_realizada.png" />
                         <div class="description">
                             <h3>Compra Realizada</h3>
                             <p>Pantalla de confirmación con los datos de compra.</p>
@@ -178,7 +178,7 @@
                 </div>
                 <div class="column right">
                     <div class="sketches">
-                        <img src="../../img/about_us.png" />
+                        <img src="../../img/bocetos/about_us.png" />
                         <div class="description">
                             <h3>Sobre nosotros</h3>
                             <p>Pantalla con información sobre FDI-Cines.</p>
@@ -189,7 +189,7 @@
             <div class="row">
                 <div class="column left">
                     <div class="sketches">
-                        <img src="../../img/contacto.png" />
+                        <img src="../../img/bocetos/contacto.png" />
                         <div class="description">
                             <h3>Formulario de Contacto</h3>
                             <p>Pantalla con un formulario para realizar una consulta a los administradores.</p>
@@ -198,7 +198,7 @@
                 </div>
                 <div class="column right">
                     <div class="sketches">
-                        <img src="../../img/terminos_y_condiciones.png" />
+                        <img src="../../img/bocetos/terminos_y_condiciones.png" />
                         <div class="description">
                             <h3>Términos y Condiciones</h3>
                             <p>Pantalla con todos los términos y condiciones de uso del servicio.</p>
@@ -214,7 +214,7 @@
             <div class="row">
                 <div class="column side">
                     <div class="sketches">
-                        <img src="../../img/panel_inicio_gerente.png" />
+                        <img src="../../img/bocetos/panel_inicio_gerente.png" />
                         <div class="description">
                             <h3>Panel de Incio Gerente</h3>
                             <p>Pantalla con las funciones exclusivas a las que puede acceder un Gerente.</p>
@@ -223,7 +223,7 @@
                 </div>
                 <div class="column middle">
                     <div class="sketches">
-                        <img src="../../img/gestionar_salas.png" />
+                        <img src="../../img/bocetos/gestionar_salas.png" />
                         <div class="description">
                             <h3>Gestionar salas</h3>
                             <p>Pantalla en la que los Gerentes pueden interactuar para añadir, modificar o eliminar la sala de un cine.</p>
@@ -232,7 +232,7 @@
                 </div>
                 <div class="column side">
                     <div class="sketches">
-                        <img src="../../img/gestionar_sesiones.png" />
+                        <img src="../../img/bocetos/gestionar_sesiones.png" />
                         <div class="description">
                             <h3>Gestionar Sesiones</h3>
                             <p>Pantalla en la que los Gerentes pueden interactuar para añadir, modificar o eliminar las sesiones de una película.</p>
@@ -248,7 +248,7 @@
             <div class="row">
                 <div class="column left">
                     <div class="sketches">
-                        <img src="../../img/panel_inicio_admin.png" />
+                        <img src="../../img/bocetos/panel_inicio_admin.png" />
                         <div class="description">
                             <h3>Panel Inicio Administrador</h3>
                             <p>Pantalla con las funciones exclusivas a las que puede acceder un Administrador.</p>
@@ -257,7 +257,7 @@
                 </div>
                 <div class="column right">
                     <div class="sketches">
-                        <img src="../../img/gestionar_peliculas.png" />
+                        <img src="../../img/bocetos/gestionar_peliculas.png" />
                         <div class="description">
                             <h3>Gestionar Películas</h3>
                             <p>Pantalla en la que los Administradores pueden interactuar para añadir, modificar o eliminar las películas de la cartelera.</p>
@@ -268,7 +268,7 @@
             <div class="row">
                 <div class="column side">
                     <div class="sketches">
-                        <img src="../../img/gestionar_cines.png" />
+                        <img src="../../img/bocetos/gestionar_cines.png" />
                         <div class="description">
                             <h3>Gestionar Cines</h3>
                             <p>Pantalla en la que los Administradores pueden interactuar para añadir, modificar o eliminar los cines.</p>
@@ -277,7 +277,7 @@
                 </div>
                 <div class="column middle">
                     <div class="sketches">
-                        <img src="../../img/gestionar_promociones.png" />
+                        <img src="../../img/bocetos/gestionar_promociones.png" />
                         <div class="description">
                             <h3>Gestionar Promociones</h3>
                             <p>Pantalla en la que los Administradores pueden interactuar para añadir, modificar o eliminar las promociones existentes.</p>
@@ -286,7 +286,7 @@
                 </div>
                 <div class="column side">
                     <div class="sketches">
-                        <img src="../../img/gestionar_admins_gerentes.png" />
+                        <img src="../../img/bocetos/gestionar_admins_gerentes.png" />
                         <div class="description">
                             <h3>Gestionar Administradores y Gerentes</h3>
                             <p>Pantalla en la que los Administradores pueden interactuar para añadir, modificar o eliminar tanto otros Administradores como Gerentes.</p>
