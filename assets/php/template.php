@@ -456,17 +456,31 @@
 
     //Print generic Footer:
     function print_footer(){
-        //$page = $this->page;
         $prefix = $this->prefix;
+        /*
+        if (isset($_GET["css"]) && $_GET["css"] === true) {
+            $css = "{$prefix}assets/css/main.css";
+            $nameCSS = "Contraste Normal";
+        } else {
+            $css = "{$prefix}assets/css/highContrast.css";
+            $nameCSS = "Alto Contraste";
+        }
+        */
+        $css = "{$prefix}assets/css/highContrast.css";
+        $nameCSS = "Alto Contraste";
+       
+        echo" <!-- Script -->
+            <script src='{$prefix}assets/js/cambiarCSS.js'></script>
 
-        echo"<footer>
+            <footer>
             <div class='footer'>
                 <p>© Práctica 2 | Sistemas Web 2021 </p>
             </div>
             <a href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</a> |
             <a href='{$prefix}fdicines/terms_conditions/'>Términos y condiciones</a> |
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |
-            <a href='{$prefix}contacto/'>Contacto</a>
+            <a href='{$prefix}contacto/'>Contacto</a> |
+            <button onclick=\"cambiarCSS('{$css}')\">$nameCSS</button>
         </footer>\n";
     }
 

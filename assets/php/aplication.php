@@ -71,9 +71,23 @@ class Aplicacion {
 	public function init($bdDatosConexion) {
         if ( ! $this->inicializada ) {
     	    $this->bdDatosConexion = $bdDatosConexion;
-    		//session_start();
+			if ( $this->is_session_started() === FALSE ) session_start();
     		$this->inicializada = true;
         }
+	}
+
+	/**
+	 * Inicia la sesión, si esta no se había iniciado.
+	 */
+	protected function is_session_started(){
+		if ( php_sapi_name() !== 'cli' ) {
+			if ( version_compare(phpversion(), '5.4.0', '>=') ) {
+				return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+			} else {
+				return session_id() === '' ? FALSE : TRUE;
+			}
+		}
+		return FALSE;
 	}
 	
 	/**

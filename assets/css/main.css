@@ -585,6 +585,16 @@ footer {
 .footer {
   text-align: right;
 }
+footer button {
+  display: inline-block;
+  margin: 1px;
+  width: 115px;
+  height: 25px;
+  padding: 0px 0px;
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+}
 @media (max-width: 500px) {
   footer {
     width: 100%;
