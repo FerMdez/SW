@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <?php
 
 	ini_set('display_errors', 0);
@@ -63,6 +62,7 @@
                 <div class="column side"></div>'."\n";
     }
 ?>
+<!DOCTYPE HTML>
 <!--
     Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines

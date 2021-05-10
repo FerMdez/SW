@@ -11,7 +11,7 @@
 
         //Welcome view.
         static function panel(){
-            $name = strtoupper($_SESSION['nombre']);
+            $name = strtoupper(unserialize($_SESSION['user'])->getName());
             $email = unserialize($_SESSION['user'])->getEmail();
             return $reply = '<div class="code info">
                     <h1>Bienvenido '.$name.' a tu Panel de Usuario.</h1>

@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <?php
     //General Config File:
     include_once('../assets/php/config.php');
@@ -15,6 +14,7 @@
     }
     
 ?>
+<!DOCTYPE HTML>
 <!--
     Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines

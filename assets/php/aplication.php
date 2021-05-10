@@ -71,7 +71,7 @@ class Aplicacion {
 	public function init($bdDatosConexion) {
         if ( ! $this->inicializada ) {
     	    $this->bdDatosConexion = $bdDatosConexion;
-    		session_start();
+    		//session_start();
     		$this->inicializada = true;
         }
 	}

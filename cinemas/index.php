@@ -1,8 +1,9 @@
-<!DOCTYPE HTML>
+
 <?php 
     //General Config File:
     require_once('../assets/php/config.php');
 ?>
+<!DOCTYPE HTML>
 <!--
     Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines

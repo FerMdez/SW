@@ -2,9 +2,6 @@
 include_once($prefix.'assets/php/common/hall.php');
 include_once($prefix.'assets/php/common/seat.php');
 include_once($prefix.'assets/php/form.php');
-
-	ini_set('display_errors', 0);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
 	
 class FormHall extends Form {
 	

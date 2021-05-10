@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <?php
 
     /**
@@ -19,6 +18,7 @@
     $login = $view->getLogin();
     $register = $view->getRegister();
 ?>
+<!DOCTYPE HTML>
 <!--
     Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines

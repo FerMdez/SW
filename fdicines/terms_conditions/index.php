@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <?php 
     session_start(); 
 
@@ -6,6 +5,7 @@
     require_once('../../assets/php/template.php');
     $template = new Template();    
 ?>
+<!DOCTYPE HTML>
 <!--
     Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines

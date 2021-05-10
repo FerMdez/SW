@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <?php
     //General Config File:
     require_once(__DIR__.'/assets/php/config.php');
@@ -9,6 +8,7 @@
     Práctica - Sistemas Web | Grupo D
     CompluCine - FDI-cines
 -->
+<!DOCTYPE HTML>
 <html lang="es">
     <!-- Head -->
     <?php
