@@ -40,8 +40,8 @@ class FormChangeName extends Form {
         
         $nombre = $datos['new_name'] ?? null;
         $nombre = strtolower($nombre);
-        if ( empty($nombre) || mb_strlen($nombre) < 3 ) {
-            $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres.";
+        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
+            $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 8 caracteres.";
         }
         
         $password = $datos['pass'] ?? null;
@@ -57,13 +57,14 @@ class FormChangeName extends Form {
            $bd = new UserDAO("complucine");
            $user = $bd->selectUser(unserialize($_SESSION['user'])->getName(), $password);
            if (!$user) {
-                $result[] = "Ha ocurrido un problema al actualizar el nombre de usuario.";
+                $result[] = "Ha ocurrido un problema\nal actualizar el nombre de usuario.";
                 $_SESSION['message'] = "<div class='row'>
                                             <div class='column side'></div>
                                             <div class='column middle'>
                                                 <div class='code info'>
                                                     <h1>Ha ocurrido un probrema</h1><hr />
-                                                    <p>No hemos podido actualizar su nombre de usuario.</p>
+                                                    <p>No hemos podido actualizar su nombre de usuario, 
+                                                    revisa que la contraseña introducida sea correcta.</p>
                                                     <a href=''><button>Cerrar Mensaje</button></a>
                                                 </div>
                                             </div>
@@ -72,7 +73,7 @@ class FormChangeName extends Form {
                                         ";
             } else {
                 $user = $bd->selectUser($nombre, $password);
-                if (!$user){
+                if ($user){
                     $result[] = "El nombre de usuario ya existe.";
                 } else {
                     $bd->changeUserName(unserialize($_SESSION['user'])->getId(), $nombre);

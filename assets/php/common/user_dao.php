@@ -43,6 +43,7 @@
 			$resul->free();
 			return $users;
 		}
+
         //Create a new User.
 		public function createUser($id, $username, $email, $password, $rol){
 			$password = $this->encryptPass($password);
@@ -51,7 +52,7 @@
 								VALUES ( '%s', '%s', '%s', '%s', '%s')", 
 									$id, $username, $email, $password, $rol );
 			
-			$resul = mysqli_query($this->mysqli, $sql) /*or die ('Error into query database')*/;
+			$resul = mysqli_query($this->mysqli, $sql);
 
 			return $resul;
 		}
@@ -59,9 +60,10 @@
 		//Returns a query to check if the user name exists.
 		public function selectUser($username, $password){
 			$username = $this->mysqli->real_escape_string($username);
+			$password = $this->mysqli->real_escape_string($password);
 
 			$sql = sprintf( "SELECT * FROM users WHERE username = '%s'", $username );
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			$resul = mysqli_query($this->mysqli, $sql);
 
 			$resul->data_seek(0);
 			while ($fila = $resul->fetch_assoc()) {
@@ -74,19 +76,6 @@
 			$resul->free();
 
 			return $user;
-		}
-
-		//Returns a query to check if the user pass matches.
-		public function selectPass($username, $password){
-			$username = $this->mysqli->real_escape_string($username);
-			$password = $this->mysqli->real_escape_string($password);
-			$password = $this->encryptPass($password);
-
-			$sql = sprintf( "SELECT * FROM users WHERE username = '%s' AND passwd = '%s'", $username, $password);
-			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
-			//return $this->mysqli->query($sql);
-			return $resul;
 		}
 
 		//Returns a query to get the user's data.
@@ -103,6 +92,19 @@
 			$username = $this->mysqli->real_escape_string($username);
 
 			$sql = sprintf( "UPDATE users SET username = '%s' WHERE id = '%d'", $username, $id );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+
+		}
+
+		//Change userpass by id.
+		public function changeUserPass($id, $password){
+			$id = $this->mysqli->real_escape_string($id);
+			$password = $this->mysqli->real_escape_string($password);
+			$password = $this->encryptPass($password);
+
+			$sql = sprintf( "UPDATE users SET passwd = '%s' WHERE id = '%d'", $password, $id );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $resul;

@@ -23,15 +23,9 @@ class FormChangeEmail extends Form {
         $html = '<div class="row">'.$htmlErroresGlobales.'
                             <fieldset id="email_usuario">
                                 <legend>Nuevo email de usuario</legend>
-                                <div class="_new_email">
-                                    <input type="text" name="new_email" id="new_email" value="" placeholder="Nuevo Email" required/>
-                                </div>
-                                <div class="_passwd">
-                                    <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
-                                </div>
-                                <div class="_passwd">
-                                    <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
-                                </div>
+                                <input type="text" name="new_email" id="new_email" value="" placeholder="Nuevo Email" required/>
+                                <input type="password" name="pass" id="pass" value="" placeholder="Contraseña" required/>
+                                <input type="password" name="repass" id="repass" value="" placeholder="Repita la contraseña" required/>
                             </fieldset>
                             <div class="actions"> 
                                 <input type="submit" id="submit" value="Cambiar Nombre de Usuario" class="primary" />
@@ -53,7 +47,7 @@ class FormChangeEmail extends Form {
         
         $password = $datos['pass'] ?? null;
         if ( empty($password) || mb_strlen($password) < 4 ) {
-            $result['pass'] = "El password tiene que tener una longitud de al menos 4 caracteres.";
+            $result['pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres.";
         }
         $password2 = $datos['repass'] ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
