@@ -19,19 +19,28 @@
 			$this->_state = $state;
         }
 		
-		static public function createSeats($seat){
+		static public function createSeats($hall, $cinema, $rows, $cols, $seats_map){
 			$bd = new SeatDAO('complucine');
 
-			for($i = 1;$i <= $seat["rows"];$i++){
-				for($j = 1; $j <= $seat["cols"];$j++){
-					error_log("DAO ===>  number ->".$seat['number']." cinema ->".$seat['cinema']." fila -> ". $i. " columna ->".$j." activa -> ".$seat[$i][$j]);
-					if($seat[$i][$j] == "1"){
-						$bd->createSeat($seat, $i, $j);
-					}
+			for($i = 1;$i <= $rows;$i++){
+				for($j = 1; $j <= $cols;$j++){
+					$bd->createSeat($hall, $cinema, $i, $j, $seats_map[$i][$j]);
 				}
 			}
 		}
 		
+		static public function getSeatsMap($number, $cinema){
+			$bd = new SeatDAO('complucine');
+			if($bd )
+				return $bd->getAllSeats($number, $cinema);
+		}
+		
+		static public function deleteAllSeats($number, $cinema){
+			$bd = new SeatDAO('complucine');
+			if($bd)
+				return $bd->deletemapSeats($number, $cinema);
+		}
+
 		//Getters && Setters:
         public function setNumber($number){	$this->_number = $number; }
 		public function getNumber(){ return $this->_number; }

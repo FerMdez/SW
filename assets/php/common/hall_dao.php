@@ -1,7 +1,7 @@
 <?php
 	require_once($prefix.'assets/php/dao.php');
 	include_once('hall.php');
-	include_once('seat_dao.php');
+	
 	
     class HallDAO extends DAO {
 
@@ -13,15 +13,13 @@
 		//Methods:
 
         //Create a new Hall.
-		public function createHall($hall){
+		public function createHall($number, $cinema, $rows, $cols, $seats, $seats_map){
 			
 			$sql = sprintf( "INSERT INTO `hall`( `number`, `idcinema`, `numrows`, `numcolumns`, `total_seats`) 
 								VALUES ( '%d', '%d', '%d', '%d', '%d')", 
-								$hall['number'], $hall['cinema'], $hall['rows'], $hall['cols'], $hall['seats'] );
+								$number, $cinema, $rows, $cols, $seats );
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error BD createhall');
-			
-			Seat::createSeats($hall);
 			
 			return $sql;
 		}
@@ -35,9 +33,8 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
 			$hall = null;
-			
 			while($fila=mysqli_fetch_array($resul)){
-				$hall[] = $this->loadHall($fila["number"], $fila["idcinema"], $fila["numrows"], $fila["numcolumns"], $fila["total_seats"]);
+				$hall[] = $this->loadHall($fila["number"], $fila["idcinema"], $fila["numrows"], $fila["numcolumns"], $fila["total_seats"], null);
 			}
 			
 			mysqli_free_result($resul);
@@ -46,11 +43,11 @@
 		}
 		
 		//Returns the count of the hall searched
-		public function searchHall($hall){
+		public function searchHall($number, $cinema){
 			
 			$sql = sprintf( "SELECT COUNT(*) FROM hall WHERE 
-							idcinema = '%s' AND number = '%s'", 
-							$hall['cinema'], $hall['number']);	
+							number = '%s' AND idcinema = '%s'", 
+							$number, $cinema);	
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
 			$hall = mysqli_fetch_array($resul);
@@ -63,27 +60,28 @@
 		
 		
 		//Create a new Hall Data Transfer Object.
-		public function loadHall($number, $idcinema, $numrows, $numcolumns,$total_seats){
-			return new Hall($number, $idcinema, $numrows, $numcolumns,$total_seats);
+		public function loadHall($number, $idcinema, $numrows, $numcolumns, $total_seats, $seats_map){
+			return new Hall($number, $idcinema, $numrows, $numcolumns, $total_seats, $seats_map);
 		}
 
 		//Edit Hall.
-		public function editHall($hall){
-
+		public function editHall($number, $cinema, $rows, $cols, $seats, $og_number){
+			
 			$sql = sprintf( "UPDATE `hall`
-							SET `numrows` = '%d' , `numcolumns` = '%d' , `total_seats` = %d
+							SET `number` = '%d' ,`numrows` = '%d' , `numcolumns` = '%d' , `total_seats` = %d
 							WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';", 
-							$hall['rows'], $hall['cols'], $hall['seats'], $hall['number'], $hall['cinema'] );
-
+							$number, $rows, $cols, $seats, $og_number, $cinema );
+			
+			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $resul;
 		}
 
 		//Delete Hall.
-		public function deleteHall($hall){
+		public function deleteHall($number, $cinema){
 
-			$sql = sprintf( "DELETE FROM `hall` WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';",$hall['number'], $hall['cinema']);
+			$sql = sprintf( "DELETE FROM `hall` WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';",$number, $cinema);
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
