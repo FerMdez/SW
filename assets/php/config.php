@@ -11,11 +11,13 @@
     * Configuration parameters used to generate URLs and file paths in the application
     */
     define('ROUTE_APP', '/'); //Change if it´s necessary.
+    define('RAIZ_APP', __DIR__);
 
     /**
     * Image files directory.
     */
-    define('FILMS_DIR', ROUTE_APP.'img/films');
+    define('FILMS_DIR', dirname(RAIZ_APP).'img/films');
+    define('FILMS_DIR_PROTECTED', RAIZ_APP.'img/films');
 
     /**
     * Utf-8 support settings, location (language and country) and time zone.
