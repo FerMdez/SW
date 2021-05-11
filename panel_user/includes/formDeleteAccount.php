@@ -25,7 +25,7 @@ class FormDeleteAccount extends Form {
                                 <legend>Eliminar usuario</legend>
                                 <input type='password' name='pass' id='pass' value='' placeholder='Contraseña actual' required/><pre>".$errorPassword."</pre>                            </fieldset>
                             <div class='actions'> 
-                                <input type='submit' id='submit' value='Borrar cuenta' class='primary' />
+                                <input type='submit' id='submit' value='Borrar cuenta' class='primary' onclick=\"return confirm('¿Estás seguro? Se borrará la cuenta definitivamente.');\"/>
                                 <input type='reset' id='reset' value='Borrar' />       
                             </div>
                         </div>";
