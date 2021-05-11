@@ -2,10 +2,10 @@
     /**
     * Connection parameters to the DB.
     */
-    define('BD_HOST', 'localhost');
+    define('BD_HOST', 'vm01.db.swarm.test');
     define('BD_NAME', 'complucine');
-    define('BD_USER', 'sw');
-    define('BD_PASS', '_admin_');
+    define('BD_USER', 'root');
+    define('BD_PASS', 'T4cFwfxT_vI2W!nYp!tv');
 
     /*
     * Configuration parameters used to generate URLs and file paths in the application

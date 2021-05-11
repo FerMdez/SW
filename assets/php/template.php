@@ -470,10 +470,10 @@
             <div class='footer'>
                 <p>© Práctica 2 | Sistemas Web 2021 </p>
             </div>
-            <button href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</button> |
-            <button href='{$prefix}fdicines/terms_conditions/'>Términos de uso</button> |
-            <button href='{$prefix}cinemas/'>Nuestros cines</button> |
-            <button href='{$prefix}contacto/'>Contacto</button> |
+            <a href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</a> |
+            <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
+            <a href='{$prefix}cinemas/'>Nuestros cines</a> |
+            <a href='{$prefix}contacto/'>Contacto</a> |
             <button onclick=\"cambiarCSS('{$css}')\">$nameCSS</button>
         </footer>\n";
 
