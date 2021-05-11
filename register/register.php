@@ -4,9 +4,9 @@
     
     //Login form validate:
     require_once('./includes/formRegister.php');
-    $register = new FormRegister();
-    $register->processesForm($_POST["name"], $_POST["email"], $_POST["pass"], $_POST["repass"]);
-    $reply = $register->getReply();
+    //$register = new FormRegister();
+    //$register->processesForm($_POST["name"], $_POST["email"], $_POST["pass"], $_POST["repass"]);
+    $reply = FormRegister::getReply();
 
 ?>
 <!DOCTYPE HTML>

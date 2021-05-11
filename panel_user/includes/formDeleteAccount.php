@@ -32,7 +32,7 @@ class FormDeleteAccount extends Form {
                             </fieldset>
                             <div class='verify'>
                                 <input type='checkbox' id='checkbox' name='verify' required>
-                                <label for='verify'>Marque esta casilla para confirmar que entiende que esta acción no se puede deshacer.</label>
+                                <label for='verify'>Al marcar esta casilla, verifica y entiende que esta acción no se puede deshacer.</label>
                             </div>
                             <div class='actions'> 
                                 <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' />

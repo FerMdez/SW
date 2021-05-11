@@ -458,14 +458,12 @@
     function print_footer(){
         $prefix = $this->prefix;
         
-        if (isset($_GET["highContrast"]) && $_GET["highContrast"] === true) {
-            $css = "{$prefix}assets/css/main.css";
-            $nameCSS = "Contraste Normal";
-        } else {
-            $css = "{$prefix}assets/css/highContrast.css";
-            $nameCSS = "Alto Contraste";
-        }
-       
+        /* TODO */
+        $css = "{$prefix}assets/css/highContrast.css";
+        $nameCSS = "Alto Contraste";
+        //$css = "{$prefix}assets/css/main.css";
+        //$nameCSS = "Contraste Normal";
+
         echo"<footer>
             <div class='footer'>
                 <p>© Práctica 2 | Sistemas Web 2021 </p>

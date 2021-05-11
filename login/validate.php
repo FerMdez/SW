@@ -4,9 +4,7 @@
     
     //Login form validate:
     require_once('./includes/formLogin.php');
-    $login = new FormLogin();
-    $login->processesForm($_POST["name"], $_POST["pass"]);
-    $reply = $login->getReply();
+    $reply = FormLogin::getReply();
 
 ?>
 <!DOCTYPE HTML>

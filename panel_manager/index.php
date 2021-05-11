@@ -1,8 +1,4 @@
 <?php
-
-	ini_set('display_errors', 0);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
     //General Config File:
     require_once('../assets/php/config.php');
     //Controller file:

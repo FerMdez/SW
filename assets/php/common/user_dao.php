@@ -81,8 +81,20 @@
 
 		//Returns a query to get the user's data.
 		public function userData($id){
+			$id = $this->mysqli->real_escape_string($id);
+			
 			$sql = sprintf( "SELECT * FROM users WHERE id = '%d'", $id );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
+
+		//Search a user by name.
+		public function selectUserName($username){
+			$username = $this->mysqli->real_escape_string($username);
+
+			$sql = sprintf( "SELECT * FROM users WHERE name = '%s'", $username );
+			$resul = mysqli_query($this->mysqli, $sql);
 
 			return $resul;
 		}
