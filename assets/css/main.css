@@ -314,6 +314,9 @@ main img {
   font-size: 90%;
   color: #d3ebff;
 }
+.code label{
+  color: #d3ebff;
+}
 .code.details{
   height: 750px;
 }

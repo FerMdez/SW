@@ -74,7 +74,7 @@ class FormChangeName extends Form {
                                         ";
             } else {
                 $user = $bd->selectUser($nombre, $password);
-                if ($user == ""){
+                if ($user){
                     $result[] = "El nombre de usuario ya existe.";
                 } else {
                     $bd->changeUserName(unserialize($_SESSION['user'])->getId(), $nombre);

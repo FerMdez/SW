@@ -315,6 +315,9 @@
     font-size: 90%;
     color: #00020f;
   }
+  .code label{
+    color: #d3ebff;
+  }
   .code.details{
     height: 750px;
   }

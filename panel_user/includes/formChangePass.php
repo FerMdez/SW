@@ -10,7 +10,6 @@ class FormChangePass extends Form {
     }
     
     protected function generaCamposFormulario($datos, $errores = array()){
-        $nombre = $datos['nombreUsuario'] ?? '';
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);

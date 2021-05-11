@@ -12,7 +12,7 @@ class FormChangeEmail extends Form {
     }
     
     protected function generaCamposFormulario($datos, $errores = array()){
-        $nombre = $datos['nombreUsuario'] ?? '';
+        $email = $datos['email'] ?? '';
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);

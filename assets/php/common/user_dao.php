@@ -18,15 +18,6 @@
 
 		//Methods:
 
-		// Delete user
-		public function deleteUser($user_id) {
-            $sql = sprintf( "DELETE FROM users WHERE id = '%s'", $user_id);	
-
-            $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
-            return $resul;
-		}
-
         //Encrypt password with SHA254.
 		private function encryptPass($password){
 			//$password = hash('sha256', $password);
@@ -75,6 +66,7 @@
 			$resul = mysqli_query($this->mysqli, $sql);
 
 			$resul->data_seek(0);
+			$user = null;
 			while ($fila = $resul->fetch_assoc()) {
 				if($username === $fila['username'] && $this->verifyPass($password, $fila['passwd'])){
 					$user = $this->loadUser($fila['id'], $fila['username'], $fila['email'], $fila['passwd'], $fila['rol']);
@@ -130,6 +122,16 @@
 
 			return $resul;
 
+		}
+
+		//Delete user account by id.
+		public function deleteUserAccount($id){
+			$id = $this->mysqli->real_escape_string($id);
+
+			$sql = sprintf( "DELETE FROM users WHERE id = '%d'", $id );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
 		}
 
 		//Create a new User Data Transfer Object.

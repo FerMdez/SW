@@ -2,10 +2,10 @@
     /**
     * Connection parameters to the DB.
     */
-    define('BD_HOST', 'vm01.db.swarm.test');
+    define('BD_HOST', 'localhost');
     define('BD_NAME', 'complucine');
-    define('BD_USER', 'root');
-    define('BD_PASS', 'T4cFwfxT_vI2W!nYp!tv');
+    define('BD_USER', 'sw');
+    define('BD_PASS', '_admin_');
 
     /*
     * Configuration parameters used to generate URLs and file paths in the application
@@ -46,4 +46,9 @@
      * @see http://php.net/manual/en/language.types.callable.php
      */
     register_shutdown_function(array($app, 'shutdown'));
+
+    //Depuración (BORRAR):
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 ?>
