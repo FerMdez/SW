@@ -16,8 +16,8 @@
     /**
     * Image files directory.
     */
-    define('FILMS_DIR', dirname(RAIZ_APP).'img/films');
-    define('FILMS_DIR_PROTECTED', RAIZ_APP.'img/films');
+    define('FILMS_DIR', dirname(RAIZ_APP).'img/films/tmp');
+    define('FILMS_DIR_PROTECTED', RAIZ_APP.'img/films/tmp');
 
     /**
     * Utf-8 support settings, location (language and country) and time zone.
