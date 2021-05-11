@@ -143,46 +143,47 @@
   body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: #00020f;
-    color: #000000
+    color: #dadada;
   }
   
   /* Table */
   table {
     border-collapse: collapse;
-      border-spacing: 0;
+    border-spacing: 0;
     margin: 0 0 2em 0;
     width: 100%;
     text-align: left;
     font-size: 15px;
   }
   table a{
-    color: #1f2c3d;
+    color: #dadada;
   }
     table tbody tr {
-      border: solid 1px #1f2c3d;
+      color: #dadada;
+      border: solid 1px #dadada;
       border-left: 0;
       border-right: 0;
     }
       table tbody tr:nth-child(2n + 1) {
-        background-color: rgba(144, 144, 144, 0.25);
+        background-color: rgba(255, 255, 255, 0.25);
       }
     table td {
       padding: 0.75em 0.75em;
     }
     table th {
-      color: #1f2c3d;
+      color: #dadada;
       font-size: 0.9em;
       font-weight: 600;
-      padding: 0 0.85em 0.85em 0.85em;
+      padding: 0.85em 0.85em 0.85em 0.85em;
     }
     table thead, table tfoot {
-      border-bottom: solid 2px #1f2c3d;
+      border-bottom: solid 2px #dadada;
     }
     table.alt {
       border-collapse: separate;
     }
     table.alt tbody tr td {
-      border: solid 1px #1f2c3d;
+      border: solid 1px #dadada;
       border-left-width: 0;
       border-top-width: 0;
     }
@@ -288,7 +289,7 @@
     color: #dadada;
   }
   .code h3, .code h4 {
-    color: #00020f;
+    color: #d3ebff;
   }
   .code p {
     color: #dadada;
@@ -381,15 +382,15 @@
   
   /* Text Box */
   .textbox {
-    color: #00020f;
+    color: #d3ebff;
     padding: 15px 15px 10px 15px;
     margin: 10px 0 10px;
     overflow: hidden;
     border-radius: 25px 0px 25px 0px;
-    border: 2px solid #00020f;
+    border: 2px solid #d3ebff;
   }
   .textbox h1, .textbox h2, .textbox h3 {
-    color: #00020f;
+    color: #d3ebff;
     text-align: left;
   }
   
@@ -489,6 +490,7 @@
   }
   
   label {
+    color: #dadada;
     text-align: center;
     font-weight: bold;
   }
@@ -496,7 +498,7 @@
   input, textarea {
     width: 100%;
     height: 27px;
-    border: 1px solid #000000;
+    border: 1px solid #dadada;
     padding: 10px;
     margin-top: 5px;
     font-size: 15px;
@@ -521,7 +523,7 @@
     font-size: 11px;
   }
   .verify a {
-    color: #1f2c3d;
+    color: #dadada;
   }
   .verify a:hover {
     color: rgb(138, 150, 32);
@@ -540,6 +542,7 @@
     cursor: pointer;
   }
   #submit:hover {
+    color: #dadada;
     background-color: #1f2c3d;
   }
   

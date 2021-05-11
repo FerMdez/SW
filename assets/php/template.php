@@ -457,31 +457,29 @@
     //Print generic Footer:
     function print_footer(){
         $prefix = $this->prefix;
-        /*
-        if (isset($_GET["css"]) && $_GET["css"] === true) {
+        
+        if (isset($_GET["highContrast"]) && $_GET["highContrast"] === true) {
             $css = "{$prefix}assets/css/main.css";
             $nameCSS = "Contraste Normal";
         } else {
             $css = "{$prefix}assets/css/highContrast.css";
             $nameCSS = "Alto Contraste";
         }
-        */
-        $css = "{$prefix}assets/css/highContrast.css";
-        $nameCSS = "Alto Contraste";
        
-        echo" <!-- Script -->
-            <script src='{$prefix}assets/js/cambiarCSS.js'></script>
-
-            <footer>
+        echo"<footer>
             <div class='footer'>
                 <p>© Práctica 2 | Sistemas Web 2021 </p>
             </div>
-            <a href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</a> |
-            <a href='{$prefix}fdicines/terms_conditions/'>Términos y condiciones</a> |
-            <a href='{$prefix}cinemas/'>Nuestros cines</a> |
-            <a href='{$prefix}contacto/'>Contacto</a> |
+            <button href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</button> |
+            <button href='{$prefix}fdicines/terms_conditions/'>Términos de uso</button> |
+            <button href='{$prefix}cinemas/'>Nuestros cines</button> |
+            <button href='{$prefix}contacto/'>Contacto</button> |
             <button onclick=\"cambiarCSS('{$css}')\">$nameCSS</button>
         </footer>\n";
+
+        echo"
+        <!-- Scripts -->
+        <script src='{$prefix}assets/js/cambiarCSS.js'></script>\n";
     }
 
     }
