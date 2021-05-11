@@ -72,9 +72,17 @@
 
         //Delete user account.
         static function delete(){
-            return $reply = '<div class="code info">
-                        <h2>Aquí el formulario para eliminar cuenta</h2><hr />
-                        </div>'."\n";
+            
+            require_once('./includes/formDeleteAccount.php');
+
+            $formDA = new FormDeleteAccount();
+            $htmlFormDeleteAccount = $formDA->gestiona();
+
+            return $reply = '<!-- Delete user account -->
+                    <div class="column middle">
+                        <h2>Eliminar usuario</h2>
+                        '.$htmlFormDeleteAccount.'
+                    </div>'."\n";
         }
     }
 ?>
