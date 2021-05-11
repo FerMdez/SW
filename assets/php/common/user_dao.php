@@ -18,6 +18,15 @@
 
 		//Methods:
 
+		// Delete user
+		public function deleteUser($user_id) {
+            $sql = sprintf( "DELETE FROM users WHERE id = '%s'", $user_id);	
+
+            $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+            return $resul;
+		}
+
         //Encrypt password with SHA254.
 		private function encryptPass($password){
 			//$password = hash('sha256', $password);
