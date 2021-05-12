@@ -5,13 +5,13 @@
     //private const _NUMPAGES = 10; //Constant to page results.
 
     //Attributes:
-    public $page;           //Page Name.
-    public $prefix;         //Page prefix.
+    private $page;           //Page Name.
+    private $prefix;         //Page prefix.
 
-    public $session;        //"Iniciar Sesión" (if user isn´t logged in), "Cerrar Sesión" (otherwise).
-    public $session_route;  //"login/" (if user isn´t logged in), "logout/" (otherwise).
-    public $panel;          //Button to access the user's dashboard (only displayed if logged in).
-    public $user_route;     //Route of the panel (depends on the type of user).
+    private $session;        //"Iniciar Sesión" (if user isn´t logged in), "Cerrar Sesión" (otherwise).
+    private $session_route;  //"login/" (if user isn´t logged in), "logout/" (otherwise).
+    private $panel;          //Button to access the user's dashboard (only displayed if logged in).
+    private $user_route;     //Route of the panel (depends on the type of user).
 
     //Constructor:
     function __construct(){
@@ -216,9 +216,24 @@
                     }  
                     echo"</nav>
                 </div>
-            </div>\n";
+            </div>
+        ";
             }
         }
+    }
+
+    //Print specific page content:
+    function print_section($section){
+        /* Panel menu */
+        $sub_header = '';
+        if(strpos($_SERVER['PHP_SELF'], 'panel')){
+            echo "<!-- Panel Menu -->
+            ";
+            $this->print_panelMenu($_SESSION["rol"]);
+            $this->print_msg();
+        }
+
+        echo $section;
     }
 
     //Print Films Cards:
@@ -457,7 +472,7 @@
     //Print generic Footer:
     function print_footer(){
         $prefix = $this->prefix;
-        
+
         /* TODO */
         $css = "{$prefix}assets/css/highContrast.css";
         $nameCSS = "Alto Contraste";
@@ -472,7 +487,7 @@
             <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |
             <a href='{$prefix}contacto/'>Contacto</a> |
-            <button onclick=\"cambiarCSS('{$css}')\">$nameCSS</button>
+            <button onclick=\"cambiarCSS('$css');\">$nameCSS</button>
         </footer>\n";
 
         echo"

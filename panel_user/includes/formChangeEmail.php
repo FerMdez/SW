@@ -36,7 +36,6 @@ class FormChangeEmail extends Form {
         return $html;
     }
     
-    /* TODO */
     protected function procesaFormulario($datos){
         $result = array();
         

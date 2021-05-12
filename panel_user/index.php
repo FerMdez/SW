@@ -37,49 +37,21 @@
                     </div>
                     <div class="column side"></div>'."\n";
     }
-?>
-<!DOCTYPE HTML>
-<!--
-    Práctica - Sistemas Web | Grupo D
-    CompluCine - FDI-cines
--->
-<html lang="es">
-    <!-- Head -->
-    <?php
-        $template->print_head();
-    ?>
-    <body>
-        <!-- Header -->
-        <?php
-            $template->print_header();
-        ?>
 
-        <!-- Main -->
-        <?php
-            $template->print_main();
-        ?>
-
-        <!-- Panel -->
+    
+    //Specific page content:
+    $section = '<!-- User Panel -->
         <section id="user_panel">
             <div class="row">
-                <!-- Panel Menu -->
-                <?php
-                    $template->print_panelMenu($_SESSION["rol"]);
-                ?>
                 <!-- Contents -->
                 <div class="row">
-                    <?php
-                        $template->print_msg();
-                        echo $reply;
-                    ?>
+                    '.$reply.'
                 </div>
             </div>
-        </section>
-        <!-- Footer -->
-        <?php
-            $template->print_footer();
-        ?>
-       
-    </body>
+        </section>';
 
-</html>
+    //General page content:
+    require RAIZ_APP.'/HTMLtemplate.php';
+    
+?>
+

@@ -21,14 +21,14 @@ class FormRegister extends Form {
         //$nombre = $datos['name'] ?? '';
 
         // Se generan los mensajes de error si existen.
-        $htmlErroresGlobales2 = self::generaListaErroresGlobales($errores);
+        $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorNombre = self::createMensajeError($errores, 'name', 'span', array('class' => 'error'));
         $errorEmail = self::createMensajeError($errores, 'email', 'span', array('class' => 'error'));
         $errorPassword = self::createMensajeError($errores, 'pass', 'span', array('class' => 'error'));
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = "<div class='row'>
-                            <fieldset id='datos_personales'><pre>".$htmlErroresGlobales2."</pre>
+                            <fieldset id='datos_personales'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Datos personales</legend>
                                 <input type='text' name='name' id='name' value='' placeholder='Nombre' required/><pre>".$errorNombre."</pre>
                                 <input type='email' name='email' id='email' value='' placeholder='Email' required/><pre>".$errorEmail."</pre>
@@ -114,7 +114,7 @@ class FormRegister extends Form {
                         <p>Ha ocurrido un problema y no hemos podido completar el registro</p>
                         <p>Vuelve a intetarlo o inicia sesión si tienes una cuenta de usuario.</p>
                         <a href='../login/'><button>Iniciar Sesión</button></a>
-                        <form method='post' action='../login/'><button name='register' id='register'>Registro</button></form>\n";
+                        <form method='post' action='../login/'><button name='register' id='_register'>Registro</button></form>\n";
         }
 
         return $reply;
