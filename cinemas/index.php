@@ -3,7 +3,7 @@
     require_once('../assets/php/config.php');
 
     //Specific page content:
-        $section = '';
+    $section = '';
 
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';

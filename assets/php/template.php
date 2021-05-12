@@ -152,10 +152,20 @@
         }
 
         /* MAIN */
+        if($prefix === "./"){ 
+            if(isset($_SESSION["nombre"])){
+                $header = "<h1>Bienvenido {$_SESSION["nombre"]}</h1>\n";
+            } else {
+                $header = "<h1>Bienvenido a CompluCine</h1>\n";
+            }
+        } else {
+            $header = "<h1>{$page}</h1>\n";
+        }
+
         echo"<main>
             <div class='image'><a href='{$prefix}'><img src='{$prefix}img/logo_trasparente.png' alt='logo_FDI-Cines' /></a></div>
             {$sub_header}
-            <h1>{$page}</h1>
+            {$header}
             <hr />
         </main>\n";
     }
@@ -238,6 +248,7 @@
 
     //Print Films Cards:
     function print_fimls(){
+        $reply = "";
         //List of the movies:
         require_once(__DIR__.'/common/film_dao.php');
 
@@ -264,18 +275,18 @@
                 for($i = 0; $i < count($films_array); $i++){
                     $tittle = str_replace('_', ' ', $tittles[$i]);
                     if($i%2 === 0){
-                        if($i != 0) echo "</div>
+                        if($i != 0) $reply .= "</div>
                     ";
-                        echo "<div class='column side'>
+                        $reply .= "<div class='column side'>
                         ";
                     }
                     else{
-                        if($i != 0) echo "</div>
+                        if($i != 0) $reply .= "</div>
                     ";
-                        echo "<div class='column middle'>
+                    $reply .= "<div class='column middle'>
                         ";
                     }
-                    echo "<section id='".$tittles[$i]."'>
+                    $reply .= "<section id='".$tittles[$i]."'>
                             <div class='zoom'>
                                 <div class='code showtimes'>
                                     <div class='image'><img src='".$prefix."img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
@@ -290,26 +301,26 @@
                         </section>
                     ";
                 }
-                echo "</div>\n";
+                $reply .= "</div>\n";
                 break;
 
             case "Panel de Administrador":
-                echo"<div class='column'>";
+                $reply .= "<div class='column'>";
                 for($i = 0; $i < count($films_array); $i++){
                     $tittle = str_replace('_', ' ', $tittles[$i]);
                     if($i%2 === 0){
-                        if($i != 0) echo "</div>
+                        if($i != 0) $reply .= "</div>
                     ";
-                        echo "<div class='column side'>
+                        $reply .= "<div class='column side'>
                         ";
                     }
                     else{
-                        if($i != 0) echo "</div>
+                        if($i != 0) $reply .= "</div>
                     ";
-                        echo "<div class='column middle'>
+                        $reply .= "<div class='column middle'>
                         ";
                     }
-                    echo "<section id='".$tittles[$i]."'>
+                    $reply .= "<section id='".$tittles[$i]."'>
                             <div class='zoom'>
                                 <div class='code showtimes'>
                                     <div class='image'><img src='".$prefix."img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
@@ -336,25 +347,25 @@
                         </section>
                     ";
                 }
-                echo "</div>\n";                
+                $reply .= "</div>\n";                
                 break;
 				
 			case "Panel de Gerente":
                 break;
 				
             default: 
-                    echo'<div class="column left">
+                    $reply .='<div class="column left">
                          <div class="galery">
                             <h1>Últimos Estrenos</h1><hr />';
                     $count = 0;
                     for($i = count($tittles)-4; $i < count($tittles); $i++){
                         if($count%2===0){
-                            if($count != 0) echo "
+                            if($count != 0) $reply .= "
                             </div>";
-                        echo "
+                        $reply .= "
                             <div class='fila'>";
                         }
-                        echo "
+                        $reply .= "
                                 <div class='zoom'>
                                     <div class='columna'>
                                         <a href='".$prefix."showtimes/#".$tittles[$i]."'><div class='image'><img src='img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div></a>
@@ -362,7 +373,7 @@
                                 </div>";
                         $count++;
                     }
-                    echo "
+                    $reply .= "
                             </div>
                         </div>
                     </div>
@@ -370,7 +381,7 @@
                         <div class='galery'>";
                     $count = rand(0, count($tittles)-1);
                     $title = str_replace('_', ' ', $tittles[$count]); 
-                    echo "
+                    $reply .= "
                             <h1>{$title}</h1><hr />
                             <div class='zoom'>
                                 <a href='".$prefix."showtimes/#".$tittles[$count]."'><div class='image main'><img src='img/films/".$tittles[$count].".jpg' alt='".$tittles[$count]."' /></div></a>
@@ -380,14 +391,15 @@
                     break;
         }
 
+        return $reply;
     }
 
     //Print Cinemas info:
     function print_cinemas(){
+        $reply = "";
+
         //List of the cinemas:
         require_once(__DIR__.'/common/cinema_dao.php');
-
-        $prefix= $this->get_prefix();
 
         $cine = new Cinema_DAO("complucine");
         $cinemas = $cine->allCinemaData();
@@ -395,6 +407,7 @@
         $names = array();
         $directions = array();
         $phones = array();
+        
         if(is_array($cinemas)){
             foreach($cinemas as $key => $value){
                 $ids[$key] = $value->getId();
@@ -406,7 +419,7 @@
 
         switch($this->page){
             case "Panel de Administrador":
-                echo "<div class='row'>
+                $reply .= "<div class='row'>
                     <div class='column side'></div>
                     <div class='column middle'>
                         <table class='alt'>
@@ -422,7 +435,7 @@
                         "; 
                 if(is_array($cinemas)){      
                     for($i = 0; $i < count($cinemas); $i++){
-                        echo '<tr>
+                        $reply .= '<tr>
                                 <td>'. $ids[$i] .'</td>
                                 <td>'. $names[$i] .'</td>
                                 <td>'. $directions[$i] .'</td>
@@ -449,16 +462,19 @@
                             '; 
                     } 
                 }  
-                    echo'</tbody>
+                $reply .='</tbody>
                             </table>
                         </div>
                         <div class="column side"></div>
                     ';
                 break;
             
-            default: break;
+            default: 
+                break;
 
         }
+
+        return $reply;
     }
 
     //Print session MSG:
