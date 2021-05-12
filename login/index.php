@@ -17,7 +17,7 @@
     $isLogin = $view->getIsLogin();
     //Forms:
     require('includes/formLogin.php');
-    require('../register/includes/formRegister.php');
+    require($prefix.'register/includes/formRegister.php');
     $formLogin = new FormLogin();
     $htmlFormLogin = $formLogin->gestiona();
     $formRegister = new FormRegister();

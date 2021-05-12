@@ -12,8 +12,7 @@ class FormRegister extends Form {
 
     //Constructor:
     public function __construct() {
-        $options = array("action" => "../register/register.php");
-        parent::__construct('formRegister', $options);
+        parent::__construct('formRegister');
     }
 
     //Methods:
@@ -41,7 +40,7 @@ class FormRegister extends Form {
                                 <label for='terms'><a href ='../fdicines/terms_conditions/' target='_blank'>Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</a></label>
                             </div>
                             <div class='actions'> 
-                                <input type='submit' id='submit' value='Registrarse' class='primary' />
+                                <input  type='submit' name='register' id='register' value='Registrarse' class='primary' />
                                 <input type='reset' id='reset' value='Borrar' />       
                             </div>
                         </div>";
@@ -85,11 +84,11 @@ class FormRegister extends Form {
                         $_SESSION["nombre"] = $this->user->getName();
                         $_SESSION["rol"] = $this->user->getRol();
                         $_SESSION["login"] = true;
-                        $result = '../register/register.php';
+                        $result = "../register/register.php";
                     }
                 }
                 else{
-                    $result[] = "El nombre de usuario ya existe.";
+                    $result[] = "El usuario ya existe.";
                 }
             } else {
                 $result[] = "Error al conectar con la BD.";
@@ -111,19 +110,14 @@ class FormRegister extends Form {
                         <a href='../../panel_{$_SESSION["rol"]}'><button>Mi Panel</button></a>\n";
         }   
         else if(!isset($_SESSION["login"])){
-            $reply = "<h1>ERROR</h1><hr />".
-                        "<p>Ha ocurrido un problema y no hemos podido completar el registro.</p>
-                        <p>Puede que el nombre de usuario ya esté registrado.</p>
+            $reply = "<h1>ERROR</h1><hr />
+                        <p>Ha ocurrido un problema y no hemos podido completar el registro</p>
                         <p>Vuelve a intetarlo o inicia sesión si tienes una cuenta de usuario.</p>
                         <a href='../login/'><button>Iniciar Sesión</button></a>
                         <form method='post' action='../login/'><button name='register' id='register'>Registro</button></form>\n";
         }
 
         return $reply;
-    }
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
     }
 
 }

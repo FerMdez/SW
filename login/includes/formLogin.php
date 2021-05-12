@@ -24,12 +24,12 @@ class FormLogin extends Form {
 
         $html = "<div class='row'>
                             <fieldset id='nombre_usuario'><pre>".$htmlErroresGlobales."</pre>
-                                <legend>Nuevo Nombre de usuario</legend>
+                                <legend>Datos Personales</legend>
                                 <input type='text' name='name' id='name' value='' placeholder='Nombre' required/><pre>".$errorNombre."</pre>
                                 <input type='password' name='pass' id='pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
                             </fieldset>
                             <div class='actions'> 
-                                <input type='submit' id='submit' value='Cambiar Nombre de Usuario' class='primary' />
+                                <input type='submit' id='submit' value='Iniciar Sesión' class='primary' />
                                 <input type='reset' id='reset' value='Borrar' />       
                             </div>
                         </div>";
@@ -65,7 +65,7 @@ class FormLogin extends Form {
                     $_SESSION["login"] = true;
                     $result = 'validate.php';
                 } else {
-                    $result[] = "El usuario o el password no coinciden.";
+                    $result[] = "El usuario o el password\nno coinciden.";
                 }
             } else {
                 $result[] = "Error al conectar con la BD.";
@@ -73,10 +73,6 @@ class FormLogin extends Form {
         }
 
         return $result;
-    }
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
     }
 
     //Returns validation response:

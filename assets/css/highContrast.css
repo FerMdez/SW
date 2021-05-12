@@ -328,6 +328,13 @@
     text-align: center;
     height: 250px;
   }
+  .code.info #register{
+    border: 1px solid#d3ebff;
+  }
+  .code.info #register:hover {
+    color: #1f2c3d;
+    background-color: #d3ebff;
+  }
   .code.showtimes{
     height: 600px;
   }
@@ -532,7 +539,7 @@
     color: rgb(138, 150, 32);
   }
   
-  #submit {
+  #submit, #register {
     width: 100%;
     height: 35px;
     border: 1px solid #dadada;
@@ -544,7 +551,7 @@
     filter: brightness(105%);
     cursor: pointer;
   }
-  #submit:hover {
+  #submit:hover, #register:hover {
     color: #dadada;
     background-color: #1f2c3d;
   }

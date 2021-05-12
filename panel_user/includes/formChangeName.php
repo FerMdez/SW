@@ -38,18 +38,18 @@ class FormChangeName extends Form {
     protected function procesaFormulario($datos){
         $result = array();
         
-        $nombre = $datos['new_name'] ?? null;
+        $nombre = $this->test_input($datos['new_name']) ?? null;
         $nombre = strtolower($nombre);
         if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
             $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 8 caracteres.";
         }
 
-        $nombre2 = $datos['rename'] ?? null;
+        $nombre2 = $this->test_input($datos['rename']) ?? null;
         if ( empty($nombre2) || strcmp($nombre, $nombre2) !== 0 ) {
             $result['rename'] = "Los nombres deben coincidir.";
         }
         
-        $password = $datos['pass'] ?? null;
+        $password = $this->test_input($datos['pass']) ?? null;
         if ( empty($password) || mb_strlen($password) < 4 ) {
             $result['pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres.";
         }
@@ -98,10 +98,6 @@ class FormChangeName extends Form {
             }
         }
         return $result;
-    }
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
     }
 }
 ?>

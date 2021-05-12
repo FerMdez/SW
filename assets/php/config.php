@@ -46,4 +46,9 @@
      * @see http://php.net/manual/en/language.types.callable.php
      */
     register_shutdown_function(array($app, 'shutdown'));
+
+    //Depuración (BORRAR):
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
 ?>

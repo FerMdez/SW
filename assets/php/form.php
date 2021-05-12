@@ -335,4 +335,9 @@ abstract class Form {
         return $result;
   }
 
+    //Test some form input.
+    protected function test_input($input){
+        return htmlspecialchars(trim(strip_tags($input)));
+    }
+
 }

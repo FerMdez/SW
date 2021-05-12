@@ -46,22 +46,22 @@ class FormDeleteAccount extends Form {
     protected function procesaFormulario($datos){
         $result = array();
         
-        $nombre = $datos['name'] ?? null;
+        $nombre = $this->test_input($datos['name']) ?? null;
         $nombre = strtolower($nombre);
         if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
             $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 8 caracteres.";
         }
 
-        $email = $datos['email'] ?? null;
+        $email = $this->test_input($datos['email']) ?? null;
         if ( empty($email) || !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $email) ) {
             $result['email'] = "El email no es válido.";
         }
         
-        $password = $datos['pass'] ?? null;
+        $password = $this->test_input($datos['pass']) ?? null;
         if ( empty($password) || mb_strlen($password) < 4 ) {
             $result['pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres.";
         }
-        $password2 = $datos['repass'] ?? null;
+        $password2 = $this->test_input($datos['repass']) ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
             $result['repass'] = "Los passwords deben coincidir.";
         }
@@ -86,10 +86,6 @@ class FormDeleteAccount extends Form {
             }
         }
         return $result;
-    }
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
     }
 }
 ?>

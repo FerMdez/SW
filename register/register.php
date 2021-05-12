@@ -4,8 +4,6 @@
     
     //Login form validate:
     require_once('./includes/formRegister.php');
-    //$register = new FormRegister();
-    //$register->processesForm($_POST["name"], $_POST["email"], $_POST["pass"], $_POST["repass"]);
     $reply = FormRegister::getReply();
 
 ?>
@@ -38,6 +36,8 @@
                     <div class="code info">
                         <?php
                             echo $reply;
+                            //$formRegister = new FormRegister();
+                            //echo $htmlFormRegister = $formRegister->gestiona();
                         ?>
                     </div>
                 </div>

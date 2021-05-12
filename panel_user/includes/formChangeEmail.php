@@ -40,17 +40,17 @@ class FormChangeEmail extends Form {
     protected function procesaFormulario($datos){
         $result = array();
         
-        $email = $datos['new_email'] ?? null;
+        $email = $this->test_input($datos['new_email']) ?? null;
         if ( empty($email) || !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $email) ) {
             $result['new_email'] = "El nuevo email no es válido.";
         }
 
-        $email2 = $datos['remail'] ?? null;
+        $email2 = $this->test_input($datos['remail']) ?? null;
         if ( empty($email2) || strcmp($email, $email2) !== 0 ) {
             $result['remail'] = "Los emails deben coincidir";
         }
         
-        $password = $datos['pass'] ?? null;
+        $password = $this->test_input($datos['pass']) ?? null;
         if ( empty($password) || mb_strlen($password) < 4 ) {
             $result['pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres.";
         }

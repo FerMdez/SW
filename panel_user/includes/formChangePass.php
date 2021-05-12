@@ -36,16 +36,16 @@ class FormChangePass extends Form {
     protected function procesaFormulario($datos){
         $result = array();
         
-        $old_pass = $datos['old_pass'] ?? null;
+        $old_pass = $this->test_input($datos['old_pass']) ?? null;
         if ( empty($old_pass) || mb_strlen($old_pass) < 4 ) {
             $result['old_pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres.";
         }
         
-        $password = $datos['pass'] ?? null;
+        $password = $this->test_input($datos['pass']) ?? null;
         if ( empty($password) || mb_strlen($password) < 4 ) {
             $result['pass'] = "El password tiene que tener una\n longitud de al menos\n 4 caracteres.";
         }
-        $password2 = $datos['repass'] ?? null;
+        $password2 = $this->test_input($datos['repass']) ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
             $result['repass'] = "Los passwords deben coincidir.";
         }
@@ -86,10 +86,6 @@ class FormChangePass extends Form {
             }
         }
         return $result;
-    }
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
     }
 }
 ?>
