@@ -1,5 +1,4 @@
 <?php
-
     /**
      * USUARIOS DE PRUEBAS:
      * user | userpass
@@ -15,6 +14,7 @@
     require('login_register_view.php');
     $view = new LoginRegisterView();
     $isLogin = $view->getIsLogin();
+
     //Forms:
     require('includes/formLogin.php');
     require($prefix.'register/includes/formRegister.php');
@@ -57,7 +57,7 @@
                             <p>Para crear una cuenta de usuario es necesario haber rellenado el formulario de registro previamente</p>
                             <p>Haz click en el botón para registrate.</p>
                             <form method='post'>
-                                <button type='submit' name='register' id='register'>Registrate</button>
+                                <button type='submit' name='register' id='_register'>Registrate</button>
                             </form>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                             <p>Si dispones de una cuenta de usuario, no es necesario que rellenes este formulario nuevamente</p>
                             <p>Haz click en el botón para iniciar sesión.</p>
                             <form method='post'>
-                                <button type='submit' name='login' id='login'>Inicia Sesión</button>
+                                <button type='submit' name='login' id='_login'>Inicia Sesión</button>
                             </form>
                         </div>
                     </div>"."\n";

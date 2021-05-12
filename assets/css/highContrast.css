@@ -6,7 +6,7 @@
   
   /* Headers */
   h1, h2, h3, h4 {
-    color: #363636;
+    color: #d3ebff;
     text-transform: uppercase;
     margin: 0;
     padding: 0;
@@ -327,13 +327,6 @@
   .code.info{
     text-align: center;
     height: 250px;
-  }
-  .code.info #register{
-    border: 1px solid#d3ebff;
-  }
-  .code.info #register:hover {
-    color: #1f2c3d;
-    background-color: #d3ebff;
   }
   .code.showtimes{
     height: 600px;

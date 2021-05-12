@@ -209,14 +209,14 @@
 
             if($_SESSION["rol"] === $panel){
                 echo"<div class='header sub'>
-                    <div class='menu'>
-                        <nav>";
-                        foreach($menus as $value){
-                            echo $value;
-                        }  
-                        echo"</nav>
-                    </div>
-                </div>\n";
+                <div class='menu'>
+                    <nav>";
+                    foreach($menus as $value){
+                        echo $value;
+                    }  
+                    echo"</nav>
+                </div>
+            </div>\n";
             }
         }
     }

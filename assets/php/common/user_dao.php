@@ -93,7 +93,7 @@
 		public function selectUserName($username){
 			$username = $this->mysqli->real_escape_string($username);
 
-			$sql = sprintf( "SELECT * FROM users WHERE name = '%s'", $username );
+			$sql = sprintf( "SELECT * FROM users WHERE username = '%s'", $username );
 			$resul = mysqli_query($this->mysqli, $sql);
 
 			return $resul;

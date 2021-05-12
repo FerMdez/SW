@@ -18,17 +18,17 @@ class FormRegister extends Form {
     //Methods:
 
     protected function generaCamposFormulario($datos, $errores = array()){
-        $nombre = $datos['name'] ?? '';
+        //$nombre = $datos['name'] ?? '';
 
         // Se generan los mensajes de error si existen.
-        $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+        $htmlErroresGlobales2 = self::generaListaErroresGlobales($errores);
         $errorNombre = self::createMensajeError($errores, 'name', 'span', array('class' => 'error'));
         $errorEmail = self::createMensajeError($errores, 'email', 'span', array('class' => 'error'));
         $errorPassword = self::createMensajeError($errores, 'pass', 'span', array('class' => 'error'));
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = "<div class='row'>
-                            <fieldset id='datos_personales'><pre>".$htmlErroresGlobales."</pre>
+                            <fieldset id='datos_personales'><pre>".$htmlErroresGlobales2."</pre>
                                 <legend>Datos personales</legend>
                                 <input type='text' name='name' id='name' value='' placeholder='Nombre' required/><pre>".$errorNombre."</pre>
                                 <input type='email' name='email' id='email' value='' placeholder='Email' required/><pre>".$errorEmail."</pre>
@@ -75,7 +75,10 @@ class FormRegister extends Form {
             $bd = new UserDAO('complucine');
             if($bd){
                 $this->user = $bd->selectUserName($nombre);
-                if (!$this->user) {
+                if ($this->user->data_seek(0)) {
+                    $result[] = "El usuario ya existe.";
+                }
+                else{
                     $bd->createUser("", $nombre, $email, $password, "user");
                     $this->user = $bd->selectUser($nombre, $password);
                     if ($this->user) {
@@ -86,9 +89,6 @@ class FormRegister extends Form {
                         $_SESSION["login"] = true;
                         $result = "../register/register.php";
                     }
-                }
-                else{
-                    $result[] = "El usuario ya existe.";
                 }
             } else {
                 $result[] = "Error al conectar con la BD.";

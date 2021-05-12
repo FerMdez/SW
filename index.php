@@ -1,8 +1,6 @@
 <?php
     //General Config File:
-    require_once(__DIR__.'/assets/php/config.php');
-
-    
+    require_once(__DIR__.'/assets/php/config.php');  
 ?>
 <!--
     Práctica - Sistemas Web | Grupo D

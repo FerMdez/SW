@@ -60,19 +60,21 @@
         ?>
 
         <!-- Panel -->
-        <div class="row">
-            <!-- Panel Menu -->
-            <?php
-                $template->print_panelMenu($_SESSION["rol"]);
-            ?>
-            <!-- Contents -->
+        <section id="user_panel">
             <div class="row">
+                <!-- Panel Menu -->
                 <?php
-                    $template->print_msg();
-                    echo $reply;
+                    $template->print_panelMenu($_SESSION["rol"]);
                 ?>
+                <!-- Contents -->
+                <div class="row">
+                    <?php
+                        $template->print_msg();
+                        echo $reply;
+                    ?>
+                </div>
             </div>
-
+        </section>
         <!-- Footer -->
         <?php
             $template->print_footer();

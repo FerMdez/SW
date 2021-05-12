@@ -36,8 +36,6 @@
                     <div class="code info">
                         <?php
                             echo $reply;
-                            //$formRegister = new FormRegister();
-                            //echo $htmlFormRegister = $formRegister->gestiona();
                         ?>
                     </div>
                 </div>
