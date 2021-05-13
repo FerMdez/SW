@@ -1,29 +1,9 @@
 <?php 
     //General Config File:
-    require_once('../../assets/php/config.php');    
-?>
-<!DOCTYPE HTML>
-<!--
-    Práctica - Sistemas Web | Grupo D
-    CompluCine - FDI-cines
--->
-<html lang="es">
-    <!-- Head -->
-    <?php
-        $template->print_head();
-    ?>
-    <body>
-        <!-- Header -->
-        <?php
-            $template->print_header();
-        ?>
-        
-        <!-- Main -->
-        <?php
-            $template->print_main();
-        ?>
+    require_once('../../assets/php/config.php');
 
-        <!-- Flow -->
+    //Specific page content:
+    $section = '<!-- Flow -->
         <section id="flow">
             <div class="code">
                 <h2>FLUJO DE NAVEGACIÓN</h2>
@@ -295,12 +275,8 @@
                 </div>
             </div>
         </section>
-
-        <!-- Footer -->
-        <?php
-            $template->print_footer();
-        ?>
-
-    </body>
-
-</html>
+        ';
+    
+    //General page content:
+    require RAIZ_APP.'/HTMLtemplate.php';
+?>

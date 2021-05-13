@@ -16,7 +16,8 @@
 
         <!-- Main -->
         <?php
-           $template->print_main();
+            if(!isset($content)) $content = "";
+            $template->print_main($content);
         ?>
 
         <!-- Section -->

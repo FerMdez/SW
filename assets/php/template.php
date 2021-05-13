@@ -130,7 +130,7 @@
     }
 
     //Print generic Main:
-    function print_main(){
+    function print_main($content = ""){
         $page = $this->page;
         $prefix = $this->prefix;
 
@@ -154,18 +154,18 @@
         /* MAIN */
         if($prefix === "./"){ 
             if(isset($_SESSION["nombre"])){
-                $header = "<h1>Bienvenido {$_SESSION["nombre"]}</h1>\n";
+                $tittle = "<h1>Bienvenido {$_SESSION["nombre"]}</h1>\n";
             } else {
-                $header = "<h1>Bienvenido a CompluCine</h1>\n";
+                $tittle = "<h1>Bienvenido a CompluCine</h1>\n";
             }
         } else {
-            $header = "<h1>{$page}</h1>\n";
+            $tittle = "<h1>{$page}</h1>\n";
         }
 
         echo"<main>
             <div class='image'><a href='{$prefix}'><img src='{$prefix}img/logo_trasparente.png' alt='logo_FDI-Cines' /></a></div>
             {$sub_header}
-            {$header}
+            {$tittle}{$content}
             <hr />
         </main>\n";
     }

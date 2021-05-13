@@ -1,29 +1,9 @@
 <?php 
     //General Config File:
-    require_once('../../assets/php/config.php');        
-?>
-<!DOCTYPE HTML>
-<!--
-    Práctica - Sistemas Web | Grupo D
-    CompluCine - FDI-cines
--->
-<html lang="es">
-    <!-- Head -->
-    <?php
-        $template->print_head();
-    ?>
-    <body>
-        <!-- Header -->
-		<?php
-			$template->print_header();
-        ?>
-
-        <!-- Main -->
-        <?php
-            $template->print_main();
-        ?>
-
-        <!-- Details -->
+    require_once('../../assets/php/config.php');
+	
+	//Specific page content:
+	$section = '<!-- Details -->
 		<section id="details">
 			<div class = "code">
 				<h1>Detalles</h1>
@@ -107,10 +87,8 @@
 				</div>
 			</div>
 		</section>
-        <!-- Footer -->
-        <?php
-			$template->print_footer();
-        ?>
-       
-    </body>
-</html>
+		';
+    
+    //General page content:
+    require RAIZ_APP.'/HTMLtemplate.php';
+?>

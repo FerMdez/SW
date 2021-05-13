@@ -4,11 +4,12 @@
     
     //Page-specific content:
     $section = '<!-- Films -->
-            <section id="films_billboard">
-                <div class="row">
-                '.$template->print_fimls().'
-                </div>
-            </section>';
+        <section id="films_billboard">
+            <div class="row">
+            '.$template->print_fimls().'
+            </div>
+        </section>
+        ';
 
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';

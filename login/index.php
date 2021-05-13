@@ -61,11 +61,12 @@
 
     //Specific page content:
     $section = '<!-- Login / Register -->
-                <section id="login_register">
-                    <div class ="row">
-                        '.$form.'
-                    </div>	
-                </section>';
+        <section id="login_register">
+            <div class ="row">
+                '.$form.'
+            </div>	
+        </section>
+        ';
 
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';

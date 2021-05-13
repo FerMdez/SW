@@ -7,17 +7,18 @@
     $reply = FormRegister::getReply();
 
     $section =  '<!-- Reply -->
-    <section class="reply">
-        <div class ="row">
-            <div class="column side"></div>
-            <div class="column middle">
-                <div class="code info">
-                    '.$reply.'
+        <section class="reply">
+            <div class ="row">
+                <div class="column side"></div>
+                <div class="column middle">
+                    <div class="code info">
+                        '.$reply.'
+                    </div>
                 </div>
+                <div class="column side"></div>    
             </div>
-            <div class="column side"></div>    
-        </div>
-    </section>';
+        </section>
+        ';
 
     require RAIZ_APP.'/HTMLtemplate.php';
 ?>

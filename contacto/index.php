@@ -9,10 +9,11 @@
     
     //Specific page content:
     $section = '<!-- Contact Form -->
-            <section id="formulario">
-                <h4>Formulario (EN DESARROLLO)</h4>
-                '.$htmlForm.'
-            </section>';
+        <section id="formulario">
+            <h4>Formulario (EN DESARROLLO)</h4>
+            '.$htmlForm.'
+        </section>
+        ';
     
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';
