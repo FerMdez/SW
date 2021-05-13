@@ -12,23 +12,24 @@
             if($this->login){
                 switch($this->state) {
                     case 'mc': if(isset($_POST['edit_cinema'])) {
-                                    editCinema();
-                                }
-                                else if(isset($_POST['delete_cinema'])) {
-                                    deleteCinema();
-                                }
-                                else if(isset($_POST['add_cinema'])) {
-                                    addCinema();
-                                    $template->print_cinemas();
-                                }                               
-                                else {
-                                    addCinema();
-                                    $template->print_cinemas();
-                                   
-                                }; 
+                                $this->editCinema();
+                            }
+                            else if(isset($_POST['delete_cinema'])) {
+                                $this->deleteCinema();
+                            }
+                            else if(isset($_POST['add_cinema'])) {
+                                $this->addCinema();
+                                $template->print_cinemas();
+                            }                               
+                            else {
+                                $this-> addCinema();
+                                $template->print_cinemas();
+                            
+                            };  
                     break;
                     case 'mf': if(isset($_POST['edit_film'])) {
                                 $this->editFilm();
+                                }
                             else if(isset($_POST['delete_film'])) {
                                 $this->deleteFilm();
                             }
@@ -97,6 +98,8 @@
                     case 'ag': echo"<h1>En construcción</h1>";; break;
                     default: echo "<h1>BIENVENIDO AL PANEL DE ADMINISTRADOR</h1>"; break;
                 }
+            }
+        }
                 function getTemplate(){
                     return $this->template;
                 }
@@ -168,4 +171,4 @@
                 }
             }
            
-        ?>
+?>

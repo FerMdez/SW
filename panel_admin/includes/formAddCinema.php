@@ -8,8 +8,8 @@ include_once('../assets/php/form.php');
 class formAddCinema extends Form{
 
     public function __construct(){
-        $op = array("action"= ."./?state=mc">);
-        parent::__construct('formAddCinema',$op)
+        $op = array("action"=>"./?state=mc">);
+        parent::__construct('formAddCinema',$op);
     } 
 
     protected function generaCamposFormulario($datos,$errores=array()){
@@ -19,7 +19,7 @@ class formAddCinema extends Form{
         $errorDirection = self::createMensajeError($errores,'direction','span',array('class'=>'error'));
         $errrorPhone = self ::createMensajeError($errores,'phone',array('class'=>'error'));
 
-        $html = '<div class="column side"></div>
+        $html = '<div class="row"></div>
                     <fieldset id = "cinema_form">'.$htmlErroresGlobales.'</pre>
                     <legend>Añadir cine</legend>
                      <input type="text" name="name" id="name" placeholder="Nombre" required/><pre>'.$errorName.'</pre>

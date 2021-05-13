@@ -8,8 +8,8 @@ include_once('../assets/php/form.php');
 class formEditCinema extends Form{
 
     public function __construct(){
-        $op = array("action"= ."./?state=mc">);
-        parent::__construct('formEditCinema',$op)
+        $op = array("action"=>"./?state=mc">);
+        parent::__construct('formAddCinema',$op);
     } 
 
     protected function generaCamposFormulario($datos,$errores=array()){
