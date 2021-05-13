@@ -12,24 +12,24 @@
             if($this->login){
                 switch($this->state) {
                     case 'mc': if(isset($_POST['edit_cinema'])) {
-                                $this->editCinema();
-                            }
-                            else if(isset($_POST['delete_cinema'])) {
-                                $this->deleteCinema();
-                            }
-                            else if(isset($_POST['add_cinema'])) {
-                                $this->addCinema();
-                                $template->print_cinemas();
-                            }                               
-                            else {
-                                $this-> addCinema();
-                                $template->print_cinemas();
-                            
-                            };  
+                        $this->editCinema();
+                    }
+                    else if(isset($_POST['delete_cinema'])) {
+                        $this->deleteCinema();
+                    }
+                    else if(isset($_POST['add_cinema'])) {
+                        $this->addCinema();
+                        $template->print_cinemas();
+                    }                               
+                    else {
+                        $this-> addCinema();
+                        $template->print_cinemas();
+                    
+                    };  
                     break;
                     case 'mf': if(isset($_POST['edit_film'])) {
                                 $this->editFilm();
-                                }
+                            }
                             else if(isset($_POST['delete_film'])) {
                                 $this->deleteFilm();
                             }
@@ -64,34 +64,20 @@
                                 
                                 }; 
                     break;
-                    case 'mg': require_once('manage_managers.php');
-                    if(isset($_POST['edit_manager'])) {
-                        editManager();
-                    }
-                    else if(isset($_POST['delete_manager'])) {
-                        deleteManager();
-                    }
-                    else if(isset($_POST['select_user'])) {
-                        selectUser();
-                    }
-                    else if(isset($_POST['select_cinema'])) {
-                        selectCinema();
-                    }
-                    else if(isset($_POST['add_manager'])) {
-                        confirmAdd();
-                    }
-                   
-                    else if(isset($_POST['confirm_delete_manager'])) {
-                        confirmDelete();
-                    }
-                    else if(isset($_POST['confirm_edit_manager'])) {
-                        confirmEdit();
-                    }
-                    else {
-                        addManager();
-                        print_managers();
-                    
-                    }; 
+                    case 'mg': if(isset($_POST['edit_manager'])) {
+                                    $this->editManager();
+                                }
+                                else if(isset($_POST['delete_manager'])) {
+                                    $this->deleteManager();
+                                }
+                                else if(isset($_POST['add_manager'])) {
+                                    $this->addManager();
+                                }
+                                
+                                else {
+                                    $this->showAddBotton();
+                                    $this->print_managers();
+                                }; 
                     break;
                     case 'un': echo"<h1>En construcción</h1>"; break;
                     case 'ur': echo"<h1>En construcción</h1>";; break;
@@ -99,76 +85,201 @@
                     default: echo "<h1>BIENVENIDO AL PANEL DE ADMINISTRADOR</h1>"; break;
                 }
             }
-        }
-                function getTemplate(){
-                    return $this->template;
-                }
-        
-                //Functions FILMS
-                function addFilm(){
-                    include_once('./includes/formAddFilm.php');
-                    $formAF = new formAddFilm();
-                    $htmlAForm = $formAF->gestiona();
-                    echo   '<!-- Add film -->
-                    <div class="column side"></div>
-                            <div class="column middle">
-                            '.$htmlAForm.'
-                            </div>'."\n";
-                }
-            
-                function deleteFilm() {
-                    include_once('./includes/formDeleteFilm.php');
-                    $formDF = new formDeleteFilm();
-                    $htmlDForm = $formDF->gestiona();
-                    echo   '<!-- Add film -->
-                    <div class="column side"></div>
-                            <div class="column middle">
-                            '.$htmlDForm.'
-                            </div>'."\n";
-                }
-                function editFilm() {
-                    include_once('./includes/formEditFilm.php');
-                    $formEF = new formEditFilm();
-                    $htmlDForm = $formEF->gestiona();
-                    echo   '<!-- Add film -->
-                    <div class="column side"></div>
-                            <div class="column middle">
-                            '.$htmlDForm.'
-                            </div>'."\n";
-                }
-                 //Functions Cinemas
-                 function addCinema(){
-                    include_once('./includes/formAddCinema.php');
-                    $formAC = new formAddCinema();
-                    $htmlAForm = $formAC->gestiona();
-                    echo   '<!-- Add cinema -->
-                    <div class="column side"></div>
-                            <div class="column middle">
-                            '.$htmlAForm.'
-                            </div>'."\n";
-                }
-            
-                function deleteCinema() {
-                    include_once('./includes/formDeleteCinema.php');
-                    $formDC = new formDeleteCinema();
-                    $htmlDForm = $formDC->gestiona();
-                    echo   '<!-- Delete cinema -->
-                    <div class="column side"></div>
-                            <div class="column middle">
-                            '.$htmlDForm.'
-                            </div>'."\n";
-                }
-
-                function editCinema() {
-                    include_once('./includes/formEditFilm.php');
-                    $formEF = new formEditCinema();
-                    $htmlDForm = $formEC->gestiona();
-                    echo   '<!-- Edit cinema -->
-                    <div class="column side"></div>
-                            <div class="column middle">
-                            '.$htmlDForm.'
-                            </div>'."\n";
-                }
+            else {
+                echo "<h1>NO TIENES PERMISOS DE ADMINISTRADOR</h1>";
             }
-           
+        }
+
+        function getTemplate(){
+            return $this->template;
+        }
+
+        //Functions FILMS
+        function addFilm(){
+            include_once('./includes/formAddFilm.php');
+            $formAF = new formAddFilm();
+            $htmlAForm = $formAF->gestiona();
+            echo   '<!-- Add film -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlAForm.'
+                    </div>'."\n";
+        }
+    
+        function deleteFilm() {
+            include_once('./includes/formDeleteFilm.php');
+            $formDF = new formDeleteFilm();
+            $htmlDForm = $formDF->gestiona();
+            echo   '<!-- Add film -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
+        function editFilm() {
+            include_once('./includes/formEditFilm.php');
+            $formEF = new formEditFilm();
+            $htmlDForm = $formEF->gestiona();
+            echo   '<!-- Add film -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
+
+         //Functions Cinemas
+         function addCinema(){
+            include_once('./includes/formAddCinema.php');
+            $formAC = new formAddCinema();
+            $htmlAForm = $formAC->gestiona();
+            echo   '<!-- Add cinema -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlAForm.'
+                    </div>'."\n";
+        }
+    
+        function deleteCinema() {
+            include_once('./includes/formDeleteCinema.php');
+            $formDC = new formDeleteCinema();
+            $htmlDForm = $formDC->gestiona();
+            echo   '<!-- Delete cinema -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
+
+        function editCinema() {
+            include_once('./includes/formEditFilm.php');
+            $formEF = new formEditCinema();
+            $htmlDForm = $formEC->gestiona();
+            echo   '<!-- Edit cinema -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
+
+
+        //Functions MANAGERS
+        function print_managers(){
+            include_once('../assets/php/common/manager_dao.php');
+            include_once('../assets/php/common/manager.php');
+            $manager = new Manager_DAO("complucine");
+            $managers = $manager->allManagersData();
+            $ids = array();
+            $idscinemas = array();
+            $usernames = array();
+            $email = array();
+            $rol = array();
+    
+            foreach($managers as $key => $value){
+                $ids[$key] = $value->getId();
+                $idscinemas[$key] = $value->getIdcinema();
+                $usernames[$key] = $value->getUsername();
+                $email[$key] = $value->getEmail();
+                $rol[$key] = $value->getRoll();
+            }
+            echo "<div class='row'>
+                <div class='column side'></div>
+                <div class='column middle'>
+                    <table class='alt'>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>IdCinema</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>password</th>
+                        <th>Rol</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    "; 
+            for($i = 0; $i < count($managers); $i++){
+                echo '<tr>
+                        <td>'. $ids[$i] .'</td>
+                        <td>'. $idscinemas[$i] .'</td>
+                        <td>'. $usernames[$i] .'</td>
+                        <td>'. $email[$i] .'</td>
+                        <td>'. $rol[$i] .'</td>
+                        <td>
+                            <form method="post" action="index.php?state=mg">
+                                <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
+                                <input type="submit" id="submit" value="Editar" name="edit_manager" class="primary" />
+                            </form> 
+                        </td> 
+                        <td> 
+                            <form method="post" action="index.php?state=mg">
+                                <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
+                                <input  name="username" type="hidden" value="'.$usernames[$i].'">
+                                <input  name="email" type="hidden" value="'.$email[$i].'">
+                                <input  name="rol" type="hidden" value="'.$rol[$i].'">
+                                <input type="submit" id="submit" value="Eliminar" name="delete_manager" class="primary" />
+                            </form> 
+                        </td> 
+                    </tr>
+                    '; 
+            } 
+            echo'</tbody>
+                    </table>
+                </div>
+                <div class="column side"></div>
+            ';
+        }
+        function showAddBotton() {
+            echo'<div class="column side"></div>
+                    <div class="column middle">
+                        <h2>Añadir gerente</h2>
+                        <form method="post" action="index.php?state=mg">
+                            <div class="actions"> 
+                                <input type="submit" id="submit" value="Añadir gerente" name="add_manager" class="primary" />      
+                            </div>
+                        </form>
+                    </div>
+                </div>';
+        }
+        function addManager(){
+            include_once('./includes/formAddManager.php');
+            $formAM = new formAddManager();
+            $htmlAForm = $formAM->gestiona();
+            echo   '<!-- ADD MANAGER -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    <h3>AÑADIR GERENTE</h3>
+                    '.$htmlAForm.'
+                    </div>'."\n";
+        }
+        function editManager(){
+            include_once('./includes/formEditManager.php');
+            $formEM = new formEditManager();
+            $htmlEForm = $formEM->gestiona();
+            echo   '<!-- EDIT MANAGER -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    <h3>EDITAR GERENTE</h3>
+                    '.$htmlEForm.'
+                    </div>'."\n";
+        }
+
+        function deleteManager(){
+            include_once('./includes/formDeleteManager.php');
+            $formDM = new formDeleteManager();
+            $htmlDForm = $formDM->gestiona();
+            echo   '<!-- DELETE MANAGER -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    <h3>ELIMINAR GERENTE</h3>
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
+
+
+
+    }
+   
 ?>
+
