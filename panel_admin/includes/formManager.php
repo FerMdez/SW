@@ -90,7 +90,7 @@ class FormManager extends Form {
 		if($bd){
 			if($this->option == "new"){
 				//Check if any var is empty
-				if(!is_null($id)&&!is_null($idcinema)){
+				if(!is_null($id)&&!empty($idcinema)){
 					// check if already exist a manager with same name
 					$exist = $bd->GetManagerCinema($id, $idcinema);
 					if( mysqli_num_rows($exist) != 0){

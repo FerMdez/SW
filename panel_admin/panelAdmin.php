@@ -33,24 +33,18 @@
                                    
                                 }; 
                     break;
-                    case 'mf': require_once('manage_films.php'); 
-                            if(isset($_POST['edit_film'])) {
-                                editFilm();
+                    case 'mf': if(isset($_POST['edit_film'])) {
+                                $this->editFilm();
                             }
                             else if(isset($_POST['delete_film'])) {
-                                deleteFilm();
+                                $this->deleteFilm();
                             }
                             else if(isset($_POST['add_film'])) {
-                                confirmAdd();
-                            }
-                            else if(isset($_POST['confirm_delete_film'])) {
-                                confirmDelete();    
-                            }
-                            else if(isset($_POST['confirm_edit_film'])) {
-                                confirmEdit();
+                                $this->addFilm();
+                                $template->print_fimls();
                             }
                             else {
-                                addFilm();
+                                $this->addFilm();
                                 $template->print_fimls();
                             };  
                     break;
@@ -119,6 +113,40 @@
         function getTemplate(){
             return $this->template;
         }
+
+        //Functions FILMS
+        function addFilm(){
+            include_once('./includes/formAddFilm.php');
+            $formAF = new formAddFilm();
+            $htmlAForm = $formAF->gestiona();
+            echo   '<!-- Add film -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlAForm.'
+                    </div>'."\n";
+        }
+    
+        function deleteFilm() {
+            include_once('./includes/formDeleteFilm.php');
+            $formDF = new formDeleteFilm();
+            $htmlDForm = $formDF->gestiona();
+            echo   '<!-- Add film -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
+        function editFilm() {
+            include_once('./includes/formEditFilm.php');
+            $formEF = new formEditFilm();
+            $htmlDForm = $formEF->gestiona();
+            echo   '<!-- Add film -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
     }
+   
 ?>
 
