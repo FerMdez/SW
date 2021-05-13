@@ -15,10 +15,10 @@
 		//Methods:
 
         //Create a new Session.
-		public function createFilm($id, $tittle, $duration, $language, $description){
-			$sql = sprintf( "INSERT INTO `film`( `id`, `tittle`, `duration`, `language`,`description`) 
-								VALUES ( '%d', '%s', '%d', '%s','%s')", 
-									$id, $tittle, $duration, $language, $description);
+		public function createFilm($id, $tittle, $duration, $language, $description, $img){
+			$sql = sprintf( "INSERT INTO `film`( `id`, `tittle`, `duration`, `language`,`description`, `img`) 
+								VALUES ( '%d', '%s', '%d', '%s','%s', '%s')", 
+									$id, $tittle, $duration, $language, $description, $img);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;
@@ -44,7 +44,7 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			while($fila=$resul->fetch_assoc()){
-				$films[] = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"]);
+				$films[] = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"], $fila["img"]);
 			}
 			$resul->free();
 			return $films;
@@ -84,10 +84,10 @@
 		}
 		
 		//Edit a film.
-		public function editFilm($id, $tittle, $duration, $language,$description){
-			$sql = sprintf( "UPDATE film SET tittle = '%s' , duration = '%d', language ='%s' , description ='%s'
+		public function editFilm($id, $tittle, $duration, $language,$description,$img){
+			$sql = sprintf( "UPDATE film SET tittle = '%s' , duration = '%d', language ='%s' , description ='%s', img ='%s'
 								WHERE film.id = '%d';", 
-									$tittle, $duration, $language, $description, $id);
+									$tittle, $duration, $language, $description, $img, $id);
 
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
@@ -95,8 +95,8 @@
 		}
 	    
 		//Create a new film Data Transfer Object.
-		public function loadFilm($id, $tittle, $duration, $language,$description){
-			return new Film( $id, $tittle, $duration, $language,$description);
+		public function loadFilm($id, $tittle, $duration, $language,$description, $img){
+			return new Film( $id, $tittle, $duration, $language,$description, $img);
 		}
 	    	
     }
