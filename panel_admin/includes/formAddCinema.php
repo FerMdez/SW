@@ -27,7 +27,7 @@ class formAddCinema extends Form{
                      <input type="text" name="phone" id="phone" placeholder="Teléfono" required/><pre>'.$errrorPhone.'</pre>
                     </fieldset>
                     <div class="actions"> 
-                        <input type="submit" id="submit" value="Añadir cine" name="add_cinema" class="primary" />
+                        <input type="submit" id="submit" value="Añadir cine" class="primary" />
                         <input type="reset" id="reset" value="Borrar" />       
                     </div>
                 </div>  ';

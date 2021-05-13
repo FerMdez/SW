@@ -35,7 +35,7 @@ class formAddFilm extends Form{
 							<div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div>
 					</fieldset>
 					<div class="actions"> 
-						<input type="submit" id="submit" value="Añadir pelicula" name="add_film" class="primary" />
+						<input type="submit" id="submit" value="Añadir pelicula" class="primary" />
 						<input type="reset" id="reset" value="Borrar" />       
 						</div>
 					</div>

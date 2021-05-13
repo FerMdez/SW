@@ -8,19 +8,19 @@ include_once('../assets/php/form.php');
 class formDeleteCinema extends Form{
 
     public function __construct(){
-        $op = array("action"=>"./?state=mc">);
+        $op = array("action"=>"./?state=mc");
         parent::__construct('formAddCinema',$op);
     } 
 
     protected function generaCamposFormulario($datos,$errores=array()){
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
-
+        $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
 
         $html = '<div class="column side"></div>
                     <fieldset id = "cinema_form">'.$htmlErroresGlobales.'</pre>
                     <legend>¿Estás seguro de que quieres eliminar este cine?</legend>
-					<input type="hidden" name="id" value='.$_POST['name'].'/>
+					<input type="hidden" name="id" value='.$_POST['id'].'/>
 						<p>Name: '.$_POST['name'].' </p>
 						<p>Dirección: '.$_POST['direction'].' </p>
 						<p>Teléfono: '.$_POST['phone'].' </p>
@@ -39,15 +39,15 @@ class formDeleteCinema extends Form{
         
         $id = $this->test_input($datos['id'])??null;
 
-        if(empty($id)){
-            $result['name']= "El nombre no es válido";
+        if(is_null($id)){
+            $result['id']= "El nombre no es válido";
         }
         
         if(count($result)===0){
 		    $bd = new Cinema_DAO('complucine');
             $exist = $bd -> cinemaData($id);
 		    if(mysqli_num_rows($exist)==1){
-                $bd->deleteFilm($id);
+                $bd->deleteCinema($id);
                 $_SESSION['message'] = "<div class='row'>
                                         <div class='column side'></div>
                                         <div class='column middle'>
@@ -62,7 +62,7 @@ class formDeleteCinema extends Form{
                                     ";
                 $result = './?state=mc';                    
             }	
-            $exist->free()
+            $exist->free();
             }
             else{
                 $result[] = "El cine seleccionado no existe.";	

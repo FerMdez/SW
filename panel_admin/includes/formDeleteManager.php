@@ -23,7 +23,7 @@ class formDeleteManager extends Form{
         //$errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
 		$html = '<div class="row">
-                    <fieldset id="promotion_form"><pre>'.$htmlErroresGlobales.'</pre>
+                    <fieldset id="manager_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>¿Estás seguro de que quieres eliminar este gerente?</legend>
                         <input type="hidden" name="id" value='.$_POST['id'].'/>
                         <p>Id: '.$_POST['id'].' </p>

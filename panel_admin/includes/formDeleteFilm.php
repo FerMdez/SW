@@ -47,8 +47,8 @@ class formDeleteFilm extends Form{
 
 	protected function procesaFormulario($datos){
         $result = array();
-        $id =  $this->test_input($_POST['id']) ?? null;
-		if ( empty($id)) {
+        $id =  $this->test_input($datos['id']) ?? null;
+		if ( is_null($id)) {
 			$result['id'] = "La pelicula seleccionada no existe.";
 		}
         

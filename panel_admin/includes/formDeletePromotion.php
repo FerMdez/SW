@@ -19,6 +19,7 @@ class formDeletePromotion extends Form{
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+		$errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         //$errorTittle = self::createMensajeError($errores, 'tittle', 'span', array('class' => 'error'));
         //$errorDescription = self::createMensajeError($errores, 'description', 'span', array('class' => 'error'));
         //$errorCode = self::createMensajeError($errores, 'code', 'span', array('class' => 'error'));
@@ -26,14 +27,14 @@ class formDeletePromotion extends Form{
 		//$errorImage = self::createMensajeError($errores, 'image', 'span', array('class' => 'error'));
 
 		$html = '<div class="row">
-					<fieldset id= "promotion_form">
+						<fieldset id="promotion_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>¿Estás seguro de que quieres eliminar esta promocion?</legend>
                             <input type="hidden" name="id" value='.$_POST['id'].'/>
 							<p>Id: '.$_POST['id'].' </p>
-                            <p>Nombre: '.$_POST['tittle']'</p>
-                            <p>Description:'.$_POST['description']'</p>
-                            <p>Codigo: '.$_POST['code']'</p>
-                            <p>Activa: '.$_POST['active']'</p>			
+                            <p>Nombre: '.$_POST['tittle'].'</p>
+                            <p>Description:'.$_POST['description'].'</p>
+                            <p>Codigo: '.$_POST['code'].'</p>
+                            <p>Activa: '.$_POST['active'].'</p>			
 							<div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div>
 					</fieldset>
 					<div class="actions"> 
@@ -51,7 +52,7 @@ class formDeletePromotion extends Form{
         
         $id =  $this->test_input($_POST['id']) ?? null;
         if ( is_null($id)) {
-			$result[] = "La promoción seleccionada no existe.";
+			$result['id'] = "La promoción seleccionada no existe.";
 		}
         
         if (count($result) === 0) {

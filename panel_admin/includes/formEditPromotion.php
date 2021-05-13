@@ -19,6 +19,7 @@ class formEditPromotion extends Form{
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+		$errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         $errorTittle = self::createMensajeError($errores, 'tittle', 'span', array('class' => 'error'));
         $errorDescription = self::createMensajeError($errores, 'description', 'span', array('class' => 'error'));
         $errorCode = self::createMensajeError($errores, 'code', 'span', array('class' => 'error'));
@@ -50,8 +51,8 @@ class formEditPromotion extends Form{
         $result = array();
         
         $id =  $this->test_input($_POST['id']) ?? null;
-        if ( is_null($id)) {
-			$result[] = "La promoción seleccionada no existe.";
+        if (is_null($id)) {
+			$result['id'] = "La promoción seleccionada no existe.";
 		}
 
         $tittle = $this->test_input($datos['tittle']) ?? null;

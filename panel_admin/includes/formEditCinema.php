@@ -8,31 +8,28 @@ include_once('../assets/php/form.php');
 class formEditCinema extends Form{
 
     public function __construct(){
-        $op = array("action"=>"./?state=mc">);
+        $op = array("action"=>"./?state=mc");
         parent::__construct('formAddCinema',$op);
     } 
 
     protected function generaCamposFormulario($datos,$errores=array()){
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+        $errorId= self::createMensajeError($errores,'id','span',array('class'=>'error'));
         $errorName = self::createMensajeError($errores,'name','span',array('class'=>'error'));
         $errorDirection = self::createMensajeError($errores,'direction','span',array('class'=>'error'));
         $errrorPhone = self ::createMensajeError($errores,'phone',array('class'=>'error'));
 
-        $html = '<div class="column side"></div>
-                    <div class="column middle">
-                        <legend>Editar cines cine</legend>
-                        <form method="post" enctype="multipart/form-data" action="index.php?state=mc">
-                        <div class="row">
-                            <fieldset id="film_form">
+        $html = '<div class="row">
+                            <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
                             <legend>Datos de cine </legend>  
-                            <input type="hidden" name="id" value='.$_POST['id'].'/>                  
+                            <input type="hidden" name="id" value='.$_POST['id'].'/>                 
                             <input type="text" name="name" value="'.$_POST['name'].'" required/><pre>'.$errorName.'</pre>
                             <input type="text" name="direction" value="'.$_POST['direction'].'"required/><pre>'.$errorDirection.'</pre>
                             <input type="text" name="phone"  value="'.$_POST['phone'].'"required/><pre>'.$errrorPhone.'</pre>
                         </fieldset>
                             <div class="actions"> 
-                                <input type="submit" id="submit" value="Añadir cine" name="add_cinema" class="primary" />
+                                <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
                                 <input type="reset" id="reset" value="Borrar" />       
                             </div>
                         </div>
@@ -46,10 +43,10 @@ class formEditCinema extends Form{
         $result =array();
         
         
-        $id =  $this->test_input($_POST['id']) ?? null;
-        if ( empty($id)) {
-			$result[] = "El cine seleccionado no existe.";
-		}
+        $id =  $this->test_input($datos['id']) ?? null;
+       // if (is_null($id)) {
+		//	$result['id'] = "El cine seleccionado no existe.";
+		//}
 
         $name = $this->test_input($datos['name'])??null;
         
@@ -57,7 +54,7 @@ class formEditCinema extends Form{
             $result['name']= "El nombre no es válido";
         }
         
-        $direction = $this -> test_input($datos['direction']) ?? null;
+        $direction = $this->test_input($datos['direction']) ?? null;
 
         if(empty($direction)){
             $result['direction'] = "La dirección no es valida";
@@ -70,11 +67,9 @@ class formEditCinema extends Form{
         }
 	
         if(count($result)===0){
-        
 		$bd = new Cinema_DAO('complucine');
-        $exist = $bd -> GetCinema($name,$direction);
+        $exist = $bd -> cinemaData($id);
 		    if(mysqli_num_rows($exist)==1){
-               
                 $bd->editCinema($id,$name,$direction,$phone);
                 $_SESSION['message'] = "<div class='row'>
                                         <div class='column side'></div>

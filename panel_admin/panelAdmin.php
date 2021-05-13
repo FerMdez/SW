@@ -12,30 +12,22 @@
             if($this->login){
                 switch($this->state) {
                     case 'mc': if(isset($_POST['edit_cinema'])) {
-                        $this->editCinema();
-                    }
-                    else if(isset($_POST['delete_cinema'])) {
-                        $this->deleteCinema();
-                    }
-                    else if(isset($_POST['add_cinema'])) {
-                        $this->addCinema();
-                        echo ($template->print_cinemas());
-                    }                               
-                    else {
-                        $this-> addCinema();
-                       echo ($template->print_cinemas());
-                    
-                    };  
+                                    $this->editCinema();
+                                }
+                                else if(isset($_POST['delete_cinema'])) {
+                                    $this->deleteCinema();
+                                }                             
+                                else {
+                                    $this-> addCinema();
+                                echo ($template->print_cinemas());
+                                
+                                };  
                     break;
                     case 'mf': if(isset($_POST['edit_film'])) {
                                 $this->editFilm();
                             }
                             else if(isset($_POST['delete_film'])) {
                                 $this->deleteFilm();
-                            }
-                            else if(isset($_POST['add_film'])) {
-                                $this->addFilm();
-                                echo ( $template->print_fimls());
                             }
                             else {
                                 $this->addFilm();
@@ -48,9 +40,6 @@
                                 }
                                 else if(isset($_POST['delete_promotion'])) {
                                     $this->deletePromotion();
-                                }
-                                else if(isset($_POST['add_promotion'])) {
-                                    $this->addPromotion();
                                 }
                                 else {
                                     $this->addPromotion();
@@ -145,8 +134,8 @@
         }
 
         function editCinema() {
-            include_once('./includes/formEditFilm.php');
-            $formEF = new formEditCinema();
+            include_once('./includes/formEditCinema.php');
+            $formEC = new formEditCinema();
             $htmlDForm = $formEC->gestiona();
             echo   '<!-- Edit cinema -->
             <div class="column side"></div>
@@ -186,7 +175,6 @@
                         <th>IdCinema</th>
                         <th>Nombre</th>
                         <th>Email</th>
-                        <th>password</th>
                         <th>Rol</th>
                     </tr>
                     </thead>
@@ -274,6 +262,8 @@
                     </div>'."\n";
         }
 
+
+        //Functions PROMOTIONS
         function addPromotion(){
             include_once('./includes/formAddPromotion.php');
             $formAP = new formAddPromotion();

@@ -35,7 +35,7 @@ class formAddPromotion extends Form{
 							<div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div>
 					</fieldset>
 					<div class="actions"> 
-						<input type="submit" id="submit" value="Añadir promocion" name="add_promotion" class="primary" />
+						<input type="submit" id="submit" value="Añadir promocion" class="primary" />
 						<input type="reset" id="reset" value="Borrar" />       
 						</div>
 					</div>
