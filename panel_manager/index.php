@@ -61,45 +61,18 @@
 					</div>
                 <div class="column side"></div>'."\n";
     }
+
+    //Specific page content:
+        $section = '<!-- Manager Panel -->
+        <section id="manager_panel">
+            <div class="row">
+                <!-- Contents -->
+                <div class="row">
+                    '.$panel.'
+                </div>
+            </div>
+        </section>';
+
+    //General page content:
+    require RAIZ_APP.'/HTMLtemplate.php';
 ?>
-<!DOCTYPE HTML>
-<!--
-    Práctica - Sistemas Web | Grupo D
-    CompluCine - FDI-cines
--->
-<html lang="es">
-<link id='estilo' rel='stylesheet' type='text/css' href='../assets/css/manager.css'>
-    <!-- Head -->
-    <?php
-        $template->print_head();
-		
-    ?>
-    <body>
-        <!-- Header -->
-        <?php
-            $template->print_header();
-        ?>
-
-        <!-- Main -->
-        <?php
-            $template->print_main();
-        ?>
-
-		<!-- Panel -->
-        <div class="row">
-            <!-- Panel Menu -->
-            <?php $template->print_panelMenu($_SESSION["rol"]); ?>
-		</div>
-            <!--Contents -->
-        <div class="row"> 
-			<?php echo $panel; ?>
-		</div>
-        
-        <!-- Footer -->
-        <?php
-            $template->print_footer();
-        ?>
-       
-    </body>
-
-</html>
