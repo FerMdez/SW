@@ -33,18 +33,17 @@
 			return "";
 		}
 		
-		public static function create_session($session){
+		public static function create_session($cinema, $hall, $start, $date, $film, $price, $format,$repeat){
 			$bd = new SessionDAO('complucine');
 			if($bd ){
-				if(!$bd->searchSession($session['cinema'], $session['hall'],$session['start'],$session['date'])){
-					$bd->createSession(null,$session['film'], $session['hall'], $session['cinema'], $session['date'], 
-						$session['start'], $session['price'], $session['format']);
-						
-					if($session['repeat'] > "0") {
-						$repeat = $session['repeat'];
-						$session['repeat'] = $session['repeat'] - 1;
-						$session['date'] = date('Y-m-d', strtotime( $session['date'] . ' +1 day') );
-						self::create_session($session);
+				if(!$bd->searchSession($cinema, $hall, $start, $date)){
+					$bd->createSession(null,$film, $hall, $cinema, $date, $start, $price, $format);
+
+					if($repeat > "0") {
+						$repeats = $repeat;
+						$repeat = $repeat - 1;
+						$date = date('Y-m-d', strtotime( $date . ' +1 day') );
+						self::create_session($cinema, $hall, $start, $date, $film, $price, $format,$repeat);
 						return "Se han creado las ".$repeat ." sesiones con exito";
 					}
 						
@@ -56,13 +55,13 @@
 			} else return "Error al conectarse a la base de datos";
 		}
 		
-		public static function edit_session($session){
+		public static function edit_session($cinema, $or_hall, $or_date, $or_start, $hall, $start, $date, $film, $price, $format){
 			$bd = new SessionDAO('complucine');
 			if($bd ){
-				if($bd->searchSession($session['cinema'], $session['origin_hall'],$session['origin_start'],$session['origin_date'])){
-					$origin = array("cinema" => $session['cinema'],"hall" => $session['origin_hall'],"start" => $session['origin_start'],"date" => $session['origin_date']);
-					$bd->editSession($session['film'], $session['hall'], $session['cinema'], $session['date'], 
-						$session['start'], $session['price'], $session['format'],$origin);
+				if($bd->searchSession($cinema, $or_hall, $or_start, $or_date)){
+					$origin = array("cinema" => $cinema,"hall" => $or_hall,"start" => $or_start,"date" => $or_date);
+					$bd->editSession($film, $hall, $cinema, $date, 
+						$start, $price, $format,$origin);
 					return "Se ha editado la session con exito";						
 				} else 
 					return "Esta session no existe";
@@ -70,11 +69,11 @@
 			} else return "Error al conectarse a la base de datos";
 		}
 
-		public static function delete_session($session){
+		public static function delete_session($cinema, $hall, $start, $date){
 			$bd = new SessionDAO('complucine');
 			if($bd ){
-				if($bd->searchSession($session['cinema'], $session['hall'],$session['start'],$session['date'])){
-					$bd->deleteSession($session['hall'], $session['cinema'], $session['date'], $session['start']);
+				if($bd->searchSession($cinema, $hall, $start, $date)){
+					$bd->deleteSession($hall, $cinema, $date, $start);
 					return "Se ha eliminado la session con exito";						
 				} else 
 					return "Esta session no existe";
