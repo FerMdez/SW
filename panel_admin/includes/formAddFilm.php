@@ -47,23 +47,26 @@ class formAddFilm extends Form{
 
 	protected function procesaFormulario($datos){
         $result = array();
+		
+		
+		/* PROCESAR LA SUBIDA DE IMAGEN
 		$ok = count($_FILES) == 1 && $_FILES['archivo']['error'] == UPLOAD_ERR_OK;
 		if ( $ok ) {
 		  $archivo = $_FILES['archivo'];
 		  $nombre = $_FILES['archivo']['name'];
-		  /* 1.a) Valida el nombre del archivo */
+		  //1.a) Valida el nombre del archivo 
 		  $ok = $this->check_file_uploaded_name($nombre) && $this->check_file_uploaded_length($nombre) ;
 		  
-		  /* 1.b) Sanitiza el nombre del archivo 
-		  $ok = $this->sanitize_file_uploaded_name($nombre);
-		  */
+		  // 1.b) Sanitiza el nombre del archivo 
+		  //$ok = $this->sanitize_file_uploaded_name($nombre);
+		  //
 		  
-		  /* 1.c) Utilizar un id de la base de datos como nombre de archivo */
+		  // 1.c) Utilizar un id de la base de datos como nombre de archivo 
 	
-		  /* 2. comprueba si la extensión está permitida*/
+		  // 2. comprueba si la extensión está permitida
 		  $ok = $ok && in_array(pathinfo($nombre, PATHINFO_EXTENSION), self::EXTENSIONS);
 	
-		  /* 3. comprueba el tipo mime del archivo correspode a una imagen image/* */
+		  // 3. comprueba el tipo mime del archivo correspode a una imagen image
 		  $finfo = new \finfo(FILEINFO_MIME_TYPE);
 		  $mimeType = $finfo->file($_FILES['archivo']['tmp_name']);
 		  $ok = preg_match('/image\/*./', $mimeType);
@@ -75,9 +78,9 @@ class formAddFilm extends Form{
 			  $result['img'] = 'Error al mover el archivo';
 			}
 	
-			/*if ( !copy("../img/tmp/{$nombre}", "/{$nombre}") ) {
-			  $result['img'] = 'Error al mover el archivo';
-			}*/
+			//if ( !copy("../img/tmp/{$nombre}", "/{$nombre}") ) {
+			//  $result['img'] = 'Error al mover el archivo';
+			//}
 	
 		  }else {
 			$result['img'] = 'El archivo tiene un nombre o tipo no soportado';
@@ -85,6 +88,7 @@ class formAddFilm extends Form{
 		} else {
 		  $result['img'] = 'Error al subir el archivo.';
 		}
+		*/
 
         $tittle = $this->test_input($datos['tittle']) ?? null;
 		//|| !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $tittle) 
@@ -120,15 +124,17 @@ class formAddFilm extends Form{
 			}
 			else{
 				
+				/* PROCESAR SUBIDA DE IMAGEN
 				$tmp_name = $_FILES['img']['tmp_name'];
 				if ( !move_uploaded_file($tmp_name, "../img/films/{$nombre}") ) {
 					$result[] = 'Error al mover el archivo';
 				}
-				/*else if ( !copy(DIR_ALMACEN. "/{$nombre}", DIR_ALMACEN_PROTEGIDO. "/{$nombre}") ) {
-					$result[] = 'Error al mover el archivo';
-				}*/
-				else {
-					$bd->createFilm(null, $tittle,$duration,$language,$description,$nombre);
+				//else if ( !copy(DIR_ALMACEN. "/{$nombre}", DIR_ALMACEN_PROTEGIDO. "/{$nombre}") ) {
+				//	$result[] = 'Error al mover el archivo';
+				//}
+				*/
+				//else {
+					$bd->createFilm(null, $tittle,$duration,$language,$description, null); //Null hasta tener $nombre
 					$_SESSION['message'] = "<div class='row'>
 											<div class='column side'></div>
 											<div class='column middle'>
@@ -142,7 +148,7 @@ class formAddFilm extends Form{
 										</div>
 										";
 					$result = './?state=mf';
-				}
+				//}
 
 			}
 			$exist->free();
