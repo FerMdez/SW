@@ -55,7 +55,7 @@ class formDeletePromotion extends Form{
 		}
         
         if (count($result) === 0) {
-        	$bd = new Pomotion_DAO("complucine");
+        	$bd = new Promotion_DAO("complucine");
 
 			//FALTARIA SUBIR LA IMAGEN
 			$exist = $bd-> promotionData($id);

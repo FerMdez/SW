@@ -39,10 +39,10 @@
                             }
                             else {
                                 $this->addFilm();
-                               echo( $template->print_fimls());
+                                echo( $template->print_fimls());
                             };  
                     break;
-                    case 'mp': require_once('manage_promotions.php');
+                    case 'mp': 
                                 if(isset($_POST['edit_promotion'])) {
                                     $this->editPromotion();
                                 }
@@ -167,13 +167,14 @@
             $usernames = array();
             $email = array();
             $rol = array();
-    
-            foreach($managers as $key => $value){
-                $ids[$key] = $value->getId();
-                $idscinemas[$key] = $value->getIdcinema();
-                $usernames[$key] = $value->getUsername();
-                $email[$key] = $value->getEmail();
-                $rol[$key] = $value->getRoll();
+            if(is_array($managers)){  
+                foreach($managers as $key => $value){
+                    $ids[$key] = $value->getId();
+                    $idscinemas[$key] = $value->getIdcinema();
+                    $usernames[$key] = $value->getUsername();
+                    $email[$key] = $value->getEmail();
+                    $rol[$key] = $value->getRoll();
+                }
             }
             echo "<div class='row'>
                 <div class='column side'></div>
@@ -191,33 +192,35 @@
                     </thead>
                     <tbody>
                     "; 
-            for($i = 0; $i < count($managers); $i++){
-                echo '<tr>
-                        <td>'. $ids[$i] .'</td>
-                        <td>'. $idscinemas[$i] .'</td>
-                        <td>'. $usernames[$i] .'</td>
-                        <td>'. $email[$i] .'</td>
-                        <td>'. $rol[$i] .'</td>
-                        <td>
-                            <form method="post" action="index.php?state=mg">
-                                <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
-                                <input type="submit" id="submit" value="Editar" name="edit_manager" class="primary" />
-                            </form> 
-                        </td> 
-                        <td> 
-                            <form method="post" action="index.php?state=mg">
-                                <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
-                                <input  name="username" type="hidden" value="'.$usernames[$i].'">
-                                <input  name="email" type="hidden" value="'.$email[$i].'">
-                                <input  name="rol" type="hidden" value="'.$rol[$i].'">
-                                <input type="submit" id="submit" value="Eliminar" name="delete_manager" class="primary" />
-                            </form> 
-                        </td> 
-                    </tr>
-                    '; 
-            } 
+            if(is_array($managers)){        
+                for($i = 0; $i < count($managers); $i++){
+                    echo '<tr>
+                            <td>'. $ids[$i] .'</td>
+                            <td>'. $idscinemas[$i] .'</td>
+                            <td>'. $usernames[$i] .'</td>
+                            <td>'. $email[$i] .'</td>
+                            <td>'. $rol[$i] .'</td>
+                            <td>
+                                <form method="post" action="index.php?state=mg">
+                                    <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                    <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
+                                    <input type="submit" id="submit" value="Editar" name="edit_manager" class="primary" />
+                                </form> 
+                            </td> 
+                            <td> 
+                                <form method="post" action="index.php?state=mg">
+                                    <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                    <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
+                                    <input  name="username" type="hidden" value="'.$usernames[$i].'">
+                                    <input  name="email" type="hidden" value="'.$email[$i].'">
+                                    <input  name="rol" type="hidden" value="'.$rol[$i].'">
+                                    <input type="submit" id="submit" value="Eliminar" name="delete_manager" class="primary" />
+                                </form> 
+                            </td> 
+                        </tr>
+                        '; 
+                } 
+            }
             echo'</tbody>
                     </table>
                 </div>
