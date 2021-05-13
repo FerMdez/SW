@@ -19,11 +19,11 @@ class formDeleteManager extends Form{
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
-        //$errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
+        $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         //$errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
 		$html = '<div class="row">
-                    <fieldset id="promotion_form">
+                    <fieldset id="promotion_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>¿Estás seguro de que quieres eliminar este gerente?</legend>
                         <input type="hidden" name="id" value='.$_POST['id'].'/>
                         <p>Id: '.$_POST['id'].' </p>
@@ -46,7 +46,7 @@ class formDeleteManager extends Form{
         
         $id = $this->test_input($datos['id']) ?? null;
         if (is_null($id) ) {
-            $result[] = "ERROR. No existe un manager con ese ID";
+            $result['id'] = "ERROR. No existe un manager con ese ID";
         }
         
         if (count($result) === 0) {

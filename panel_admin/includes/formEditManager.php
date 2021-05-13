@@ -20,8 +20,8 @@ class formEditManager extends Form{
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
-        //$errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
-        //$errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
+        $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
+        $errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
 		$html = '<div class="row">
                     <h1>EDITAR GERENTE ID:'.$_POST['id'].'</h1>
@@ -45,13 +45,13 @@ class formEditManager extends Form{
         
         $id = $this->test_input($datos['id']) ?? null;
         if (is_null($id) ) {
-            $result[] = "ERROR. No existe un usuario con ese ID";
+            $result['id'] = "ERROR. No existe un usuario con ese ID";
         }
 
         $idcinema = $this->test_input($datos['idcinema']) ?? null;
 		//||!mb_ereg_match(self::HTML5_EMAIL_REGEXP, $duration) 
         if (is_null($idcinema)) {
-            $result[] = "ERROR. No existe un cine con ese ID";
+            $result['idcinema'] = "ERROR. No existe un cine con ese ID";
         }
         
         

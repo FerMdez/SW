@@ -20,18 +20,16 @@ class formEditFilm extends Form{
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+        $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         $errorTittle = self::createMensajeError($errores, 'tittle', 'span', array('class' => 'error'));
         $errorDuration = self::createMensajeError($errores, 'duration', 'span', array('class' => 'error'));
         $errorLanguage = self::createMensajeError($errores, 'language', 'span', array('class' => 'error'));
 		$errorDescription = self::createMensajeError($errores, 'description', 'span', array('class' => 'error'));
 		$errorImage = self::createMensajeError($errores, 'image', 'span', array('class' => 'error'));
 
-		$html = '<div class="column side"></div>
-        <div class="column middle">
-        <h2>Editar pelicula</h2>
-        <form method="post" enctype="multipart/form-data" action="index.php?state=mf">
+		$html = '
             <div class="row">
-                <fieldset id="film_form">
+                <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
                 <legend>Datos de pelicula</legend>
                     <input type="hidden" name="id" value='.$_POST['id'].'/>
                     <input type="text" name="tittle" value='.$_POST['tittle'].' required/><pre>'.$errorTittle.'</pre>
@@ -57,7 +55,7 @@ class formEditFilm extends Form{
         $result = array();
 
         $id =  $this->test_input($_POST['id']) ?? null;
-        if ( is_null($id)) {
+        if ( empty($id)) {
 			$result[] = "La pelicula seleccionada no existe.";
 		}
 

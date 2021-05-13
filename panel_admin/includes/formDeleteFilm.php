@@ -19,6 +19,7 @@ class formDeleteFilm extends Form{
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+		$errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         //$errorTittle = self::createMensajeError($errores, 'tittle', 'span', array('class' => 'error'));
         //$errorDuration = self::createMensajeError($errores, 'duration', 'span', array('class' => 'error'));
         //$errorLanguage = self::createMensajeError($errores, 'language', 'span', array('class' => 'error'));
@@ -26,7 +27,7 @@ class formDeleteFilm extends Form{
 		//$errorImage = self::createMensajeError($errores, 'image', 'span', array('class' => 'error'));
 
 		$html = '<div class="row">
-				<fieldset id="film_form">
+				<fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
 					<legend>¿Estás seguro de que quieres eliminar esta pelicula?</legend>
 					<input type="hidden" name="id" value='.$_POST['id'].'/>
 						<p>Id: '.$_POST['id'].' </p>
@@ -48,7 +49,7 @@ class formDeleteFilm extends Form{
         $result = array();
         $id =  $this->test_input($_POST['id']) ?? null;
 		if ( empty($id)) {
-			$result[] = "La pelicula seleccionada no existe.";
+			$result['id'] = "La pelicula seleccionada no existe.";
 		}
         
         if (count($result) === 0) {
