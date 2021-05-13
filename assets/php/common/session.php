@@ -30,7 +30,6 @@
 			if($bd ) {
 				return $bd->getAllSessions($hall, $cinema, $date);
 			}
-			return "";
 		}
 		
 		public static function create_session($cinema, $hall, $start, $date, $film, $price, $format,$repeat){
@@ -59,10 +58,12 @@
 			$bd = new SessionDAO('complucine');
 			if($bd ){
 				if($bd->searchSession($cinema, $or_hall, $or_start, $or_date)){
-					$origin = array("cinema" => $cinema,"hall" => $or_hall,"start" => $or_start,"date" => $or_date);
-					$bd->editSession($film, $hall, $cinema, $date, 
-						$start, $price, $format,$origin);
-					return "Se ha editado la session con exito";						
+					if(!$bd->searchSession($cinema,$hall,$start,$date)){
+						$origin = array("cinema" => $cinema,"hall" => $or_hall,"start" => $or_start,"date" => $or_date);
+						$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format,$origin);
+						return "Se ha editado la session con exito";			
+					}else	
+						return "Ya existe una sesion con los parametros nuevos";	
 				} else 
 					return "Esta session no existe";
 				
@@ -87,23 +88,6 @@
 			if($bd ) {
 				return $bd->filmTittle($idfilm);
 			}
-			return "";
-		}
-		
-		public static function getThisSessionId($cinema, $hall, $start, $date){
-			$bd = new SessionDAO('complucine');
-			if($bd ) {
-				return $bd->searchSession($cinema, $hall, $start, $date);
-			}
-			return "";
-		}
-		
-		public static function getThisSessionFromId($id){
-			$bd = new SessionDAO('complucine');
-			if($bd ) {
-				return $bd->sessionData($id);
-			}
-			return "";
 		}
 		
         public function setId($id){	$this->_id = $id; }

@@ -28,7 +28,6 @@
 			$bd = new HallDAO('complucine');
 			if($bd )
 				return $bd->getAllHalls($cinema);
-			return "";
 		}
 		
 		public static function create_hall($number, $cinema, $rows, $cols, $seats, $seats_map){

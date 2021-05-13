@@ -42,19 +42,23 @@
 			return $hall;
 		}
 		
-		//Returns the count of the hall searched
 		public function searchHall($number, $cinema){
 			
-			$sql = sprintf( "SELECT COUNT(*) FROM hall WHERE 
+			$sql = sprintf( "SELECT * FROM hall WHERE 
 							number = '%s' AND idcinema = '%s'", 
 							$number, $cinema);	
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			$hall = false;
 			
-			$hall = mysqli_fetch_array($resul);
-			
-			mysqli_free_result($resul);
-			
-			return $hall[0];
+			if($resul){
+				if($resul->num_rows == 1){
+					$fila = $resul->fetch_assoc();
+					$hall = $this->loadHall($fila["number"], $fila["idcinema"], $fila["numrows"], $fila["numcolumns"], $fila["total_seats"], null);
+				}
+				$resul->free();
+			}
+		
+			return $hall;
 		}
 		
 		
