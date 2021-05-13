@@ -1,107 +1,148 @@
 <?php
 require_once($prefix.'assets/php/common/session_dao.php');
+require_once($prefix.'assets/php/common/film_dao.php');
 require_once($prefix.'assets/php/common/session.php');
 require_once($prefix.'assets/php/form.php');
-	
+
 //Receive data from froms and prepare the correct response
 class FormSession extends Form {
 
+	private $option;
+
     //Constructor:
-    public function __construct() {
-        parent::__construct('formSession');
+    public function __construct($option) {
+		$this->option = $option;
+		$options = array("action" => "./?state=".$option);
+        parent::__construct('formSession',$options);
     }
 	
 	//TODO Edit session no funciona correctamente con el seleccionar una pelicula distinta, hay que guardar la id de la sesion de alguna forma y usarla o guardar en la sesion
-	public static function generaCampoFormulario($data, $errores = array()){
+	protected function generaCamposFormulario($data, $errores = array()){
+
+		$filmList = new Film_DAO('complucine');
+		$films = $filmList->allFilmData();	
 		
-		$cinema = $data['cinema'] ?? '';
-		$film = $data['film'] ?? '';
-		$hall = $data['hall'] ?? '';
-		$date = $data['date'] ?? '';
-		$start = $data['start'] ?? '';
-		$price = $data['price'] ?? '';
-		$format = $data['format'] ?? '';
-		
-		$htmlform .= '<div class="column left">
-				<form method="post" id="'.$data['option'].'" action="./includes/processForm.php"\>
+		if($this->option == "new_session") {
+			$cinema = $data['cinema'] ?? $_SESSION["cinema"];
+			$film = $data['film'] ?? 1;
+			$hall = $data['hall'] ?? '';
+			$date = $data['date'] ?? '';
+			$start = $data['start'] ?? '';
+			$price = $data['price'] ?? '';
+			$format = $data['format'] ?? '';
+		} 
+		else {
+			$cinema = $data['cinema'] ?? $_SESSION["cinema"];
+			$film = $data['film'] ?? $_POST["film"];
+			$hall = $data['hall'] ?? $_POST["hall"];
+			$date = $data['date'] ?? $_POST["date"];
+			$start = $data['start'] ?? $_POST["start"];
+			$price = $data['price'] ?? $_POST["price"];
+			$format = $data['format'] ?? $_POST["format"];
+		}
+		$or_hall = $data["or_hall"] ?? $hall;
+		$or_date = $data["or_date"] ?? $date;
+		$or_start = $data["or_start"] ?? $start;
+
+		$htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+		$errorPrice = self::createMensajeError($errores, 'price', 'span', array('class' => 'error'));
+
+		$html .= '<div class="column left">
+				 '.$htmlErroresGlobales.'
+				 '.$errorPrice.'
 					<fieldset>
 						<legend>Datos</legend>
 						<input type="number" step="0.01" name="price" value="'.$price.'" min="0" placeholder="Precio de la entrada" required/> <br>
+						'.$errorFormat.'
 						<input type="text" name="format" value="'.$format.'" placeholder="Formato de pelicula" required/> <br>
-						<input type="hidden" name="film" value="'.$film["idfilm"].'"/> 
+						<input type="hidden" name="film" value="'.$film.'"/> 
 						<select name="hall" class="button large">';
-		foreach(Hall::getListHalls($cinema) as $hll){
+			foreach(Hall::getListHalls($cinema) as $hll){
 				if($hll->getNumber() == $hall){
-					$htmlform.= '
+					$html.= '
 							<option value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
 				}else{ 
-					$htmlform.= '
+					$html.= '
 							<option value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
 				}
 			}
-		$htmlform.= '
+		$html.= '
 						</select>
+						<input type="hidden" name="or_hall" value="'.$or_hall.'"/>
 					</fieldset>
 					<fieldset>
 						<legend>Horario</legend>
 						<input type="time" name="start" value="'.$start.'" placeholder="Hora de inicio" required/> <br>
+						<input type="hidden" name="or_start" value="'.$or_start.'"/>
 						<input type="date" name="date" value="'.$date.'" placeholder="Fecha de inicio" required/> <br>
+						<input type="hidden" name="or_date" value="'.$or_date.'"/>
 					</fieldset>
 						';		
 		if($film){
-			if($data['option'] == "new_session")
-				$htmlform .= '<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
-				<button type="submit" name="new_session" class="button large">Crear</button><br>';
+			if($this->option == "new_session")
+				$html .= '<input type="number" name="repeat" value="" min="0" title="Añadir esta sesion durante los proximos X dias" min="0" max="31" placeholder="Añadir X dias"/> <br>
+				<button type="submit" id="submit" name="sumbit" class="button large">Crear</button><br>';
 				
-			if($data['option'] == "edit_session"){
-				if(!$_SESSION["or_hall"]) $_SESSION["or_hall"] = $hall;
-				if(!$_SESSION["or_date"]) $_SESSION["or_date"] = $date;
-				if(!$_SESSION["or_start"])$_SESSION["or_start"] = $start;
-				
-				$htmlform .= '
-				<button type="submit" name="edit_session" class="button large">Editar</button><br>
-				<button type="submit" name="delete_session" class="primary">Borrar</button><br>';
+			if($this->option == "edit_session"){			
+				$html .= '
+				<button type="submit" id="submit" name="sumbit" class="button large">Editar</button><br>
+				<button type="submit" id="submit" name="delete" class="primary">Borrar</button><br>';
 			}
 		}
-		$htmlform .= "
-		<input type='reset' value='Limpiar Campos' >
-				</form>
+		$html .= '
+		<input type="reset" value="Limpiar Campos" >
 				</div>
-				<div class='column side'>";
-				if($film["tittle"]){
-					$htmlform .= " <section id='".$film["tittle"]."'>
-                                <div class='code showtimes'>
-                                    <div class='image'><img src='../img/".$film["tittle"].".jpg' alt='".$film["tittle"]."' /></div>
-                                    <h2>".str_replace('_', ' ',$film["tittle"])."</h2>
-                                    <hr />
-                                    <div class='blockquote'>
-                                        <p>".$film["description"]."</p>
-                                    </div>
-                                    <p>Duración: ".$film["duration"]." minutos</p>
-                                </div>
-                        </section>
-";
+				<div class="column side">
+				<select name="film" class="button large">';
+				foreach($films as $f){ 
+					if($f->getId() == $film){
+						$html .=  "<option value=\"". $f->getId() ." \"selected> " . $f->getId() . "|" . $f->getTittle() ." Idioma: " . $f->getLanguage() . "</option>";
+					}else{
+						$html .=  "<option value=\"". $f->getId() ." \"> " . $f->getId() . "|" . $f->getTittle() ." Idioma: " . $f->getLanguage() . "</option>";
+					}
 				}
-				$htmlform .= '<button type="submit" name="select_films" form="'.$data['option'].'" formaction="?state=select_film&option='.$data['option'].'" class="button large">Seleccionar una Pelicula</button><br>
-				</div>
-';
-		return $htmlform;	
+				
+		return $html;	
 	}
     //Methods:
 
     //Process form:
-    public static function processesForm($data){
-		if($data["option"] == "new_session"){
-			$_SESSION['msg'] = Session::create_session($data);
-			header( "Location: ../?state=success" );
-		}else if($data["option"] == "edit_session"){
-			$_SESSION['msg'] = Session::edit_session($data);
-			header( "Location: ../?state=success" );
+	protected function procesaFormulario($data){
+		$result = array();
+
+		$film = $data['film'] ;
+		$hall = $data['hall'] ;
+		$date = $data['date'] ;
+		$start = $data['start'];
+		$price = $data['price'] ;
+		$format = $data['format'] ;
+		$repeat = $data['repeat'] ?? 0;
+		$or_hall = $data["or_hall"] ;
+		$or_date = $data["or_date"] ;
+		$or_start = $data["or_start"] ;
+
+		if (($price == 0 || empty($price))&& isset($data["sumbit"]) ) {
+            $result['price'] = "<li> No puede haber 0 euros. </li> <br>";
 		}
-		else if($data["option"] == "delete_session") {
-			$_SESSION['msg'] = Session::delete_session($data);
-			header( "Location: ../?state=success" );
-		}			
+	
+		
+        if (count($result) === 0 && isset($data["sumbit"]) ) {
+			if($this->option == "new_session"){
+                $_SESSION['msg'] = Session::create_session($_SESSION["cinema"], $hall, $start, $date, $film, $price, $format,$repeat);
+                $result = './?state=success';
+            }
+			if($this->option == "edit_session"){
+                $_SESSION['msg'] = Session::edit_session($_SESSION["cinema"], $or_hall, $or_date, $or_start, $hall, $start, $date, $film, $price, $format);
+                $result = './?state=success';
+            }
+        }
+
+		if(!isset($result['hall']) && !isset($result['start']) && !isset($result['date']) && isset($data["delete"])) {
+			$_SESSION['msg'] = Session::delete_session($_SESSION["cinema"], $or_hall, $or_start, $or_date);
+			$result = './?state=success';
+		}
+ 
+        return $result;		
     }
 }
 
