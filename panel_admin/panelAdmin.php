@@ -44,23 +44,17 @@
                     break;
                     case 'mp': require_once('manage_promotions.php');
                                 if(isset($_POST['edit_promotion'])) {
-                                    editPromotion();
+                                    $this->editPromotion();
                                 }
                                 else if(isset($_POST['delete_promotion'])) {
-                                    deletePromotion();
+                                    $this->deletePromotion();
                                 }
                                 else if(isset($_POST['add_promotion'])) {
-                                    confirmAdd();
-                                }
-                                else if(isset($_POST['confirm_delete_promotion'])) {
-                                    confirmDelete();
-                                }
-                                else if(isset($_POST['confirm_edit_promotion'])) {
-                                    confirmEdit();
+                                    $this->addPromotion();
                                 }
                                 else {
-                                    addPromotion();
-                                    print_promotions();
+                                    $this->addPromotion();
+                                    $this->print_promotions();
                                 
                                 }; 
                     break;
@@ -277,8 +271,114 @@
                     </div>'."\n";
         }
 
+        function addPromotion(){
+            include_once('./includes/formAddPromotion.php');
+            $formAP = new formAddPromotion();
+            $htmlAForm = $formAP->gestiona();
+            echo   '<!-- ADD PROMOTION -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    <h3>AÑADIR PROMOCIÓN</h3>
+                    '.$htmlAForm.'
+                    </div>'."\n";
+        }
+        function editPromotion(){
+            include_once('./includes/formEditPromotion.php');
+            $formEP = new formEditPromotion();
+            $htmlEForm = $formEP->gestiona();
+            echo   '<!-- EDIT MANAGER -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    <h3>EDITAR PROMOCIÓN</h3>
+                    '.$htmlEForm.'
+                    </div>'."\n";
+        }
 
-
+        function deletePromotion(){
+            include_once('./includes/formDeletePromotion.php');
+            $formDP = new formDeletePromotion();
+            $htmlDForm = $formDP->gestiona();
+            echo   '<!-- DELETE MANAGER -->
+            <div class="column side"></div>
+                    <div class="column middle">
+                    <h3>ELIMINAR PROMOCIÓN</h3>
+                    '.$htmlDForm.'
+                    </div>'."\n";
+        }
+        
+        function print_promotions(){
+            $promo = new Promotion_DAO("complucine");
+            $promos = $promo->allPromotionData();
+            $ids = array();
+            $tittles = array();
+            $descriptions = array();
+            $codes = array();
+            $actives = array();
+    
+            if(is_array($promos)){ 
+                foreach($promos as $key => $value){
+                    $ids[$key] = $value->getId();
+                    $tittles[$key] = $value->getTittle();
+                    $descriptions[$key] = $value->getDescription();
+                    $codes[$key] = $value->getCode();
+                    $actives[$key] = $value->getActive();
+                }
+            }
+            
+            echo "<div class='row'>
+                <div class='column side'></div>
+                <div class='column middle'>
+                    <table class='alt'>
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Título</th>
+                        <th>Descripcion</th>
+                        <th>Código</th>
+                        <th>Activo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    "; 
+            if(is_array($promos)){         
+            for($i = 0; $i < count($promos); $i++){
+                echo '<tr>
+                        <td>'. $ids[$i] .'</td>
+                        <td>'. $tittles[$i] .'</td>
+                        <td>'. $descriptions[$i] .'</td>
+                        <td>'. $codes[$i] .'</td>
+                        <td>'. $actives[$i] .'</td>
+                        <td>
+                            <form method="post" action="index.php?state=mp">
+                                <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                <input  name="tittle" type="hidden" value="'.$tittles[$i].'">
+                                <input  name="description" type="hidden" value="'.$descriptions[$i].'">
+                                <input  name="code" type="hidden" value="'.$codes[$i].'">
+                                <input  name="active" type="hidden" value="'.$actives[$i].'">
+                                <input type="submit" id="submit" value="Editar" name="edit_promotion" class="primary" />
+                            </form> 
+                        </td> 
+                        <td> 
+                            <form method="post" action="index.php?state=mp">
+                                <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                <input  name="tittle" type="hidden" value="'.$tittles[$i].'">
+                                <input  name="description" type="hidden" value="'.$descriptions[$i].'">
+                                <input  name="code" type="hidden" value="'.$codes[$i].'">
+                                <input  name="active" type="hidden" value="'.$actives[$i].'">
+                                <input type="submit" id="submit" value="Eliminar" name="delete_promotion" class="primary" />
+                            </form> 
+                        </td> 
+                    </tr>
+                    '; 
+            } 
+            }
+            echo'</tbody>
+                    </table>
+                </div>
+                <div class="column side"></div>
+            ';
+                
+        }
     }
    
 ?>

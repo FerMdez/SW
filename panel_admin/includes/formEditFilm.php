@@ -57,7 +57,7 @@ class formEditFilm extends Form{
         $result = array();
 
         $id =  $this->test_input($_POST['id']) ?? null;
-        if ( empty($id)) {
+        if ( is_null($id)) {
 			$result[] = "La pelicula seleccionada no existe.";
 		}
 
