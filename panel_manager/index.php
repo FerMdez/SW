@@ -18,50 +18,50 @@
 			if($manager){
 				if($manager->num_rows == 1){
 					$fila = $manager->fetch_assoc();
-					$manager = new Manager($fila["id"], $fila["idcinema"], $fila["username"], $fila["email"], $fila["rol"]);
+					$manager = new Manager($fila["id"], $fila["idcinema"], null, null, null);
 				}
 			}
 		}
-		
-        switch($_GET["state"]){
+		$state = isset($_GET['state']) ? $_GET['state'] : '';
+		switch($state){
 			case "view_ruser":
 			case "view_user":
-                   $panel = '<div class="column side"></div>
-                   <div class="column middle">
+				   $panel = '<div class="column side"></div>
+				   <div class="column middle">
 						<div class="code info">
-                            <h1>Esta vista aun no esta implementada.</h1><hr />
+							<h1>Esta vista aun no esta implementada.</h1><hr />
 						</div>
 					</div>
-                <div class="column side"></div>'."\n";
-                break;			
+				<div class="column side"></div>'."\n";
+				break;			
 			case "manage_halls":
-                $panel = Manager_panel::manage_halls($manager);
-                break;
+				$panel = Manager_panel::manage_halls($manager);
+				break;
 			case "new_hall":
-                $panel = Manager_panel::new_hall($manager);
-                break;	
+				$panel = Manager_panel::new_hall($manager);
+				break;	
 			case "edit_hall":
-                $panel = Manager_panel::edit_hall($manager);
-                break;	
-            case "manage_sessions":
-                $panel = Manager_panel::manage_sessions($manager);
-                break;
+				$panel = Manager_panel::edit_hall($manager);
+				break;	
+			case "manage_sessions":
+				$panel = Manager_panel::manage_sessions($manager);
+				break;
 			case "new_session":
-                $panel = Manager_panel::new_session($manager);
-                break;
+				$panel = Manager_panel::new_session($manager);
+				break;
 			case "edit_session":
-                $panel = Manager_panel::edit_session($manager);
-                break;
+				$panel = Manager_panel::edit_session($manager);
+				break;
 			case "select_film":
-                $panel = Manager_panel::select_film($template,$manager);
-                break;
+				$panel = Manager_panel::select_film($template,$manager);
+				break;
 			case "success":
-                $panel = Manager_panel::success();
-                break;
-            default:  
-                $panel = Manager_panel::welcome($manager);
-                break;
-        }
+				$panel = Manager_panel::success();
+				break;
+			default:  
+				$panel = Manager_panel::welcome($manager);
+				break;
+		}
     }
     else{
         $panel = '<div class="column side"></div>

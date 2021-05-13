@@ -33,13 +33,21 @@ class FormHall extends Form {
 		//Seats_map
 		$seats = 0;
 		$seats_map = array();
-
+		for($i = 1;$i <= $rows; $i++){
+			for($j = 1; $j <= $cols; $j++){ 
+				$seats_map[$i][$j] = "-1";
+			}
+		}
+		
 		//Show the original seats_map once u click restart or the first time u enter this form from manage_halls's form
-		if($data["restart"] || $_POST["edit_hall"] ){
-			foreach(Seat::getSeatsMap($og_number, $this->cinema) as $seat){
-				$seats_map[$seat->getNumRows()][$seat->getNumCol()] = $seat->getState();
-				if($seat->getState()>=0){
-					$seats++;
+		if(isset($data["restart"]) || isset($_POST["edit_hall"]) ){
+			$seat_list = Seat::getSeatsMap($og_number, $this->cinema);
+			if($seat_list){
+				foreach($seat_list as $seat){
+					$seats_map[$seat->getNumRows()][$seat->getNumCol()] = $seat->getState();
+					if($seat->getState()>=0){
+						$seats++;
+					}
 				}
 			}
 		}//Show the checkbox seats_map updated and everything to selected if alltoone was pressed 
@@ -64,7 +72,7 @@ class FormHall extends Form {
 		$errorSeats = self::createMensajeError($errores, 'seats', 'span', array('class' => 'error'));
 
 		$html = '
-				<div class="column left">'.$htmlErroresGlobales.' '.$errorSeats.' '. $errorManager.'
+				<div class="column left">'.$htmlErroresGlobales.' '.$errorSeats.'
 					<fieldset>
 						<legend>Mapa de Asientos</legend>
 						<label> Filas: </label> <input type="number" name="rows" min="1" id="rows" value="'.$rows.'" required/> <br>

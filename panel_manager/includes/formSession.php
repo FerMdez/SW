@@ -46,8 +46,9 @@ class FormSession extends Form {
 
 		$htmlErroresGlobales = self::generaListaErroresGlobales($errores);
 		$errorPrice = self::createMensajeError($errores, 'price', 'span', array('class' => 'error'));
-
-		$html .= '
+		$errorFormat = self::createMensajeError($errores, 'format', 'span', array('class' => 'error'));
+		
+		$html = '
 				<div class="column left">'.$htmlErroresGlobales.' '.$errorPrice.'
 					<fieldset>
 						<legend>Datos</legend>
