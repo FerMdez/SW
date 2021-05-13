@@ -48,3 +48,21 @@ table.seat td:first-child {
 .check_box:checked+label{
 	background:url('../../img/seat_green.png') no-repeat;
 }
+
+button, .black.button {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #dadada;
+  background-color: #00020f;
+  color: #dadada;
+  padding: 5px;
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 2px 2px #1f2c3d;
+  cursor: pointer;
+}
+button:hover, .black.button:hover {
+  border:#000000;
+  background-color: #791515;
+}
