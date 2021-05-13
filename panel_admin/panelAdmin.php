@@ -19,11 +19,11 @@
                     }
                     else if(isset($_POST['add_cinema'])) {
                         $this->addCinema();
-                        $template->print_cinemas();
+                        echo ($template->print_cinemas());
                     }                               
                     else {
                         $this-> addCinema();
-                        $template->print_cinemas();
+                       echo ($template->print_cinemas());
                     
                     };  
                     break;
@@ -35,11 +35,11 @@
                             }
                             else if(isset($_POST['add_film'])) {
                                 $this->addFilm();
-                                $template->print_fimls();
+                                echo ( $template->print_fimls());
                             }
                             else {
                                 $this->addFilm();
-                                $template->print_fimls();
+                               echo( $template->print_fimls());
                             };  
                     break;
                     case 'mp': require_once('manage_promotions.php');
