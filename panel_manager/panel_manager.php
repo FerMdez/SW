@@ -183,48 +183,18 @@
         }
 		
 		static function new_session(){	
-			echo "inicio";
-			if(isset($_POST["new_session"])){
-				
-				$data = array("option" => "new_session","hall" => $_POST['hall'],"cinema" => $_SESSION["cinema"],"date" => $_POST['date']);
-				
-			}else if(isset($_POST["select_film"])){
-				
-				$film = array("idfilm" => $_POST["id"],"tittle" => $_POST["tittle"], "description" => $_POST["description"], "duration" => $_POST["duration"]);
-				$data = array("option" => "new_session","hall" => $_POST['hall'],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $film, "start" => $_POST['start']
-					, "price" => $_POST['price'], "format" => $_POST['format']);
-			}
-			
-			if($data){
-				$panel = '<h1>Crear una sesión.</h1><hr /></br>
-				'.FormSession::generaCampoFormulario($data, null);
-			}else $panel = self::warning();
-			
+			$formSession = new FormSession("new_session");
+		
+			$panel = '<h1>Crear una sesion.</h1><hr/></br>'
+				.$formSession->gestiona();
 			return $panel;
 		}
 		
 		static function edit_session(){	
-			if(isset($_POST["edit_session"])){
-				
-				$_SESSION["or_hall"] = "";
-				$_SESSION["or_date"] = "";
-				$_SESSION["or_start"] = "";
+			$formSession = new FormSession("edit_session");
 		
-				$film = Session::getThisSessionFilm($_POST["film"]);
-				$data = array("option" => "edit_session","hall" => $_POST["hall"],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $film,
-					"start" => $_POST['start'],"price" => $_POST['price'],"format" => $_POST['format']);
-					
-			}else if(isset($_SESSION["session"])){
-				$film = array("idfilm" => $_POST["id"],"tittle" => $_POST["tittle"], "description" => $_POST["description"], "duration" => $_POST["duration"]);
-
-				$data = array("option" => "edit_session","hall" => $_POST['hall'],"cinema" => $_SESSION["cinema"],"date" => $_POST['date'],"film" => $film, "start" => $_POST['start']
-					, "price" => $_POST['price'], "format" => $_POST['format']);
-			}
-			
-			if($data){
-				$panel = '<h1>Editar una sesión.</h1><hr /></br>
-				'.FormSession::generaCampoFormulario($data, null);
-			} else $panel = self::warning();
+			$panel = '<h1>Editar una sesion.</h1><hr/></br>'
+				.$formSession->gestiona();
 			return $panel;
 		}
 		
