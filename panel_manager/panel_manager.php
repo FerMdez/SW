@@ -1,6 +1,7 @@
 <?php
 	include_once($prefix.'assets/php/common/hall.php');
 	include_once($prefix.'assets/php/common/session.php');
+	require_once($prefix.'assets/php/common/manager.php');
 	include_once('./includes/formHall.php');	
 	include_once('./includes/formSession.php');	
 
@@ -9,17 +10,17 @@
 		
         function __construct(){}
 
-		static function welcome(){
-            $name = strtoupper($_SESSION['nombre']);
-			$cinema = strtoupper($_SESSION['cinema']);
+		static function welcome($manager){
+            $name = strtoupper($_SESSION["nombre"]);
+			$cinema = strtoupper( $manager->getIdcinema());
 
             $panel = '<div class="code info">
-                    <h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
-                    <hr />
-                    <p>Usuario: '.$name.'</p>
-					<p>Cine: '.$cinema.'</p>
-                    <p>Espero que estes pasando un buen dia</p>
-                </div>'."\n";
+						<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
+						<hr />
+						<p>Usuario: '.$name.'</p>
+						<p>Cine: '.$cinema.'</p>
+						<p>Espero que estes pasando un buen dia</p>
+					</div>';
 				
 			return $panel;
         }
@@ -35,170 +36,167 @@
 			return $panel;
         }
 		
-		static function manage_halls(){	
+		static function manage_halls($manager){	
 			
 			$panel = '<div class="column side"></div>
-			<div class="column middle">';
-			$listhall = Hall::getListHalls($_SESSION["cinema"]);
+					<div class="column middle">';
+			$listhall = Hall::getListHalls($manager->getIdcinema());
 			if(!$listhall){
 				$panel .= "<h2> No hay ninguna sala en este cine";
 			}else{
 			$panel .= '
-			
-				<table class="alt">
-					<thead>
-						<tr>
-							<th>Numero</th>
-							<th>Filas</th>
-							<th>Columnas</th>
-							<th>Asientos Disponibles</th>
-						</tr>
-					</thead>
-					<tbody>'; 
+						<table class="alt">
+							<thead>
+								<tr>
+									<th>Numero</th>
+									<th>Filas</th>
+									<th>Columnas</th>
+									<th>Asientos Disponibles</th>
+								</tr>
+							</thead>
+							<tbody>'; 
 
 			foreach($listhall as $hall){ 
 				$panel .='
-						<tr>
-							<td> '. $hall->getNumber().'</td>
-							<td> '. $hall->getNumRows().'</td>
-							<td> '. $hall->getNumCol().'</td>
-							<td> '.$hall->getTotalSeats().' </td>
-							<form method="post" action="./?state=edit_session">
-								<input  name="number" type="hidden" value="'. $hall->getNumber().'">
-								<input  name="rows" type="hidden" value="'. $hall->getNumRows().'">
-								<input  name="cols" type="hidden" value="'. $hall->getNumCol().'">
-								<input  name="seats" type="hidden" value="'.$hall->getTotalSeats().'">
-								<input  name="object" type="hidden" value="'.serialize($cinema).'">
-							<td> <input type="submit" name="edit_hall" value="Editar" class="button" formaction="./?state=edit_hall&number='.$hall->getNumber().'" ></td>
-							</form>
-						</tr>';
+								<tr>
+									<td> '. $hall->getNumber().'</td>
+									<td> '. $hall->getNumRows().'</td>
+									<td> '. $hall->getNumCol().'</td>
+									<td> '.$hall->getTotalSeats().' </td>
+									<form method="post" action="./?state=edit_session">
+										<input  name="number" type="hidden" value="'. $hall->getNumber().'"/>
+										<input  name="rows" type="hidden" value="'. $hall->getNumRows().'"/>
+										<input  name="cols" type="hidden" value="'. $hall->getNumCol().'"/>
+										<input  name="seats" type="hidden" value="'.$hall->getTotalSeats().'"/>
+									<td> <input type="submit" id="submit" name ="edit_hall" formaction="./?state=edit_hall&number='.$hall->getNumber().'" value="Editar" class="primary" /> </td>
+									</form>
+								</tr>';
 				}
 			$panel.='
-					</tbody>
-				</table>
-			';
+							</tbody>
+						</table>';
 			}
-			$panel.='	<form method="post" action="./?state=new_hall">
-							<input type="submit" name="new_hall" value="Añadir Sala" class="button large" >
+			$panel.='
+						<form method="post" action="./?state=new_hall">
+							<input type="submit" name="new_hall" value="Añadir Sala" class="button large" />
 						</form>
-			</div>
-			<div class="column side"></div>
-			';			
+				</div>
+				<div class="column side"></div>';			
 			return $panel;
         }
 		
-		static function new_hall(){		
+		static function new_hall($manager){		
 		
-			$formHall = new FormHall("new_hall");
+			$formHall = new FormHall("new_hall",$manager->getIdcinema());
 		
-			$panel = '<h1>Crear una sala.</h1><hr/></br>'
-				.$formHall->gestiona();
+			$panel = '<h1>Crear una sala.</h1><hr/></br>
+				'.$formHall->gestiona();
 			return $panel;
 		}
 		
-		static function edit_hall(){		
-			$formHall = new FormHall("edit_hall");
+		static function edit_hall($manager){		
+			$formHall = new FormHall("edit_hall",$manager->getIdcinema());
 		
-			$panel = '<h1>Editar una sala.</h1><hr/></br>'
-				.$formHall->gestiona();
+			$panel = '<h1>Editar una sala.</h1><hr/></br>
+				'.$formHall->gestiona();
 			return $panel;
 		}
 		
-		static function manage_sessions(){
+		static function manage_sessions($manager){
 			//Base filtering values
 			$date = isset($_POST['date']) ? $_POST['date'] : date("Y-m-d");
 			$hall = isset($_POST['hall']) ? $_POST['hall'] : "1";
 			
 			//Session filter
 			$panel='<div class = "column left">
-				<form method="post" id="filter" action="./?state=manage_sessions">
-					<input type="date" name="date" value="'.$date.'" min="2021-01-01" max="2031-12-31">
-					<select name="hall" class="button large">';
+					<form method="post" id="filter" action="./?state=manage_sessions">
+						<input type="date" name="date" value="'.$date.'" min="2021-01-01" max="2031-12-31">
+							<select name="hall" class="button large">';
 						
-			foreach(Hall::getListHalls($_SESSION["cinema"]) as $hll){
+			foreach(Hall::getListHalls($manager->getIdcinema()) as $hll){
 				if($hll->getNumber() == $hall){
 					$panel.= '
-						<option value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
+								<option value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
 				}else{ 
 					$panel.= '
-						<option value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
+								<option value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
 				}
 			}
 			$panel.='
-					</select>
-					<input type="submit" name="filter" value="Filtrar" class="button large"/>
-				</form>
-			</div>
+							</select>
+						<input type="submit" name="filter" value="Filtrar" class="button large"/>
+					</form>
+				</div>
 			';
 			//Session list
-			$panel .='<div class = "column right">';
-			$sessions = Session::getListSessions($hall,$_SESSION["cinema"],$date);
+			$panel .='	<div class = "column right">';
+			$sessions = Session::getListSessions($hall,$manager->getIdcinema(),$date);
 			
 			if($sessions) {
 				$panel .='
-				<form method="post" action="./?state=edit_session">
-					<table class="alt">
-						<thead>
-							<tr>
-								<th>Hora</th>
-								<th>Pelicula</th>
-								<th>Formato</th>
-								<th>Precio</th>
-							</tr>
-						</thead>
-						<tbody>'; 
+					<form method="post" action="./?state=edit_session">
+						<table class="alt">
+							<thead>
+								<tr>
+									<th>Hora</th>
+									<th>Pelicula</th>
+									<th>Formato</th>
+									<th>Precio</th>
+								</tr>
+							</thead>
+							<tbody>'; 
 				
 				
 				foreach($sessions as $session){ 
 					$panel .='
-							<tr>
-								<td> '.date("H:i", strtotime( $session->getStartTime())).' </td>
-								<td> '. str_replace('_', ' ', Session::getThisSessionFilm($session->getIdfilm())["tittle"]) .' </td>
-								<td> '.$session->getFormat().' </td>
-								<td> '.$session->getSeatPrice().' </td>
-								<form method="post" action="./?state=edit_session">
-									<input  name="film" type="hidden" value="'.$session->getIdfilm().'">
-									<input  name="hall" type="hidden" value="'.$session->getIdhall().'">
-									<input  name="date" type="hidden" value="'.$session->getDate().'">
-									<input  name="start" type="hidden" value="'.$session->getStartTime().'">
-									<input  name="price" type="hidden" value="'.$session->getSeatPrice().'">
-									<input  name="format" type="hidden" value="'.$session->getFormat().'">	
-								<td> <input type="submit" name="edit_session" value="Editar" class="button" ></td>
-								</form>
-							</tr>';
+								<tr>
+									<td> '.date("H:i", strtotime( $session->getStartTime())).' </td>
+									<td> '. str_replace('_', ' ', Session::getThisSessionFilm($session->getIdfilm())["tittle"]) .' </td>
+									<td> '.$session->getFormat().' </td>
+									<td> '.$session->getSeatPrice().' </td>
+									<form method="post" action="./?state=edit_session">
+										<input  name="film" type="hidden" value="'.$session->getIdfilm().'">
+										<input  name="hall" type="hidden" value="'.$session->getIdhall().'">
+										<input  name="date" type="hidden" value="'.$session->getDate().'">
+										<input  name="start" type="hidden" value="'.$session->getStartTime().'">
+										<input  name="price" type="hidden" value="'.$session->getSeatPrice().'">
+										<input  name="format" type="hidden" value="'.$session->getFormat().'">	
+									<td> <input type="submit" id="submit" name ="edit_session"  value="Editar" class="primary" /> </td>
+									</form>
+								</tr>';
 					}
 				$panel.='
-						</tbody>
-					</table>
-				</form>';
+							</tbody>
+						</table>
+					</form>';
 			} else {
 				$panel.=' <h3> No hay ninguna sesion </h3>';
 			}
 			$panel.='
-				<input type="submit" name="new_session" form="filter"  value="Añadir" class="button large" formaction="./?state=new_session">
-			</div>
-';
+					<input type="submit" name="new_session" form="filter"  value="Añadir" class="button large" formaction="./?state=new_session">
+				</div>';
 			
 			return $panel;
         }
 		
-		static function new_session(){	
-			$formSession = new FormSession("new_session");
-		
-			$panel = '<h1>Crear una sesion.</h1><hr/></br>'
-				.$formSession->gestiona();
+		static function new_session($manager){	
+			$formSession = new FormSession("new_session", $manager->getIdcinema() );
+			
+			$panel = '<h1>Crear una sesion.</h1> <hr/> </br>
+				'.$formSession->gestiona();
 			return $panel;
 		}
 		
-		static function edit_session(){	
-			$formSession = new FormSession("edit_session");
+		static function edit_session($manager){	
+			$formSession = new FormSession("edit_session", $manager->getIdcinema() );
 		
-			$panel = '<h1>Editar una sesion.</h1><hr/></br>'
-				.$formSession->gestiona();
+			$panel = '<h1>Editar una sesion.</h1><hr/></br>
+				'.$formSession->gestiona();
 			return $panel;
 		}
 		
-		static function select_film($template){		
+		//TODO: estado al modificar sesiones para la seleccion de peliculas usando el template->print films
+		static function select_film($template,$manager){		
 			if(isset($_GET["option"])){
 				$_SESSION["option"] = $_GET["option"];
 				$panel = '<h1>Seleccionar Pelicula.</h1><hr /></br>';
@@ -210,7 +208,7 @@
 		}
 		
 		//Funcion que se envia cuando hay inconsistencia en el panel manager, principalmente por tocar cosas con la ulr
-		static function warning(){
+		static function warning($manager){
 			$panel = '<div class="code info">
                     <h1>No deberias poder acceder aqui.</h1>
                     <hr />

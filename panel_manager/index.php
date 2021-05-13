@@ -1,15 +1,28 @@
 <?php
 
-	ini_set('display_errors', 0);
-	error_reporting(E_ERROR | E_WARNING | E_PARSE);
-
     //General Config File:
     require_once('../assets/php/config.php');
     //Controller file:
-    include_once('panel_manager.php');
+    require_once('panel_manager.php');
+	require_once('../assets/php/common/manager_dao.php');
+	require_once('../assets/php/common/manager.php');
+	require_once('../assets/php/common/user.php');
 	
     if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
-		$_SESSION["cinema"] = 1;
+		$bd = new Manager_DAO('complucine');
+		$manager = false;
+		if($bd && !$manager){
+			$user = unserialize($_SESSION["user"]);
+			$manager = $bd->GetManager($user->getId());
+			
+			if($manager){
+				if($manager->num_rows == 1){
+					$fila = $manager->fetch_assoc();
+					$manager = new Manager($fila["id"], $fila["idcinema"], $fila["username"], $fila["email"], $fila["rol"]);
+				}
+			}
+		}
+		
         switch($_GET["state"]){
 			case "view_ruser":
 			case "view_user":
@@ -22,31 +35,31 @@
                 <div class="column side"></div>'."\n";
                 break;			
 			case "manage_halls":
-                $panel = Manager_panel::manage_halls();
+                $panel = Manager_panel::manage_halls($manager);
                 break;
 			case "new_hall":
-                $panel = Manager_panel::new_hall();
+                $panel = Manager_panel::new_hall($manager);
                 break;	
 			case "edit_hall":
-                $panel = Manager_panel::edit_hall();
+                $panel = Manager_panel::edit_hall($manager);
                 break;	
             case "manage_sessions":
-                $panel = Manager_panel::manage_sessions();
+                $panel = Manager_panel::manage_sessions($manager);
                 break;
 			case "new_session":
-                $panel = Manager_panel::new_session();
+                $panel = Manager_panel::new_session($manager);
                 break;
 			case "edit_session":
-                $panel = Manager_panel::edit_session();
+                $panel = Manager_panel::edit_session($manager);
                 break;
 			case "select_film":
-                $panel = Manager_panel::select_film($template);
+                $panel = Manager_panel::select_film($template,$manager);
                 break;
 			case "success":
                 $panel = Manager_panel::success();
                 break;
             default:  
-                $panel = Manager_panel::welcome();
+                $panel = Manager_panel::welcome($manager);
                 break;
         }
     }
@@ -64,13 +77,12 @@
 
     //Specific page content:
         $section = '<!-- Manager Panel -->
+		<link rel="stylesheet" href="../assets/css/manager.css">
         <section id="manager_panel">
-            <div class="row">
-                <!-- Contents -->
-                <div class="row">
-                    '.$panel.'
-                </div>
-            </div>
+			<!-- Contents -->
+			<div class="row">
+				'.$panel.'
+			</div>
         </section>';
 
     //General page content:
