@@ -2,6 +2,7 @@
     class Panel {
         private $state;
         private $login;
+        private $prefix;
 
         function __construct($panel, $login){
             $this->state = $panel;
@@ -9,6 +10,7 @@
         }
 
         function showPanel($template) {
+            $this->prefix = $template->get_prefix();
             if($this->login){
                 switch($this->state) {
                     case 'mc': if(isset($_POST['edit_cinema'])) {
@@ -62,14 +64,25 @@
                                     $this->print_managers();
                                 }; 
                     break;
-                    case 'un': echo"<h1>En construcción</h1>"; break;
-                    case 'ur': echo"<h1>En construcción</h1>";; break;
-                    case 'ag': echo"<h1>En construcción</h1>";; break;
-                    default: echo "<h1>BIENVENIDO AL PANEL DE ADMINISTRADOR</h1>"; break;
+                    case 'un': echo"<div class='code info'><h1>En construcción</h1><hr /></div>"; break;
+                    case 'ur': echo"<div class='code info'><h1>En construcción</h1><hr /></div>"; break;
+                    case 'ag': echo"<div class='code info'><h1>En construcción</h1><hr /></div>"; break;
+                    default: echo '<div class="code info">
+                        <h1>Bienvenido al Panel de Administrador.</h1>
+                        <hr />
+                    </div>'."\n"; break;
                 }
             }
             else {
-                echo "<h1>NO TIENES PERMISOS DE ADMINISTRADOR</h1>";
+                echo '<div class="column side"></div>
+                <div class="column middle">
+                    <div class="code info">
+                        <h1>No tienes permiso de administrador.</h1><hr />
+                        <p>Inicia Sesión con una cuenta de administtación.</p>
+                        <a href="'.$this->prefix.'login/"><button>Iniciar Sesión</button></a>
+                    </div>
+                </div>
+                <div class="column side"></div>'."\n";
             }
         }
 
@@ -166,20 +179,20 @@
                 }
             }
             echo "<div class='row'>
-                <div class='column side'></div>
-                <div class='column middle'>
-                    <table class='alt'>
-                    <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>IdCinema</th>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>Rol</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    "; 
+                    <div class='column side'></div>
+                    <div class='column middle'>
+                        <table class='alt'>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>IdCinema</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Rol</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        "; 
             if(is_array($managers)){        
                 for($i = 0; $i < count($managers); $i++){
                     echo '<tr>
@@ -213,10 +226,11 @@
                     </table>
                 </div>
                 <div class="column side"></div>
+            </div>
             ';
         }
         function showAddBotton() {
-            echo'<div class="column side"></div>
+            echo'   <div class="column side"></div>
                     <div class="column middle">
                         <h2>Añadir gerente</h2>
                         <form method="post" action="index.php?state=mg">
@@ -225,29 +239,33 @@
                             </div>
                         </form>
                     </div>
-                </div>';
+                <div class="column side"></div>
+            </div>
+                ';
         }
         function addManager(){
             include_once('./includes/formAddManager.php');
             $formAM = new formAddManager();
             $htmlAForm = $formAM->gestiona();
             echo   '<!-- ADD MANAGER -->
-            <div class="column side"></div>
-                    <div class="column middle">
+                <div class="column side"></div>
+                <div class="column middle">
                     <h3>AÑADIR GERENTE</h3>
                     '.$htmlAForm.'
-                    </div>'."\n";
+                </div>
+                <div class="column side"></div>'."\n";
         }
         function editManager(){
             include_once('./includes/formEditManager.php');
             $formEM = new formEditManager();
             $htmlEForm = $formEM->gestiona();
             echo   '<!-- EDIT MANAGER -->
-            <div class="column side"></div>
-                    <div class="column middle">
+                <div class="column side"></div>
+                <div class="column middle">
                     <h3>EDITAR GERENTE</h3>
                     '.$htmlEForm.'
-                    </div>'."\n";
+                </div>
+                <div class="column side"></div>'."\n";
         }
 
         function deleteManager(){
@@ -255,11 +273,12 @@
             $formDM = new formDeleteManager();
             $htmlDForm = $formDM->gestiona();
             echo   '<!-- DELETE MANAGER -->
-            <div class="column side"></div>
-                    <div class="column middle">
+                <div class="column side"></div>
+                <div class="column middle">
                     <h3>ELIMINAR GERENTE</h3>
                     '.$htmlDForm.'
-                    </div>'."\n";
+                </div>
+                <div class="column side"></div>'."\n";
         }
 
 
@@ -269,22 +288,24 @@
             $formAP = new formAddPromotion();
             $htmlAForm = $formAP->gestiona();
             echo   '<!-- ADD PROMOTION -->
-            <div class="column side"></div>
-                    <div class="column middle">
+                <div class="column side"></div>
+                <div class="column middle">
                     <h3>AÑADIR PROMOCIÓN</h3>
                     '.$htmlAForm.'
-                    </div>'."\n";
+                </div>
+                <div class="column side"></div>'."\n";
         }
         function editPromotion(){
             include_once('./includes/formEditPromotion.php');
             $formEP = new formEditPromotion();
             $htmlEForm = $formEP->gestiona();
             echo   '<!-- EDIT MANAGER -->
-            <div class="column side"></div>
-                    <div class="column middle">
+                <div class="column side"></div>
+                <div class="column middle">
                     <h3>EDITAR PROMOCIÓN</h3>
                     '.$htmlEForm.'
-                    </div>'."\n";
+                </div>
+                <div class="column side"></div>'."\n";
         }
 
         function deletePromotion(){
@@ -318,8 +339,7 @@
                 }
             }
             
-            echo "<div class='row'>
-                <div class='column side'></div>
+            echo "
                 <div class='column middle'>
                     <table class='alt'>
                     <thead>
@@ -368,7 +388,7 @@
             echo'</tbody>
                     </table>
                 </div>
-                <div class="column side"></div>
+                <div class="column side"></div> 
             ';
                 
         }

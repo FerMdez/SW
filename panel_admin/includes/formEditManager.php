@@ -26,8 +26,8 @@ class formEditManager extends Form{
 		$html = '<div class="row">
                     <h1>EDITAR GERENTE ID:'.$_POST['id'].'</h1>
                     <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
-                    <legend>Selecciona cine.</legend>
-                    <input type="hidden" name="id" value='.$_POST['id'].'/>'
+                    <legend>Selecciona cine.</legend><pre>'.$errorIdCinema.'</pre>
+                    <input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>'
                     .$this->showCinemas().
                     '</fieldset>
                 <div class="actions"> 
@@ -82,11 +82,6 @@ class formEditManager extends Form{
 		}
 		return $result;
 	}
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
-    }
-
 
     private function showCinemas() {
         $cine = new Cinema_DAO("complucine");

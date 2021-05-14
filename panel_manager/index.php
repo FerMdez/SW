@@ -68,7 +68,7 @@
                    <div class="column middle">
 						<div class="code info">
                             <h1>Debes iniciar sesión para ver el Panel de Manager.</h1><hr />
-                            <p>Inicia Sesión en una cuenta con permisos.</p>
+                            <p>Inicia Sesión con una cuenta de Gerente.</p>
                             <a href="'.$prefix.'login/" ><button class="button large">Iniciar Sesión</button></a>
 						</div>
 					</div>

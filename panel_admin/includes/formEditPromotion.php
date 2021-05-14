@@ -109,10 +109,6 @@ class formEditPromotion extends Form{
 		return $result;
 	}
 
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
-    }
-
 
 }
 

@@ -24,13 +24,12 @@ class formAddManager extends Form{
         $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         $errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
-		$html = '<div class="row">
-                    <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
-                    <legend>Selecciona usuario.</legend>' 
+		$html = '<fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
+                    <legend>Selecciona usuario.</legend><pre>'.$errorId.'</pre>' 
                     .$this->showUsers().
                     '</fieldset>
                     <fieldset>
-                    <legend>Selecciona cine.</legend>'
+                    <legend>Selecciona cine.</legend><pre>'.$errorIdCinema.'</pre>'
                     .$this->showCinemas().
                     '</fieldset>
                 <div class="actions"> 
@@ -38,7 +37,7 @@ class formAddManager extends Form{
                         <input type="reset" id="reset" value="Borrar" />       
                         </div>
                 </div>
-                </div>';
+                ';
 
         return $html;
     }
@@ -53,7 +52,7 @@ class formAddManager extends Form{
 
         $idcinema = $this->test_input($datos['idcinema']) ?? null;
 		//||!mb_ereg_match(self::HTML5_EMAIL_REGEXP, $duration) 
-        if (is_null($idcinema)) {
+        if (empty($idcinema)) {
             $result['idcinema'] = "ERROR. No existe un cine con ese ID";
         }
         
@@ -87,10 +86,6 @@ class formAddManager extends Form{
 		}
 		return $result;
 	}
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
-    }
 
     private function showUsers() {
         $user = new UserDAO("complucine");

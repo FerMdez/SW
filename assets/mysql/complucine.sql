@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 30-04-2021 a las 21:59:24
+-- Tiempo de generación: 14-05-2021 a las 11:28:23
 -- Versión del servidor: 10.0.28-MariaDB-2+b1
 -- Versión de PHP: 7.3.27-1~deb10u1
 
@@ -48,7 +48,8 @@ CREATE TABLE `cinema` (
 --
 
 INSERT INTO `cinema` (`id`, `name`, `direction`, `phone`) VALUES
-(1, 'Cinema 1st', 'no tiene direccion', '666666666');
+(1, 'Cinema 1st', 'Calle de ejemplo 111', '77777777'),
+(3, 'Cinema 2st', 'Calle falsa 123', '123456789');
 
 -- --------------------------------------------------------
 
@@ -61,24 +62,25 @@ CREATE TABLE `film` (
   `tittle` varchar(60) NOT NULL,
   `duration` int(3) UNSIGNED NOT NULL,
   `language` varchar(30) NOT NULL,
-  `description` text NOT NULL
+  `description` text NOT NULL,
+  `img` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `film`
 --
 
-INSERT INTO `film` (`id`, `tittle`, `duration`, `language`, `description`) VALUES
-(1, 'iron_man', 120, 'spanish', 'Un empresario millonario construye un traje blindado y lo usa para combatir el crimen y el terrorismo.'),
-(2, 'iron_man_2', 120, 'spanish', 'Con el mundo ahora consciente de que él es Iron Man, el millonario inventor Tony Stark debe forjar nuevas alianzas y confrontar a un enemigo nuevo y poderoso.'),
-(3, 'iron_man_3', 120, 'spanish', 'El descarado y brillante Tony Stark, tras ver destruido todo su universo personal, debe encontrar y enfrentarse a un enemigo cuyo poder no conoce límites. Este viaje pondrá a prueba su entereza una y otra vez, y le obligará a confiar en su ingenio.'),
-(4, 'capitan_america_el_primer_vengador', 120, 'spanish', 'Tras tres meses de someterse a un programa de entrenamiento físico y táctico, encomiendan a Steve Rogers su primera misión como Capitán América. Armado con un escudo indestructible, emprende la guerra contra la perversa organización HYDRA.'),
-(5, 'capitan_america_el_soldado_de_invierno', 120, 'spanish', 'Capitán América, Viuda Negra y un nuevo aliado, Falcon, se enfrentan a un enemigo inesperado mientras intentan exponer una conspiración que pone en riesgo al mundo.'),
-(6, 'capitan_america_civil_war', 180, 'spanish', 'Después de que otro incidente internacional, en el que se ven envueltos los Vengadores, produzca daños colaterales, la presión política obliga a poner en marcha un sistema para depurar responsabilidades.'),
-(7, 'marvel_avengers', 120, 'spanish', 'El director de la Agencia SHIELD decide reclutar a un equipo para salvar al mundo de un desastre casi seguro cuando un enemigo inesperado surge como una gran amenaza para la seguridad mundial.'),
-(8, 'avengers_age_of_ultron', 120, 'spanish', 'Los Vengadores se reúnen de nuevo y juntan sus fuerzas con las de los recién llegados Quicksilver y Bruja Escarlata para luchar contra un robot maquiavélico llamado Ultrón, el cual Tony Stark creó con el fin de defender la paz, pero resultó defectuoso y ahora pretende exterminar a toda la humanidad.'),
-(9, 'avengers_inifinity_war', 180, 'spanish', 'Los superhéroes se alían para vencer al poderoso Thanos, el peor enemigo al que se han enfrentado. Si Thanos logra reunir las seis gemas del infinito: poder, tiempo, alma, realidad, mente y espacio, nadie podrá detenerlo.'),
-(10, 'avengers_end_game', 180, 'spanish', 'Los Vengadores restantes deben encontrar una manera de recuperar a sus aliados para un enfrentamiento épico con Thanos, el malvado que diezmó el planeta y el universo.');
+INSERT INTO `film` (`id`, `tittle`, `duration`, `language`, `description`, `img`) VALUES
+(1, 'iron_man', 120, 'spanish', 'Un empresario millonario construye un traje blindado y lo usa para combatir el crimen y el terrorismo.', ''),
+(2, 'iron_man_2', 120, 'spanish', 'Con el mundo ahora consciente de que él es Iron Man, el millonario inventor Tony Stark debe forjar nuevas alianzas y confrontar a un enemigo nuevo y poderoso.', ''),
+(3, 'iron_man_3', 120, 'spanish', 'El descarado y brillante Tony Stark, tras ver destruido todo su universo personal, debe encontrar y enfrentarse a un enemigo cuyo poder no conoce límites. Este viaje pondrá a prueba su entereza una y otra vez, y le obligará a confiar en su ingenio.', ''),
+(4, 'capitan_america_el_primer_vengador', 120, 'spanish', 'Tras tres meses de someterse a un programa de entrenamiento físico y táctico, encomiendan a Steve Rogers su primera misión como Capitán América. Armado con un escudo indestructible, emprende la guerra contra la perversa organización HYDRA.', ''),
+(5, 'capitan_america_el_soldado_de_invierno', 120, 'spanish', 'Capitán América, Viuda Negra y un nuevo aliado, Falcon, se enfrentan a un enemigo inesperado mientras intentan exponer una conspiración que pone en riesgo al mundo.', ''),
+(6, 'capitan_america_civil_war', 180, 'spanish', 'Después de que otro incidente internacional, en el que se ven envueltos los Vengadores, produzca daños colaterales, la presión política obliga a poner en marcha un sistema para depurar responsabilidades.', ''),
+(7, 'marvel_avengers', 120, 'spanish', 'El director de la Agencia SHIELD decide reclutar a un equipo para salvar al mundo de un desastre casi seguro cuando un enemigo inesperado surge como una gran amenaza para la seguridad mundial.', ''),
+(8, 'avengers_age_of_ultron', 120, 'spanish', 'Los Vengadores se reúnen de nuevo y juntan sus fuerzas con las de los recién llegados Quicksilver y Bruja Escarlata para luchar contra un robot maquiavélico llamado Ultrón, el cual Tony Stark creó con el fin de defender la paz, pero resultó defectuoso y ahora pretende exterminar a toda la humanidad.', ''),
+(9, 'avengers_inifinity_war', 180, 'spanish', 'Los superhéroes se alían para vencer al poderoso Thanos, el peor enemigo al que se han enfrentado. Si Thanos logra reunir las seis gemas del infinito: poder, tiempo, alma, realidad, mente y espacio, nadie podrá detenerlo.', ''),
+(10, 'avengers_end_game', 180, 'spanish', 'Los Vengadores restantes deben encontrar una manera de recuperar a sus aliados para un enfrentamiento épico con Thanos, el malvado que diezmó el planeta y el universo.', '');
 
 -- --------------------------------------------------------
 
@@ -90,17 +92,17 @@ CREATE TABLE `hall` (
   `number` int(15) UNSIGNED NOT NULL,
   `idcinema` int(15) UNSIGNED NOT NULL,
   `numrows` int(3) NOT NULL,
-  `numcolumns` int(3) NOT NULL
+  `numcolumns` int(3) NOT NULL,
+  `total_seats` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `hall`
 --
 
-INSERT INTO `hall` (`number`, `idcinema`, `numrows`, `numcolumns`) VALUES
-(1, 1, 20, 20),
-(2, 1, 20, 20),
-(3, 1, 20, 20);
+INSERT INTO `hall` (`number`, `idcinema`, `numrows`, `numcolumns`, `total_seats`) VALUES
+(1, 1, 12, 8, 60),
+(2, 1, 14, 8, 97);
 
 -- --------------------------------------------------------
 
@@ -112,6 +114,13 @@ CREATE TABLE `manager` (
   `id` int(15) UNSIGNED NOT NULL,
   `idcinema` int(15) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `manager`
+--
+
+INSERT INTO `manager` (`id`, `idcinema`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -126,6 +135,14 @@ CREATE TABLE `promotion` (
   `code` varchar(15) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `promotion`
+--
+
+INSERT INTO `promotion` (`id`, `tittle`, `description`, `code`, `active`) VALUES
+(1, '3x2', 'en entradas', '000001A', 0),
+(2, 'Promocion de ejemplo', 'Esto es un ejemplo', '1234', 0);
 
 -- --------------------------------------------------------
 
@@ -157,6 +174,220 @@ CREATE TABLE `seat` (
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `seat`
+--
+
+INSERT INTO `seat` (`idhall`, `idcinema`, `numrow`, `numcolum`, `active`) VALUES
+(1, 1, 1, 1, 0),
+(1, 1, 1, 2, 0),
+(1, 1, 1, 3, 0),
+(1, 1, 1, 4, -1),
+(1, 1, 1, 5, -1),
+(1, 1, 1, 6, 0),
+(1, 1, 1, 7, 0),
+(1, 1, 1, 8, 0),
+(1, 1, 2, 1, 0),
+(1, 1, 2, 2, 0),
+(1, 1, 2, 3, 0),
+(1, 1, 2, 4, -1),
+(1, 1, 2, 5, -1),
+(1, 1, 2, 6, 0),
+(1, 1, 2, 7, 0),
+(1, 1, 2, 8, 0),
+(1, 1, 3, 1, 0),
+(1, 1, 3, 2, 0),
+(1, 1, 3, 3, 0),
+(1, 1, 3, 4, -1),
+(1, 1, 3, 5, -1),
+(1, 1, 3, 6, 0),
+(1, 1, 3, 7, 0),
+(1, 1, 3, 8, 0),
+(1, 1, 4, 1, -1),
+(1, 1, 4, 2, -1),
+(1, 1, 4, 3, -1),
+(1, 1, 4, 4, -1),
+(1, 1, 4, 5, -1),
+(1, 1, 4, 6, -1),
+(1, 1, 4, 7, -1),
+(1, 1, 4, 8, -1),
+(1, 1, 5, 1, -1),
+(1, 1, 5, 2, -1),
+(1, 1, 5, 3, -1),
+(1, 1, 5, 4, -1),
+(1, 1, 5, 5, -1),
+(1, 1, 5, 6, -1),
+(1, 1, 5, 7, -1),
+(1, 1, 5, 8, -1),
+(1, 1, 6, 1, 0),
+(1, 1, 6, 2, 0),
+(1, 1, 6, 3, 0),
+(1, 1, 6, 4, -1),
+(1, 1, 6, 5, -1),
+(1, 1, 6, 6, 0),
+(1, 1, 6, 7, 0),
+(1, 1, 6, 8, 0),
+(1, 1, 7, 1, 0),
+(1, 1, 7, 2, 0),
+(1, 1, 7, 3, 0),
+(1, 1, 7, 4, -1),
+(1, 1, 7, 5, -1),
+(1, 1, 7, 6, 0),
+(1, 1, 7, 7, 0),
+(1, 1, 7, 8, 0),
+(1, 1, 8, 1, 0),
+(1, 1, 8, 2, 0),
+(1, 1, 8, 3, 0),
+(1, 1, 8, 4, -1),
+(1, 1, 8, 5, -1),
+(1, 1, 8, 6, 0),
+(1, 1, 8, 7, 0),
+(1, 1, 8, 8, 0),
+(1, 1, 9, 1, 0),
+(1, 1, 9, 2, 0),
+(1, 1, 9, 3, 0),
+(1, 1, 9, 4, -1),
+(1, 1, 9, 5, -1),
+(1, 1, 9, 6, 0),
+(1, 1, 9, 7, 0),
+(1, 1, 9, 8, 0),
+(1, 1, 10, 1, 0),
+(1, 1, 10, 2, 0),
+(1, 1, 10, 3, 0),
+(1, 1, 10, 4, -1),
+(1, 1, 10, 5, -1),
+(1, 1, 10, 6, 0),
+(1, 1, 10, 7, 0),
+(1, 1, 10, 8, 0),
+(1, 1, 11, 1, 0),
+(1, 1, 11, 2, 0),
+(1, 1, 11, 3, 0),
+(1, 1, 11, 4, -1),
+(1, 1, 11, 5, -1),
+(1, 1, 11, 6, 0),
+(1, 1, 11, 7, 0),
+(1, 1, 11, 8, 0),
+(1, 1, 12, 1, 0),
+(1, 1, 12, 2, 0),
+(1, 1, 12, 3, 0),
+(1, 1, 12, 4, -1),
+(1, 1, 12, 5, -1),
+(1, 1, 12, 6, 0),
+(1, 1, 12, 7, 0),
+(1, 1, 12, 8, 0),
+(2, 1, 1, 1, 1),
+(2, 1, 1, 2, 1),
+(2, 1, 1, 3, 1),
+(2, 1, 1, 4, 1),
+(2, 1, 1, 5, 1),
+(2, 1, 1, 6, 1),
+(2, 1, 1, 7, 1),
+(2, 1, 1, 8, 1),
+(2, 1, 2, 1, 1),
+(2, 1, 2, 2, 1),
+(2, 1, 2, 3, 1),
+(2, 1, 2, 4, 1),
+(2, 1, 2, 5, 1),
+(2, 1, 2, 6, 1),
+(2, 1, 2, 7, 1),
+(2, 1, 2, 8, 1),
+(2, 1, 3, 1, 1),
+(2, 1, 3, 2, -1),
+(2, 1, 3, 3, -1),
+(2, 1, 3, 4, -1),
+(2, 1, 3, 5, 1),
+(2, 1, 3, 6, 1),
+(2, 1, 3, 7, 1),
+(2, 1, 3, 8, 1),
+(2, 1, 4, 1, 1),
+(2, 1, 4, 2, -1),
+(2, 1, 4, 3, -1),
+(2, 1, 4, 4, -1),
+(2, 1, 4, 5, 1),
+(2, 1, 4, 6, 1),
+(2, 1, 4, 7, 1),
+(2, 1, 4, 8, 1),
+(2, 1, 5, 1, 1),
+(2, 1, 5, 2, -1),
+(2, 1, 5, 3, -1),
+(2, 1, 5, 4, -1),
+(2, 1, 5, 5, 1),
+(2, 1, 5, 6, 1),
+(2, 1, 5, 7, 1),
+(2, 1, 5, 8, 1),
+(2, 1, 6, 1, 1),
+(2, 1, 6, 2, 1),
+(2, 1, 6, 3, 1),
+(2, 1, 6, 4, 1),
+(2, 1, 6, 5, 1),
+(2, 1, 6, 6, 1),
+(2, 1, 6, 7, 1),
+(2, 1, 6, 8, 1),
+(2, 1, 7, 1, 1),
+(2, 1, 7, 2, 1),
+(2, 1, 7, 3, 1),
+(2, 1, 7, 4, 1),
+(2, 1, 7, 5, -1),
+(2, 1, 7, 6, -1),
+(2, 1, 7, 7, 1),
+(2, 1, 7, 8, 1),
+(2, 1, 8, 1, 1),
+(2, 1, 8, 2, 1),
+(2, 1, 8, 3, 1),
+(2, 1, 8, 4, 1),
+(2, 1, 8, 5, -1),
+(2, 1, 8, 6, -1),
+(2, 1, 8, 7, 1),
+(2, 1, 8, 8, 1),
+(2, 1, 9, 1, 1),
+(2, 1, 9, 2, 1),
+(2, 1, 9, 3, 1),
+(2, 1, 9, 4, 1),
+(2, 1, 9, 5, -1),
+(2, 1, 9, 6, -1),
+(2, 1, 9, 7, 1),
+(2, 1, 9, 8, 1),
+(2, 1, 10, 1, 1),
+(2, 1, 10, 2, 1),
+(2, 1, 10, 3, 1),
+(2, 1, 10, 4, 1),
+(2, 1, 10, 5, 1),
+(2, 1, 10, 6, 1),
+(2, 1, 10, 7, 1),
+(2, 1, 10, 8, 1),
+(2, 1, 11, 1, 1),
+(2, 1, 11, 2, 1),
+(2, 1, 11, 3, 1),
+(2, 1, 11, 4, 1),
+(2, 1, 11, 5, 1),
+(2, 1, 11, 6, 1),
+(2, 1, 11, 7, 1),
+(2, 1, 11, 8, 1),
+(2, 1, 12, 1, 1),
+(2, 1, 12, 2, 1),
+(2, 1, 12, 3, 1),
+(2, 1, 12, 4, 1),
+(2, 1, 12, 5, 1),
+(2, 1, 12, 6, 1),
+(2, 1, 12, 7, 1),
+(2, 1, 12, 8, 1),
+(2, 1, 13, 1, 1),
+(2, 1, 13, 2, 1),
+(2, 1, 13, 3, 1),
+(2, 1, 13, 4, 1),
+(2, 1, 13, 5, 1),
+(2, 1, 13, 6, 1),
+(2, 1, 13, 7, 1),
+(2, 1, 13, 8, 1),
+(2, 1, 14, 1, 1),
+(2, 1, 14, 2, 1),
+(2, 1, 14, 3, 1),
+(2, 1, 14, 4, 1),
+(2, 1, 14, 5, 1),
+(2, 1, 14, 6, 1),
+(2, 1, 14, 7, 1),
+(2, 1, 14, 8, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -171,27 +402,17 @@ CREATE TABLE `session` (
   `date` date NOT NULL,
   `start_time` time NOT NULL,
   `seat_price` float NOT NULL,
-  `format` varchar(20) NOT NULL
+  `format` varchar(20) NOT NULL,
+  `seats_full` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `session`
 --
 
-INSERT INTO `session` (`id`, `idfilm`, `idhall`, `idcinema`, `date`, `start_time`, `seat_price`, `format`) VALUES
-(3, 4, 2, 1, '2021-04-16', '14:20:00', 5, 'Estandar'),
-(4, 4, 2, 1, '2021-04-17', '14:20:00', 5, 'Estandar'),
-(5, 4, 2, 1, '2021-04-18', '14:20:00', 5, 'Estandar'),
-(6, 9, 2, 1, '2021-04-15', '18:00:00', 7, '3D'),
-(7, 9, 1, 1, '2021-04-16', '18:00:00', 7, '3D'),
-(8, 9, 1, 1, '2021-04-17', '18:00:00', 7, '3D'),
-(9, 9, 1, 1, '2021-04-18', '18:00:00', 7, '3D'),
-(10, 9, 1, 1, '2021-04-19', '18:00:00', 7, '3D'),
-(11, 9, 1, 1, '2021-04-20', '18:00:00', 7, '3D'),
-(12, 9, 1, 1, '2021-04-21', '18:00:00', 7, '3D'),
-(13, 9, 1, 1, '2021-04-22', '18:00:00', 7, '3D'),
-(14, 10, 1, 1, '2021-04-15', '18:00:00', 10, 'normal'),
-(15, 1, 1, 1, '2021-04-30', '14:00:00', 5, '3d');
+INSERT INTO `session` (`id`, `idfilm`, `idhall`, `idcinema`, `date`, `start_time`, `seat_price`, `format`, `seats_full`) VALUES
+(19, 1, 2, 1, '2021-05-14', '19:00:00', 12, '2d', 0),
+(20, 1, 2, 1, '2021-05-15', '19:00:00', 12, '2d', 0);
 
 -- --------------------------------------------------------
 
@@ -215,7 +436,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `rol`) VALUES
 (0, 'admin', 'admin@complucine.sytes.net', 'shDBCKnEbWZFc', 'admin'),
 (1, 'manager', 'manager@complucine.sytes.net', 'shTS9RK/eJPoQ', 'manager'),
 (2, 'user', 'user@complucine.sytes.net', 'shO5etd.DYKWg', 'user'),
-(7, 'fernando', 'fer@complucine.sytes.net', '$2y$10$k/R4m.uN1IfZ0rdc5wwc2uaO9b0e5qK9WtOBloxlfkUuBjWPMC3PG', 'user');
+(7, 'fernando', 'fer@complucine.sytes.net', '$2y$10$/3yjEh4d7AOY3RyNjXIIkO5H2hg7/kiHiToJa92tCBPd7s3UPtB.G', 'user'),
+(63, 'user2', 'user2@ucm.es', '$2y$10$Alopov4Z1HPW9i9PqQ/APedPoU.N/zc3XlRfIfSkwPCQCKI.qTp5u', 'user');
 
 --
 -- Índices para tablas volcadas
@@ -301,27 +523,32 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `cinema`
 --
 ALTER TABLE `cinema`
-  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `film`
 --
 ALTER TABLE `film`
-  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `hall`
 --
 ALTER TABLE `hall`
-  MODIFY `number` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `number` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `promotion`
+--
+ALTER TABLE `promotion`
+  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `session`
 --
 ALTER TABLE `session`
-  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(15) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 --
 -- Restricciones para tablas volcadas
 --

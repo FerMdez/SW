@@ -88,7 +88,7 @@ class formEditFilm extends Form{
         	$bd = new Film_DAO("complucine");
 			$exist = $bd-> FilmData($id);
                 if( mysqli_num_rows($exist) == 1){
-                    $bd->editFilm($id,$tittle,$duration,$language,$description);
+                $bd->editFilm($id, $tittle, $duration, $language, $description, $img = null /* Cambiar cuando se ñaladan las imágenes */);
                     $_SESSION['message'] = "<div class='row'>
                                             <div class='column side'></div>
                                             <div class='column middle'>
@@ -110,12 +110,6 @@ class formEditFilm extends Form{
 		}
 		return $result;
 	}
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
-    }
-
-
 }
 
 ?>

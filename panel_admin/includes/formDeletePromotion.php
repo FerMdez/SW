@@ -29,7 +29,7 @@ class formDeletePromotion extends Form{
 		$html = '<div class="row">
 						<fieldset id="promotion_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>¿Estás seguro de que quieres eliminar esta promocion?</legend>
-                            <input type="hidden" name="id" value='.$_POST['id'].'/>
+                            <input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>
 							<p>Id: '.$_POST['id'].' </p>
                             <p>Nombre: '.$_POST['tittle'].'</p>
                             <p>Description:'.$_POST['description'].'</p>
@@ -84,12 +84,6 @@ class formDeletePromotion extends Form{
 		}
 		return $result;
 	}
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
-    }
-
-
 }
 
 ?>

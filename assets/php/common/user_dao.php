@@ -1,5 +1,4 @@
 <?php
-	require_once('../assets/php/dao.php');
 	include_once('user.php');
 
     class UserDAO extends DAO {

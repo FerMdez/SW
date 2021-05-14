@@ -18,9 +18,9 @@ class formDeleteCinema extends Form{
         $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
 
         $html = '<div class="column side"></div>
-                    <fieldset id = "cinema_form">'.$htmlErroresGlobales.'</pre>
+                    <fieldset id = "cinema_form"><pre>'.$htmlErroresGlobales.'</pre>
                     <legend>¿Estás seguro de que quieres eliminar este cine?</legend>
-					<input type="hidden" name="id" value='.$_POST['id'].'/>
+					<input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>
 						<p>Name: '.$_POST['name'].' </p>
 						<p>Dirección: '.$_POST['direction'].' </p>
 						<p>Teléfono: '.$_POST['phone'].' </p>
@@ -70,9 +70,6 @@ class formDeleteCinema extends Form{
         return $result;	
 	}
 
-	protected function test_input($input){
-		return htmlspecialchars(trim(strip_tags($input)));
-	}
 }
 
 ?>

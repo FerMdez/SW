@@ -297,7 +297,7 @@
   .code a {
     text-decoration: underline; 
   }
-  .code ul, .code ol {
+  .code ul, .code ol, .code li{
     color: #dadada;
   }
   .code img{

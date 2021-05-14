@@ -295,7 +295,8 @@
                                     <div class='blockquote'>
                                         <p>".$descriptions[$i]."</p>
                                     </div>
-                                    <p>Duración: ".$times[$i]." minutos</p>
+                                    <li>Duración: ".$times[$i]." minutos</li>
+                                    <li>Lenguaje: ".$languages[$i]."</li>
                                 </div>
                             </div>
                         </section>

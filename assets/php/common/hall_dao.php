@@ -1,5 +1,4 @@
 <?php
-	require_once($prefix.'assets/php/dao.php');
 	include_once('hall.php');
 	
 	

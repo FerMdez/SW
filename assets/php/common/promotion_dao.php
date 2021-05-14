@@ -1,8 +1,5 @@
 <?php
 	include_once('promotion.php');
-	$template = new Template();
-    $prefix = $template->get_prefix();
-	include_once($prefix.'assets/php/dao.php');
 
     class Promotion_DAO extends DAO {
 

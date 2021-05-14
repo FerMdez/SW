@@ -37,6 +37,7 @@
     /**
      * Initialize the application:
      */
+    include_once($prefix.'assets/php/dao.php');
     require_once('aplication.php');
     $app = Aplicacion::getSingleton();
     $app->init(array('host'=>BD_HOST, 'bd'=>BD_NAME, 'user'=>BD_USER, 'pass'=>BD_PASS));

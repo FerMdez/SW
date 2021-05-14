@@ -24,7 +24,7 @@ class formDeleteManager extends Form{
 
 		$html = '<div class="row">
                     <fieldset id="manager_form"><pre>'.$htmlErroresGlobales.'</pre>
-                        <legend>¿Estás seguro de que quieres eliminar este gerente?</legend>
+                        <legend>¿Estás seguro de que quieres eliminar este gerente?</legend><pre>'.$errorId.'</pre>
                         <input type="hidden" name="id" value='.$_POST['id'].'/>
                         <p>Id: '.$_POST['id'].' </p>
                         <p>IdCinema: '.$_POST['idcinema'].' </p>
@@ -74,10 +74,6 @@ class formDeleteManager extends Form{
 		}
 		return $result;
 	}
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
-    }
 
 
 }

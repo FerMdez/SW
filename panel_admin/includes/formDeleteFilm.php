@@ -29,7 +29,7 @@ class formDeleteFilm extends Form{
 		$html = '<div class="row">
 				<fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
 					<legend>¿Estás seguro de que quieres eliminar esta pelicula?</legend>
-					<input type="hidden" name="id" value='.$_POST['id'].'/>
+					<input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>
 						<p>Id: '.$_POST['id'].' </p>
 						<p>Título: '.$_POST['tittle'].' </p>
 						<p>Duración: '.$_POST['duration'].' </p>
@@ -79,10 +79,6 @@ class formDeleteFilm extends Form{
 		}
 		return $result;
 	}
-
-    protected function test_input($input){
-        return htmlspecialchars(trim(strip_tags($input)));
-    }
 
 
 }
