@@ -85,11 +85,19 @@
     color :#dadada;
     position: relative;
   }      
+  .menu nav li.danger{
+    background-color: #791515;
+  }
   .menu nav li:hover{
     background-color:#dadada;
     color:#1f2c3d;
     border-color: #1f2c3d;
-  } 
+  }
+  .menu nav li.danger:hover{
+    color: #d3ebff;
+    background-color: #00020f;
+    border-color: #d3ebff;
+  }
   .menu nav li>ul{
     display: none;
   }

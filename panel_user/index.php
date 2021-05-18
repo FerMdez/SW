@@ -33,7 +33,7 @@
                             <p>Inicia Sesión si estás registrado.</p>
                             <a href="'.$prefix.'login/"><button>Iniciar Sesión</button></a>
                             <p>Registrate si no lo habías hecho previamente.</p>
-                            <form method="post" action="'.$prefix.'login/"><button name="register" id="register">Registro</button></form>
+                            <form method="post" action="'.$prefix.'login/"><button name="register" id="_register">Registro</button></form>
                         </div>
                     </div>
                     <div class="column side"></div>'."\n";

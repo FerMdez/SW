@@ -13,22 +13,22 @@
                         <div class="textbox">
                             <h2>Implementaciones Generales de la Web</h2>
                             <ul>
-                                <li>Pantalla de Inicio (incluye promociones y estrenos) [Fer && Adrián]</li>
+                                <li>Pantalla de Inicio (incluye promociones y estrenos) [Fer]</li>
                                 <li>Cartelera Dinámica [Fer --> Marian && Daniel]</li>
                                 <li>Selección Cines (mapa) [Fer]</li>
                                 <li>Listado de Horarios [Fer]</li>
                                 <li>Selección de butacas [Fer --> Marco && Óscar]</li>
                                 <li>Pagar + opción para código promocional [Fer]</li>
-                                <li>Sobre FDI-Cines (About us) [Fer && Adrián]</li>
+                                <li>Sobre FDI-Cines (About us) [Fer  ]</li>
                                 <li>Formulario de Contacto [Fer]</li>
-                                <li>Términos y Condiciones [Fer && Adrián]</li>
+                                <li>Términos y Condiciones [Fer]</li>
                             </ul>
                         </div>
                         <div class="textbox">
                             <h2>Paneles de Usuario Registrado</h2>
                             <ul>
-                                <li>Registrarse e Iniciar sesión [Adrián]</li>
-                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Adrián]</li>
+                                <li>Registrarse e Iniciar sesión [Fer]</li>
+                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Fer]</li>
                             </ul>
                         </div>
                         <div class="textbox">
@@ -76,9 +76,11 @@
                                 <li>Listado de Horarios [General]</li>
                                 <li>Selección de butacas [General]</li>
                                 <li>Pagar + opción para código promocional [General]</li>
-                                <li>Sobre FDI-Cines (About us) [General (de apoyo)]</li>
                                 <li>Formulario de Contacto [General]</li>
-                                <li>Términos y Condiciones [General (de apoyo)]</li>
+                                <li>Registrarse e Iniciar sesión [Usuario Registrado]</li>
+                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Usuario Registrado]</li>
+                                <li>Sobre FDI-Cines (About us) [General]</li>
+                                <li>Términos y Condiciones [General]</li>
                             </ul>
                         </div>
                         <div class="textbox">
@@ -113,16 +115,6 @@
                                 <li>Selección de butacas [General (de apoyo)]</li>
                             </ul>
                         </div>
-                        <div class="textbox">
-                            <h2>Adrian Real del Noval</h2>
-                            <ul>
-                                <li>Registrarse e Iniciar sesión [Usuario Registrado]</li>
-                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Usuario Registrado]</li>
-                                <li>Sobre FDI-Cines (About us) [General]</li>
-                                <li>Términos y Condiciones [General]</li>
-                                <li>Pantalla de Inicio (incluye promociones y estrenos) [General (de apoyo)]</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <div class="column side">
@@ -145,19 +137,19 @@
                             <h2>Práctica 2 [HTML + PHP]</h2>
                             <div class="bar">100%</div>
                             <ul>
-                                <li>Sobre FDI-Cines (About us) [Fer && Adrián]</li>
+                                <li>Sobre FDI-Cines (About us) [Fer]</li>
                                 <li>Formulario de Contacto [Fer]</li>
-                                <li>Términos y Condiciones [Fer && Adrián]</li>
+                                <li>Términos y Condiciones [Fer  ]</li>
                                 <li>Pantalla de inicio de gerente [Marco && Óscar]</li>
                             </ul>
                             <div class="bar seventyfive">75%</div>
                             <ul>
-                                <li>Pantalla de Inicio (incluye promociones y estrenos) [Fer && Adrián]</li>
+                                <li>Pantalla de Inicio (incluye promociones y estrenos) [Fer]</li>
                                 <li>Listado de Horarios [Fer]</li>
                             </ul>
                             <div class="bar fifty">50%</div>
                             <ul>
-                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Adrián]</li>
+                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Fer]</li>
                                 <li>Eliminar sesión de una película [Marco && Óscar]</li>
                                 <li>Deshabilitar salas [Marco && Óscar]</li>
                                 <li>Panel de inicio administrador (ver todas la funcionalidades de admin de un vistazo) [Daniel && Marian]</li>
@@ -166,7 +158,7 @@
                             </ul>
                             <div class="bar twentyfive">25%</div>
                             <ul>
-                                <li>Registrarse && Iniciar sesión [Adrián]</li>
+                                <li>Registrarse && Iniciar sesión [Fer]</li>
                                 <li>Deshabilitar asientos en una sala [Marco && Óscar]</li>
                                 <li>Ver como >> Usuario no registrado | Usuario registrado | (Gerente: Añadir si vamos bien de tiempo) [Daniel && Marian]</li>
                                 <li>Panel añadir/editar/eliminar promociones [Marian && Dani]</li>
@@ -182,8 +174,8 @@
                             </ul>
                             <div class="bar seventyfive">75%</div>
                             <ul>
-                                <li>Registrarse && Iniciar sesión [Adrián]</li>
-                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Adrián]</li>
+                                <li>Registrarse && Iniciar sesión [Fer]</li>
+                                <li>Menú y panel de Usuario (Historial compras, cambiar contraseña, datos de pago y eliminar usuario) [Fer]</li>
                                 <li>Panel de inicio administrador (ver todas la funcionalidades de admin de un vistazo) [Daniel && Marian]</li>
                                 <li>Panel añadir/editar/eliminar cine [Marian && Dani]</li>
                                 <li>Panel añadir/editar/eliminar películas a la cartelera [Marian && Dani]</li>

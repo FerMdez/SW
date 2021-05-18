@@ -25,7 +25,7 @@ class FormLogin extends Form {
         $html = "<div class='row'>
                             <fieldset id='nombre_usuario'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Datos Personales</legend>
-                                <input type='text' name='name' id='name' value='' placeholder='Nombre' required/><pre>".$errorNombre."</pre>
+                                <input type='text' name='name' id='name' value='' placeholder='Nombre de Usuario' required/><pre>".$errorNombre."</pre>
                                 <input type='password' name='pass' id='pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
                             </fieldset>
                             <div class='actions'> 

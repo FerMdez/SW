@@ -30,7 +30,7 @@ class FormRegister extends Form {
         $html = "<div class='row'>
                             <fieldset id='datos_personales'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Datos personales</legend>
-                                <input type='text' name='name' id='name' value='' placeholder='Nombre' required/><pre>".$errorNombre."</pre>
+                                <input type='text' name='name' id='name' value='' placeholder='Nombre de Usuario' required/><pre>".$errorNombre."</pre>
                                 <input type='email' name='email' id='email' value='' placeholder='Email' required/><pre>".$errorEmail."</pre>
                                 <input type='password' name='pass' id='pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
                                 <input type='password' name='repass' id='repass' value='' placeholder='Repita la contraseña' required/><pre>".$errorPassword2."</pre>

@@ -80,7 +80,7 @@ class FormContact extends Form {
         }
 
         if (count($result) === 0) {
-            $result = ROUTE_APP;            
+            $result = ROUTE_APP;  // DE MOMENTO, NO HACE NADA :)      
         }
         
         return $result;

@@ -24,15 +24,37 @@
 		}
 		$state = isset($_GET['state']) ? $_GET['state'] : '';
 		switch($state){
-			case "view_ruser":
 			case "view_user":
-				   $panel = '<div class="column side"></div>
-				   <div class="column middle">
-						<div class="code info">
-							<h1>Esta vista aun no esta implementada.</h1><hr />
+				$_SESSION["lastRol"] = $_SESSION["rol"];
+				$_SESSION["rol"] = null;
+				$panel = "<div class='row'>
+							<div class='column side'></div>
+							<div class='column middle'>
+								<div class='code info'>
+									<h1> ¡ATENCIÓN! </h1><hr />
+									<p>Está viendo la web como un Usuario NO Registrado.</p>
+									<a href=''><button>Cerrar Mensaje</button></a>
+								</div>
+							</div>
+							<div class='column side'></div>
 						</div>
-					</div>
-				<div class="column side"></div>'."\n";
+						";
+				break;
+			case "view_ruser":
+				$_SESSION["lastRol"] = $_SESSION["rol"];
+				$_SESSION["rol"] = "user";
+				$panel = "<div class='row'>
+							<div class='column side'></div>
+							<div class='column middle'>
+								<div class='code info'>
+									<h1> ¡ATENCIÓN! </h1><hr />
+									<p>Está viendo la web como un Usuario Registrado.</p>
+									<a href=''><button>Cerrar Mensaje</button></a>
+								</div>
+							</div>
+							<div class='column side'></div>
+						</div>
+						";
 				break;			
 			case "manage_halls":
 				$panel = Manager_panel::manage_halls($manager);

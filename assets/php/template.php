@@ -83,18 +83,24 @@
         $user_route = $this->user_route;
         $panel =$this->panel;
 
-        if(isset($_SESSION["nombre"])){
-            if($_SESSION["rol"] == "admin") $user_route = 'panel_admin/';
-            else if($_SESSION["rol"] == "manager") $user_route = 'panel_manager/';
+        if(isset($_SESSION["rol"])){
+            if($_SESSION["rol"] === "admin") $user_route = 'panel_admin/';
+            else if($_SESSION["rol"] === "manager") $user_route = 'panel_manager/';
             $panel = "<a href='{$prefix}{$user_route}'><li>Mi Panel</li></a>";
             $session = 'Cerrar Sesión';
             $session_route = 'logout/';
+        }
+
+        if(isset($_SESSION["lastRol"]) && ($_SESSION["lastRol"] === "admin" || $_SESSION["lastRol"] === "manager" )){
+            $changeRol = "<a href='{$prefix}assets/php/common/reRol.php'><li class='danger'>Volver a {$_SESSION["lastRol"]}</li></a>";
+        } else {
+            $changeRol = null;
         }
         
         echo"<div class='header'>
             <a href='{$prefix}'><img src='{$prefix}img/favicon2.png' alt='favicon' /> CompluCine</a> | {$page}
             <div class='menu'>
-                <nav>
+                <nav>{$changeRol}
                     <a href='{$prefix}{$session_route}'><li>{$session}</li></a>
                     {$panel}
                     <li>Menú
@@ -500,7 +506,7 @@
             <div class='footer'>
                 <p>© Práctica Final | Sistemas Web 2021 </p>
             </div>
-	    <a href='#'>▲Volver arriba</a> |
+            <a href='#'>▲Volver arriba</a> |
             <a href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</a> |
             <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |

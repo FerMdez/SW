@@ -33,8 +33,8 @@
                                 <td><a href="mailto:oscarrui@ucm.es">oscarrui@ucm.es</a></td>
                             </tr>
                             <tr>
-                                <td><a href="#ARN">Adrian Real del Noval</a></td>
-                                <td><a href="mailto:adrireal@ucm.es">adrireal@ucm.es</td>
+                                <td><a href="#UND">Undefined</a></td>
+                                <td><a href="">undefined@ucm.es</td>
                             </tr>
                         </tbody>
                     </table>
@@ -123,15 +123,14 @@
                             </section>
                         </div>
                         <div class="column side">
-                            <!-- Adrian Real -->
-                            <section id="ARN">
+                            <!-- Undefined -->
+                            <section id="UND">
                                 <div class="zoom">
                                     <div class="code">
-                                        <img src="../../img/us/arn.jpg" />
-                                        <p>~ Adrian Real del Noval (adrireal@ucm.es)</p>
+                                        <img src="../../img/seat_grey.png" />
+                                        <p>~ Undefined (undefined@ucm.es)</p>
                                         <div class="blockquote bio">  
-                                            <p>Estudiante de 3er año de Ingeniería de Computadores en la Universidad Complutense de Madrid.</p>
-                                            <p>Las áreas en las que tiene mayor interés son la electrónica, las GPUs, y los sistemas empotrados.</p>
+                                            <p>Este miembro ha abandonado el grupo.</p>
                                         </div>
                                     </div>
                                 </div>
