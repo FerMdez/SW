@@ -7,5 +7,6 @@ function reRol(){
     }
 }
 reRol();
-header("Location: /");
+$redirect = ROUTE_APP.'panel_'.$_SESSION['rol'];
+header("Location: {$redirect}");
 ?>
