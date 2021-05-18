@@ -506,7 +506,7 @@
             <div class='footer'>
                 <p>© Práctica Final | Sistemas Web 2021 </p>
             </div>
-            <a href='#'>▲Volver arriba</a> |
+            <a href='#'>▲Subir</a> |
             <a href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</a> |
             <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |
