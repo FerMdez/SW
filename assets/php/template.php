@@ -495,6 +495,7 @@
     //Print generic Footer:
     function print_footer(){
         $prefix = $this->prefix;
+        $page = $this->page;
 
         /* TODO */
         $css = "{$prefix}assets/css/highContrast.css";
@@ -516,7 +517,9 @@
 
         echo"
         <!-- Scripts -->
-        <script src='{$prefix}assets/js/cambiarCSS.js'></script>\n";
+        <script src='{$prefix}assets/js/cambiarCSS.js'></script>
+        ";
+        if($page === "FDI-Cines") echo"<script src='{$prefix}assets/js/promotions.js'></script>\n";
     }
 
     }

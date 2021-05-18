@@ -95,7 +95,7 @@ abstract class Form {
         $opciones = array_merge($opcionesPorDefecto, $opciones);
 
         $this->ajax     = $opciones['ajax'];
-        $this->action = $opciones['action'];
+        $this->action   = $opciones['action'];
         $this->classAtt = $opciones['class'];
         $this->enctype  = $opciones['enctype'];
         

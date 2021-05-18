@@ -86,3 +86,4 @@ class FormContact extends Form {
         return $result;
     }
 }
+?>
