@@ -92,7 +92,7 @@
         }
 
         if(isset($_SESSION["lastRol"]) && ($_SESSION["lastRol"] === "admin" || $_SESSION["lastRol"] === "manager" )){
-            $changeRol = "<a href='{$prefix}assets/php/common/reRol.php'><li class='danger'>Volver a {$_SESSION["lastRol"]}</li></a>";
+            $changeRol = "<a href='{$prefix}assets/php/common/resetRol.php'><li class='danger'>Volver a {$_SESSION["lastRol"]}</li></a>";
         } else {
             $changeRol = null;
         }
