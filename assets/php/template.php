@@ -498,7 +498,7 @@
 
         echo"<footer>
             <div class='footer'>
-                <p>© Práctica 2 | Sistemas Web 2021 </p>
+                <p>© Práctica 3 | Sistemas Web 2021 </p>
             </div>
             <a href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</a> |
             <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
