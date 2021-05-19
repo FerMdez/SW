@@ -435,19 +435,46 @@ main img {
 .promotions img {
   width: 100%;
   height: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   background-size: cover;
+  border-radius: 10px;
+  border-style: dashed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
 }
 .promotions button {
-  margin-top: 5%;
+  margin: 1em 1em 0 1em;
+  background-repeat: no-repeat;
+  height: 125px;
+  width: 125px;
+  background-position: center;
 }
 .controls {
   text-align: center;
 }
+.controls #play {
+  height: 30px;
+  width: 30px;
+  border-radius: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.controls #stop {
+  height: 30px;
+  width: 30px;
+  border-radius: 25px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 /* Responsive layout */
 @media (max-width: 750px) {
+  .promotions button {
+    margin: 0 1em 0 1em;
+  }
   .promotions img {
     width: 100%;
-    height: 50px;
+    height: auto;
   }
 }
 

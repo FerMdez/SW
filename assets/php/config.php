@@ -16,8 +16,8 @@
     /**
     * Image files directory.
     */
-    define('FILMS_DIR', dirname(RAIZ_APP).'img/films/tmp');
-    define('FILMS_DIR_PROTECTED', RAIZ_APP.'img/films/tmp');
+    define('FILMS_DIR', dirname(RAIZ_APP).'/img/films/tmp');
+    define('FILMS_DIR_PROTECTED', RAIZ_APP.'/img/films/tmp');
 
     /**
      * Allowed extensions for image files.

@@ -41,7 +41,7 @@ class FormUploadFiles extends Form {
             $archivo = $_FILES['archivo'];
             $nombre = $_FILES['archivo']['name'];
             /* 1.a) Valida el nombre del archivo */
-            $ok = check_file_uploaded_name($nombre) && check_file_uploaded_length($nombre) ;
+            $ok = $this->check_file_uploaded_name($nombre) && $this->check_file_uploaded_length($nombre) ;
             /* 1.b) Sanitiza el nombre del archivo 
             $ok = sanitize_file_uploaded_name($nombre);
             */
@@ -82,7 +82,7 @@ class FormUploadFiles extends Form {
      * @author Yousef Ismaeil Cliprz
      * @See http://php.net/manual/es/function.move-uploaded-file.php#111412
      */
-    function check_file_uploaded_name ($filename) {
+    protected function check_file_uploaded_name ($filename) {
         return (bool) ((mb_ereg_match('/^[0-9A-Z-_\.]+$/i',$filename) === 1) ? true : false );
     }
 
@@ -97,7 +97,7 @@ class FormUploadFiles extends Form {
      * @author Sean Vieira
      * @see http://stackoverflow.com/a/2021729
      */
-    function sanitize_file_uploaded_name($filename) {
+    protected function sanitize_file_uploaded_name($filename) {
         /* Remove anything which isn't a word, whitespace, number
         * or any of the following caracters -_~,;[]().
         * If you don't need to handle multi-byte characters
@@ -118,7 +118,7 @@ class FormUploadFiles extends Form {
      * @author Yousef Ismaeil Cliprz.
      * @See http://php.net/manual/es/function.move-uploaded-file.php#111412
      */
-    function check_file_uploaded_length ($filename) {
+    protected function check_file_uploaded_length ($filename) {
         return (bool) ((mb_strlen($filename,'UTF-8') < 250) ? true : false);
     }
 }
