@@ -5,13 +5,14 @@
     //private const _NUMPAGES = 10; //Constant to page results.
 
     //Attributes:
-    private $page;           //Page Name.
-    private $prefix;         //Page prefix.
+    private $page;                  //Page Name.
+    private $prefix;                //Page prefix.
 
-    private $session;        //"Iniciar Sesión" (if user isn´t logged in), "Cerrar Sesión" (otherwise).
-    private $session_route;  //"login/" (if user isn´t logged in), "logout/" (otherwise).
-    private $panel;          //Button to access the user's dashboard (only displayed if logged in).
-    private $user_route;     //Route of the panel (depends on the type of user).
+    private $session;               //"Iniciar Sesión" (if user isn´t logged in), "Cerrar Sesión" (otherwise).
+    private $session_route;         //"login/" (if user isn´t logged in), "logout/" (otherwise).
+    private $panel;                 //Button to access the user's dashboard (only displayed if logged in).
+    private $user_route;            //Route of the panel (depends on the type of user).
+    private $sessionButtonClass;    //Type of button to login or logout.
 
     //Constructor:
     function __construct(){
@@ -24,6 +25,7 @@
         $this->session_route = 'login/';    //Default, the session has not started.
         $this->panel = '';                  //Default, the session has not started.
         $this->user_route = 'panel_user/';  //Default, the type of client is user.
+        $this->sessionButtonClass = '';     //Default, normal button.
     }
 
     //Methods:
@@ -80,7 +82,8 @@
         $page = $this->page;
         $prefix = $this->prefix;
         $session = $this->session;
-        $session_route =$this->session_route;
+        $sessionButtonClass = $this->sessionButtonClass;
+        $session_route = $this->session_route;
         $user_route = $this->user_route;
         $panel =$this->panel;
 
@@ -89,6 +92,7 @@
             else if($_SESSION["rol"] === "manager") $user_route = 'panel_manager/';
             $panel = "<a href='{$prefix}{$user_route}'><li>Mi Panel</li></a>";
             $session = 'Cerrar Sesión';
+            $sessionButtonClass = 'danger';
             $session_route = 'logout/';
         }
 
@@ -102,7 +106,7 @@
             <a href='{$prefix}'><img src='{$prefix}img/favicon2.png' alt='favicon' /> CompluCine</a> | {$page}
             <div class='menu'>
                 <nav>{$changeRol}
-                    <a href='{$prefix}{$session_route}'><li>{$session}</li></a>
+                    <a href='{$prefix}{$session_route}'><li class={$sessionButtonClass}>{$session}</li></a>
                     {$panel}
                     <li>Menú
                         <ul>

@@ -78,8 +78,9 @@ class FormDeleteAccount extends Form {
                     $bd->deleteUserAccount($user->getId());
                     unset($_SESSION);
                     session_destroy();
-                        
+                    
                     $result = ROUTE_APP;
+                    
                 } else {
                     $result[] = "Los datos introducidos\nno son válidos.";
                 }
