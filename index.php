@@ -15,7 +15,7 @@
             <div class="code">
                 <section class="promotions">
                     <button id="retroceder">Anterior</button>
-                    <img class="imagen" />
+                    <a href="promotions/" class="imagen"></a>
                     <button id="avanzar">Siguiente</button>
                 </section>
                 <section class="controls">

@@ -1,5 +1,5 @@
 window.onload = function (promotions) {
-    // Variables
+    // Promociones (Cambiar por el contenido del array "promotions")
     const IMAGENES = [
         '../img/promos/promo_vuelve.jpg',
         '../img/promos/promo_palomitas.jpg',

@@ -38,6 +38,7 @@
             case strpos($this->page, 'logout'): $this->page = 'Cerrar Sesión'; break;
             case strpos($this->page, 'register'): $this->page = 'Registro de Usuario'; break;
             case strpos($this->page, 'showtimes'): $this->page = 'Cartelera'; break;
+            case strpos($this->page, 'promotions'): $this->page = 'Promociones'; break;
             case strpos($this->page, 'cinemas'): $this->page = 'Nuestros Cines'; break;
             case strpos($this->page, 'about_us'): $this->page = 'Sobre FDI-Cines'; $this->prefix = '../../'; break;
             case strpos($this->page, 'terms'): $this->page = 'Términos y Condiciones'; $this->prefix = '../../'; break;
@@ -107,6 +108,7 @@
                         <ul>
                             <a href='{$prefix}'><li>Inicio</li></a>
                             <a href='{$prefix}showtimes/'><li>Cartelera</li></a>
+                            <a href='{$prefix}promotions/'><li>Promociones</li></a>
                             <a href='{$prefix}cinemas/'><li>Nuestros Cines</li></a>
                             <a href='{$prefix}fdicines/miembros/'><li>Quiénes somos</li></a>
                             <a href='{$prefix}contacto/'><li>Contacto</li></a>
