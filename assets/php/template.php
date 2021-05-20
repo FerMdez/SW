@@ -364,6 +364,52 @@
                 break;
 				
 			case "Panel de Gerente":
+				$reply .= "<div class='column'>";
+                for($i = 0; $i < count($films_array); $i++){
+                    $tittle = str_replace('_', ' ', $tittles[$i]);
+                    if($i%2 === 0){
+                        if($i != 0) $reply .= "</div>
+                    ";
+                        $reply .= "<div class='column side'>
+                        ";
+                    }
+                    else{
+                        if($i != 0) $reply .= "</div>
+                    ";
+                        $reply .= "<div class='column middle'>
+                        ";
+                    }
+                    $reply .= "<section id='".$tittles[$i]."'>
+                            <div class='zoom'>
+                                <div class='code showtimes'>
+                                    <div class='image'><img src='".$prefix."img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
+                                    <h2>".$tittle."</h2>
+                                    <hr />
+                                    <li>Duración: ".$times[$i]." minutos</li>
+                                    <li>Lenguaje: ".$languages[$i]."</li>
+                                
+								<form method='post' action='./?state=".$_SESSION["option"]."'>
+									<input name='film' type='hidden' value='".$ids[$i]."'>
+									<input name='tittle' type='hidden' value='".$tittles[$i]."'>
+									<input name='duration' type='hidden' value='".$times[$i]."'>
+									<input name='language' type='hidden' value='".$languages[$i]."'>
+									<input name='description' type='hidden' value='".$descriptions[$i]."'>
+									<input name='hall' type='hidden' value='".$_POST["hall"]."'>
+									<input name='date' type='hidden' value='".$_POST["date"]."'>
+									<input name='start' type='hidden' value='".$_POST["start"]."'>	
+									<input name='price' type='hidden' value='".$_POST["price"]."'>
+									<input name='format' type='hidden' value='".$_POST["format"]."'>
+									<input name='or_hall' type='hidden' value='".$_POST["or_hall"]."'>
+									<input name='or_date' type='hidden' value='".$_POST["or_date"]."'>
+									<input name='or_start' type='hidden' value='".$_POST["or_start"]."'>
+									<input type='submit' id='submit' value='Seleccionar' name='select_film' class='primary' />
+								</form>
+								</div>
+                            </div>
+                        </section>
+                    ";
+                }
+                $reply .= "</div>\n";      
                 break;
 				
             default: 
