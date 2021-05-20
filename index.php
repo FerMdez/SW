@@ -19,7 +19,7 @@
                     <button id="avanzar">Siguiente</button>
                 </section>
                 <section class="controls">
-                    <button id="play">►</button>
+                    <button id="play">&#x25b6;</button>
                     <button id="stop" disabled>||</button>
                 </section>
             </div>

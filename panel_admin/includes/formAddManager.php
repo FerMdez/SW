@@ -1,10 +1,10 @@
 <?php
 //General Config File:
 include_once('../assets/php/config.php');
-include_once('../assets/php/common/manager_dao.php');
-include_once('../assets/php/common/manager.php');
-include_once('../assets/php/common/cinema_dao.php');
-include_once('../assets/php/common/user_dao.php');
+include_once('../assets/php/includes/manager_dao.php');
+include_once('../assets/php/includes/manager.php');
+include_once('../assets/php/includes/cinema_dao.php');
+include_once('../assets/php/includes/user_dao.php');
 include_once('../assets/php/form.php');
 
 class formAddManager extends Form{

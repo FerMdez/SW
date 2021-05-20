@@ -1,8 +1,10 @@
 <?php
 require_once('../assets/php/form.php');
-include_once('../assets/php/common/user.php');
+include_once('../assets/php/includes/user.php');
 
 class FormChangePass extends Form {
+    //Constants:
+    const HTML5_PASS_REGEXP = '^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{4,16}$';
 
     public function __construct() {
         $options = array("action" => "./?option=manage_profile");
@@ -14,14 +16,15 @@ class FormChangePass extends Form {
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorOldPass = self::createMensajeError($errores, 'old_pass', 'span', array('class' => 'error'));
-        $errorPassword = self::createMensajeError($errores, 'pass', 'span', array('class' => 'error'));
+        $errorPassword = self::createMensajeError($errores, 'new_pass', 'span', array('class' => 'error'));
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = "<div class='row'>
                             <fieldset id='contraseña_usuario'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Nueva Contraseña</legend>
                                 <input type='password' name='old_pass' id='old_pass' value='' placeholder='Contraseña Actual' required/><pre>".$errorOldPass."</pre>
-                                <input type='password' name='pass' id='pass' value='' placeholder='Nueva Contraseña' required/><pre>".$errorPassword."</pre>
+                                <input type='password' name='new_pass' id='new_pass' value='' placeholder='Nueva Contraseña' required/><pre>".$errorPassword."</pre>
+                                <span id='passValid'>&#x2714;</span><span id='passWarning'>&#x26a0;</span></span><span id='passInvalid'>&#x274C;</span>
                                 <input type='password' name='repass' id='repass' value='' placeholder='Repita la nueva contraseña' required/><pre>".$errorPassword2."</pre>
                             </fieldset>
                             <div class='actions'> 
@@ -41,9 +44,9 @@ class FormChangePass extends Form {
             $result['old_pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres.";
         }
         
-        $password = $this->test_input($datos['pass']) ?? null;
-        if ( empty($password) || mb_strlen($password) < 4 ) {
-            $result['pass'] = "El password tiene que tener una\n longitud de al menos\n 4 caracteres.";
+        $password = $this->test_input($datos['new_pass']) ?? null;
+        if ( empty($password) || !mb_ereg_match(self::HTML5_PASS_REGEXP, $password) ) {
+            $result['new_pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres 1 mayúscula y 1 número.";
         }
         $password2 = $this->test_input($datos['repass']) ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {

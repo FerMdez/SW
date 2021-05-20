@@ -100,6 +100,7 @@ abstract class Form {
         $this->enctype  = $opciones['enctype'];
         
         if ( !$this->action ) {
+            // Cambiar por << $this->action = htmlentities($_SERVER['REQUEST_URI']); >> para mantener los parámetros de la URL.
             $this->action = htmlentities($_SERVER['PHP_SELF']);
         }
     }

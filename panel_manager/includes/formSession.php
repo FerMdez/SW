@@ -1,6 +1,6 @@
 <?php
-require_once($prefix.'assets/php/common/session_dao.php');
-require_once($prefix.'assets/php/common/session.php');
+require_once($prefix.'assets/php/includes/session_dao.php');
+require_once($prefix.'assets/php/includes/session.php');
 require_once($prefix.'assets/php/form.php');
 
 //Receive data from froms and prepare the correct response

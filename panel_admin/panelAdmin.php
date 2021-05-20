@@ -90,8 +90,8 @@
 
         //Functions MANAGERS
         static function print_managers(){
-            include_once('../assets/php/common/manager_dao.php');
-            include_once('../assets/php/common/manager.php');
+            include_once('../assets/php/includes/manager_dao.php');
+            include_once('../assets/php/includes/manager.php');
             $manager = new Manager_DAO("complucine");
             $managers = $manager->allManagersData();
             $ids = array();

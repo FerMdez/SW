@@ -1,5 +1,5 @@
 <?php
-    require_once($prefix.'assets/php/common/user.php');
+    require_once($prefix.'assets/php/includes/user.php');
 
     class UserPanel {
         //Atributes:

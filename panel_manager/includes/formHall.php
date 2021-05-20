@@ -1,6 +1,6 @@
 <?php
-include_once($prefix.'assets/php/common/hall.php');
-include_once($prefix.'assets/php/common/seat.php');
+include_once($prefix.'assets/php/includes/hall.php');
+include_once($prefix.'assets/php/includes/seat.php');
 include_once($prefix.'assets/php/form.php');
 	
 class FormHall extends Form {

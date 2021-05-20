@@ -4,9 +4,9 @@
     require_once('../assets/php/config.php');
     //Controller file:
     require_once('panel_manager.php');
-	require_once('../assets/php/common/manager_dao.php');
-	require_once('../assets/php/common/manager.php');
-	require_once('../assets/php/common/user.php');
+	require_once('../assets/php/includes/manager_dao.php');
+	require_once('../assets/php/includes/manager.php');
+	require_once('../assets/php/includes/user.php');
 
 	if($_SESSION["login"] && $_SESSION["lastRol"] === "admin" && $_SESSION["rol"] === "manager") {
 		$manager = false;

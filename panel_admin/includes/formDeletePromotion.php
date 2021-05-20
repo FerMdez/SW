@@ -1,8 +1,8 @@
 <?php
 //General Config File:
 include_once('../assets/php/config.php');
-include_once('../assets/php/common/promotion_dao.php');
-include_once('../assets/php/common/promotion.php');
+include_once('../assets/php/includes/promotion_dao.php');
+include_once('../assets/php/includes/promotion.php');
 include_once('../assets/php/form.php');
 
 class formDeletePromotion extends Form{

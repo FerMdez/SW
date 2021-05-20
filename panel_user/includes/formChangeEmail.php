@@ -1,6 +1,6 @@
 <?php
 require_once('../assets/php/form.php');
-include_once('../assets/php/common/user.php');
+include_once('../assets/php/includes/user.php');
 
 class FormChangeEmail extends Form {
     //Constants:
@@ -24,6 +24,7 @@ class FormChangeEmail extends Form {
                             <fieldset id='email_usuario'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Nuevo email de usuario</legend>
                                 <input type='text' name='new_email' id='new_email' value='' placeholder='Nuevo Email' required/><pre>".$errorEmail."</pre>
+                                <span id='emailValid'>&#x2714;</span></span><span id='emailInvalid'>&#x274C;</span>
                                 <input type='text' name='remail' id='remail' value='' placeholder='Repita el email' required/><pre>".$errorEmail2."</pre>
                                 <input type='password' name='pass' id='pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
                             </fieldset>
@@ -73,20 +74,28 @@ class FormChangeEmail extends Form {
                                     </div>
                                     ";
             } else {
-                $bd->changeUserEmail(unserialize($_SESSION['user'])->getId(), $email);
-                $_SESSION['message'] = "<div class='row'>
-                                            <div class='column side'></div>
-                                            <div class='column middle'>
-                                                <div class='code info'>
-                                                    <h1>Operacion realizada con exito</h1><hr />
-                                                    <p>Se ha modificado su email correctamente.</p>
-                                                    <a href=''><button>Cerrar Mensaje</button></a>
+                $user = $bd->selectUserEmail($email);
+                if ($user->data_seek(0)){
+                    $result[] = "El email ya está registrado.";
+                } else {
+                    $bd->changeUserEmail(unserialize($_SESSION['user'])->getId(), $email);
+                    $user = $bd->selectUser(unserialize($_SESSION['user'])->getName(), $password);
+                    $_SESSION['user'] = serialize($user);
+                    $_SESSION["nombre"] = $user->getName();
+                    $_SESSION['message'] = "<div class='row'>
+                                                <div class='column side'></div>
+                                                <div class='column middle'>
+                                                    <div class='code info'>
+                                                        <h1>Operacion realizada con exito</h1><hr />
+                                                        <p>Se ha modificado su email correctamente.</p>
+                                                        <a href=''><button>Cerrar Mensaje</button></a>
+                                                    </div>
                                                 </div>
+                                                <div class='column side'></div>
                                             </div>
-                                            <div class='column side'></div>
-                                        </div>
-                                        ";
-                $result = './?option=manage_profile';
+                                            ";
+                    $result = './?option=manage_profile';
+                }
             }
         }
         return $result;

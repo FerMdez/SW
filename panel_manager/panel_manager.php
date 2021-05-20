@@ -1,8 +1,8 @@
 <?php
-	include_once($prefix.'assets/php/common/hall.php');
-	include_once($prefix.'assets/php/common/session.php');
-	require_once($prefix.'assets/php/common/manager.php');
-	require_once($prefix.'assets/php/common/cinema_dao.php');
+	include_once($prefix.'assets/php/includes/hall.php');
+	include_once($prefix.'assets/php/includes/session.php');
+	require_once($prefix.'assets/php/includes/manager.php');
+	require_once($prefix.'assets/php/includes/cinema_dao.php');
 	include_once('./includes/formHall.php');	
 	include_once('./includes/formSession.php');	
 

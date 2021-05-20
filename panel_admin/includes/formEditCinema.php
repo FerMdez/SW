@@ -1,8 +1,8 @@
 <?php
 //General Config File:
 include_once('../assets/php/config.php');
-include_once('../assets/php/common/cinema_dao.php');
-include_once('../assets/php/common/cinema.php');
+include_once('../assets/php/includes/cinema_dao.php');
+include_once('../assets/php/includes/cinema.php');
 include_once('../assets/php/form.php');
 
 class formEditCinema extends Form{

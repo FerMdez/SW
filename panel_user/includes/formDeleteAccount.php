@@ -1,7 +1,7 @@
 <?php
 require_once('../assets/php/form.php');
-include_once('../assets/php/common/user.php');
-include_once('../assets/php/common/user_dao.php');
+include_once('../assets/php/includes/user.php');
+include_once('../assets/php/includes/user_dao.php');
 
 class FormDeleteAccount extends Form {
      //Constants:

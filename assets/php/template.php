@@ -49,6 +49,7 @@
             case strpos($this->page, 'miembros'): $this->page = 'Miembros'; $this->prefix = '../../'; break;
             case strpos($this->page, 'planificacion'): $this->page = 'Planificación'; $this->prefix = '../../'; break;
             case strpos($this->page, 'contacto'): $this->page = 'Contacto'; break;
+            case strpos($this->page, 'assets'): $this->prefix = '../../../'; break;
             default: $this->page = 'FDI-Cines'; $this->prefix = './'; break;
         }
     }
@@ -72,6 +73,8 @@
         <title>CompluCine | {$page}</title>
         <meta charset='utf-8' />
         <link id='estilo' rel='stylesheet' type='text/css' href='{$prefix}assets/css/main.css'>
+        <noscript><h1>Esta página requiere JavaScript para su correcto funcionamiento. 
+            Compruebe si JavaScript está deshabilitado en su navegador.</h1></noscript>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
         <link rel='icon' href='{$prefix}img/favicon.png' />
     </head>\n";
@@ -262,7 +265,7 @@
     function print_fimls(){
         $reply = "";
         //List of the movies:
-        require_once(__DIR__.'/common/film_dao.php');
+        require_once(__DIR__.'/includes/film_dao.php');
 
         $prefix= $this->get_prefix();
 
@@ -364,7 +367,7 @@
                 break;
 				
 			case "Panel de Gerente":
-				$reply .= "<div class='column'>";
+                $reply .= "<div class='column'>";
                 for($i = 0; $i < count($films_array); $i++){
                     $tittle = str_replace('_', ' ', $tittles[$i]);
                     if($i%2 === 0){
@@ -409,7 +412,7 @@
                         </section>
                     ";
                 }
-                $reply .= "</div>\n";      
+                $reply .= "</div>\n"; 
                 break;
 				
             default: 
@@ -458,7 +461,7 @@
         $reply = "";
 
         //List of the cinemas:
-        require_once(__DIR__.'/common/cinema_dao.php');
+        require_once(__DIR__.'/includes/cinema_dao.php');
 
         $cine = new Cinema_DAO("complucine");
         $cinemas = $cine->allCinemaData();
@@ -550,10 +553,15 @@
         $page = $this->page;
 
         /* TODO */
-        $css = "{$prefix}assets/css/highContrast.css";
-        $nameCSS = "Alto Contraste";
-        //$css = "{$prefix}assets/css/main.css";
-        //$nameCSS = "Contraste Normal";
+        if(!isset($_SESSION["css"]) || $_SESSION["css"] === "assets/css/main.css"){
+            $css = "{$prefix}assets/css/highContrast.css";
+            $nameCSS = "Alto Contraste";
+        } else {
+            $css = "{$prefix}assets/css/main.css";
+            $nameCSS = "Contraste Normal";
+        }
+        /****/
+        
 
         echo"<footer>
             <div class='footer'>
@@ -564,12 +572,14 @@
             <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |
             <a href='{$prefix}contacto/'>Contacto</a> |
-            <button onclick=\"cambiarCSS('$css');\">$nameCSS</button>
+            <button id='css' onclick=\"cambiarCSS('$css');\">$nameCSS</button>
         </footer>\n";
 
         echo"
         <!-- Scripts -->
+        <script type='text/javascript' src='{$prefix}assets/js/jquery-3.2.1.min.js'></script>
         <script src='{$prefix}assets/js/cambiarCSS.js'></script>
+        <script src='{$prefix}assets/js/checkForms.js'></script>
         ";
         if($page === "FDI-Cines") echo"<script src='{$prefix}assets/js/promotions.js'></script>\n";
     }

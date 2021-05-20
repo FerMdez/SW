@@ -1,7 +1,7 @@
 <?php
 require_once('../assets/php/form.php');
-include_once('../assets/php/common/user.php');
-include_once('../assets/php/common/user_dao.php');
+include_once('../assets/php/includes/user.php');
+include_once('../assets/php/includes/user_dao.php');
 
 class FormChangeName extends Form {
 
@@ -23,6 +23,7 @@ class FormChangeName extends Form {
                             <fieldset id='nombre_usuario'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Nuevo Nombre de usuario</legend>
                                 <input type='text' name='new_name' id='new_name' value='' placeholder='Nuevo Nombre' required/><pre>".$errorNombre."</pre>
+                                <span id='userValid'>&#x2714;</span><span id='userWarning'>&#x26a0;</span></span><span id='userInvalid'>&#x274C;</span>
                                 <input type='text' name='rename' id='rename' value='' placeholder='Repita el nombre' required/><pre>".$errorNombre2."</pre>
                                 <input type='password' name='pass' id='pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
                             </fieldset>
