@@ -2,6 +2,7 @@
 	include_once($prefix.'assets/php/common/hall.php');
 	include_once($prefix.'assets/php/common/session.php');
 	require_once($prefix.'assets/php/common/manager.php');
+	require_once($prefix.'assets/php/common/cinema_dao.php');
 	include_once('./includes/formHall.php');	
 	include_once('./includes/formSession.php');	
 
@@ -24,6 +25,45 @@
 				
 			return $panel;
         }
+
+		static function welcomeAdmin($manager) {
+			$cinemaList = new Cinema_DAO('complucine');
+			$cinemas = $cinemaList->allCinemaData();	
+			$cinema = 1;
+
+            $name = strtoupper($_SESSION["nombre"]);
+			if(isset($_POST['change'])){
+				$manager->setIdcinema($_POST['cinema']);
+			}
+
+			if($manager->getIdcinema() != null) $cinema = strtoupper( $manager->getIdcinema());
+
+            $panel = '<div class="code info">
+						<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
+						<hr />
+						<p>Usuario: '.$name.'</p>
+						<p>Cine: '.$cinema.'</p>
+						<p>Espero que estes pasando un buen dia</p>
+						<form method="post" id="changecinema" action="index.php">
+							<select name="cinema" class="button">
+							';
+					foreach($cinemas as $c){ 
+						if($c->getId() == $cinema){
+							$panel .=  "<option value=\"". $c->getId() ." \"selected> " . $c->getId() ."</option>
+							";
+						}else{
+							$panel .=  "<option value=\"". $c->getId() ." \"> " . $c->getId() . "</option>
+							";
+					}
+				}
+				
+		$panel .= '				<input type="submit" name="change" value="Cambiar" /><br>
+							</select>
+						</form>
+					</div>';
+				
+			return $panel;
+		}
 		
 		static function success(){
             $panel = '<div class="code info">

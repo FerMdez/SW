@@ -7,8 +7,48 @@
 	require_once('../assets/php/common/manager_dao.php');
 	require_once('../assets/php/common/manager.php');
 	require_once('../assets/php/common/user.php');
-	
-    if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
+
+	if($_SESSION["login"] && $_SESSION["lastRol"] === "admin" && $_SESSION["rol"] === "manager") {
+		$manager = false;
+		$manager = new Manager(null, null, null, null, null);
+
+
+		$state = isset($_GET['state']) ? $_GET['state'] : '';
+		switch($state){
+			case "view_user":
+				break;
+			case "view_ruser":
+				break;			
+			case "manage_halls":
+				$panel = Manager_panel::manage_halls($manager);
+				break;
+			case "new_hall":
+				$panel = Manager_panel::new_hall($manager);
+				break;	
+			case "edit_hall":
+				$panel = Manager_panel::edit_hall($manager);
+				break;	
+			case "manage_sessions":
+				$panel = Manager_panel::manage_sessions($manager);
+				break;
+			case "new_session":
+				$panel = Manager_panel::new_session($manager);
+				break;
+			case "edit_session":
+				$panel = Manager_panel::edit_session($manager);
+				break;
+			case "select_film":
+				$panel = Manager_panel::select_film($template,$manager);
+				break;
+			case "success":
+				$panel = Manager_panel::success();
+				break;
+			default:  
+				$panel = Manager_panel::welcomeAdmin($manager);
+				break;
+		}
+	}
+    else if($_SESSION["login"] && $_SESSION["rol"] === "manager"){
 		$bd = new Manager_DAO('complucine');
 		$manager = false;
 		if($bd && !$manager){
