@@ -62,10 +62,16 @@
 						$origin = array("cinema" => $cinema,"hall" => $or_hall,"start" => $or_start,"date" => $or_date);
 						$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format,$origin);
 						return "Se ha editado la session con exito";			
-					}else	
+					}else if($or_hall == $hall && $or_start == $start && $or_date == $date){
+						$origin = array("cinema" => $cinema,"hall" => $or_hall,"start" => $or_start,"date" => $or_date);
+						$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format, $origin);
+						return "Se ha editado la session con exito";
+					}else{
 						return "Ya existe una sesion con los parametros nuevos";	
+					}
+						
 				} else 
-					return "Esta session no existe";
+					return "La session a editar no existe";
 				
 			} else return "Error al conectarse a la base de datos";
 		}
