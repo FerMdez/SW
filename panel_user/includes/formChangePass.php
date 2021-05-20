@@ -26,6 +26,7 @@ class FormChangePass extends Form {
                                 <input type='password' name='new_pass' id='new_pass' value='' placeholder='Nueva Contraseña' required/><pre>".$errorPassword."</pre>
                                 <span id='passValid'>&#x2714;</span><span id='passWarning'>&#x26a0;</span></span><span id='passInvalid'>&#x274C;</span>
                                 <input type='password' name='repass' id='repass' value='' placeholder='Repita la nueva contraseña' required/><pre>".$errorPassword2."</pre>
+                                <span id='repassValid'>&#x2714;</span></span><span id='repassInvalid'>&#x274C;</span>
                             </fieldset>
                             <div class='actions'> 
                                 <input type='submit' id='submit' value='Cambiar Contraseña' class='primary' />

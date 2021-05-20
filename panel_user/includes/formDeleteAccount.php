@@ -27,8 +27,9 @@ class FormDeleteAccount extends Form {
                                 <legend>Datos de la cuenta</legend>
                                 <input type='text' name='name' id='name' value='' placeholder='Nombre de usuario' required/><pre>".$errorNombre."</pre>
                                 <input type='text' name='email' id='email' value='' placeholder='Email de usuario' required/><pre>".$errorEmail."</pre>
-                                <input type='password' name='pass' id='pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
+                                <input type='password' name='pass' id='new_pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
                                 <input type='password' name='repass' id='repass' value='' placeholder='Repita la contraseña' required/><pre>".$errorPassword2."</pre>
+                                <span id='repassValid'>&#x2714;</span></span><span id='repassInvalid'>&#x274C;</span>
                             </fieldset>
                             <div class='verify'>
                                 <input type='checkbox' id='checkbox' name='verify' required>

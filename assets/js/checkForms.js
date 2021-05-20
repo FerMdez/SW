@@ -21,6 +21,10 @@ $(document).ready(function() {
     $("#passValid").hide();
     $("#passInvalid").hide();
     $("#passWarning").hide();
+
+    //Iconos para validar que las contraseñas coindicen:
+    $("#repassValid").hide();
+    $("#repassInvalid").hide();
 	
     //Comprueba que el nombre de usuario introducido para el login, exista.
 	$("#name").change(function(){
@@ -62,6 +66,24 @@ $(document).ready(function() {
             $("#passInvalid").show();
             $("#passWarning").hide();
             fieldPass[0].setCustomValidity("La contraseña debe contener al menos 1 mayúscula y 1 número.");
+		}
+
+    });
+
+    //Comprueba que las contraseñas sean iguales.
+    $("#repass").change(function(){
+		const fieldPass = $("#new_pass");
+        const fieldRepass = $("#repass");
+        fieldRepass[0].setCustomValidity("");
+		
+        if (Object.is(fieldPass.val(), fieldRepass.val())) {
+            $("#repassValid").show();
+            $("#repassInvalid").hide();
+			fieldRepass[0].setCustomValidity("");
+		} else {
+            $("#repassValid").hide();
+            $("#repassInvalid").show();
+            fieldRepass[0].setCustomValidity("Las contraseñas deben coincidir.");
 		}
 
     });
