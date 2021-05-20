@@ -25,7 +25,7 @@
 				
 			return $panel;
         }
-
+		
 		static function welcomeAdmin($manager) {
 			$cinemaList = new Cinema_DAO('complucine');
 			$cinemas = $cinemaList->allCinemaData();	
@@ -56,12 +56,12 @@
 							";
 					}
 				}
-				
+
 		$panel .= '				<input type="submit" name="change" value="Cambiar" /><br>
 							</select>
 						</form>
 					</div>';
-				
+
 			return $panel;
 		}
 		
@@ -188,14 +188,19 @@
 				
 				
 				foreach($sessions as $session){ 
+					$film = Session::getThisSessionFilm($session->getIdfilm());
 					$panel .='
 								<tr>
 									<td> '.date("H:i", strtotime( $session->getStartTime())).' </td>
-									<td> '. str_replace('_', ' ', Session::getThisSessionFilm($session->getIdfilm())["tittle"]) .' </td>
+									<td> '. str_replace('_', ' ', $film["tittle"]) .' </td>
 									<td> '.$session->getFormat().' </td>
 									<td> '.$session->getSeatPrice().' </td>
 									<form method="post" action="./?state=edit_session">
 										<input  name="film" type="hidden" value="'.$session->getIdfilm().'">
+										<input  name="tittle" type="hidden" value="'.$film["tittle"].'">
+										<input  name="duration" type="hidden" value="'.$film["duration"].'">
+										<input  name="language" type="hidden" value="'.$film["language"].'">
+										<input  name="description" type="hidden" value="'.$film["description"].'">
 										<input  name="hall" type="hidden" value="'.$session->getIdhall().'">
 										<input  name="date" type="hidden" value="'.$session->getDate().'">
 										<input  name="start" type="hidden" value="'.$session->getStartTime().'">
@@ -237,8 +242,8 @@
 		
 		//TODO: estado al modificar sesiones para la seleccion de peliculas usando el template->print films
 		static function select_film($template,$manager){		
-			if(isset($_GET["option"])){
-				$_SESSION["option"] = $_GET["option"];
+			if(isset($_POST["select_film"]) && isset($_POST["option"])){
+				$_SESSION["option"] = $_POST["option"];
 				$panel = '<h1>Seleccionar Pelicula.</h1><hr /></br>';
 				$panel .= $template->print_fimls();
 				$_SESSION["option"] = "";
@@ -252,7 +257,7 @@
 			$panel = '<div class="code info">
                     <h1>No deberias poder acceder aqui.</h1>
                     <hr />
-                    <p> No uses la url para toquitear cosas >.< </p>
+                    <p> >.< </p>
                 </div>'."\n";
 				
 			return $panel;
