@@ -18,18 +18,13 @@ class FormHall extends Form {
 	
 	protected function generaCamposFormulario($data, $errores = array()){
 		//Prepare the data
-		if($this->option == "new_hall"){
-			$number = $data['number'] ?? "";
-			$rows = $data['rows'] ?? '12';
-			$cols = $data['cols'] ?? '8';
-		}else {
-			$number = $data['number'] ?? $_POST["number"];
-			$rows = $data['rows'] ?? $_POST["rows"];
-			$cols = $data['cols'] ?? $_POST["cols"];
-		}
-		
+		$number = $data['number'] ?? $_POST["number"] ?? "";
+		$rows = $data['rows'] ?? $_POST["rows"] ?? "12";
+		$cols = $data['cols'] ?? $_POST["cols"] ?? "8";
 		$og_number = $data['og_number'] ?? $number;
-			
+		$og_rows = $data['og_rows'] ?? $rows;
+		$og_cols = $data['og_cols'] ?? $cols;
+		
 		//Seats_map
 		$seats = 0;
 		$seats_map = array();
@@ -41,6 +36,8 @@ class FormHall extends Form {
 		
 		//Show the original seats_map once u click restart or the first time u enter this form from manage_halls's form
 		if(isset($data["restart"]) || isset($_POST["edit_hall"]) ){
+			$rows = $og_rows;
+			$cols = $og_cols;
 			$seat_list = Seat::getSeatsMap($og_number, $this->cinema);
 			if($seat_list){
 				foreach($seat_list as $seat){
@@ -70,13 +67,18 @@ class FormHall extends Form {
 		$htmlErroresGlobales = self::generaListaErroresGlobales($errores);
 		$errorNumber = self::createMensajeError($errores, 'number', 'span', array('class' => 'error'));
 		$errorSeats = self::createMensajeError($errores, 'seats', 'span', array('class' => 'error'));
-
+		$errorRows = self::createMensajeError($errores, 'rows', 'span', array('class' => 'error'));
+		$errorCols = self::createMensajeError($errores, 'cols', 'span', array('class' => 'error'));
+		
 		$html = '
-				<div class="column left">'.$htmlErroresGlobales.' '.$errorSeats.'
+				<div class="column left">'.$htmlErroresGlobales.' 
 					<fieldset>
 						<legend>Mapa de Asientos</legend>
+						'.$errorSeats.' '.$errorRows.' '.$errorCols.'
 						<label> Filas: </label> <input type="number" name="rows" min="1" id="rows" value="'.$rows.'" required/> <br>
+						<input type="Hidden" name="og_rows" value="'.$og_rows.'"/> <br>
 						<label> Columnas: </label> <input type="number" name="cols" min="1" id="cols" value="'.$cols.'"required/> <br>
+						<input type="Hidden" name="og_cols" value="'.$og_cols.'"/> <br>
 						<label> Asientos totales:'.$seats.' </label> <input type="hidden" name="seats" id="seats" value="'.$seats.'"readonly/> <br>
 						<input type="submit" name="alltoone" value="Activar todos los asientos" class="button large" />';
 						if($this->option == "edit_hall")
@@ -98,6 +100,7 @@ class FormHall extends Form {
 					<input type="submit" id="submit" name="delete" onclick="return confirm(\'Seguro que quieres borrar esta sala?\')" value="Eliminar Sala" class="black button" />  
 				';	
 		}
+		if(!$errorCols && !$errorRows){
 			$html .='</div>
 				<div class="column right">
 					<h3 class="table_title"> Pantalla </h3>
@@ -133,7 +136,9 @@ class FormHall extends Form {
 						</tbody>
 					</table>
 				</div>';		
-
+		} else
+			$html .='</div>';
+			
 		return $html;
 	}
 	
@@ -166,6 +171,14 @@ class FormHall extends Form {
 		
 		if ($seats == 0 && isset($datos["sumbit"]) ) {
             $result['seats'] = "<li> No puede haber 0 asientos disponibles. </li> <br>";
+        }
+		
+		if ($rows <= 0) {
+            $result['rows'] = "<li> No puede haber 0 o menos filas. </li> <br>";
+        }
+		
+		if ($cols <= 0) {
+            $result['cols'] = "<li> No puede haber 0 o menos columnas. </li> <br>";
         }
 		
 		

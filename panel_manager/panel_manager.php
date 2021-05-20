@@ -56,7 +56,6 @@
 							";
 					}
 				}
-
 		$panel .= '				<input type="submit" name="change" value="Cambiar" /><br>
 							</select>
 						</form>
@@ -108,7 +107,7 @@
 										<input  name="rows" type="hidden" value="'. $hall->getNumRows().'"/>
 										<input  name="cols" type="hidden" value="'. $hall->getNumCol().'"/>
 										<input  name="seats" type="hidden" value="'.$hall->getTotalSeats().'"/>
-									<td> <input type="submit" id="submit" name ="edit_hall" formaction="./?state=edit_hall&number='.$hall->getNumber().'" value="Editar" class="primary" /> </td>
+									<td> <input type="submit" id="submit" name ="edit_hall" formaction="./?state=edit_hall" value="Editar" class="primary" /> </td>
 									</form>
 								</tr>';
 				}
