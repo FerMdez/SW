@@ -336,7 +336,12 @@ main img {
   height: 250px;
 }
 .code.showtimes{
-  height: 600px;
+  height: 500px;
+}
+.code.showtimes p{
+  height: 5em;
+  overflow-x: auto;
+  overflow-y: auto;
 }
 
 

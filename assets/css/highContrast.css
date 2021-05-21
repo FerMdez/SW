@@ -282,64 +282,68 @@
   }
   
   /* Code & Blockquote */
-  .code {
-    background: #1f2c3d;
-    border-radius: 3px;
-    font-size: 0.9em;
-    margin: 10px;
-    display: block;
-    line-height: 1.75em;
-    padding: 1em 1.5em;
-    overflow-x: auto;
-    overflow-y: auto;
-  }
-  .code h1, .code h2{
-    color: #dadada;
-  }
-  .code h3, .code h4 {
-    color: #d3ebff;
-  }
-  .code p {
-    color: #dadada;
-  }
-  .code a {
-    text-decoration: underline; 
-  }
-  .code ul, .code ol, .code li{
-    color: #dadada;
-  }
-  .code img{
-    /* width: 80px; height: 80px; */
-    width: 25%;
-  }
-  .code fieldset{
-    margin: 1px;
-    border-color: #dadada;
-    border-style: groove;
-  }
-  .code fieldset legend {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 90%;
-    color: #d3ebff;
-  }
-  .code label{
-    color: #d3ebff;
-  }
-  .code.details{
-    height: 750px;
-  }
-  .code.plan {
-    height: 1150px;
-  }
-  .code.info{
-    text-align: center;
-    height: 250px;
-  }
-  .code.showtimes{
-    height: 600px;
-  }
-  
+.code {
+  background: #1f2c3d;
+  border-radius: 3px;
+  font-size: 0.9em;
+  margin: 10px;
+  display: block;
+  line-height: 1.75em;
+  padding: 1em 1.5em;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.code h1, .code h2{
+  color: #dadada;
+}
+.code h3, .code h4 {
+  color: #d3ebff;
+}
+.code p {
+  color: #dadada;
+}
+.code a {
+  text-decoration: underline; 
+}
+.code ul, .code ol, .code li {
+  color: #dadada;
+}
+.code img{
+  /* width: 80px; height: 80px; */
+  width: 25%;
+}
+.code fieldset{
+  margin: 1px;
+  border-color: #dadada;
+  border-style: groove;
+}
+.code fieldset legend {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 90%;
+  color: #d3ebff;
+}
+.code label{
+  color: #d3ebff;
+}
+.code.details{
+  height: 750px;
+}
+.code.plan {
+  height: 1150px;
+}
+.code.info{
+  text-align: center;
+  height: 250px;
+}
+.code.showtimes{
+  height: 500px;
+}
+.code.showtimes p{
+  height: 5em;
+  overflow-x: auto;
+  overflow-y: auto;
+}  
   
   /* BlockQuotes */
   .blockquote {
