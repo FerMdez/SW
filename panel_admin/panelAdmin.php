@@ -27,8 +27,7 @@
             return $reply=   '<!-- Add film -->
             <div class="column side"></div>
                     <div class="column middle">
-                    '.$htmlAForm.'
-                    </div>'."\n";
+                    '.$htmlAForm."\n";
         }
     
         static function deleteFilm() {
