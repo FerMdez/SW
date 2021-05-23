@@ -13,7 +13,8 @@ class FormDeleteAccount extends Form {
     }
     
     protected function generaCamposFormulario($datos, $errores = array()){
-        $nombre = $datos['username'] ?? '';
+        $nameValue = "value=".unserialize($_SESSION['user'])->getName().""; 
+        $emailValue = "value=".unserialize($_SESSION['user'])->getEmail()."";
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
@@ -25,8 +26,8 @@ class FormDeleteAccount extends Form {
         $html = "<div class='row'>
                             <fieldset id='cuenta_usuario'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Datos de la cuenta</legend>
-                                <input type='text' name='name' id='name' value='' placeholder='Nombre de usuario' required/><pre>".$errorNombre."</pre>
-                                <input type='text' name='email' id='email' value='' placeholder='Email de usuario' required/><pre>".$errorEmail."</pre>
+                                <input type='text' name='name' id='name' ".$nameValue." placeholder='Nombre de usuario' required/><pre>".$errorNombre."</pre>
+                                <input type='text' name='email' id='email' ".$emailValue." placeholder='Email de usuario' required/><pre>".$errorEmail."</pre>
                                 <input type='password' name='pass' id='new_pass' value='' placeholder='Contraseña' required/><pre>".$errorPassword."</pre>
                                 <input type='password' name='repass' id='repass' value='' placeholder='Repita la contraseña' required/><pre>".$errorPassword2."</pre>
                                 <span id='repassValid'>&#x2714;</span></span><span id='repassInvalid'>&#x274C;</span>
@@ -36,8 +37,7 @@ class FormDeleteAccount extends Form {
                                 <label for='verify'>Al marcar esta casilla, verifica y entiende que esta acción no se puede deshacer.</label>
                             </div>
                             <div class='actions'> 
-                                <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' />
-                                <input type='reset' id='reset' value='Borrar' />       
+                                <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' />     
                             </div>
                         </div>";
 
@@ -49,8 +49,8 @@ class FormDeleteAccount extends Form {
         
         $nombre = $this->test_input($datos['name']) ?? null;
         $nombre = strtolower($nombre);
-        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
-            $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 8 caracteres.";
+        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 15 ) {
+            $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 15 caracteres.";
         }
 
         $email = $this->test_input($datos['email']) ?? null;

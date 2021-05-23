@@ -40,6 +40,7 @@
             case strpos($this->page, 'logout'): $this->page = 'Cerrar Sesión'; break;
             case strpos($this->page, 'register'): $this->page = 'Registro de Usuario'; break;
             case strpos($this->page, 'showtimes'): $this->page = 'Cartelera'; break;
+            case strpos($this->page, 'purchase'): $this->page = 'Comprar Entrada'; break;
             case strpos($this->page, 'promotions'): $this->page = 'Promociones'; break;
             case strpos($this->page, 'cinemas'): $this->page = 'Nuestros Cines'; break;
             case strpos($this->page, 'about_us'): $this->page = 'Sobre FDI-Cines'; $this->prefix = '../../'; break;
@@ -223,11 +224,10 @@
                                                     </li>");
                                 break;
 
-                case "user": array_push($menus, "<a href='./?option=manage_profile'><li>Cuenta de usuario</li></a>");
-                                array_push($menus, "<a href='./?option=purchases'><li>Historial Compras</li></a>");
-                                    array_push($menus, "<a href='./?option=payment'><li>Datos Pago</li></a>");
-                                        array_push($menus, "<a href='./?option=delete_user'><li>Eliminar Usuario</li></a>");
-                                            break;
+                case "user": array_push($menus, "<a href='./?option=purchases'><li>Historial Compras</li></a>");
+                                array_push($menus, "<a href='./?option=payment'><li>Datos Pago</li></a>");
+                                    array_push($menus, "<a href='./?option=delete_user'><li>Eliminar Usuario</li></a>");
+                                        break;
 
                 default: $menus = array(); break;
             }
@@ -303,6 +303,7 @@
                     }
                     $reply .= "<section id='".$tittles[$i]."'>
                             <div class='zoom'>
+                                <a href='".$prefix."purchase?film=".$ids[$i]."'>
                                 <div class='code showtimes'>
                                     <div class='image'><img src='".$prefix."img/films/".$tittles[$i].".jpg' alt='".$tittles[$i]."' /></div>
                                     <h2>".$tittle."</h2>
@@ -313,6 +314,7 @@
                                     <li>Duración: ".$times[$i]." minutos</li>
                                     <li>Lenguaje: ".$languages[$i]."</li>
                                 </div>
+                                </a>
                             </div>
                         </section>
                     ";

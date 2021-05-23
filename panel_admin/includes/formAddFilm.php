@@ -33,7 +33,7 @@ class formAddFilm extends Form{
 							<input type="number" name="duration" id="duration" placeholder="Duración" required/><pre>'.$errorDuration.'</pre>
 							<input type="text" name="language" id="language" placeholder="Idioma" required/><pre>'.$errorLanguage.'</pre>
 							<input type="text" name="description" id="description" placeholder="Descripción" required/><pre>'.$errorDescription.'</pre>
-							<div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div><pre>'.$errorImage.'</pre></p>
+							<div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div><pre>'.$errorImage.'</pre>
 					</fieldset>
 					<div class="actions"> 
 						<input type="submit" id="submit" value="Añadir pelicula" class="primary" />

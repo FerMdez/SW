@@ -1,9 +1,8 @@
 <?php
 require_once('../assets/php/form.php');
+include_once('../assets/php/includes/user.php');
 
 class FormUploadFiles extends Form {
-    //Constants:
-    const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
 
     public function __construct() {
         $options = array('enctype' => 'multipart/form-data');
@@ -23,7 +22,7 @@ class FormUploadFiles extends Form {
         // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
         $html = '
                 <div class="file">
-                    <label for="file">Imagen:</label><input type="file" name="file" id="file" /><pre>'.$htmlErroresGlobales.'</pre>
+                    <input type="file" name="file" id="file" /><pre>'.$htmlErroresGlobales.'</pre>
                 </div>
                 <input type="submit" id="submit" value="Subir" class="primary" /><pre>'.$errorFile.'</pre>
                 ';
@@ -59,13 +58,27 @@ class FormUploadFiles extends Form {
 
             if ( $ok ) {
             $tmp_name = $_FILES['archivo']['tmp_name'];
+            //$tmp_name = unserialize(strtolower($_SESSION["user"])->getName()).".jpg";
 
-            if ( !move_uploaded_file($tmp_name, FILMS_DIR.$nombre) ) {
+            if ( !move_uploaded_file($tmp_name, USER_PICS.$nombre) ) {
                 $result[] = 'Error al mover el archivo';
             }
 
             // 4. Si fuese necesario guardar en la base de datos la ruta relativa $nombre del archivo
             //return "index.php#img=".urlencode('img/'.$nombre);
+            $_SESSION['message'] = "<div class='row'>
+                                                <div class='column side'></div>
+                                                <div class='column middle'>
+                                                    <div class='code info'>
+                                                        <h1>Operacion realizada con exito</h1><hr />
+                                                        <p>Se ha modificado su imagen de usuario correctamente.</p>
+                                                        <a href='./'><button>Cerrar Mensaje</button></a>
+                                                    </div>
+                                                </div>
+                                                <div class='column side'></div>
+                                            </div>
+                                            ";
+            $result = "./?option=change_profile_pic";
             } else {
                 $result["errorFile"] = 'El archivo tiene un nombre o tipo no soportado';
             }

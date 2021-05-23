@@ -43,8 +43,8 @@ class FormLogin extends Form {
         //$nombre = $this->test_input($datos['name']) ?? null;
         $nombre = $datos['name'] ?? null;
         $nombre = strtolower($nombre);
-        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
-            $result['name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 8 caracteres.";
+        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 15 ) {
+            $result['name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 15 caracteres.";
         }
         
         //$password = $this->test_input($datos['pass']) ?? null;

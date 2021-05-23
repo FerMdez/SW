@@ -13,14 +13,19 @@
         static function panel(){
             $name = strtoupper(unserialize($_SESSION['user'])->getName());
             $email = unserialize($_SESSION['user'])->getEmail();
+            $userPic = USER_PICS.strtolower($name).".jpg";
+
+            $forms = self::manage();
+
             return $reply = '<div class="code info">
                     <h1>Bienvenido '.$name.' a tu Panel de Usuario.</h1>
                     <hr />
+                    <a href="./?option=change_profile_pic"><img src='.$userPic.' alt="user_profile_picture"/></a>
                     <h3>'.strftime("%A %e de %B de %Y | %H:%M").'</h3>
                     <br />
                     <p>Usuario: '.$name.'</p>
                     <p>Email: '.$email.'</p>
-                </div>'."\n";
+                </div>'."\n".$forms;
         }
 
         //Manage the user account.
@@ -39,7 +44,10 @@
             $formCE = new FormChangeEmail();
             $htmlFormChangeEmail = $formCE->gestiona();
 
-            return $reply = '<!-- Change User Name -->
+            return $reply = '
+                <!-- Cambiar Información de la Usuario -->
+                <br /><h2>Cambiar información de la cuenta</h2><hr />
+                <!-- Change User Name -->
                 <div class="column side">
                     <h2>Cambiar nombre de usuario</h2>
                     '.$htmlFormChangeName.'
@@ -54,6 +62,29 @@
                     <h2>Cambiar email de usuario</h2>
                     '.$htmlFormChangeEmail.'
                 </div>'."\n";
+        }
+
+        //User purchase history.
+        static function changeUserPic(){
+
+            require_once('./includes/formUploadPic.php');
+
+            $formCP = new FormUploadFiles();
+            $htmlFormChangeUserPic = $formCP->gestiona();
+
+            $name = strtoupper(unserialize($_SESSION['user'])->getName());
+            $userPic = USER_PICS.strtolower($name).".jpg";
+
+            return $reply = '<!-- Form Change User Profile Picture -->
+                            <div class="column side"></div>
+                            <div class="column middle">
+                                <div class="code info">
+                                    <h1>Cambiar imagen de perfil</h1><hr />
+                                    <img src='.$userPic.' alt="user_profile_picture"/>
+                                    '.$htmlFormChangeUserPic.'
+                                </div>
+                            </div>
+                            <div class="column side"></div>'."\n";
         }
 
         //User purchase history.

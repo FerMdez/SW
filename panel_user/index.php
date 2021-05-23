@@ -8,8 +8,8 @@
     if($_SESSION["login"] && $_SESSION["rol"] === "user"){
         if(!isset($_GET["option"])) $_GET["option"] = null;
         switch($_GET["option"]){
-            case "manage_profile":
-                $reply = UserPanel::manage();
+            case "change_profile_pic":
+                $reply = UserPanel::changeUserPic();
                 break;
             case "purchases":
                 $reply = UserPanel::purchases();

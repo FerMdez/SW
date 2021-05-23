@@ -58,8 +58,8 @@ class FormRegister extends Form {
         
         $nombre = $this->test_input($datos['new_name']) ?? null;
         $nombre = strtolower($nombre);
-        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
-            $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 8 caracteres.";
+        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 15 ) {
+            $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 15 caracteres.";
         }
 
         $email = $this->test_input($datos['new_email']) ?? null;

@@ -26,12 +26,25 @@
 			return $resul;
 		}
 
-		//Returns a query to get the film's data.
+		//Returns the film's data by ID.
 		public function FilmData($id){
+			$id = $this->mysqli->real_escape_string($id);
+
 			$sql = sprintf( "SELECT * FROM film WHERE id = '%d'", $id );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
-			return $resul;
+			$resul->data_seek(0);
+			$film = null;
+			while ($fila = $resul->fetch_assoc()) {
+				if($id === $fila['id']){
+					$film = $this->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"], $fila["img"]);
+				}
+			}
+
+			//mysqli_free_result($selectUser);
+			$resul->free();
+
+			return $film;
 		}
 		
 	    //Returns a query to get All the films.
@@ -88,6 +101,24 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $resul;
+		}
+
+		//Get cinemas associated with a movie.
+		public function getCinemas($id){
+			include_once('cinema_dao.php');
+			$cinema = new Cinema_DAO("complucine");
+
+			$sql = sprintf( " SELECT DISTINCT * FROM cinema WHERE cinema.id in 
+								(SELECT session.idcinema FROM session JOIN film ON session.idfilm = film.id WHERE film.id = '%d'); ", $id);
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			//$cinemas[] = null;
+			while($fila = $resul->fetch_assoc()){
+				$cinemas[] = $cinema->loadCinema($fila["id"], $fila["name"], $fila["direction"], $fila["phone"]);
+			}
+			$resul->free();
+
+			return $cinemas;
 		}
 	    
 		//Create a new film Data Transfer Object.

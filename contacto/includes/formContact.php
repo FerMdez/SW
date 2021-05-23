@@ -1,5 +1,6 @@
 <?php
 require_once($prefix.'assets/php/form.php');
+require_once($prefix.'assets/php/includes/user.php');
 
 class FormContact extends Form {
     //Constants:
@@ -11,6 +12,8 @@ class FormContact extends Form {
     }
     
     protected function generaCamposFormulario($datos, $errores = array()) {
+        if(isset($_SESSION["user"])){ $nameValue = "value=".unserialize($_SESSION['user'])->getName().""; $emailValue = "value=".unserialize($_SESSION['user'])->getEmail().""; }
+        else { $nameValue = "placeholder='Nombre'"; $emailValue = "placeholder='Email'"; }
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
@@ -23,10 +26,10 @@ class FormContact extends Form {
                     <fieldset id='datos_personales'>
                         <legend>Datos personales</legend><pre>".$htmlErroresGlobales."</pre>
                         <div class='_name'>
-                            <input type='text' name='name' id='name' value='' placeholder='Nombre' required/><pre>".$errorNombre."</pre>
+                            <input type='text' name='name' id='name' ".$nameValue." required/><pre>".$errorNombre."</pre>
                         </div>
                         <div class='_email'>
-                            <input type='email' name='email' id='email' value='' placeholder='Email' required/><pre>".$errorEmail."</pre>
+                            <input type='email' name='email' id='email' ".$emailValue." required/><pre>".$errorEmail."</pre>
                         </div>
                     </fieldset>
                     <fieldset id='motivo'>
@@ -65,8 +68,8 @@ class FormContact extends Form {
         $result = array();
 
         $nombre = $this->test_input($datos['name']) ?? null;
-        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 8 ) {
-            $result['name'] = "El nombre tiene que tener\n una longitud de más de\n 3 caracteres\n y menos de 8 caracteres.";
+        if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 15 ) {
+            $result['name'] = "El nombre tiene que tener\n una longitud de más de\n 3 caracteres\n y menos de 15 caracteres.";
         }
         
         $email = $this->test_input($datos['email']) ?? null;

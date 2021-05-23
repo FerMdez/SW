@@ -335,13 +335,27 @@ main img {
   text-align: center;
   height: 250px;
 }
+.code.info img{
+  width: 75px;
+  height: 75px;
+  margin-top: 5px;
+  border: 1px solid #d3ebff;
+  border-radius: 5px;
+  padding: 5px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  
+}
 .code.showtimes{
-  height: 500px;
+  height: 600px;
 }
 .code.showtimes p{
   height: 5em;
   overflow-x: auto;
   overflow-y: auto;
+}
+.code.showtimes:hover {
+  filter: drop-shadow(5px 5px 10px #1f2c3d);
 }
 
 
