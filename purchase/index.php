@@ -18,21 +18,22 @@
 
         $cinemas = $filmDAO->getCinemas($_GET["film"]);
         if(!empty($cinemas)){
-            $cinemasNames = array();
-            $cinemasIDs = array();
+            $cinemasNames = new ArrayIterator(array());
+            $cinemasIDs = new ArrayIterator(array());
             foreach($cinemas as $key=>$value){
                 $cinemasIDs[$key] = $value->getId();
                 $cinemasNames[$key] = $value->getName();
             }
+            $cinemasIT = new MultipleIterator(MultipleIterator::MIT_KEYS_ASSOC);
+            $cinemasIT->attachIterator($cinemasIDs, "ID");
+            $cinemasIT->attachIterator($cinemasNames, "NAME");
         
             $cinemasListHTML = '<select name="cinemas">';
-            foreach($cinemasNames as $value){
-                foreach($cinemasIDs as $id){
-                    if($value == reset($cinemasNames)){
-                        $cinemasListHTML .= '<option value="'.$id.'" selected>'.$value.'</option>';
-                    } else {
-                        $cinemasListHTML .='<option value="'.$id.'">'.$value.'</option>';
-                    }
+            foreach($cinemasIT as $value){
+                if($value == reset($cinemasIT)){
+                    $cinemasListHTML .= '<option value="'.$value["ID"].'" selected>'.$value["NAME"].'</option>';
+                } else {
+                    $cinemasListHTML .='<option value="'.$value["ID"].'">'.$value["NAME"].'</option>';
                 }
             }
             $cinemasListHTML .= '</select>';
@@ -41,7 +42,7 @@
         }
 
         $cinemaDAO = new Cinema_DAO("complucine");
-        $sessions = $cinemaDAO->getSessions($id);
+        $sessions = $cinemaDAO->getSessions($value["ID"]);
         if(!empty($sessions)){
             $sessionsDates = new ArrayIterator(array());
             $sessionsStarts = new ArrayIterator(array());
@@ -64,19 +65,6 @@
                     $sessionsListHTML .='<option value="'.$value["ID"].'">'.$value["DATE"].' | '.$value["HOUR"].'</option>';
                 }
             }
-            /*
-            foreach($sessionsDates as $value){
-                foreach($sessionsStarts as $start){
-                    foreach($sessionsIDs as $id){
-                        if($value == reset($sessionsDates)){
-                            $sessionsListHTML .= '<option value="'.$id.'" selected>'.$value.' | '.$start.'</option>';
-                        } else {
-                            $sessionsListHTML .='<option value="'.$id.'">'.$value.' | '.$start.'</option>';
-                        }
-                    }
-                }
-            }
-            */
             $sessionsListHTML .= '</select>';
         } else {
             $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select>';
