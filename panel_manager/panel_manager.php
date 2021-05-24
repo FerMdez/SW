@@ -12,14 +12,23 @@
         function __construct(){}
 
 		static function welcome($manager){
+			$bd = new Cinema_DAO('complucine');
+			if($bd){
+				$cinema = ($bd->cinemaData($manager->getIdcinema()))->fetch_assoc();
+				$c_name = $cinema["name"];
+				$c_dir = $cinema["direction"];
+				$c_tel = $cinema["phone"];
+			}
             $name = strtoupper($_SESSION["nombre"]);
 			$cinema = strtoupper( $manager->getIdcinema());
 
             $panel = '<div class="code info">
 						<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
 						<hr />
-						<p>Usuario: '.$name.'</p>
-						<p>Cine: '.$cinema.'</p>
+						<p>Usuario: '.$name.'</p> <br>
+						<p>Cine: '.$c_name.'</p>
+						<p>Dirección: '.$c_dir.'</p>
+						<p>Telefono: '.$c_tel.'</p> <br>
 						<p>Espero que estes pasando un buen dia</p>
 					</div>';
 				
@@ -84,36 +93,20 @@
 				$panel .= "<h2> No hay ninguna sala en este cine";
 			}else{
 			$panel .= '
-						<table class="alt">
-							<thead>
-								<tr>
-									<th>Numero</th>
-									<th>Filas</th>
-									<th>Columnas</th>
-									<th>Asientos Disponibles</th>
-								</tr>
-							</thead>
-							<tbody>'; 
+					<h3 class="tablelike_title"> Salas </h3> <h3 class="tablelike_title"> Asientos </h3> <br>
+						<ul class="tablelike">
+							'; 
 
 			foreach($listhall as $hall){ 
 				$panel .='
-								<tr>
-									<td> '. $hall->getNumber().'</td>
-									<td> '. $hall->getNumRows().'</td>
-									<td> '. $hall->getNumCol().'</td>
-									<td> '.$hall->getTotalSeats().' </td>
-									<form method="post" action="./?state=edit_session">
-										<input  name="number" type="hidden" value="'. $hall->getNumber().'"/>
-										<input  name="rows" type="hidden" value="'. $hall->getNumRows().'"/>
-										<input  name="cols" type="hidden" value="'. $hall->getNumCol().'"/>
-										<input  name="seats" type="hidden" value="'.$hall->getTotalSeats().'"/>
-									<td> <input type="submit" id="submit" name ="edit_hall" formaction="./?state=edit_hall" value="Editar" class="primary" /> </td>
-									</form>
-								</tr>';
+							<li class="tablelike"> '. $hall->getNumber().'</li>
+							<li class="tablelike"> '.$hall->getTotalSeats().' </li>
+							<a class="tablelike_link" href="?state=edit_hall&number='. $hall->getNumber().'"> Editar  </a>
+							<a class="tablelike_link" href="?state=manage_sessions&number='. $hall->getNumber().'"> Sessiones  </a>
+						';
 				}
 			$panel.='
-							</tbody>
-						</table>';
+						</ul>';
 			}
 			$panel.='
 						<form method="post" action="./?state=new_hall">
@@ -133,18 +126,24 @@
 			return $panel;
 		}
 		
-		static function edit_hall($manager){		
-			$formHall = new FormHall("edit_hall",$manager->getIdcinema());
-		
-			$panel = '<h1>Editar una sala.</h1><hr/></br>
-				'.$formHall->gestiona();
-			return $panel;
+		static function edit_hall($manager){	
+			$hall = Hall::search_hall($_GET["number"], $manager->getIdcinema());
+			
+			if($hall || isset($_POST["restart"]) || isset($_POST["filter"]) || isset($_POST["sumbit"]) ){
+				
+				$formHall = new FormHall("edit_hall",$manager->getIdcinema(), $hall);
+				$panel = '<h1>Editar una sala.</h1><hr/></br>
+					'.$formHall->gestiona();
+				return $panel;
+			} else{
+				return Manager_panel::warning($manager);
+			}
 		}
 		
 		static function manage_sessions($manager){
 			//Base filtering values
-			$date = isset($_POST['date']) ? $_POST['date'] : date("Y-m-d");
-			$hall = isset($_POST['hall']) ? $_POST['hall'] : "1";
+			$date = $_POST['date'] ?? $_GET['date'] ?? date("Y-m-d");
+			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
 			
 			//Session filter
 			$panel='<div class = "column left">
@@ -254,7 +253,7 @@
 		//Funcion que se envia cuando hay inconsistencia en el panel manager, principalmente por tocar cosas con la ulr
 		static function warning($manager){
 			$panel = '<div class="code info">
-                    <h1>No deberias poder acceder aqui.</h1>
+                    <h1>Ha habido un error.</h1>
                     <hr />
                     <p> >.< </p>
                 </div>'."\n";

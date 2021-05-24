@@ -7,23 +7,28 @@ class FormHall extends Form {
 	
 	private $option;
 	private $cinema;
+	private $og_hall;
+	private $first;
 	
     //Constructor:
-    public function __construct($option, $cinema) {
+    public function __construct($option, $cinema, $hall) {
+		
 		$this->option = $option;
 		$this->cinema = $cinema;
-		$options = array("action" => "./?state=".$option);
+		$this->og_hall = $hall;
+		
+		if($option == "edit_hall")
+			$this->first = true;
+		
+		$options = array("action" => "./?state=".$option."&number=".$hall->getNumber()."");
         parent::__construct('formHall',$options);
     }
 	
 	protected function generaCamposFormulario($data, $errores = array()){
 		//Prepare the data
-		$number = $data['number'] ?? $_POST["number"] ?? "";
-		$rows = $data['rows'] ?? $_POST["rows"] ?? "12";
-		$cols = $data['cols'] ?? $_POST["cols"] ?? "8";
-		$og_number = $data['og_number'] ?? $number;
-		$og_rows = $data['og_rows'] ?? $rows;
-		$og_cols = $data['og_cols'] ?? $cols;
+		$number = $data['number'] ?? $this->og_hall->getNumber() ?? "";
+		$rows = $data['rows'] ?? $this->og_hall->getNumRows() ?? "12";
+		$cols = $data['cols'] ?? $this->og_hall->getNumCol() ?? "8";
 		
 		//Seats_map
 		$seats = 0;
@@ -35,10 +40,11 @@ class FormHall extends Form {
 		}
 		
 		//Show the original seats_map once u click restart or the first time u enter this form from manage_halls's form
-		if(isset($data["restart"]) || isset($_POST["edit_hall"]) ){
-			$rows = $og_rows;
-			$cols = $og_cols;
-			$seat_list = Seat::getSeatsMap($og_number, $this->cinema);
+		if(isset($data["restart"]) || $this->first){
+			$first = false;
+			$rows = $this->og_hall->getNumRows();
+			$cols = $this->og_hall->getNumCol();
+			$seat_list = Seat::getSeatsMap($this->og_hall->getNumber(), $this->cinema);
 			if($seat_list){
 				foreach($seat_list as $seat){
 					$seats_map[$seat->getNumRows()][$seat->getNumCol()] = $seat->getState();
@@ -76,21 +82,17 @@ class FormHall extends Form {
 						<legend>Mapa de Asientos</legend>
 						'.$errorSeats.' '.$errorRows.' '.$errorCols.'
 						<label> Filas: </label> <input type="number" name="rows" min="1" id="rows" value="'.$rows.'" required/> <br>
-						<input type="Hidden" name="og_rows" value="'.$og_rows.'"/> <br>
 						<label> Columnas: </label> <input type="number" name="cols" min="1" id="cols" value="'.$cols.'"required/> <br>
-						<input type="Hidden" name="og_cols" value="'.$og_cols.'"/> <br>
 						<label> Asientos totales:'.$seats.' </label> <input type="hidden" name="seats" id="seats" value="'.$seats.'"readonly/> <br>
-						<input type="submit" name="alltoone" value="Activar todos los asientos" class="button large" />';
+						<input type="submit" name="filter" value="Actualizar mapa de la sala" class="button large" /> 
+						';
 						if($this->option == "edit_hall")
 								$html .= ' <input type="submit" id="restart" name="restart" value="Restaurar mapa original" class="black button" />';						
 					$html .='
-					</fieldset>
-					<input type="submit" name="filter" value="Actualizar mapa de la sala" class="button large" /> '.$errorNumber.'
-					<fieldset>
+					</fieldset><br>
+					'.$errorNumber.'
 						<label> Numero de sala: </label>
 						<input type="number" min="1" name="number" id="number" value="'.$number.'" placeholder="Numero de la Sala" /><br>		
-						<input type="hidden" name="og_number" value="'.$og_number.'" /><br>	
-					</fieldset>	
 					';
 		if($this->option == "new_hall")
 				$html .='<input type="submit" id="submit" name="sumbit" value="Crear Sala" class="primary" />
@@ -103,6 +105,7 @@ class FormHall extends Form {
 		if(!$errorCols && !$errorRows){
 			$html .='</div>
 				<div class="column right">
+					<input type="submit" name="alltoone" value="Activar todos los asientos" class="button large" />
 					<h3 class="table_title"> Pantalla </h3>
 					<table class="seat">
 						<thead>
@@ -150,7 +153,6 @@ class FormHall extends Form {
        
 		$rows = $datos['rows'];
         $cols = $datos['cols'];
-		$og_number = $datos["og_number"];
 		
 		//Prepare the seat_map
 		$seats_map = array();
@@ -193,14 +195,14 @@ class FormHall extends Form {
 					$result = './?state=success';
 				}
 				if($this->option == "edit_hall"){
-					$_SESSION['msg'] = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $og_number);
+					$_SESSION['msg'] = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
 					$result = './?state=success';
 				}
         }
 		
 		if (!isset($result['number']) && isset($datos["delete"]) ) {
 			if($this->option == "edit_hall"){
-                $_SESSION['msg'] = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $og_number);
+                $_SESSION['msg'] = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
                 $result = './?state=success';
             }
         }
