@@ -15,15 +15,24 @@
         $tittle = $film->getTittle();
 
         $cinemas = $filmDAO->getCinemas($_GET["film"]);
-        $cinemasNames = array();
-        foreach($cinemas as $key=>$value){
-            $cinemasNames[$key] = $value->getName();
+        if(!empty($cinemas)){
+            $cinemasNames = array();
+            foreach($cinemas as $key=>$value){
+                $cinemasNames[$key] = $value->getName();
+            }
+        
+            $cinemasListHTML = '<select name="cinemas">';
+            foreach($cinemasNames as $value){
+                if($value == reset($cinemasNames)){
+                    $cinemasListHTML .= '<option value="'.$value.'" selected>'.$value.'</option>';
+                } else {
+                    $cinemasListHTML .='<option value="'.$value.'">'.$value.'</option>';
+                }
+            }
+            $cinemasListHTML .= '</select>';
+        } else {
+            $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select>';
         }
-        foreach($cinemasNames as $value){
-            $cinemasListHTML = '<select name="cinemas">
-                                <option value="'.$value.'">'.$value.'</option>
-                            </select>';
-         }
     }
     
 
@@ -31,12 +40,14 @@
     $reply = '<div class="column left">
                         <h2>Película seleccionada: '.str_replace('_', ' ', $tittle).'</h2><hr />
                         <div class="image"><img src="'.$prefix.'img/films/'.$tittle.'.jpg" alt="'.$tittle.'" /></div>
-                        <p>Duración: '.$film->getDuration().'</p>
+                        <p>Duración: '.$film->getDuration().' minutos</p>
                         <p>Idioma: '.$film->getLanguage().'</p>
                     </div>
                     <div class="column right">
-                        <h2>Seleccione un Cine y una Sesión</h2><hr />           
+                        <h2>Seleccione un Cine y una Sesión</h2><hr />
+                        <br /><h3>Cines</h3>        
                             '.$cinemasListHTML.'
+                        <h3>Sesiones</h3>
                     </div>
                         ';
     
@@ -44,7 +55,7 @@
     $section = '<!-- Purchase -->
         <section id="purchase">
             <div class="row">
-                <section class="code">
+                <section class="code purchase">
                    '.$reply.'
                 </section>
             </div>

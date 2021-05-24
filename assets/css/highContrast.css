@@ -358,6 +358,22 @@
 .code.showtimes:hover {
   filter: drop-shadow(5px 5px 10px #1f2c3d);
 } 
+.code.purchase {
+  text-align: center;
+}
+.code.purchase img {
+  margin: 0.1em 0 0.8em 0;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 #00020f, 0 6px 20px 0 #00020f;
+}
+.code.purchase select, .code.purchase select option {
+  width: 100%;
+  font-weight: bold !important;
+  color: #1f2c3d !important;
+  background-color: #d3ebff;
+  text-transform: uppercase;
+}
+
   
   /* BlockQuotes */
   .blockquote {

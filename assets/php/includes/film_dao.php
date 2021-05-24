@@ -112,7 +112,7 @@
 								(SELECT session.idcinema FROM session JOIN film ON session.idfilm = film.id WHERE film.id = '%d'); ", $id);
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
-			//$cinemas[] = null;
+			$cinemas = null;
 			while($fila = $resul->fetch_assoc()){
 				$cinemas[] = $cinema->loadCinema($fila["id"], $fila["name"], $fila["direction"], $fila["phone"]);
 			}
