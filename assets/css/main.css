@@ -359,6 +359,15 @@ main img {
 .code.cinemas {
   height: 200px;
 }
+.code.promo img {
+  margin: 0.1em 0 0.8em 0;
+  width: 30%;
+  height: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 8px 0 #00020f, 0 6px 20px 0 #00020f;
+}
 .code.purchase {
   text-align: center;
 }

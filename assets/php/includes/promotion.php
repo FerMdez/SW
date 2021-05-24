@@ -3,11 +3,11 @@
     class Promotion{
 
         //Attributes:
-        private $_id;               //Cinema ID.
-        private $_tittle;           //Cinema name.
-        private $_description;         //Cinema direction.
-        private $_code;         //Cinema phone.
-        private $_active;
+        private $_id;               //Promotion ID.
+        private $_tittle;           //Promotions name.
+        private $_description;      //Promotion description.
+        private $_code;             //Promotion code.
+        private $_active;           //Promotion is active?
 
 		//Constructor:
         function __construct($id, $tittle, $description, $code, $active){

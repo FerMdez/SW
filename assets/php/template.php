@@ -505,7 +505,7 @@
                                     <h2>".$names[$i]."</h2>
                                     <hr />
                                     <li>Dirección: ".$directions[$i]."</li>
-                                    <li>Teléfono: ".$phones[$i]." minutos</li>
+                                    <li>Teléfono: ".$phones[$i]."</li>
                                 </div>
                                 </a>
                             </div>
@@ -568,6 +568,76 @@
             default:
                 break;
 
+        }
+
+        return $reply;
+    }
+
+    function print_promotions(){
+        $reply = "";
+
+        //List of the cinemas:
+        require_once(__DIR__.'/includes/promotion_dao.php');
+
+        $prefix= $this->get_prefix();
+
+        $promotion = new Promotion_DAO("complucine");
+        $promotions = $promotion->allPromotionData();
+        $ids = array();
+        $tittles = array();
+        $descriptions = array();
+        $codes = array();
+        $isActive = array();
+
+        if(is_array($promotions)){
+            foreach($promotions as $key => $value){
+                $ids[$key] = $value->getId();
+                $tittles[$key] = $value->getTittle();
+                $descriptions[$key] = $value->getDescription();
+                $codes[$key] = $value->getCode();
+                if($value->getActive()){
+                    $isActives[$key] = "ACTIVA";
+                } else {
+                    $isActives[$key] = "CADUCADA";
+                }
+            }
+        }
+
+        switch($this->page){
+            case "Promociones":
+                for($i = 0; $i < count($promotions); $i++){
+                    if($i%2 === 0){
+                        if($i != 0) $reply .= "</div>
+                    ";
+                        $reply .= "<div class='column side'>
+                        ";
+                    }
+                    else{
+                        if($i != 0) $reply .= "</div>
+                    ";
+                    $reply .= "<div class='column middle'>
+                        ";
+                    }
+                    $reply .= "<section id='".$tittles[$i]."'>
+                            <div class='zoom'>
+                                <div class='code promo'>
+                                    <div class='image'><img src='".$prefix."img/promos/".str_replace(' ', '_', strtolower($tittles[$i])).".jpg' alt='".$tittles[$i]."' /></div>
+                                    <h2>".$tittles[$i]."</h2>
+                                    <hr />
+                                    <div class='blockquote'>
+                                        <p>".$descriptions[$i]."</p>
+                                    </div>
+                                    <li>Código: ".$codes[$i]."</li>
+                                    <li>Estado: ".$isActives[$i]."</li>
+                                </div>
+                            </div>
+                        </section>
+                    ";
+                }
+                $reply .= "</div>\n";
+                break;
+            default:
+                break;
         }
 
         return $reply;

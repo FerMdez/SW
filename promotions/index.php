@@ -4,9 +4,11 @@
     
     //Specific page content:
     $section = '<!-- Promotions -->
-        <section id="promociones">
-            
-        </section>
+        <div class="row">
+            <section id="promociones">
+                '.$template->print_promotions().'
+            </section>
+        </div>
         ';
     
     //General page content:
