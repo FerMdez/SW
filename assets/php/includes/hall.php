@@ -1,5 +1,5 @@
 <?php
-	include_once($prefix.'assets/php/includes/hall_dao.php');
+	include_once('hall_dao.php');
 	include_once('seat_dao.php');
 	
     class Hall{
@@ -78,6 +78,12 @@
 					return "La sala a borrar no existe";
 				}
 			} else { return "Error al conectarse a la base de datos"; }
+		}
+		
+		public static function search_hall($number,$cinema){
+			$bd = new HallDAO('complucine');
+			if($bd )
+				return $bd->searchHall($number,$cinema);;
 		}
 		
 		//Getters && Setters:
