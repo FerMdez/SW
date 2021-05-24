@@ -96,7 +96,7 @@ class FormRegister extends Form {
                             $_SESSION["nombre"] = $this->user->getName();
                             $_SESSION["rol"] = $this->user->getRol();
                             $_SESSION["login"] = true;
-                            $result = "../register/register.php";
+                            $result = ROUTE_APP."register/register.php";
                         }
                     }
                 }

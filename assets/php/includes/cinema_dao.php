@@ -66,6 +66,24 @@
 
 			return $resul;
 		}
+
+		//Get sessions associated with a cinema.
+		public function getSessions($id){
+			include_once('session_dao.php');
+			$session = new SessionDAO("complucine");
+
+			$sql = sprintf( " SELECT DISTINCT * FROM session WHERE session.id in 
+								(SELECT session.id FROM session JOIN cinema ON session.idcinema = cinema.id WHERE cinema.id = '%d'); ", $id);
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			$sessions = null;
+			while($fila = $resul->fetch_assoc()){
+				$sessions[] = $session->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"], $fila["seats_full"]);
+			}
+			$resul->free();
+
+			return $sessions;
+		}
 	    
 		//Create a new film Data Transfer Object.
 		public function loadCinema($id, $name, $direction, $phone){
