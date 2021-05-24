@@ -66,3 +66,66 @@ table.seat td:first-child {
   border:#000000;
   background-color: #791515;
 }
+
+h3.tablelike_title{
+	text-align: left;
+	margin-bottom: 1em;
+	margin-left: 13%;
+	float:left;
+}
+
+a.tablelike_link { 
+  color: #1f2c3d;
+  text-decoration: none; 
+  float:left;
+  padding:10px;
+  border-bottom:1px solid #000;
+  border-right:1px solid #000;
+  min-width:46px;
+  width: 25%;
+  height: 40px;
+}
+
+a.tablelike_link:nth-child(8n){
+	 background-color:rgba(144, 144, 144, 0.25);
+}
+a.tablelike_link:nth-child(8n-1){
+	 background-color:rgba(144, 144, 144, 0.25);
+}
+a.tablelike_link:nth-child(-n+4){
+  border-top:1px solid #000;
+}
+a.tablelike_link:hover{
+  color:rgb(138, 150, 32);
+}
+
+ul.tablelike{
+  list-style:none;
+  text-align:center;
+}
+  
+ul.tablelike li.tablelike{
+  float:left;
+  padding:10px;
+  border-bottom:1px solid #000;
+  border-right:1px solid #000;
+  min-width:46px;
+  width: 25%;
+  height: 40px;
+}
+
+ul.tablelike li.tablelike:nth-child(2n+1){
+  clear:both;
+  border-left:1px solid #000;
+}
+
+ul.tablelike li.tablelike:nth-child(-n+2){
+  border-top:1px solid #000;
+}
+
+li.tablelike:nth-child(8n-2){
+	 background-color:rgba(144, 144, 144, 0.25);
+}
+li.tablelike:nth-child(8n-3){
+	 background-color:rgba(144, 144, 144, 0.25);
+}
