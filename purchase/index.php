@@ -101,8 +101,15 @@
             $reply = '<h1>No existe la película.</h1>';
             $pay = false;
         }
+    } else if(isset($_GET["cinema"])) {
+        $reply = '<h1>ESTAMOS TRABAJANDO EN ELLO</h1>';
+        $pay = false;
+    } else {
+        $reply = '<h1>No ha encontrado película ni cine.</h1>';
+        $pay = false;
     }
     
+
     //Pay button:
     if($pay){
         $pay = '<form action="confirm.php" method="post">

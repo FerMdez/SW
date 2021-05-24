@@ -465,6 +465,8 @@
         //List of the cinemas:
         require_once(__DIR__.'/includes/cinema_dao.php');
 
+        $prefix= $this->get_prefix();
+
         $cine = new Cinema_DAO("complucine");
         $cinemas = $cine->allCinemaData();
         $ids = array();
@@ -482,6 +484,36 @@
         }
 
         switch($this->page){
+            case "Nuestros Cines":
+                for($i = 0; $i < count($cinemas); $i++){
+                    if($i%2 === 0){
+                        if($i != 0) $reply .= "</div>
+                    ";
+                        $reply .= "<div class='column side'>
+                        ";
+                    }
+                    else{
+                        if($i != 0) $reply .= "</div>
+                    ";
+                    $reply .= "<div class='column middle'>
+                        ";
+                    }
+                    $reply .= "<section id='".$names[$i]."'>
+                            <div class='zoom'>
+                                <a href='".$prefix."purchase?cinema=".$ids[$i]."'>
+                                <div class='code cinemas'>
+                                    <h2>".$names[$i]."</h2>
+                                    <hr />
+                                    <li>Dirección: ".$directions[$i]."</li>
+                                    <li>Teléfono: ".$phones[$i]." minutos</li>
+                                </div>
+                                </a>
+                            </div>
+                        </section>
+                    ";
+                }
+                $reply .= "</div>\n";
+                break;
             case "Panel de Administrador":
                 $reply .= "<div class='row'>
                     <div class='column side'></div>
@@ -533,7 +565,7 @@
                     ';
                 break;
             
-            default: 
+            default:
                 break;
 
         }

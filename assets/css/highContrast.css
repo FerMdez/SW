@@ -357,7 +357,10 @@
 }
 .code.showtimes:hover {
   filter: drop-shadow(5px 5px 10px #1f2c3d);
-} 
+}
+.code.cinemas {
+  height: 200px;
+}
 .code.purchase {
   text-align: center;
 }
