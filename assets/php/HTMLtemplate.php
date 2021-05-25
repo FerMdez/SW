@@ -29,6 +29,11 @@
         <?php
             $template->print_footer();
         ?>
+
+        <!-- Scripts -->
+        <?php
+            $template->print_scripts();
+        ?>
        
     </body>
 </html>

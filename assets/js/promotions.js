@@ -1,4 +1,6 @@
-window.onload = function (promotions) {
+window.onload = function () {
+    var promos = document.getElementById("promotions").value;
+    console.log(promos);
     // Promociones (Cambiar por el contenido del array "promotions")
     const IMAGENES = [
         '../img/promos/promo_vuelve.jpg',

@@ -50,7 +50,8 @@
             $fiml_id = $film->getId();
             $cinema_id = $value["cID"];
 
-            $sessions = $filmDAO->getSessions($_GET["film"]);
+            $cinemaDAO = new Cinema_DAO("complucine");
+            $sessions = $cinemaDAO->getSessions($value["cID"]);
             if(!empty($sessions)){
                 $sessionsDates = new ArrayIterator(array());
                 $sessionsStarts = new ArrayIterator(array());

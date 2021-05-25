@@ -2,6 +2,8 @@
     //General Config File:
     require_once(__DIR__.'/assets/php/config.php');
 
+    $promotions = "HOLA MUNDO";
+
     //Page-specific content:
     $section = '<!-- Undercard -->
         <section id="cartelera">
@@ -13,6 +15,7 @@
         </section>
         <section id="promociones" class="row">
             <div class="code">
+                <h2>Promociones</h2>
                 <section class="promotions">
                     <button id="retroceder">Anterior</button>
                     <a href="promotions/" class="imagen"></a>
@@ -24,6 +27,7 @@
                 </section>
             </div>
         </section>
+        <input type="hidden" id="promotions" value="'.$promotions.'" />
         ';
 
     //General page content:

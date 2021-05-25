@@ -678,14 +678,18 @@
             <a href='{$prefix}contacto/'>Contacto</a> |
             <button id='css' onclick=\"cambiarCSS('$css');\">$nameCSS</button>
         </footer>\n";
+    }
 
-        echo"
-        <!-- Scripts -->
-        <script type='text/javascript' src='{$prefix}assets/js/jquery-3.2.1.min.js'></script>
-        <script src='{$prefix}assets/js/cambiarCSS.js'></script>
-        <script src='{$prefix}assets/js/checkForms.js'></script>
+    //Print JS scripts:
+    function print_scripts(){
+        $prefix = $this->prefix;
+        $page = $this->page;
+
+        echo"<script type='text/javascript' src='{$prefix}assets/js/jquery-3.2.1.min.js'></script>
+        <script type='text/javascript' src='{$prefix}assets/js/cambiarCSS.js'></script>
+        <script type='text/javascript' src='{$prefix}assets/js/checkForms.js'></script>
         ";
-        if($page === "FDI-Cines") echo"<script src='{$prefix}assets/js/promotions.js'></script>\n";
+        if($page === "FDI-Cines") echo"<script type='text/javascript' src='{$prefix}assets/js/promotions.js' ></script>\n";
     }
 
     }

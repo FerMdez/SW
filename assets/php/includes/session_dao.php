@@ -27,9 +27,12 @@
 			$sql = sprintf( "SELECT * FROM `session` WHERE id = '%d'", $id );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $id);
 
-			$resul = mysqli_fetch_array($resul);
+			while($fila=$resul->fetch_assoc()){
+				$session = $this->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"], $fila["seats_full"]);
+			}
+			$resul->free();
 
-			return $resul;
+			return $session;
 		}	
 		
 		public function filmTittle($idfilm){
@@ -57,6 +60,7 @@
 			
 			return $session;
 		}
+		
 		//Returns a query to get all the session's data.
 		public function getAllSessions($hall, $cinema, $date){
 			$date = date('Y-m-d', strtotime( $date ) ); 
