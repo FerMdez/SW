@@ -44,7 +44,14 @@
 		public function cinemaData($id){
 			$sql = sprintf( "SELECT * FROM cinema WHERE cinema.id = '%d'", $id);
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-			return $resul;
+
+			$cinema = null;
+			while($fila=$resul->fetch_assoc()){
+				$cinema = $this->loadCinema($fila["id"], $fila["name"], $fila["direction"], $fila["phone"]);
+			}
+			$resul->free();
+
+			return $cinema;
 		}
 
 		//Deleted film by "id".

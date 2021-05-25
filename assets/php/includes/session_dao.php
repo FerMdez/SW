@@ -79,6 +79,19 @@
 			
 			return $sessions;
 		}
+
+		public function getSessions_Film_Cinema($idFiml, $idCinema){
+			$sql = sprintf( "SELECT * FROM session WHERE session.idfilm = '%d' AND session.idcinema = '%d' ", $idFiml, $idCinema);
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			$sessions = null;
+			while($fila = $resul->fetch_assoc()){
+				$sessions[] = $this->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"], $fila["seats_full"]);
+			}
+			$resul->free();
+
+			return $sessions;
+		}
 		
         public function editSession($idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $origin){
 			$format = $this->mysqli->real_escape_string($format);

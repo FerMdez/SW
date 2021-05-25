@@ -1,11 +1,8 @@
 <?php
     //General Config File:
     require_once('../assets/php/config.php');
-
-    $sessionDAO = new SessionDAO("complucine");
-    //$session = $sessionDAO->loadSession($_POST["session_id"], $_POST["film_id"], $_POST["hall_id"], $_POST["cinema_id"], $_POST["date_"], $_POST["hour_"], "12", null, null);
-    $session = $sessionDAO->sessionData($_POST["session_id"]);
     
+    //echo $_POST["session_id"];
 
     //Purchase form:
     require_once('includes/formPurchase.php');

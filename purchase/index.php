@@ -7,6 +7,7 @@
     include_once($prefix.'assets/php/includes/film.php');
     include_once($prefix.'assets/php/includes/cinema_dao.php');
     include_once($prefix.'assets/php/includes/cinema.php');
+    include_once($prefix.'assets/php/includes/session_dao.php');
     include_once($prefix.'assets/php/includes/session.php');
 
     $TODAY = getdate();
@@ -50,7 +51,9 @@
             $fiml_id = $film->getId();
             $cinema_id = $value["cID"];
 
-            $sessions = $filmDAO->getSessions($_GET["film"]);
+            $sessionsDAO = new SessionDAO("complucine");
+            $sessions = $sessionsDAO->getSessions_Film_Cinema($fiml_id, $cinema_id);
+            //print_r($sessions);
             if(!empty($sessions)){
                 $sessionsDates = new ArrayIterator(array());
                 $sessionsStarts = new ArrayIterator(array());
@@ -71,10 +74,10 @@
                 $sessionsListHTML = '<select name="sessions">';
                 foreach ($sessionsIT as $value) {
                     if($TODAY <= $value["DATE"]){
-                        if($value == reset($sessionsIT)){
-                            $sessionsListHTML .= '<option value="'.$value["sID"].'" selected>'.$value["DATE"].' | '.$value["HOUR"].' (Sala: '.$value["HALL"].') '.'</option>';
+                        if($value === reset($sessionsIT)){
+                            $sessionsListHTML .= '<option value="'.$value["sID"].'" selected>Fecha: '.$value["DATE"].' || Hora: '.$value["HOUR"].' || Sala: '.$value["HALL"].'</option>';
                         } else {
-                            $sessionsListHTML .='<option value="'.$value["sID"].'">'.$value["DATE"].' | '.$value["HOUR"].' (Sala: '.$value["HALL"].') '.'</option>';
+                            $sessionsListHTML .='<option value="'.$value["sID"].'">Fecha: '.$value["DATE"].' || Hora:'.$value["HOUR"].' || Sala: '.$value["HALL"].'</option>';
                         }
                     }
                 }
@@ -97,9 +100,9 @@
                     </div>
                     <div class="column right">
                         <h2>Seleccione un Cine y una Sesión</h2><hr />
-                            <br /><h3>Cines</h3>        
-                            '.$cinemasListHTML.'<br />
-                            <br/><h3>Sesiones</h3>
+                            <h3>Cines</h3>        
+                            '.$cinemasListHTML.'
+                            <h3>Sesiones</h3>
                             '.$sessionsListHTML.'
                     </div>
                         ';
