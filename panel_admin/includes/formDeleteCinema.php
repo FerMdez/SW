@@ -45,7 +45,7 @@ class formDeleteCinema extends Form{
         
         if(count($result)===0){
 		    $bd = new Cinema_DAO('complucine');
-            $exist = $bd -> cinemaData($id);
+            $exist = $bd -> existCinema($id);
 		    if(mysqli_num_rows($exist)==1){
                 $bd->deleteCinema($id);
                 $_SESSION['message'] = "<div class='row'>

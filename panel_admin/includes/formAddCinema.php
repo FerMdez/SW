@@ -15,14 +15,14 @@ class formAddCinema extends Form{
     protected function generaCamposFormulario($datos,$errores=array()){
 
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
-        $errorName = self::createMensajeError($errores,'name','span',array('class'=>'error'));
+        $errorName = self::createMensajeError($errores,'namecinema','span',array('class'=>'error'));
         $errorDirection = self::createMensajeError($errores,'direction','span',array('class'=>'error'));
         $errrorPhone = self ::createMensajeError($errores,'phone',array('class'=>'error'));
 
         $html = '<div class="row"></div>
                     <fieldset id = "cinema_form">'.$htmlErroresGlobales.'</pre>
                     <legend>Añadir cine</legend>
-                     <input type="text" name="name" id="name" placeholder="Nombre" required/><pre>'.$errorName.'</pre>
+                     <input type="text" name="namecinema" id="namecinema" placeholder="Nombre" required/><pre>'.$errorName.'</pre>
                      <input type="text" name="direction" id="direction" placeholder="Direccion" required/><pre>'.$errorDirection.'</pre> 
                      <input type="text" name="phone" id="phone" placeholder="Teléfono" required/><pre>'.$errrorPhone.'</pre>
                     </fieldset>
@@ -38,10 +38,10 @@ class formAddCinema extends Form{
 	public function procesaFormulario($datos) {
         $result =array();
         
-        $name = $this->test_input($datos['name'])??null;
+        $name = $this->test_input($datos['namecinema'])??null;
 
         if(empty($name)){
-            $result['name']= "El nombre no es válido";
+            $result['namecinema']= "El nombre no es válido";
         }
         
         $direction = $this -> test_input($datos['direction']) ?? null;

@@ -17,8 +17,7 @@
                                 }                             
                                 else {
                                     $reply=AdminPanel::addCinema();
-                                    $reply.= ($template->print_cinemas());
-                                
+                                    $reply.= ($template->print_cinemas()); 
                                 };  
                     break;
                     case 'mf': if(isset($_POST['edit_film'])) {

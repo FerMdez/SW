@@ -7,11 +7,12 @@ include_once('../assets/php/form.php');
 
 class formAddPromotion extends Form{
 	//Constants:
-	
+	const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
+	const EXTENSIONS = array('gif','jpg','jpe','jpeg','png');
 
 	public function __construct() {
-        $op = array("action" => "./?state=mp");
-        parent::__construct('formAddPromotion', $op);
+        $options = array("action" => "./?state=mp", 'enctype' => 'multipart/form-data');
+        parent::__construct('formAddPromotion', $options);
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
@@ -32,7 +33,7 @@ class formAddPromotion extends Form{
 							<input type="text" name="description" id="description" placeholder="Descripción" required/><pre>'.$errorDescription.'</pre>
 							<input type="text" name="code" id="code" placeholder="Codigo" required/><pre>'.$errorCode.'</pre>
 							<input type="text" name="active" id="active" placeholder="Activo" required/><pre>'.$errorActive.'</pre>
-							<div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div>
+							<div class="file">Imagen promocional:<input type="file" name="archivo" id="file" placeholder="Imagen promocional" /></div>
 					</fieldset>
 					<div class="actions"> 
 						<input type="submit" id="submit" value="Añadir promocion" class="primary" />
@@ -73,15 +74,45 @@ class formAddPromotion extends Form{
         
         if (count($result) === 0) {
         	$bd = new Promotion_DAO("complucine");
-
-			//FALTARIA SUBIR LA IMAGEN
 			$exist = $bd-> GetPromotion($code);
 			if(mysqli_num_rows($exist) != 0){
 				$result[] = "Ya existe una nueva promocion con el mismo codigo.";
 			}
 			else{
-				$bd->createPromotion(null, $tittle,$description,$code,$active);
-				$_SESSION['message'] = "<div class='row'>
+				$ok = count($_FILES) == 1 && $_FILES['archivo']['error'] == UPLOAD_ERR_OK;
+				if ( $ok ) {
+				$archivo = $_FILES['archivo'];
+				$nombre = $_FILES['archivo']['name'];
+				//1.a) Valida el nombre del archivo 
+				$ok = $this->check_file_uploaded_name($nombre) && $this->check_file_uploaded_length($nombre) ;
+				
+				// 1.b) Sanitiza el nombre del archivo 
+				//$ok = $this->sanitize_file_uploaded_name($nombre);
+				//
+				
+				// 1.c) Utilizar un id de la base de datos como nombre de archivo 
+			
+				// 2. comprueba si la extensión está permitida
+				$ok = $ok && in_array(pathinfo($nombre, PATHINFO_EXTENSION), self::EXTENSIONS);
+			
+				// 3. comprueba el tipo mime del archivo correspode a una imagen image
+				$finfo = new \finfo(FILEINFO_MIME_TYPE);
+				$mimeType = $finfo->file($_FILES['archivo']['tmp_name']);
+				$ok = preg_match('/image\/*./', $mimeType);
+				finfo_close($finfo);
+				
+				if ( $ok ) {
+					$tmp_name = $_FILES['archivo']['tmp_name'];
+			
+					if ( !move_uploaded_file($tmp_name, "../img/promos/{$nombre}") ) {
+					$result['img'] = 'Error al mover el archivo';
+					}
+			
+					//if ( !copy("../img/tmp/{$nombre}", "/{$nombre}") ) {
+					//  $result['img'] = 'Error al mover el archivo';
+					//}
+					$bd->createPromotion(null, $tittle,$description,$code,$active, $nombre);
+					$_SESSION['message'] = "<div class='row'>
 										<div class='column side'></div>
 										<div class='column middle'>
 											<div class='code info'>
@@ -93,14 +124,28 @@ class formAddPromotion extends Form{
 										<div class='column side'></div>
 									</div>
 									";
-				$result = './?state=mp';
-
+					$result = './?state=mp';
+			
+				}else {
+					$result['img'] = 'El archivo tiene un nombre o tipo no soportado';
+				}
+				} else {
+				$result['img'] = 'Error al subir el archivo.';
+				}
+				
 			}
 			$exist->free();
 		}
 		return $result;
 	}
 
+	private function check_file_uploaded_name ($filename) {
+		return (bool) ((mb_ereg_match('/^[0-9A-Z-_\.]+$/i',$filename) === 1) ? true : false );
+	}
+	private function check_file_uploaded_length ($filename) {
+		return (bool) ((mb_strlen($filename,'UTF-8') < 250) ? true : false);
+	}
+		
 
 }
 

@@ -35,7 +35,6 @@ class formDeletePromotion extends Form{
                             <p>Description:'.$_POST['description'].'</p>
                             <p>Codigo: '.$_POST['code'].'</p>
                             <p>Activa: '.$_POST['active'].'</p>			
-							<div class="file">Imagen promocional:<input type="file" name="file" id="file" placeholder="Imagen promocional" /></div>
 					</fieldset>
 					<div class="actions"> 
 						<input type="submit" id="submit" value="Eliminar" name="delete_promotion" class="primary" />
@@ -58,7 +57,7 @@ class formDeletePromotion extends Form{
         if (count($result) === 0) {
         	$bd = new Promotion_DAO("complucine");
 
-			//FALTARIA SUBIR LA IMAGEN
+			
 			$exist = $bd-> promotionData($id);
 			if(mysqli_num_rows($exist) == 1){
 				$bd->deletePromotion($id);
