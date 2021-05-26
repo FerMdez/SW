@@ -20,7 +20,7 @@ class FormPurchase extends Form {
         parent::__construct('formPurchase');
 
         $sessionDAO = new SessionDAO("complucine");
-        $this->session = $sessionDAO->sessionData($_POST["session_id"]);
+        $this->session = $sessionDAO->sessionData($_POST["sessions"]);
 
         $filmDAO = new Film_DAO("complucine");  
         $this->film = $filmDAO->FilmData($this->session->getIdfilm());
@@ -68,7 +68,7 @@ class FormPurchase extends Form {
                             <fieldset id='pagar_entrada'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Datos Bancarios</legend>
                                 <label for='card-holder'>Titular de la Tarjeta:</label><br />
-                                    <input type='text' id='card-holder' class='card-holder' required />
+                                    <input type='text' id='card-holder' class='card-holder' placeholder='NOMBRE APELLIDO1 APELLIDO2' required />
                                 <br />
                                 <label for='card-number'>Número de Tarjeta: </label><br />
                                     <input type='num' id='card-number-0' class='input-cart-number' placeholder='XXXX' maxlength='4' required />

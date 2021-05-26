@@ -35,7 +35,7 @@
                 $cinemasIT->attachIterator($cinemasIDs, "cID");
                 $cinemasIT->attachIterator($cinemasNames, "NAME");
             
-                $cinemasListHTML = '<select name="cinemas">';
+                $cinemasListHTML = '<form><select name="cinemas" id="cinemas">';
                 foreach($cinemasIT as $value){
                     if($value == reset($cinemasIT)){
                         $cinemasListHTML .= '<option value="'.$value["cID"].'" selected>'.$value["NAME"].'</option>';
@@ -43,9 +43,9 @@
                         $cinemasListHTML .='<option value="'.$value["cID"].'">'.$value["NAME"].'</option>';
                     }
                 }
-                $cinemasListHTML .= '</select>';
+                $cinemasListHTML .= '</select></form>';
             } else {
-                $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select>';
+                $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select></form>';
             }
 
             $fiml_id = $film->getId();
@@ -71,25 +71,34 @@
                 $sessionsIT->attachIterator($sessionsHalls, "HALL");
                 $sessionsIT->attachIterator($sessionsStarts, "HOUR");
 
-                $sessionsListHTML = '<select name="sessions">';
+                $count = 0;
+                $sessionsListHTML = '<form action="confirm.php" method="post">';
+                $sessionsListHTML .= '<select name="sessions" id="sessions">';
                 foreach ($sessionsIT as $value) {
                     if($TODAY <= $value["DATE"]){
                         if($value === reset($sessionsIT)){
-                            $sessionsListHTML .= '<option value="'.$value["sID"].'" selected>Fecha: '.$value["DATE"].' || Hora: '.$value["HOUR"].' || Sala: '.$value["HALL"].'</option>';
+                            $sessionsListHTML .= '<option value="'.$value["sID"].'" >Fecha: '.$value["DATE"].' | Hora: '.$value["HOUR"].' | Sala: '.$value["HALL"].'</option>';
                         } else {
-                            $sessionsListHTML .='<option value="'.$value["sID"].'">Fecha: '.$value["DATE"].' || Hora:'.$value["HOUR"].' || Sala: '.$value["HALL"].'</option>';
+                            $sessionsListHTML .='<option value="'.$value["sID"].'">Fecha: '.$value["DATE"].' | Hora:'.$value["HOUR"].' | Sala: '.$value["HALL"].'</option>';
                         }
+                        $count++;
                     }
                 }
                 $sessionsListHTML .= '</select>';
+
+                if($count == 0) {
+                    $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select>'; 
+                    $pay = false;
+                }
             } else {
                 $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select>';
+                $pay = false;
             }
 
-            $session_id = $value["sID"];
-            $hall_id = $value["HALL"];
-            $date_ = $value["DATE"];
-            $hour_ = $value["HOUR"];
+            //$session_id = $value["sID"];
+            //$hall_id = $value["HALL"];
+            //$date_ = $value["DATE"];
+            //$hour_ = $value["HOUR"];
 
             //Reply: Depends on whether the purchase is to be made from a selected movie or a cinema.
             $reply = '<div class="column left">
@@ -121,15 +130,8 @@
 
     //Pay button:
     if($pay){
-        $pay = '<form action="confirm.php" method="post">
-                        <input type="hidden" name="film_id" id="film_id" value='.$fiml_id.' />
-                        <input type="hidden" name="cinema_id" id="cinema_id" value='.$cinema_id.' />
-                        <input type="hidden" name="session_id" id="session_id" value='.$session_id.' />
-                        <input type="hidden" name="hall_id" id="hall_id" value='.$hall_id.' />
-                        <input type="hidden" name="date_" id="date_" value='.$date_.' />
-                        <input type="hidden" name="hour_" id="hour_" value='.$hour_.' />
-                        <input type="submit" id="submit" value="Pagar" />
-                    </form>';
+        $pay = '<input type="submit" id="submit" value="Pagar" />
+                </form>';
     }
     //Page-specific content:
     $section = '<!-- Purchase -->

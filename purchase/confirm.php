@@ -1,8 +1,6 @@
 <?php
     //General Config File:
     require_once('../assets/php/config.php');
-    
-    //echo $_POST["session_id"];
 
     //Purchase form:
     require_once('includes/formPurchase.php');
