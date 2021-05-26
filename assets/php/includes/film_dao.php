@@ -111,6 +111,17 @@
 			return $resul;
 		}
 
+		//Edit a film.
+		public function editFilmNoImg($id, $tittle, $duration, $language,$description){
+			$sql = sprintf( "UPDATE film SET tittle = '%s' , duration = '%d', language ='%s' , description ='%s'
+								WHERE film.id = '%d';", 
+									$tittle, $duration, $language, $description, $id);
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
+
 		//Get cinemas associated with a movie.
 		public function getCinemas($id){
 			include_once('cinema_dao.php');

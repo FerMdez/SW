@@ -11,10 +11,10 @@
 		//Methods:
 
         //Create a new Session.
-		public function createPromotion($id, $tittle, $description, $code, $active){
-			$sql = sprintf( "INSERT INTO `promotion`( `id`, `tittle`, `description`, `code`, `active`) 
-								VALUES ( '%d', '%s', '%s', '%s', '%s')", 
-									$id, $tittle, $description, $code, $active);
+		public function createPromotion($id, $tittle, $description, $code, $active, $img){
+			$sql = sprintf( "INSERT INTO `promotion`( `id`, `tittle`, `description`, `code`, `active`, `img`) 
+								VALUES ( '%d', '%s', '%s', '%s', '%s', '%s')", 
+									$id, $tittle, $description, $code, $active, $img);
 			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;
@@ -27,7 +27,7 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			while($fila=$resul->fetch_assoc()){
-				$promotions[] = $this->loadPromotion($fila["id"], $fila["tittle"], $fila["description"], $fila["code"], $fila["active"]);
+				$promotions[] = $this->loadPromotion($fila["id"], $fila["tittle"], $fila["description"], $fila["code"], $fila["active"], null);
 			}
 			$resul->free();
 			return $promotions;
@@ -57,7 +57,17 @@
 		}
 		
 		//Edit a film.
-		public function editPromotion($id, $tittle, $description, $code, $active){
+		public function editPromotion($id, $tittle, $description, $code, $active, $img){
+			$sql = sprintf( "UPDATE promotion SET tittle = '%s' , description = '%s', code ='%s' , active ='%s', img = '%s'
+								WHERE promotion.id = '%d';", 
+									 $tittle, $description, $code, $active, $img, $id);
+
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+		}
+
+		public function editPromotionNoImg($id, $tittle, $description, $code, $active){
 			$sql = sprintf( "UPDATE promotion SET tittle = '%s' , description = '%s', code ='%s' , active ='%s'
 								WHERE promotion.id = '%d';", 
 									 $tittle, $description, $code, $active, $id);
@@ -68,8 +78,8 @@
 		}
 	    
 		//Create a new film Data Transfer Object.
-		public function loadPromotion($id, $tittle, $description, $code, $active){
-			return new Promotion($id, $tittle, $description, $code, $active);
+		public function loadPromotion($id, $tittle, $description, $code, $active, $img){
+			return new Promotion($id, $tittle, $description, $code, $active, $img);
 		}
 	    	
     }

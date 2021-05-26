@@ -8,14 +8,16 @@
         private $_description;      //Promotion description.
         private $_code;             //Promotion code.
         private $_active;           //Promotion is active?
+        private $_img;
 
 		//Constructor:
-        function __construct($id, $tittle, $description, $code, $active){
+        function __construct($id, $tittle, $description, $code, $active, $img){
             $this->_id = $id;
             $this->_tittle = $tittle;
             $this->_description = $description;
             $this->_code = $code;
             $this->_active = $active;
+            $this->_img= $img;
         }
 
 		//Methods:
@@ -31,6 +33,8 @@
 		public function getCode(){return  $this->_code;}
         public function setActive($active){  $this->_active = $active;}
 		public function getActive(){return  $this->_active;}
+        public function setImg($img){  $this->_img = $img;}
+		public function getImg(){return  $this->_img;}
 
     }
 ?>
