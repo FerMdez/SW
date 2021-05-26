@@ -46,6 +46,14 @@
 
 			return $film;
 		}
+
+		public function existFilm($id){
+			$id = $this->mysqli->real_escape_string($id);
+
+			$sql = sprintf( "SELECT * FROM film WHERE id = '%d'", $id );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			return $resul;
+		}
 		
 	    //Returns a query to get All the films.
 		public function allFilmData(){

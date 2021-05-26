@@ -42,16 +42,27 @@
 
 		//Returns a  film data .
 		public function cinemaData($id){
-			$sql = sprintf( "SELECT * FROM cinema WHERE cinema.id = '%d'", $id);
+			$id = $this->mysqli->real_escape_string($id);
+
+			$sql = sprintf( "SELECT * FROM cinema WHERE id = '%d'", $id );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
-			$cinema = null;
+			$resul->data_seek(0);
+			$film = null;
 			while($fila=$resul->fetch_assoc()){
 				$cinema = $this->loadCinema($fila["id"], $fila["name"], $fila["direction"], $fila["phone"]);
 			}
 			$resul->free();
 
 			return $cinema;
+		}
+
+		public function existCinema($id){
+			$id = $this->mysqli->real_escape_string($id);
+
+			$sql = sprintf( "SELECT * FROM cinema WHERE id = '%d'", $id );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			return $resul;
 		}
 
 		//Deleted film by "id".
