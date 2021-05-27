@@ -58,6 +58,7 @@ class FormPurchase extends Form {
         $html = "<div class='row'>
                             <fieldset id='datos_entrada'>
                                 <legend>Resumen de la Compra</legend>
+                                <img src='"."../img/films/".$this->film->getImg()."' alt='".$this->film->getTittle()."' />
                                 <p>Película: ".str_replace('_', ' ', strtoupper($this->film->getTittle()))."</p>
                                 <p>Cine: ".$this->cinema->getName()."</p>
                                 <p>Sala: ".$this->session->getIdhall()."</p>

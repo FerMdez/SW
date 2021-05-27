@@ -8,7 +8,7 @@
     $formHTML = $form->gestiona();
 
     //Page-specific content:
-    $section = '<div class="code">
+    $section = '<div class="code pay">
                     <h2>Completar la Compra</h2><hr />
                     <!-- Purchase Form -->
                     '.$formHTML.'
