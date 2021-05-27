@@ -23,6 +23,7 @@
         $film = $filmDAO->FilmData($_GET["film"]);
         if($film){
             $tittle = $film->getTittle();
+            $image = $film->getImg();
 
             $cinemas = $filmDAO->getCinemas($_GET["film"]);
             $cinema_id = $_GET["cinema"];
@@ -112,7 +113,7 @@
             //Reply: Depends on whether the purchase is to be made from a selected movie or a cinema.
             $reply = '<div class="column left">
                         <h2>Película seleccionada: '.str_replace('_', ' ', $tittle).'</h2><hr />
-                        <div class="image"><img src="'.$prefix.'img/films/'.$tittle.'.jpg" alt="'.$tittle.'" /></div>
+                        <div class="image"><img src="'.$prefix.'img/films/'.$image.'" alt="'.$tittle.'" /></div>
                         <p>Duración: '.$film->getDuration().' minutos</p>
                         <p>Idioma: '.$film->getLanguage().'</p>
                     </div>
@@ -135,7 +136,7 @@
         $reply = '<h1>No se ha encontrado película ni cine.</h1>';
         $pay = false;
     }
-    
+
     //Pay button:
     if($pay){
         $pay = '<input type="submit" id="submit" value="Pagar" />
@@ -158,4 +159,6 @@
 
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';
+
+    //TO-DO: añadir elegir promocione sy enviar con el POST.
 ?>
