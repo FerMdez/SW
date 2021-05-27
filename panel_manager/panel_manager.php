@@ -54,14 +54,14 @@
 						<p>Cine: '.$cinema.'</p>
 						<p>Espero que estes pasando un buen dia</p>
 						<form method="post" id="changecinema" action="index.php">
-							<select name="cinema" class="button">
+							<select name="cinema" class="button large">
 							';
 					foreach($cinemas as $c){ 
 						if($c->getId() == $cinema){
-							$panel .=  "<option value=\"". $c->getId() ." \"selected> " . $c->getId() ."</option>
+							$panel .=  "<option value=\"". $c->getId() ." \"selected> " . $c->getName() ."</option>
 							";
 						}else{
-							$panel .=  "<option value=\"". $c->getId() ." \"> " . $c->getId() . "</option>
+							$panel .=  "<option value=\"". $c->getId() ." \"> " . $c->getName() . "</option>
 							";
 					}
 				}
@@ -93,29 +93,27 @@
 				$panel .= "<h2> No hay ninguna sala en este cine";
 			}else{
 			$panel .= '
-			<div class="tablelist">
-				<u1">
-					<li class="title"> Salas </li>
+				<ul class="tablelist col3">
+					<li class="title"> Sala </li>
 					<li class="title"> Asientos </li>
-					<li class="title"> Sesiones </li> <br>
+					<li class="title"> Sesión </li>
 							'; 
 			$parity = "odd";
 			foreach($listhall as $hall){ 
-				$panel .='<div class='.$parity.'>
-							<a href="?state=edit_hall&number='. $hall->getNumber().'">
+				$panel .='<div class="'.$parity.'">
+							<a class="h2long" href="?state=edit_hall&number='. $hall->getNumber().'">
 								<li> '. $hall->getNumber().'</li>
 								<li> '.$hall->getTotalSeats().' </li>
 							</a>
 							<a href="?state=manage_sessions&hall='. $hall->getNumber().'">
-								<li> Sessiones</li>
+								<li> Sesiones </li>
 							</a>
 						</div>
 						';
 				$parity = ($parity == "odd") ? "even" : "odd";
 				}
 			$panel.='
-						</ul>
-					</div>';
+				</ul>';
 			}
 			$panel.='
 						<form method="post" action="./?state=new_hall">
