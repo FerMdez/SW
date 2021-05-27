@@ -276,7 +276,7 @@
         $descriptions = array();
         $times = array();
         $languages = array();
-
+        if(is_array($films_array)){
         foreach($films_array as $key => $value){
             $ids[$key] = $value->getId();
             $tittles[$key] = $value->getTittle();
@@ -284,9 +284,10 @@
             $times[$key] = $value->getDuration();
             $languages[$key] = $value->getLanguage();
         }
-
+        }
         switch($this->page){
             case "Cartelera": 
+                if(is_array($films_array)){
                 for($i = 0; $i < count($films_array); $i++){
                     $tittle = str_replace('_', ' ', $tittles[$i]);
                     if($i%2 === 0){
@@ -319,11 +320,13 @@
                         </section>
                     ";
                 }
+                }
                 $reply .= "</div>\n";
                 break;
 
             case "Panel de Administrador":
                 $reply .= "<div class='column'>";
+                if(is_array($films_array)){
                 for($i = 0; $i < count($films_array); $i++){
                     $tittle = str_replace('_', ' ', $tittles[$i]);
                     if($i%2 === 0){
@@ -365,11 +368,13 @@
                         </section>
                     ";
                 }
+                }
                 $reply .= "</div>\n";                
                 break;
 				
 			case "Panel de Gerente":
                 $reply .= "<div class='column'>";
+                if(is_array($films_array)){
                 for($i = 0; $i < count($films_array); $i++){
                     $tittle = str_replace('_', ' ', $tittles[$i]);
                     if($i%2 === 0){
@@ -414,10 +419,12 @@
                         </section>
                     ";
                 }
+                }
                 $reply .= "</div>\n"; 
                 break;
 				
             default: 
+                if(is_array($films_array)){
                     $reply .='<div class="column left">
                          <div class="galery">
                             <h1>Últimos Estrenos</h1><hr />';
@@ -452,6 +459,7 @@
                             </div>
                         </div>
                     </div>\n";
+                }
                     break;
         }
 
@@ -473,7 +481,7 @@
         $names = array();
         $directions = array();
         $phones = array();
-        
+
         if(is_array($cinemas)){
             foreach($cinemas as $key => $value){
                 $ids[$key] = $value->getId();
@@ -485,6 +493,7 @@
 
         switch($this->page){
             case "Nuestros Cines":
+                if(is_array($cinemas)){
                 for($i = 0; $i < count($cinemas); $i++){
                     if($i%2 === 0){
                         if($i != 0) $reply .= "</div>
@@ -513,6 +522,7 @@
                     ";
                 }
                 $reply .= "</div>\n";
+                }
                 break;
             case "Panel de Administrador":
                 $reply .= "<div class='row'>
