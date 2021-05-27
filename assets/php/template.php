@@ -701,6 +701,7 @@
         ";
         if($page === "FDI-Cines") echo"<script type='text/javascript' src='{$prefix}assets/js/promotions.js' ></script>\n";
         if($page === "Panel de Usuario") echo"<script type='text/javascript' src='{$prefix}assets/js/deleteConfirm.js' ></script>\n";
+        if($page === "Comprar Entrada") echo"<script type='text/javascript' src='{$prefix}assets/js/selectTicket.js' ></script>\n";
     }
 
     }

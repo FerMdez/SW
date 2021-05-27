@@ -15,7 +15,6 @@
 
     $pay = true;
     $film = null;
-    $cinema = null;
     $cinemas = [];
     $sessions = [];
     if(isset($_GET["film"])){
@@ -25,7 +24,6 @@
             $tittle = $film->getTittle();
 
             $cinemas = $filmDAO->getCinemas($_GET["film"]);
-            $cinema_id = $_GET["cinema"];
             if(!empty($cinemas)){
                 $cinemasNames = new ArrayIterator(array());
                 $cinemasIDs = new ArrayIterator(array());
@@ -36,78 +34,70 @@
                 $cinemasIT = new MultipleIterator(MultipleIterator::MIT_KEYS_ASSOC);
                 $cinemasIT->attachIterator($cinemasIDs, "cID");
                 $cinemasIT->attachIterator($cinemasNames, "NAME");
-                
-                $cinemasListHTML = '<form id="select_cinema">
+            
+                $cinemasListHTML = '<form action="confirm.php" method="post">
                                     <select name="cinemas" id="cinemas">';
-                if(!isset($cinema_id)){
-                    $cinemasListHTML .= '<option value="" selected>Selecciona un cine</option>';
-                    foreach($cinemasIT as $value){
+                foreach($cinemasIT as $value){
+                    if($value == reset($cinemasIT)){
+                        $cinemasListHTML .= '<option value="'.$value["cID"].'" selected>'.$value["NAME"].'</option>';
+                    } else {
                         $cinemasListHTML .='<option value="'.$value["cID"].'">'.$value["NAME"].'</option>';
                     }
-                } else {
-                    foreach($cinemasIT as $value){
-                        if($value["cID"] == $cinema_id){
-                            $cinemasListHTML .= '<option value="'.$value["cID"].'" selected>'.$value["NAME"].'</option>';
-                        } else {
-                            $cinemasListHTML .='<option value="'.$value["cID"].'">'.$value["NAME"].'</option>';
-                        }
-                    }
                 }
-                $cinemasListHTML .= '</select>
-                            </form>';
+                $cinemasListHTML .= '</select>';
             } else {
                 $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select></form>';
             }
 
             $fiml_id = $film->getId();
+            $cinema_id = $value["cID"];
 
-            if(isset($cinema_id)){
-                $sessionsDAO = new SessionDAO("complucine");
-                $sessions = $sessionsDAO->getSessions_Film_Cinema($fiml_id, $cinema_id);
-                if(!empty($sessions)){
-                    $sessionsDates = new ArrayIterator(array());
-                    $sessionsStarts = new ArrayIterator(array());
-                    $sessionsHalls = new ArrayIterator(array());
-                    $sessionsIDs = new ArrayIterator(array());
-                    foreach($sessions as $key=>$value){
-                        $sessionsIDs[$key] = $value->getId();
-                        $sessionsDates[$key] = date_format(date_create($value->getDate()), 'j-n-Y');
-                        $sessionsHalls[$key] = $value->getIdhall();
-                        $sessionsStarts[$key] = $value->getStartTime();
-                    }
-                    $sessionsIT = new MultipleIterator(MultipleIterator::MIT_KEYS_ASSOC);
-                    $sessionsIT->attachIterator($sessionsIDs, "sID");
-                    $sessionsIT->attachIterator($sessionsDates, "DATE");
-                    $sessionsIT->attachIterator($sessionsHalls, "HALL");
-                    $sessionsIT->attachIterator($sessionsStarts, "HOUR");
+            $sessionsDAO = new SessionDAO("complucine");
+            $sessions = $sessionsDAO->getSessions_Film_Cinema($fiml_id, $cinema_id);
+            if(!empty($sessions)){
+                $sessionsDates = new ArrayIterator(array());
+                $sessionsStarts = new ArrayIterator(array());
+                $sessionsHalls = new ArrayIterator(array());
+                $sessionsIDs = new ArrayIterator(array());
+                foreach($sessions as $key=>$value){
+                    $sessionsIDs[$key] = $value->getId();
+                    $sessionsDates[$key] = date_format(date_create($value->getDate()), 'j-n-Y');
+                    $sessionsHalls[$key] = $value->getIdhall();
+                    $sessionsStarts[$key] = $value->getStartTime();
+                }
+                $sessionsIT = new MultipleIterator(MultipleIterator::MIT_KEYS_ASSOC);
+                $sessionsIT->attachIterator($sessionsIDs, "sID");
+                $sessionsIT->attachIterator($sessionsDates, "DATE");
+                $sessionsIT->attachIterator($sessionsHalls, "HALL");
+                $sessionsIT->attachIterator($sessionsStarts, "HOUR");
 
-                    $count = 0;
-                    $sessionsListHTML = '<form id="select_session" action="confirm.php" method="post">
-                                            <select name="sessions" id="sessions">';
-                    foreach ($sessionsIT as $value) {
-                        if($TODAY <= $value["DATE"]){
-                            if($value === reset($sessionsIT)){
-                                $sessionsListHTML .= '<option value="'.$value["sID"].'" >Fecha: '.$value["DATE"].' | Hora: '.$value["HOUR"].' | Sala: '.$value["HALL"].'</option>';
-                            } else {
-                                $sessionsListHTML .='<option value="'.$value["sID"].'">Fecha: '.$value["DATE"].' | Hora:'.$value["HOUR"].' | Sala: '.$value["HALL"].'</option>';
-                            }
-                            $count++;
+                $count = 0;
+                $sessionsListHTML = '<select name="sessions" id="sessions">';
+                foreach ($sessionsIT as $value) {
+                    if($TODAY <= $value["DATE"]){
+                        if($value === reset($sessionsIT)){
+                            $sessionsListHTML .= '<option value="'.$value["sID"].'" >Fecha: '.$value["DATE"].' | Hora: '.$value["HOUR"].' | Sala: '.$value["HALL"].'</option>';
+                        } else {
+                            $sessionsListHTML .='<option value="'.$value["sID"].'">Fecha: '.$value["DATE"].' | Hora:'.$value["HOUR"].' | Sala: '.$value["HALL"].'</option>';
                         }
+                        $count++;
                     }
-                    $sessionsListHTML .= '</select>';
+                }
+                $sessionsListHTML .= '</select>';
 
-                    if($count == 0) {
-                        $sessionsListHTML = '<form><select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select></form>'; 
-                        $pay = false;
-                    }
-                } else {
-                    $sessionsListHTML = '<form><select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select></form>';
+                if($count == 0) {
+                    $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select>'; 
                     $pay = false;
                 }
             } else {
-                $sessionsListHTML = '<form><select name="sessions"><option value="" selected>Seleccione primero un cine.</option></select></form>';
+                $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select>';
                 $pay = false;
             }
+
+            //$session_id = $value["sID"];
+            //$hall_id = $value["HALL"];
+            //$date_ = $value["DATE"];
+            //$hour_ = $value["HOUR"];
 
             //Reply: Depends on whether the purchase is to be made from a selected movie or a cinema.
             $reply = '<div class="column left">
@@ -136,12 +126,14 @@
         $pay = false;
     }
     
+
     //Pay button:
     if($pay){
         $pay = '<input type="submit" id="submit" value="Pagar" />
-                            </form>';
+                </form>';
+    } else {
+        $pay = '</form>';
     }
-
     //Page-specific content:
     $section = '<!-- Purchase -->
         <section id="purchase">

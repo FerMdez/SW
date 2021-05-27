@@ -101,7 +101,7 @@ table.seat td:first-child {
   pointer-events: none;
 }
 
-.tablelist li:nth-child(3n+)
+.tablelist li:nth-child(3n)
 {
    clear: both;
 }
