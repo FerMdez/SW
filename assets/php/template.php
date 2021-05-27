@@ -457,7 +457,7 @@
                     $reply .= "
                             <h1>{$title}</h1><hr />
                             <div class='zoom'>
-                                <a href='".$prefix."showtimes/#".$tittles[$count]."'><div class='image main'><img src='img/films/".$tittles[$count].".jpg' alt='".$tittles[$count]."' /></div></a>
+                                <a href='".$prefix."showtimes/#".$tittles[$count]."'><div class='image main'><img src='img/films/".$images[$count]."' alt='".$tittles[$count]."' /></div></a>
                             </div>
                         </div>
                     </div>\n";

@@ -57,7 +57,7 @@
                 $cinemasListHTML .= '</select>
                             </form>';
             } else {
-                $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select></form>';
+                $cinemasListHTML = '<form><select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select></form>';
             }
 
             $fiml_id = $film->getId();
@@ -106,7 +106,7 @@
                     $pay = false;
                 }
             } else {
-                $sessionsListHTML = '<form><select name="sessions"><option value="" selected>Seleccione primero un cine.</option></select></form>';
+                $sessionsListHTML = '<form><select name="sessions"><option value="" selected>Primero seleccione un cine.</option></select></form>';
                 $pay = false;
             }
 
