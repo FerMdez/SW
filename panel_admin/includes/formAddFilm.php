@@ -48,7 +48,8 @@ class formAddFilm extends Form{
 	protected function procesaFormulario($datos){
         $result = array();
 		
-        $tittle = $this->test_input($datos['tittle']) ?? null;
+        $t = $this->test_input($datos['tittle']) ?? null;
+		$tittle = str_replace(" ", "_", $t);
 		//|| !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $tittle) 
         if ( empty($tittle) ) {
             $result['tittle'] = "El título no es válido";

@@ -57,8 +57,8 @@ class formEditPromotion extends Form{
 			$result['id'] = "La promoción seleccionada no existe.";
 		}
 
-        $tittle = $this->test_input($datos['tittle']) ?? null;
-
+		$t = $this->test_input($datos['tittle']) ?? null;
+		$tittle = str_replace(" ", "_", $t);
         if ( empty($tittle) ) {
             $result['tittle'] = "El título no es válido";
         }
