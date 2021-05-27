@@ -12,39 +12,64 @@
 		$manager = false;
 		$manager = new Manager(null, null, null, null, null);
 
-
 		$state = isset($_GET['state']) ? $_GET['state'] : '';
 		switch($state){
 			case "view_user":
+				$_SESSION["rol"] = null;
+				$panel .= "<div class='row'>
+							<div class='column side'></div>
+							<div class='column middle'>
+								<div class='code info'>
+									<h1> ¡ATENCIÓN! </h1><hr />
+									<p>Está viendo la web como un Usuario NO Registrado.</p>
+									<a href=''><button>Cerrar Mensaje</button></a>
+								</div>
+							</div>
+							<div class='column side'></div>
+						</div>
+						";
 				break;
 			case "view_ruser":
+				$_SESSION["rol"] = "user";
+				$panel .= "<div class='row'>
+							<div class='column side'></div>
+							<div class='column middle'>
+								<div class='code info'>
+									<h1> ¡ATENCIÓN! </h1><hr />
+									<p>Está viendo la web como un Usuario Registrado.</p>
+									<a href=''><button>Cerrar Mensaje</button></a>
+								</div>
+							</div>
+							<div class='column side'></div>
+						</div>
+						";
 				break;			
 			case "manage_halls":
-				$panel = Manager_panel::manage_halls($manager);
+				$panel .= Manager_panel::manage_halls($manager);
 				break;
 			case "new_hall":
-				$panel = Manager_panel::new_hall($manager);
+				$panel .= Manager_panel::new_hall($manager);
 				break;	
 			case "edit_hall":
-				$panel = Manager_panel::edit_hall($manager);
+				$panel .= Manager_panel::edit_hall($manager);
 				break;	
 			case "manage_sessions":
-				$panel = Manager_panel::manage_sessions($manager);
+				$panel .= Manager_panel::manage_sessions($manager);
 				break;
 			case "new_session":
-				$panel = Manager_panel::new_session($manager);
+				$panel .= Manager_panel::new_session($manager);
 				break;
 			case "edit_session":
-				$panel = Manager_panel::edit_session($manager);
+				$panel .= Manager_panel::edit_session($manager);
 				break;
 			case "select_film":
-				$panel = Manager_panel::select_film($template,$manager);
+				$panel .= Manager_panel::select_film($template,$manager);
 				break;
 			case "success":
-				$panel = Manager_panel::success();
+				$panel .= Manager_panel::success();
 				break;
 			default:  
-				$panel = Manager_panel::welcomeAdmin($manager);
+				$panel .= Manager_panel::welcomeAdmin($manager);
 				break;
 		}
 	}
