@@ -325,7 +325,59 @@
             ';
               return  $reply ;
         }
-        
+
+        static function see_like_user(){
+            $_SESSION["lastRol"] = $_SESSION["rol"];
+            //unset($_SESSION["rol"]);
+            $_SESSION["rol"] = null;
+            header("Location: {$_SERVER['PHP_SELF']}");
+            $_SESSION['message'] = "<div class=''>
+                                    <div class='column side'></div>
+                                    <div class='column middle'>
+                                        <div class='code info'>
+                                            <h1> ¡ATENCIÓN! </h1><hr />
+                                            <p>Está viendo la web como un Usuario NO Registrado.</p>
+                                            <a href=''><button>Cerrar Mensaje</button></a>
+                                        </div>
+                                    </div>
+                                    <div class='column side'></div>
+                                </div>
+                                ";
+        }
+        static function see_like_registed_user(){
+            $_SESSION["lastRol"] = $_SESSION["rol"];
+            $_SESSION["rol"] = "user";
+            header("Location: {$_SERVER['PHP_SELF']}");
+            $_SESSION['message'] = "<div class='row'>
+                                     <div class='column side'></div>
+                                      <div class='column middle'>
+                                             <div class='code info'>
+                                                <h1> ¡ATENCIÓN! </h1><hr />
+                                                 <p>Está viendo la web como un Usuario Registrado.</p>
+                                                 <a href=''><button>Cerrar Mensaje</button></a>
+                                             </div>
+                                     </div>
+                                     <div class='column side'></div>
+                                    </div>
+                                    ";
+            }
+        static function see_like_manager(){
+            $_SESSION["lastRol"] = $_SESSION["rol"];
+            $_SESSION["rol"] = "manager";
+            header("Location: {$_SERVER['PHP_SELF']}");
+            $_SESSION['message'] = "<div class='row'>
+                                      <div class='column side'></div>
+                                       <div class='column middle'>
+                                                 <div class='code info'>
+                                                    <h1> ¡ATENCIÓN! </h1><hr />
+                                                    <p>Está viendo la web como un Gerente.</p>
+                                                     <a href=''><button>Cerrar Mensaje</button></a>
+                                                  </div>
+                                        </div>
+                                        <div class='column side'></div>
+                                    </div>
+                                    ";
+            }
     }
    
 ?>

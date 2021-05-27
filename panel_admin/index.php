@@ -60,56 +60,13 @@
                                 }; 
                     break;
                     case 'un': 
-                        $_SESSION["lastRol"] = $_SESSION["rol"];
-                        //unset($_SESSION["rol"]);
-                        $_SESSION["rol"] = null;
-                        //header("Location: {$_SERVER['PHP_SELF']}");
-                        $_SESSION['message'] = "<div class='row'>
-                                                <div class='column side'></div>
-                                                <div class='column middle'>
-                                                    <div class='code info'>
-                                                        <h1> ¡ATENCIÓN! </h1><hr />
-                                                        <p>Está viendo la web como un Usuario NO Registrado.</p>
-                                                        <a href=''><button>Cerrar Mensaje</button></a>
-                                                    </div>
-                                                </div>
-                                                <div class='column side'></div>
-                                            </div>
-                                            ";
+                        AdminPanel::see_like_user();
                         break;
                     case 'ur': 
-                        $_SESSION["lastRol"] = $_SESSION["rol"];
-                        $_SESSION["rol"] = "user";
-                        //header("Location: {$_SERVER['PHP_SELF']}");
-                        $_SESSION['message'] = "<div class='row'>
-                                                <div class='column side'></div>
-                                                <div class='column middle'>
-                                                    <div class='code info'>
-                                                        <h1> ¡ATENCIÓN! </h1><hr />
-                                                        <p>Está viendo la web como un Usuario Registrado.</p>
-                                                        <a href=''><button>Cerrar Mensaje</button></a>
-                                                    </div>
-                                                </div>
-                                                <div class='column side'></div>
-                                            </div>
-                                            ";
+                        AdminPanel::see_like_registed_user(); 
                         break;
                     case 'ag': 
-                        $_SESSION["lastRol"] = $_SESSION["rol"];
-                        $_SESSION["rol"] = "manager";
-                        //header("Location: {$_SERVER['PHP_SELF']}");
-                        $_SESSION['message'] = "<div class='row'>
-                                                <div class='column side'></div>
-                                                <div class='column middle'>
-                                                    <div class='code info'>
-                                                        <h1> ¡ATENCIÓN! </h1><hr />
-                                                        <p>Está viendo la web como un Gerente.</p>
-                                                        <a href=''><button>Cerrar Mensaje</button></a>
-                                                    </div>
-                                                </div>
-                                                <div class='column side'></div>
-                                            </div>
-                                            ";
+                        AdminPanel::see_like_manager();
                         break;
                     default:
                         $reply=AdminPanel:: panel(); 
