@@ -14,10 +14,10 @@
 		static function welcome($manager){
 			$bd = new Cinema_DAO('complucine');
 			if($bd){
-				$cinema = ($bd->cinemaData( $manager->getIdcinema() ) );
-				$c_name = $cinema->getId();
-				$c_dir = $cinema->getId();
-				$c_tel = $cinema->getId();
+				$cinema = $bd->cinemaData($manager->getIdcinema());
+				$c_name = $cinema->getName();
+				$c_dir = $cinema->getDirection();
+				$c_tel = $cinema->getPhone();
 			}
             $name = strtoupper($_SESSION["nombre"]);
 			$cinema = strtoupper( $manager->getIdcinema());
