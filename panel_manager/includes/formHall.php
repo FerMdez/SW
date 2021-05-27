@@ -14,7 +14,8 @@ class FormHall extends Form {
 		
 		$this->option = $option;
 		$this->cinema = $cinema;
-		$this->og_hall = $hall;
+		if($hall)
+			$this->og_hall = $hall;
 		
 		if($option == "edit_hall")
 			$options = array("action" => "./?state=".$option."&number=".$hall->getNumber()."&editing");
@@ -39,7 +40,7 @@ class FormHall extends Form {
 		}
 		$alltozero = $_POST["alltozero"] ?? 0;
 		//Show the original seats_map once u click restart or the first time u enter this form from manage_halls's form
-		if(!isset($_GET["editing"])){
+		if($this->option == "edit_hall" && !isset($_GET["editing"])){
 			$rows = $this->og_hall->getNumRows();
 			$cols = $this->og_hall->getNumCol();
 			$seat_list = Seat::getSeatsMap($this->og_hall->getNumber(), $this->cinema);
