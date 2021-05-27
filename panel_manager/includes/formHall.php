@@ -8,7 +8,6 @@ class FormHall extends Form {
 	private $option;
 	private $cinema;
 	private $og_hall;
-	private $first;
 	
     //Constructor:
     public function __construct($option, $cinema, $hall) {
@@ -18,9 +17,9 @@ class FormHall extends Form {
 		$this->og_hall = $hall;
 		
 		if($option == "edit_hall")
-			$this->first = true;
-		
-		$options = array("action" => "./?state=".$option."&number=".$hall->getNumber()."");
+			$options = array("action" => "./?state=".$option."&number=".$hall->getNumber()."&editing");
+		else
+			$options = array("action" => "./?state=".$option."&number=".$hall->getNumber()."");
         parent::__construct('formHall',$options);
     }
 	
@@ -38,10 +37,9 @@ class FormHall extends Form {
 				$seats_map[$i][$j] = "-1";
 			}
 		}
-		
+		$alltozero = $_POST["alltozero"] ?? 0;
 		//Show the original seats_map once u click restart or the first time u enter this form from manage_halls's form
-		if(isset($data["restart"]) || $this->first){
-			$first = false;
+		if(!isset($_GET["editing"])){
 			$rows = $this->og_hall->getNumRows();
 			$cols = $this->og_hall->getNumCol();
 			$seat_list = Seat::getSeatsMap($this->og_hall->getNumber(), $this->cinema);
@@ -54,7 +52,7 @@ class FormHall extends Form {
 				}
 			}
 		}//Show the checkbox seats_map updated and everything to selected if alltoone was pressed 
-		else{
+		else if(!$alltozero){
 			$alltoone = $_POST["alltoone"] ?? 0;
 			for($i = 1;$i <= $rows; $i++){
 				for($j = 1; $j <= $cols; $j++){ 
@@ -81,8 +79,8 @@ class FormHall extends Form {
 					<fieldset>
 						<legend>Mapa de Asientos</legend>
 						'.$errorSeats.' '.$errorRows.' '.$errorCols.'
-						<label> Filas: </label> <input type="number" name="rows" min="1" id="rows" value="'.$rows.'" required/> <br>
-						<label> Columnas: </label> <input type="number" name="cols" min="1" id="cols" value="'.$cols.'"required/> <br>
+						<label> Filas: </label> <input type="number" name="rows" min="1" id="rows" value="'.$rows.'" /> <br>
+						<label> Columnas: </label> <input type="number" name="cols" min="1" id="cols" value="'.$cols.'"/> <br>
 						<label> Asientos totales:'.$seats.' </label> <input type="hidden" name="seats" id="seats" value="'.$seats.'"readonly/> <br>
 						<input type="submit" name="filter" value="Actualizar mapa de la sala" class="button large" /> 
 						';
@@ -92,7 +90,7 @@ class FormHall extends Form {
 					</fieldset><br>
 					'.$errorNumber.'
 						<label> Numero de sala: </label>
-						<input type="number" min="1" name="number" id="number" value="'.$number.'" placeholder="Numero de la Sala" /><br>		
+						<input type="number" name="number" id="number" value="'.$number.'" placeholder="Numero de la Sala" /><br>		
 					';
 		if($this->option == "new_hall")
 				$html .='<input type="submit" id="submit" name="sumbit" value="Crear Sala" class="primary" />
@@ -106,6 +104,7 @@ class FormHall extends Form {
 			$html .='</div>
 				<div class="column right">
 					<input type="submit" name="alltoone" value="Activar todos los asientos" class="button large" />
+					<input type="submit" name="alltozero" value="Desactivar todos los asientos" class="button large" />
 					<h3 class="table_title"> Pantalla </h3>
 					<table class="seat">
 						<thead>
@@ -189,25 +188,29 @@ class FormHall extends Form {
             $result['number'] = "<li> El numero de sala tiene que ser mayor que 0. </li> <br>";
         }
 		
+		if(isset($datos["restart"])){
+			return $result = "./?state=".$this->option."&number=".$this->og_hall->getNumber()."";
+		}
+			
         if (count($result) === 0 && isset($datos["sumbit"]) ) {
 				if($this->option == "new_hall"){
 					$_SESSION['msg'] = Hall::create_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map);
-					$result = './?state=success';
+					return $result = './?state=success';
 				}
 				if($this->option == "edit_hall"){
 					$_SESSION['msg'] = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-					$result = './?state=success';
+					return $result = './?state=success';
 				}
         }
 		
 		if (!isset($result['number']) && isset($datos["delete"]) ) {
 			if($this->option == "edit_hall"){
                 $_SESSION['msg'] = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-                $result = './?state=success';
+                return $result = './?state=success';
             }
         }
 		
- 
+		
         return $result;
     }
 }

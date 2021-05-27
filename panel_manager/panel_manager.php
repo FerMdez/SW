@@ -14,10 +14,10 @@
 		static function welcome($manager){
 			$bd = new Cinema_DAO('complucine');
 			if($bd){
-				$cinema = $bd->cinemaData($manager->getIdcinema());
-				$c_name = $cinema->getName();
-				$c_dir = $cinema->getDirection();
-				$c_tel = $cinema->getPhone();
+				$cinema = ($bd->cinemaData( $manager->getIdcinema() ) );
+				$c_name = $cinema->getId();
+				$c_dir = $cinema->getId();
+				$c_tel = $cinema->getId();
 			}
             $name = strtoupper($_SESSION["nombre"]);
 			$cinema = strtoupper( $manager->getIdcinema());
@@ -93,20 +93,29 @@
 				$panel .= "<h2> No hay ninguna sala en este cine";
 			}else{
 			$panel .= '
-					<h3 class="tablelike_title"> Salas </h3> <h3 class="tablelike_title"> Asientos </h3> <br>
-						<ul class="tablelike">
+			<div class="tablelist">
+				<u1">
+					<li class="title"> Salas </li>
+					<li class="title"> Asientos </li>
+					<li class="title"> Sesiones </li> <br>
 							'; 
-
+			$parity = "odd";
 			foreach($listhall as $hall){ 
-				$panel .='
-							<li class="tablelike"> '. $hall->getNumber().'</li>
-							<li class="tablelike"> '.$hall->getTotalSeats().' </li>
-							<a class="tablelike_link" href="?state=edit_hall&number='. $hall->getNumber().'"> Editar  </a>
-							<a class="tablelike_link" href="?state=manage_sessions&number='. $hall->getNumber().'"> Sessiones  </a>
+				$panel .='<div class='.$parity.'>
+							<a href="?state=edit_hall&number='. $hall->getNumber().'">
+								<li> '. $hall->getNumber().'</li>
+								<li> '.$hall->getTotalSeats().' </li>
+							</a>
+							<a href="?state=manage_sessions&hall='. $hall->getNumber().'">
+								<li> Sessiones</li>
+							</a>
+						</div>
 						';
+				$parity = ($parity == "odd") ? "even" : "odd";
 				}
 			$panel.='
-						</ul>';
+						</ul>
+					</div>';
 			}
 			$panel.='
 						<form method="post" action="./?state=new_hall">
@@ -119,7 +128,7 @@
 		
 		static function new_hall($manager){		
 		
-			$formHall = new FormHall("new_hall",$manager->getIdcinema());
+			$formHall = new FormHall("new_hall",$manager->getIdcinema(),new Hall(null, null, null, null, null, null));
 		
 			$panel = '<h1>Crear una sala.</h1><hr/></br>
 				'.$formHall->gestiona();
