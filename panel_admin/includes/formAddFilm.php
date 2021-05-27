@@ -111,7 +111,8 @@ class formAddFilm extends Form{
 					//if ( !copy("../img/tmp/{$nombre}", "/{$nombre}") ) {
 					//  $result['img'] = 'Error al mover el archivo';
 					//}
-					$bd->createFilm(null, $tittle,$duration,$language,$description, $nombre); //Null hasta tener $nombre
+					$nombreBd = str_replace("_", " ", $nombre);
+					$bd->createFilm(null, $tittle,$duration,$language,$description, $nombreBd); //Null hasta tener $nombre
 					$_SESSION['message'] = "<div class='row'>
 											<div class='column side'></div>
 											<div class='column middle'>

@@ -84,7 +84,6 @@ class formEditPromotion extends Form{
         if (count($result) === 0) {
         	$bd = new Promotion_DAO("complucine");
 
-			//FALTARIA SUBIR LA IMAGEN
 			$exist = $bd-> promotionData($id);
 			if(mysqli_num_rows($exist) == 1){
 				$ok = count($_FILES) == 1 && $_FILES['archivo']['error'] == UPLOAD_ERR_OK;
@@ -119,7 +118,8 @@ class formEditPromotion extends Form{
 					//if ( !copy("../img/tmp/{$nombre}", "/{$nombre}") ) {
 					//  $result['img'] = 'Error al mover el archivo';
 					//}
-				   $bd->editPromotion($id, $tittle,$description,$code,$active, $nombre);
+					$nombreBd = str_replace("_", " ", $nombre);
+				   $bd->editPromotion($id, $tittle,$description,$code,$active, $nombreBd);
 				   $_SESSION['message'] = "<div class='row'>
 											<div class='column side'></div>
 											<div class='column middle'>

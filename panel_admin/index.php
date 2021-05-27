@@ -63,7 +63,7 @@
                         $_SESSION["lastRol"] = $_SESSION["rol"];
                         //unset($_SESSION["rol"]);
                         $_SESSION["rol"] = null;
-                        header("Location: {$_SERVER['PHP_SELF']}");
+                        //header("Location: {$_SERVER['PHP_SELF']}");
                         $_SESSION['message'] = "<div class='row'>
                                                 <div class='column side'></div>
                                                 <div class='column middle'>
@@ -80,7 +80,7 @@
                     case 'ur': 
                         $_SESSION["lastRol"] = $_SESSION["rol"];
                         $_SESSION["rol"] = "user";
-                        header("Location: {$_SERVER['PHP_SELF']}");
+                        //header("Location: {$_SERVER['PHP_SELF']}");
                         $_SESSION['message'] = "<div class='row'>
                                                 <div class='column side'></div>
                                                 <div class='column middle'>
@@ -97,7 +97,7 @@
                     case 'ag': 
                         $_SESSION["lastRol"] = $_SESSION["rol"];
                         $_SESSION["rol"] = "manager";
-                        header("Location: {$_SERVER['PHP_SELF']}");
+                        //header("Location: {$_SERVER['PHP_SELF']}");
                         $_SESSION['message'] = "<div class='row'>
                                                 <div class='column side'></div>
                                                 <div class='column middle'>

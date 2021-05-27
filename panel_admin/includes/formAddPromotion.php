@@ -111,7 +111,8 @@ class formAddPromotion extends Form{
 					//if ( !copy("../img/tmp/{$nombre}", "/{$nombre}") ) {
 					//  $result['img'] = 'Error al mover el archivo';
 					//}
-					$bd->createPromotion(null, $tittle,$description,$code,$active, $nombre);
+					$nombreBd = str_replace("_", " ", $nombre);
+					$bd->createPromotion(null, $tittle,$description,$code,$active, $nombreBd);
 					$_SESSION['message'] = "<div class='row'>
 										<div class='column side'></div>
 										<div class='column middle'>
