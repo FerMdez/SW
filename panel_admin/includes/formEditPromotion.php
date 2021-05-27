@@ -58,7 +58,7 @@ class formEditPromotion extends Form{
 		}
 
 		$t = $this->test_input($datos['tittle']) ?? null;
-		$tittle = str_replace(" ", "_", $t);
+		$tittle = strtolower(str_replace(" ", "_", $t));
         if ( empty($tittle) ) {
             $result['tittle'] = "El título no es válido";
         }
