@@ -114,7 +114,7 @@ class formEditFilm extends Form{
                      
                      if ( $ok ) {
                          $tmp_name = $_FILES['archivo']['tmp_name'];
-                         $nombreBd = str_replace(" ", "_", $tittle).".".pathinfo($nombre, PATHINFO_EXTENSION);
+                         $nombreBd = strtolower(str_replace(" ", "_", $tittle)).".".pathinfo($nombre, PATHINFO_EXTENSION);
                          if ( !move_uploaded_file($tmp_name, "../img/films/{$nombreBd}") ) {
                          $result['img'] = 'Error al mover el archivo';
                          }
