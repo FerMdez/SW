@@ -67,17 +67,21 @@ table.seat td:first-child {
   background-color: #791515;
 }
 
+
+/*lists like tables*/
 .tablelist{
-	list-style-type: none;
-	width: 100%;
-	padding: 0;
-	margin: 0;
+  display: grid;
+  list-style-type: none;
 }
 
-.tablelist a
-{
+.tablelist li {
+  border-bottom: 1px solid black;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+}
+.tablelist a {
   color: #000000;
-  width: 33%
 }
 
 .tablelist a:hover li{
@@ -85,29 +89,81 @@ table.seat td:first-child {
   background: rgba(0, 3, 255, 0.25);
 }
 
-.tablelist li
+.tablelist li.title{
+	font-weight: bold;
+}
+
+/*3columns*/
+.col3{
+  grid-template-columns: repeat(3,1fr); 
+  
+}
+
+.col3 .odd{
+   background: rgba(144, 144, 144, 0.25);
+   display: grid;
+   grid-column-start: 1;
+   grid-column-end: 4;
+   grid-template-columns: repeat(3,1fr); 
+}
+
+.col3 .even{
+   display: grid;
+   grid-column-start: 1;
+   grid-column-end: 4;
+   grid-template-columns: repeat(3,1fr); 
+}
+
+.tablelist.col3 a.h2long
 {
-  border-bottom: 1px solid #000;
-  float: left;
-  width: 33%;
-  white-space: pre;
-  padding: 10px;
-  text-align:center;
+   display: grid;
+   grid-column-start: 1;
+   grid-column-end: 3;
+   grid-template-columns: repeat(2,1fr);
 }
 
-.tablelist li.title
-{ 
-  font-weight: bold;
-  pointer-events: none;
-}
-
-.tablelist li:nth-child(3n)
+.tablelist.col3 a
 {
-   clear: both;
+   display: grid;
+   grid-column-start: 3;
+   grid-column-end: 4;
+   grid-template-columns: repeat(1,1fr);
 }
 
-.tablelist .odd li
+/*5 columns*/
+
+.col5{
+  grid-template-columns: repeat(5,1fr);    
+}
+
+.col5 .odd{
+   background: green;
+   display: grid;
+   grid-column-start: 1;
+   grid-column-end: 6;
+   grid-template-columns: repeat(5,auto); 
+}
+
+.col5 .even{
+   background: pink;
+   display: grid;
+   grid-column-start: 1;
+   grid-column-end: 6;
+   grid-template-columns: repeat(5,auto); 
+}
+
+.tablelist.col5 a.h4long
 {
-	background-color:rgba(144, 144, 144, 0.25);
+   display: grid;
+   grid-column-start: 1;
+   grid-column-end: 5;
+   grid-template-columns: repeat(4,auto);
 }
 
+.tablelist.col5 a
+{
+   display: grid;
+   grid-column-start: 5;
+   grid-column-end: 6;
+   grid-template-columns: auto;
+}
