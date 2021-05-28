@@ -91,26 +91,26 @@
         static function purchases(){
             require_once('../assets/php/includes/purchase_dao.php');
 
+            $purchasesHTML = '';
+
             $purchaseDAO = new PurchaseDAO("complucine");
             $purchases = $purchaseDAO->allPurchasesData(unserialize($_SESSION['user'])->getId());
 
-            $sessions = array();
-            $halls = array();
-            $cinemas = array();
-            $rows = array();
-            $columns = array();
-            $dates = array();
-            foreach($purchases as $key=>$value){
-                $sessions[$key] = $value->getSessionId();
-                $halls[$key] = $value->getHallId();
-                $cinemas[$key] = $value->getCinemaId();
-                $rows[$key] = $value->getRow();
-                $columns[$key] = $value->getColumn();
-                $dates[$key] = $value->getTime();
-            }
-
-            $purchasesHTML = '';
-            if(count($purchases) > 0){
+            if($purchases){
+                $sessions = array();
+                $halls = array();
+                $cinemas = array();
+                $rows = array();
+                $columns = array();
+                $dates = array();
+                foreach($purchases as $key=>$value){
+                    $sessions[$key] = $value->getSessionId();
+                    $halls[$key] = $value->getHallId();
+                    $cinemas[$key] = $value->getCinemaId();
+                    $rows[$key] = $value->getRow();
+                    $columns[$key] = $value->getColumn();
+                    $dates[$key] = $value->getTime();
+                }
                 for($i = 0; $i < count($purchases); $i++){
                     if($i%2 === 0){
                         if($i != 0) $purchasesHTML .= '</div>

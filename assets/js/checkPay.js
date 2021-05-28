@@ -39,16 +39,16 @@ $(document).ready(function() {
 
     //Comprueba que el NÚMERO de la tarjeta es válido.
     $("#card-number-0").change(function(){
+        const cardNumber0 = $("#card-number-0");
+        cardNumber0[0].setCustomValidity("");
         $("#card-number-1").change(function(){
+            const cardNumber1 = $("#card-number-1");
+            cardNumber1[0].setCustomValidity("");
             $("#card-number-2").change(function(){
-                $("#card-number-3").change(function(){
-                    const cardNumber0 = $("#card-number-0");
-                    const cardNumber1 = $("#card-number-1");
-                    const cardNumber2 = $("#card-number-2");
+                const cardNumber2 = $("#card-number-2");
+                cardNumber2[0].setCustomValidity("");
+                $("#card-number-3").change(function(){                  
                     const cardNumber3 = $("#card-number-3");
-                    cardNumber0[0].setCustomValidity("");
-                    cardNumber1[0].setCustomValidity("");
-                    cardNumber2[0].setCustomValidity("");
                     cardNumber3[0].setCustomValidity("");
 
                     if( (cardNumber0.val().length + cardNumber1.val().length + cardNumber2.val().length +cardNumber3.val().length) === 16 ){
