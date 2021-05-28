@@ -77,11 +77,15 @@ class FormDeleteAccount extends Form {
                 if( (unserialize($_SESSION['user'])->getId() === $user->getId()) && ($nombre === $user->getName())
                         && ($email === $user->getEmail()) && ($bd->verifyPass($password, $user->getPass())) ){
 
-                    $bd->deleteUserAccount($user->getId());
-                    unset($_SESSION);
-                    session_destroy();
-                    
-                    $result = ROUTE_APP;
+                    if(!isset($_GET['reply'])){
+                        $bd->deleteUserAccount($user->getId());
+                        unset($_SESSION);
+                        session_destroy();
+                        
+                        $result = ROUTE_APP;
+                    } else {
+                        $result[] = "Operación cancelada.";
+                    }
                     
                 } else {
                     $result[] = "Los datos introducidos\nno son válidos.";

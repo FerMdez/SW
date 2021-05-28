@@ -120,5 +120,8 @@
 		public function setFormat($format){ $this->_format = $format; }
 		public function getFormat(){ return $this->_format; }
 
+		public function setSeatsFull($bool){ $this->_seats_full = $bool; }
+		public function getSeatsFull(){ return $this->_seats_full; }
+
     }
 ?>

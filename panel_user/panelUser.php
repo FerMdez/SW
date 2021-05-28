@@ -89,8 +89,47 @@
 
         //User purchase history.
         static function purchases(){
+            require_once('../assets/php/includes/purchase_dao.php');
+
+            $purchaseDAO = new PurchaseDAO("complucine");
+            $purchases = $purchaseDAO->allPurchasesData(unserialize($_SESSION['user'])->getId());
+
+            $sessions = array();
+            $halls = array();
+            $cinemas = array();
+            $rows = array();
+            $columns = array();
+            $dates = array();
+            foreach($purchases as $key=>$value){
+                $sessions[$key] = $value->getSessionId();
+                $halls[$key] = $value->getHallId();
+                $cinemas[$key] = $value->getCinemaId();
+                $rows[$key] = $value->getRow();
+                $columns[$key] = $value->getColumn();
+                $dates[$key] = $value->getTime();
+            }
+
+            $purchasesHTML = '';
+            if(count($purchases) > 0){
+                for($i = 0; $i < count($purchases); $i++){
+                    if($i%2 === 0){
+                        if($i != 0) $purchasesHTML .= '</div>
+                        ';
+                        $purchasesHTML .= '<div class="column left">
+                        ';
+                    } else {
+                        if($i != 0) $purchasesHTML .= '</div>
+                        ';
+                        $purchasesHTML .= '<div class="column left">
+                        ';
+                    }
+                    $purchasesHTML .= '<h1>'.$dates[$i].'</h1><hr />';
+                }
+            }
+            
             return $reply = '<div class="code info">
-                            <h2>Aquí el historial de compras</h2><hr />
+                            <h2>Historial de compras</h2><hr />
+                            '.$purchasesHTML.'
                         </div>'."\n";
         }
 

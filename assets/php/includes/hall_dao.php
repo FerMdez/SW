@@ -22,6 +22,25 @@
 			
 			return $sql;
 		}
+
+		//Returns the hall's data by ID.
+		public function HallData($id){
+			$id = $this->mysqli->real_escape_string($id);
+
+			$sql = sprintf( "SELECT * FROM hall WHERE number = '%d'", $id );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			$resul->data_seek(0);
+			$hall = null;
+			while ($fila = $resul->fetch_assoc()) {
+				$hall = $this->loadHall($fila["number"], $fila["idcinema"], $fila["numrows"], $fila["numcolumns"], $fila["total_seats"], null);
+			}
+
+			//mysqli_free_result($selectUser);
+			$resul->free();
+
+			return $hall;
+		}
 		
 		//Returns a query to get the halls data.
 		public function getAllHalls($cinema){

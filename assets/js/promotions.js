@@ -1,3 +1,9 @@
+/**
+ * Práctica - Sistemas Web | Grupo D
+ * CompluCine - FDI-cines
+ */
+
+/* TO-DO: enviar el contenido del array de promociones */
 window.onload = function () {
     var promos = document.getElementById("promotions").value;
     console.log(promos);

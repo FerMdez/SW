@@ -2,7 +2,7 @@
     //General Config File:
     require_once('../assets/php/config.php');
 
-    //Get Film to purchase:
+    //Get Ticket to purchase:
     include_once($prefix.'assets/php/includes/film_dao.php');
     include_once($prefix.'assets/php/includes/film.php');
     include_once($prefix.'assets/php/includes/cinema_dao.php');
@@ -160,5 +160,5 @@
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';
 
-    //TO-DO: añadir elegir promocione sy enviar con el POST.
+    //TO-DO: añadir elegir promociones y enviar con el POST.
 ?>

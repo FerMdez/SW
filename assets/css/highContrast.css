@@ -370,7 +370,7 @@
   margin-right: auto;
   box-shadow: 0 4px 8px 0 #00020f, 0 6px 20px 0 #00020f;
 }
-.code.purchase {
+.code.purchase, .code.resume {
   text-align: center;
 }
 .code.purchase h3 {
