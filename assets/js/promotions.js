@@ -3,16 +3,12 @@
  * CompluCine - FDI-cines
  */
 
-/* TO-DO: enviar el contenido del array de promociones */
 window.onload = function () {
+    //Promociones:
     var promos = document.getElementById("promotions").value;
-    console.log(promos);
-    // Promociones (Cambiar por el contenido del array "promotions")
-    const IMAGENES = [
-        '../img/promos/promo_vuelve.jpg',
-        '../img/promos/promo_palomitas.jpg',
-        '../img/promos/promo_miercoles.jpg'
-    ];
+    const prefix = "../img/promos/";
+    const IMAGENES = JSON.parse(promos);
+
     const TIEMPO_INTERVALO_MILESIMAS_SEG = 3500;
     let posicionActual = 0;
     let $botonRetroceder = document.querySelector('#retroceder');
@@ -52,7 +48,7 @@ window.onload = function () {
      * Funcion que actualiza la imagen de imagen dependiendo de posicionActual
      */
     function renderizarImagen () {
-        $imagen.style.backgroundImage = `url(${IMAGENES[posicionActual]})`;
+        $imagen.style.backgroundImage = `url(${prefix+IMAGENES[posicionActual]})`;
     }
 
     /**

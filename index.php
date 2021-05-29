@@ -2,7 +2,14 @@
     //General Config File:
     require_once(__DIR__.'/assets/php/config.php');
 
-    $promotions = "HOLA MUNDO";
+    //Promotions:
+    include_once(__DIR__.'/assets/php/includes/promotion_dao.php');
+
+    $promotionsDAO = new Promotion_DAO("complucine");
+    $promotions = $promotionsDAO->allPromotionData();
+    foreach($promotions as $key=>$value){
+        $promotions_img[$key] = $value->getImg();
+    }
 
     //Page-specific content:
     $section = '<!-- Undercard -->
@@ -27,8 +34,8 @@
                 </section>
             </div>
         </section>
-        <input type="hidden" id="promotions" value="'.$promotions.'" />
-        ';
+        '; 
+    $section.="<input type='hidden' id='promotions' value='".json_encode($promotions_img)."' />";
 
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';

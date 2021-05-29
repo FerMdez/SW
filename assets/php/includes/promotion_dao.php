@@ -27,7 +27,7 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			while($fila=$resul->fetch_assoc()){
-				$promotions[] = $this->loadPromotion($fila["id"], $fila["tittle"], $fila["description"], $fila["code"], $fila["active"], null);
+				$promotions[] = $this->loadPromotion($fila["id"], $fila["tittle"], $fila["description"], $fila["code"], $fila["active"], $fila["img"],);
 			}
 			$resul->free();
 			return $promotions;
