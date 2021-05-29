@@ -4,21 +4,9 @@
  */
 
 function confirmDelete() {
-	let _delete = confirm("¿Está seguro de que desea eliminar su cuenta de usuario?\nEsta acción no se puede deshacer.");
-
-	if(_delete){
+	if(confirm("¿Está seguro de que desea eliminar su cuenta de usuario?\nEsta acción no se puede deshacer.")){
 		document.formDeleteAccount.submit();
+	} else {
+		location.href = "./";
 	}
 }
-
-/*
-$(document).ready(function() {
-	document.getElementById("submit").onclick=function(){
-		let _delete = confirm("¿Está seguro de que desea eliminar su cuenta de usuario?\nEsta acción no se puede deshacer.");
-
-		if(_delete){
-			document.formDeleteAccount.submit();
-		}
-	}
-});
-*/
