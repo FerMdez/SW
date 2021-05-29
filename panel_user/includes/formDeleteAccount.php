@@ -37,8 +37,8 @@ class FormDeleteAccount extends Form {
                                 <label for='verify'>Al marcar esta casilla, verifica y entiende que esta acción no se puede deshacer.</label>
                             </div>
                             <div class='actions'>
-                                <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' />
-                                <!-- <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' onclick=\"newWindow('confirm.php');\" /> -->
+                                <!-- <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' /> -->
+                                <button class='danger' onclick='confirmDelete()'>Eliminar Cuenta de Usuario</button>
                             </div>
                         </div>";
 

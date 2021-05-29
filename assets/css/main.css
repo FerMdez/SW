@@ -35,14 +35,14 @@ button, .button.large{
   width: 150px;
   height: 30px;
   padding: 5px 10px;
-  background-color :#1f2c3d;
+  background-color:#1f2c3d;
   border: 1px solid #d3ebff;
   text-align: center;
-  color :#d3ebff;
+  color:#d3ebff;
   font-weight: bold;
   position: relative;
 }
-.button.large {
+.button.large, button.danger {
   width: 95%;
 }
 button:hover, .button:hover {
@@ -51,6 +51,16 @@ button:hover, .button:hover {
   color:#1f2c3d;
   border-color: #1f2c3d;
 }
+button.danger{
+  background-color:#2c0000;
+  border: 2px solid #d3ebff;
+}
+button.danger:hover{
+  background-color:#d3ebff;
+  border: 2px solid #791515;
+  color: #791515;
+}
+
 
 /* Header */
 .header {
@@ -732,6 +742,19 @@ pre {
 
 fieldset pre {
   color: red;
+}
+
+/* Go Up button */
+.go-up {
+  display: none;
+  padding: 5px;
+  background:#1f2c3d;
+  font-size: 20px;
+  color:#d3ebff;
+  cursor: pointer;
+  position: fixed;
+  bottom: 5px;
+  right: 20px;
 }
 
 

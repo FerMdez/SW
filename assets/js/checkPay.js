@@ -41,28 +41,70 @@ $(document).ready(function() {
     $("#card-number-0").change(function(){
         const cardNumber0 = $("#card-number-0");
         cardNumber0[0].setCustomValidity("");
-        $("#card-number-1").change(function(){
-            const cardNumber1 = $("#card-number-1");
-            cardNumber1[0].setCustomValidity("");
-            $("#card-number-2").change(function(){
-                const cardNumber2 = $("#card-number-2");
-                cardNumber2[0].setCustomValidity("");
-                $("#card-number-3").change(function(){                  
-                    const cardNumber3 = $("#card-number-3");
-                    cardNumber3[0].setCustomValidity("");
+        cardNumber1[0].setCustomValidity("");
+        cardNumber2[0].setCustomValidity("");
+        cardNumber3[0].setCustomValidity("");
 
-                    if( (cardNumber0.val().length + cardNumber1.val().length + cardNumber2.val().length +cardNumber3.val().length) === 16 ){
-                        $("#carNumberValid").show();
-                        $("#cardNumerInvalid").hide();
-                        cardNumber0[0].setCustomValidity("");
-                    } else {
-                        $("#carNumberValid").hide();
-                        $("#cardNumerInvalid").show();
-                        cardNumber0[0].setCustomValidity("El número de tarjeta debe tener 16 dígitos.");
-                    }
-                });
-            });
-        });
+        if(cardNumber0.val().length < 4){
+            $("#carNumberValid").show();
+            $("#cardNumerInvalid").hide();
+            cardNumber0[0].setCustomValidity("");
+        } else {
+            $("#carNumberValid").hide();
+            $("#cardNumerInvalid").show();
+            cardNumber0[0].setCustomValidity("El número de tarjeta debe tener 16 dígitos.");
+        }
+    });
+    $("#card-number-1").change(function(){
+        const cardNumber1 = $("#card-number-1");
+        cardNumber0[0].setCustomValidity("");
+        cardNumber1[0].setCustomValidity("");
+        cardNumber2[0].setCustomValidity("");
+        cardNumber3[0].setCustomValidity("");
+
+        if(cardNumber1.val().length < 4){
+            $("#carNumberValid").show();
+            $("#cardNumerInvalid").hide();
+            cardNumber1[0].setCustomValidity("");
+        } else {
+            $("#carNumberValid").hide();
+            $("#cardNumerInvalid").show();
+            cardNumber1[0].setCustomValidity("El número de tarjeta debe tener 16 dígitos.");
+        }
+    });
+    $("#card-number-2").change(function(){
+        const cardNumber2 = $("#card-number-2");
+        cardNumber0[0].setCustomValidity("");
+        cardNumber1[0].setCustomValidity("");
+        cardNumber2[0].setCustomValidity("");
+        cardNumber3[0].setCustomValidity("");
+
+        if(cardNumber2.val().length < 4){
+            $("#carNumberValid").show();
+            $("#cardNumerInvalid").hide();
+            cardNumber2[0].setCustomValidity("");
+        } else {
+            $("#carNumberValid").hide();
+            $("#cardNumerInvalid").show();
+            cardNumber2[0].setCustomValidity("El número de tarjeta debe tener 16 dígitos.");
+        }
+    });
+    $("#card-number-3").change(function(){
+        const cardNumber3 = $("#card-number-3");
+        cardNumber0[0].setCustomValidity("");
+        cardNumber1[0].setCustomValidity("");
+        cardNumber2[0].setCustomValidity("");
+        cardNumber3[0].setCustomValidity("");
+
+        if(cardNumber3.val().length < 4){
+            $("#carNumberValid").show();
+            $("#cardNumerInvalid").hide();
+            cardNumber3[0].setCustomValidity("");
+        } else {
+            $("#carNumberValid").hide();
+            $("#cardNumerInvalid").show();
+            cardNumber3[0].setCustomValidity("El número de tarjeta debe tener 16 dígitos.");
+        }
     });
 
 

@@ -683,7 +683,7 @@
             <div class='footer'>
                 <p>© Práctica Final | Sistemas Web 2021 </p>
             </div>
-            <a href='#'>▲Subir</a> |
+            <span class='go-up'>&#x1F51D</span>
             <a href='{$prefix}fdicines/about_us/'>Sobre FDI-Cines</a> |
             <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |
@@ -700,6 +700,7 @@
         echo"<script type='text/javascript' src='{$prefix}assets/js/jquery-3.2.1.min.js'></script>
         <script type='text/javascript' src='{$prefix}assets/js/cambiarCSS.js'></script>
         <script type='text/javascript' src='{$prefix}assets/js/checkForms.js'></script>
+        <script type='text/javascript' src='{$prefix}assets/js/goUp.js'></script>
         ";
         if($page === "FDI-Cines") echo"<script type='text/javascript' src='{$prefix}assets/js/promotions.js'></script>\n";
         if($page === "Panel de Usuario") echo"<script type='text/javascript' src='{$prefix}assets/js/deleteConfirm.js'></script>\n";
