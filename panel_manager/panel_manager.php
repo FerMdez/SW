@@ -30,6 +30,8 @@
 						<p>Dirección: '.$c_dir.'</p>
 						<p>Telefono: '.$c_tel.'</p> <br>
 						<p>Espero que estes pasando un buen dia</p>
+						
+						<a href="?state=calendar"> calendario </a>
 					</div>';
 				
 			return $panel;
@@ -72,7 +74,14 @@
 
 			return $panel;
 		}
-		
+		static function calendar(){
+			$panel = '
+			<div class="code">
+				<div id="calendar"></div>
+			</div>';
+			
+			return $panel;
+		}
 		static function success(){
             $panel = '<div class="code info">
                     <h1>Operacion completada.</h1>

@@ -1,5 +1,8 @@
-<?php
 
+
+
+
+<?php
     //General Config File:
     require_once('../assets/php/config.php');
     //Controller file:
@@ -146,6 +149,9 @@
 			case "success":
 				$panel = Manager_panel::success();
 				break;
+			case "calendar":
+				$panel = Manager_panel::calendar($manager);
+				break;
 			default:  
 				$panel = Manager_panel::welcome($manager);
 				break;
@@ -165,10 +171,13 @@
 
     //Specific page content:
         $section = '<!-- Manager Panel -->
+
+	
 		<link rel="stylesheet" href="../assets/css/manager.css">
         <section id="manager_panel">
 			<!-- Contents -->
 			<div class="row">
+			
 				'.$panel.'
 			</div>
         </section>';
@@ -176,3 +185,11 @@
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';
 ?>
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+<script src="./sessioncalendar.js"></script>
