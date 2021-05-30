@@ -24,7 +24,6 @@ class FormPurchase extends Form {
     private $_TODAY;         // Actual date.
 
     public function __construct() {
-        //$options = array("action" => $_SERVER['PHP_SELF']);
         parent::__construct('formPurchase');
 
         $sessionDAO = new SessionDAO("complucine");

@@ -123,7 +123,12 @@
                         $purchasesHTML .= '<div class="column left">
                         ';
                     }
-                    $purchasesHTML .= '<h1>'.$dates[$i].'</h1><hr />';
+                    $purchasesHTML .= '<h1>Compara realizada el: '.$dates[$i].'</h1><hr />
+                                        <p>Cine: '.$cinemas[$i].'</p>
+                                        <p>Sala: '.$halls[$i].'</p>
+                                        <p>Sesión: '.$sessions[$i].'</p>
+                                        <p>Asiento(Fila): '.$rows[$i].'</p>
+                                        <p>Asiento(Columna): '.$columns[$i].'</p>';
                 }
             }
             
