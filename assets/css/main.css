@@ -533,9 +533,10 @@ main img {
   .promotions button {
     margin: 0 1em 0 1em;
   }
-  .promotions img {
+  .promotions .imagen {
+    margin-top: 2.5em;
     width: 100%;
-    height: auto;
+    height: 40px;
   }
 }
 
