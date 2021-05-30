@@ -19,5 +19,5 @@
     //General page content:
     require RAIZ_APP.'/HTMLtemplate.php';
 
-    //TO-DO: añadir elegir promociones y enviar con el POST.
+    //TO-DO: añadir selección de butaca y elegir promociones y enviar con el POST.
 ?>

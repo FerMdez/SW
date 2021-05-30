@@ -27,7 +27,7 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			while($fila=$resul->fetch_assoc()){
-				$promotions[] = $this->loadPromotion($fila["id"], $fila["tittle"], $fila["description"], $fila["code"], $fila["active"], $fila["img"],);
+				$promotions[] = $this->loadPromotion($fila["id"], $fila["tittle"], $fila["description"], $fila["code"], $fila["active"], $fila["img"]);
 			}
 			$resul->free();
 			return $promotions;
@@ -75,6 +75,20 @@
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 
 			return $resul;
+		}
+
+		//Returns a  film data .
+		public function GetPromotionObj($code){
+			$sql = sprintf( "SELECT * FROM promotion WHERE promotion.code = '%s'", $code );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			$promo = null;
+			while($fila = $resul->fetch_assoc()){
+				$promo = $this->loadPromotion($fila["id"], $fila["tittle"], $fila["description"], $fila["code"], $fila["active"], $fila["img"]);
+			}
+			$resul->free();
+
+			return $promo;
 		}
 	    
 		//Create a new film Data Transfer Object.

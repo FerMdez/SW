@@ -32,10 +32,11 @@ class FormSelectCinemaSession extends Form {
         $cinemas = [];
         $sessions = [];
 
-        // Se generan los mensajes de error si existen.
+        // Se generan los mensajes de error, si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorCinema = self::createMensajeError($errores, 'cinemas', 'span', array('class' => 'error'));
         $errorSession = self::createMensajeError($errores, 'sessions', 'span', array('class' => 'error'));
+        $errorCode = self::createMensajeError($errores, 'code', 'span', array('class' => 'error'));
         
         $pay = true;
         if(isset($_GET["film"])){
@@ -58,8 +59,8 @@ class FormSelectCinemaSession extends Form {
                     $cinemasIT->attachIterator($cinemasIDs, "cID");
                     $cinemasIT->attachIterator($cinemasNames, "NAME");
                     
-                    $cinemasListHTML = '<section id="select_cinema">
-                                        <select name="cinemas" id="cinemas">';
+                    $cinemasListHTML = '<section id="select_cinema"><pre>'.$htmlErroresGlobales.'</pre>
+                                        <select name="cinemas" id="cinemas"><pre>'.$errorCinema.'</pre>';
                     if(!isset($cinema_id)){
                         $cinemasListHTML .= '<option value="" selected>Selecciona un cine</option>';
                         foreach($cinemasIT as $value){
@@ -103,7 +104,7 @@ class FormSelectCinemaSession extends Form {
                         $sessionsIT->attachIterator($sessionsStarts, "HOUR");
     
                         $count = 0;
-                        $sessionsListHTML = '<select name="sessions" id="sessions">';
+                        $sessionsListHTML = '<select name="sessions" id="sessions"><pre>'.$errorSession.'</pre>';
                         foreach ($sessionsIT as $value) {
                             if($this->_TODAY <= $value["DATE"]){
                                 if($value === reset($sessionsIT)){
@@ -142,6 +143,9 @@ class FormSelectCinemaSession extends Form {
                                 '.$cinemasListHTML.'
                                 <h3>Sesiones</h3>
                                 '.$sessionsListHTML.'
+                                <h3>Aplicar código promocional<span id="codeValid">&#x2714;</span><span id="codeInvalid">&#x274C;</span></h3>
+                                <input type="text" name="code" id="code" value="" placeholder="Código pormocional" /><pre>'.$errorPromo.'</pre>
+                                
                         </div>';
             } else {
                 $html = '<h1>No existe la película.</h1>';
@@ -180,6 +184,12 @@ class FormSelectCinemaSession extends Form {
         $session = $this->test_input($datos['sessions']) ?? null;
         if ( empty($session) ) {
             $result['sessions'] = "Selecciona una sesión.";
+        }
+
+        $code = $this->test_input($datos['code']) ?? null;
+        $avaliable = "../assets/php/common/checkPromo.php?code=".$code;
+        if ( !empty($code) && mb_strlen($code) != 8 && $avaliable === "avaliable") {
+            $result['code'] = "El código promocional no es válido.";
         }
 
         if (count($result) === 0) {

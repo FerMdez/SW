@@ -89,19 +89,16 @@ class FormPurchase extends Form {
                             </fieldset>
                             <fieldset id='pagar_entrada'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Datos Bancarios</legend>
-                                <label for='card-holder'>Titular de la Tarjeta:</label><pre>".$errorNombre."</pre><br />
+                                <label for='card-holder'>Titular de la Tarjeta:  <span id='cardNameValid'>&#x2714;</span><span id='cardNameInvalid'>&#x274C;</span></label><pre>".$errorNombre."</pre><br />
                                     <input type='text' name='card-holder' id='card-holder' class='card-holder' placeholder='NOMBRE APELLIDO1 APELLIDO2' required />
-                                    <span id='cardNameValid'>&#x2714;</span><span id='cardNameInvalid'>&#x274C;</span>
                                 <br />
-                                <label for='card-number'>Número de Tarjeta: </label><pre>".$errorCardNumber."</pre><br />
+                                <label for='card-number'>Número de Tarjeta: <span id='carNumberValid'>&#x2714;</span><span id='cardNumerInvalid'>&#x274C;</span></label><pre>".$errorCardNumber."</pre><br />
                                     <input type='num' name='card-number-0' id='card-number-0' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
                                     <input type='num' name='card-number-1' id='card-number-1' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
                                     <input type='num' name='card-number-2' id='card-number-2' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
                                     <input type='num' name='card-number-3' id='card-number-3' class='input-cart-number' placeholder='XXXX' maxlength='4' required />    
-                                    <span id='carNumberValid'>&#x2714;</span><span id='cardNumerInvalid'>&#x274C;</span>
-                                <label for='card-cvv'>CVV: </label>
+                                <label for='card-cvv'>CVV: <span id='cvvValid'>&#x2714;</span><span id='cvvInvalid'>&#x274C;</span></label>
                                     <input type='text' name='card-cvv' id='card-cvv' class='fieldset-cvv' maxlength='3' placeholder='XXX' required /><pre>".$errorCVV."</pre>
-                                    <span id='cvvValid'>&#x2714;</span><span id='cvvInvalid'>&#x274C;</span>
                                 <br />
                                 <label for='card-expiration'>Fecha de Expiración:</label><pre>".$errorCardExpirationMonth.$errorCardExpirationYear."</pre><br />
                                     <select name='card-expiration-month' id='card-expiration-month' required>
