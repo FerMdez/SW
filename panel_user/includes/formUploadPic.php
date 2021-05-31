@@ -4,8 +4,10 @@ include_once('../assets/php/includes/user.php');
 
 class FormUploadFiles extends Form {
 
+    const EXTENSIONS = array('gif','jpg','jpe','jpeg','png');
+
     public function __construct() {
-        $options = array('enctype' => 'multipart/form-data');
+        $options = array("enctype" => "multipart/form-data", "action" => "./?option=change_profile_pic");
         parent::__construct('formUploadFiles', $options);
     }
     
@@ -22,7 +24,7 @@ class FormUploadFiles extends Form {
         // Se genera el HTML asociado a los campos del formulario y los mensajes de error.
         $html = '
                 <div class="file">
-                    <input type="file" name="file" id="file" /><pre>'.$htmlErroresGlobales.'</pre>
+                    <input type="file" name="archivo" id="archivo" /><pre>'.$htmlErroresGlobales.'</pre>
                 </div>
                 <input type="submit" id="submit" value="Subir" class="primary" /><pre>'.$errorFile.'</pre>
                 ';
@@ -36,49 +38,33 @@ class FormUploadFiles extends Form {
         
         $result = array();
         $ok = count($_FILES) == 1 && $_FILES['archivo']['error'] == UPLOAD_ERR_OK;
-        
         if ( $ok ) {
-            $archivo = $_FILES['archivo'];
             $nombre = $_FILES['archivo']['name'];
-            /* 1.a) Valida el nombre del archivo */
+            //1.a) Valida el nombre del archivo 
             $ok = $this->check_file_uploaded_name($nombre) && $this->check_file_uploaded_length($nombre) ;
-            /* 1.b) Sanitiza el nombre del archivo 
-            $ok = sanitize_file_uploaded_name($nombre);
-            */
-            /* 1.c) Utilizar un id de la base de datos como nombre de archivo */
-
-            /* 2. comprueba si la extensión está permitida*/
-            $ok = $ok && in_array(pathinfo($nombre, PATHINFO_EXTENSION), $ALLOWED_EXTENSIONS);
-
-            /* 3. comprueba el tipo mime del archivo correspode a una imagen image/* */
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mimeType = finfo_file($finfo, $_FILES['archivo']['tmp_name']);
+            
+            // 1.b) Sanitiza el nombre del archivo 
+            //$ok = $this->sanitize_file_uploaded_name($nombre);
+            //
+        
+            // 2. comprueba si la extensión está permitida
+            $ok = $ok && in_array(pathinfo($nombre, PATHINFO_EXTENSION), self::EXTENSIONS);
+        
+            // 3. comprueba el tipo mime del archivo correspode a una imagen image
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
+            $mimeType = $finfo->file($_FILES['archivo']['tmp_name']);
             $ok = preg_match('/image\/*./', $mimeType);
             finfo_close($finfo);
-
+				
             if ( $ok ) {
-            $tmp_name = $_FILES['archivo']['tmp_name'];
-            //$tmp_name = unserialize(strtolower($_SESSION["user"])->getName()).".jpg";
-
-            if ( !move_uploaded_file($tmp_name, USER_PICS.$nombre) ) {
-                $result[] = 'Error al mover el archivo';
-            }
-
-            // 4. Si fuese necesario guardar en la base de datos la ruta relativa $nombre del archivo
-            //return "index.php#img=".urlencode('img/'.$nombre);
-            $_SESSION['message'] = "<div class='row'>
-                                                <div class='column side'></div>
-                                                <div class='column middle'>
-                                                    <div class='code info'>
-                                                        <h1>Operacion realizada con exito</h1><hr />
-                                                        <p>Se ha modificado su imagen de usuario correctamente.</p>
-                                                        <a href='./'><button>Cerrar Mensaje</button></a>
-                                                    </div>
-                                                </div>
-                                                <div class='column side'></div>
-                                            </div>
-                                            ";
-            $result = "./?option=change_profile_pic";
+                $tmp_name = $_FILES['archivo']['tmp_name'];
+                $new_name = strtolower(unserialize($_SESSION["user"])->getName()).".jpg";
+                
+                if ( !move_uploaded_file($tmp_name, "../img/users/{$new_name}") ) {
+                    $result['img'] = 'Error al mover el archivo';
+                }
+               
+                $result = "./";
             } else {
                 $result["errorFile"] = 'El archivo tiene un nombre o tipo no soportado';
             }
@@ -96,8 +82,8 @@ class FormUploadFiles extends Form {
      * @author Yousef Ismaeil Cliprz
      * @See http://php.net/manual/es/function.move-uploaded-file.php#111412
      */
-    protected function check_file_uploaded_name ($filename) {
-        return (bool) ((mb_ereg_match('/^[0-9A-Z-_\.]+$/i',$filename) === 1) ? true : false );
+    protected function check_file_uploaded_name($filename) {
+        return (bool) ((mb_ereg_match('/^[0-9A-Z-_\.]+$/i', $filename) === 1) ? true : false );
     }
 
     /**

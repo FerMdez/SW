@@ -1,5 +1,4 @@
 <?php
-
 include_once($prefix.'assets/php/includes/user_dao.php');
 include_once($prefix.'assets/php/form.php');
 
@@ -96,6 +95,9 @@ class FormRegister extends Form {
                             $_SESSION["nombre"] = $this->user->getName();
                             $_SESSION["rol"] = $this->user->getRol();
                             $_SESSION["login"] = true;
+                            $img = "../img/users/user.jpg"; //USER_PICS
+                            $profile_img = "../img/users/".$nombre.".jpg";
+                            copy($img, $profile_img);
                             $result = ROUTE_APP."register/register.php";
                         }
                     }
