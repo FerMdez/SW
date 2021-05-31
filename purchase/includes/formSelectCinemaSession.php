@@ -10,10 +10,10 @@ include_once($prefix.'assets/php/includes/session.php');
 class FormSelectCinemaSession extends Form {
 
     //Atributes:
-    private $session;       // Session of the film to be purchased.
-    private $cinema;        // Cinema of the film to be purchased.
-    private $hall;          // Hall of the film to be purchased.
-    private $film;          // Film to be purchased.
+    //private $session;       // Session of the film to be purchased.
+    //private $cinema;        // Cinema of the film to be purchased.
+    //private $hall;          // Hall of the film to be purchased.
+    //private $film;          // Film to be purchased.
     private $_TODAY;         // Actual date.
 
     public function __construct() {
@@ -22,9 +22,6 @@ class FormSelectCinemaSession extends Form {
 
         $TODAY = getdate();
         $this->_TODAY = "$TODAY[mday]"."-"."$TODAY[mon]"."-"."$TODAY[year]";
-
-        $filmDAO = new Film_DAO("complucine");
-        $this->film = $filmDAO->FilmData($_GET["film"]);
         
     }
 
@@ -35,6 +32,7 @@ class FormSelectCinemaSession extends Form {
         // Se generan los mensajes de error, si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorCinema = self::createMensajeError($errores, 'cinemas', 'span', array('class' => 'error'));
+        $errorFilm = self::createMensajeError($errores, 'films', 'span', array('class' => 'error'));
         $errorSession = self::createMensajeError($errores, 'sessions', 'span', array('class' => 'error'));
         $errorCode = self::createMensajeError($errores, 'code', 'span', array('class' => 'error'));
         
@@ -144,16 +142,78 @@ class FormSelectCinemaSession extends Form {
                                 <h3>Sesiones</h3>
                                 '.$sessionsListHTML.'
                                 <h3>Aplicar código promocional<span id="codeValid">&#x2714;</span><span id="codeInvalid">&#x274C;</span></h3>
-                                <input type="text" name="code" id="code" value="" placeholder="Código pormocional" /><pre>'.$errorPromo.'</pre>
-                                
+                                <input type="text" name="code" id="code" value="" placeholder="Código pormocional" /><pre>'.$errorCode.'</pre> 
                         </div>';
             } else {
                 $html = '<h1>No existe la película.</h1>';
                 $pay = false;
             }
         } else if(isset($_GET["cinema"])) {
-            $html = '<h1>ESTAMOS TRABAJANDO EN ELLO</h1>';
             $pay = false;
+            $cinemaDAO = new Cinema_DAO("complucine");
+            $cinema = $cinemaDAO->cinemaData($_GET["cinema"]);
+            if($cinema){
+                $cinema_name = $cinema->getName();
+                $cinema_address = $cinema->getDirection();
+                $cinema_tlf = $cinema->getPhone();
+
+                $films = $cinemaDAO->getFilms($_GET["cinema"]);
+                $film_id = $_GET["film"];
+                if(!empty($films)){
+                    $filmsNames = new ArrayIterator(array());
+                    $filmsIDs = new ArrayIterator(array());
+                    foreach($films as $key=>$value){
+                        $filmsIDs[$key] = $value->getId();
+                        $filmsNames[$key] = str_replace('_', ' ', $value->getTittle());
+                    }
+                    $filmsIT = new MultipleIterator(MultipleIterator::MIT_KEYS_ASSOC);
+                    $filmsIT->attachIterator($filmsIDs, "fID");
+                    $filmsIT->attachIterator($filmsNames, "NAME");
+
+                    $filmsListHTML = '<section id="select_film"><pre>'.$htmlErroresGlobales.'</pre>
+                                        <select name="films" id="films"><pre>'.$errorFilm.'</pre>';
+                    if(!empty($films)){
+                        $filmsListHTML .= '<option value="" selected>Selecciona una película</option>';
+                        foreach($filmsIT as $value){
+                            $filmsListHTML .='<option value="'.$value["fID"].'">'.$value["NAME"].'</option>';
+                        }
+                    } else {
+                        foreach($filmsIT as $value){
+                            if($value["cID"] == $film_id){
+                                $filmsListHTML .= '<option value="'.$value["fID"].'" selected>'.$value["NAME"].'</option>';
+                            } else {
+                                $filmsListHTML .='<option value="'.$value["fID"].'">'.$value["NAME"].'</option>';
+                            }
+                        }
+                    }
+                    $filmsListHTML .= '</select>
+                                </section>';
+
+                } else {
+                    $filmsListHTML = '<select name="films"><option value="" selected>No hay películas disponibles para este cine.</option></select>';
+                }
+
+                //Reply: Depends on whether the purchase is to be made from a selected movie or a cinema.
+                $html = '<div class="column left">
+                            <h2>Cine seleccionado: '.$cinema_name.'</h2><hr />
+                            <div class="image"><img src="../img/sala1.jpg" alt="'.$cinema_name.'" /></div>
+                            <p>Dirección: '.$cinema_address.'</p>
+                            <p>Teléfono: '.$cinema_tlf.'</p>
+                        </div>
+                        <div class="column right">
+                            <h2>Seleccione una Película y una Sesión</h2><hr />
+                                <h3>Películas</h3>        
+                                '.$filmsListHTML.'
+                                <h3>Sesiones</h3>
+                                <select>
+                                    <option value="" selected>Primero selecione una película.</option>
+                                <select>
+                        </div>';
+
+            } else {
+                $html = '<h1>No existe el cine.</h1>';
+                $pay = false;
+            }
         } else {
             $html = '<h1>No se ha encontrado película ni cine.</h1>';
             $pay = false;
@@ -179,6 +239,11 @@ class FormSelectCinemaSession extends Form {
         $cinema = $this->test_input($datos['cinemas']) ?? null;
         if ( empty($cinema) ) {
             $result['cinemas'] = "Selecciona un cine.";
+        }
+
+        $films = $this->test_input($datos['films']) ?? null;
+        if ( empty($films) ) {
+            $result['films'] = "Selecciona una película.";
         }
 
         $session = $this->test_input($datos['sessions']) ?? null;

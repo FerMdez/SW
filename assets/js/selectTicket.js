@@ -11,24 +11,28 @@ window.onload = function(){
     }
 }
 
+var select_ = document.getElementById("select_film");
+select_.onchange = function(){
+    location.href += "&film=" + $('select[id=films]').val();
+}
+
 // Método 2: enviar una petición AJAX con POST. ==> (NO FUNCIONA, PERO LA IDEA ERA HACERLO ASÍ PARA EVITAR REFRESCAR LA PÁGINA Y LLENAR LA URL)
 /*
 $(document).ready(function(){
-	$("#select_cinema_session").change(function(){
+	$("#select_cinema").change(function(){
         var cinema =  $('select[id=cinemas]').val();
         //console.log($('select[id=cinemas]').val());
+
         $.ajax({
-            url         : 'index.php',
-            type        : 'POST',
-            dataType    : 'text',
-            data        : 'cinema='+cinema,
-            cache       : false,
-            async       : false,
-            success: function(data){
+            url         : "index.php",
+            type        : "post",
+            dataType    : "html",
+            data        : "",
+            success: function(response){
+                $("#cinemas > option[value="+ cinema +"]").attr("selected", true);
                 console.log(cinema);
             },
-            error: function(response)
-            {
+            error: function(response){
                 console.log(response + ' ==> Error al seleccionar el cine')
             }
         });

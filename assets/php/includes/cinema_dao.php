@@ -34,7 +34,7 @@
 		}
 
 		//Returns a  film data .
-		public function GetCinema($name,$direction){
+		public function GetCinema($name, $direction){
 			$sql = sprintf( "SELECT * FROM cinema WHERE cinema.name = '%s'AND cinema.direction='%s'", $name,$direction );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;
@@ -101,6 +101,24 @@
 			$resul->free();
 
 			return $sessions;
+		}
+
+		//Get films associated with a cinema.
+		public function getFilms($id){
+			include_once('film_dao.php');
+			$film = new Film_DAO("complucine");
+
+			$sql = sprintf( " SELECT DISTINCT * FROM film WHERE film.id in 
+								(SELECT session.idfilm FROM session JOIN cinema ON session.idcinema = cinema.id WHERE cinema.id = '%d'); ", $id);
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			$films = null;
+			while($fila = $resul->fetch_assoc()){
+				$films[] = $film->loadFilm($fila["id"], $fila["tittle"], $fila["duration"], $fila["language"], $fila["description"], $fila["img"]);
+			}
+			$resul->free();
+
+			return $films;
 		}
 	    
 		//Create a new film Data Transfer Object.

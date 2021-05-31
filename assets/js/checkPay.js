@@ -157,7 +157,7 @@ $(document).ready(function() {
             $("#codeValid").show();
             $("#codeInvalid").hide();
             code[0].setCustomValidity("");
-        } else if(code.val().length > 0 ){
+        } else if(code.val().length > 0 && data === "!avaliable" ){
             $("#codeValid").hide();
             $("#codeInvalid").show();
             code[0].setCustomValidity("El código promocional no es válido.");
