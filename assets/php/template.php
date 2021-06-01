@@ -484,18 +484,20 @@
         $directions = array();
         $phones = array();
 
-        if(is_array($cinemas)){
+        if(!is_array($cinemas)){
+            $reply = "<h2>No hay cines actualmentes</h2>";
+        }
+        else{
             foreach($cinemas as $key => $value){
                 $ids[$key] = $value->getId();
                 $names[$key] = $value->getName();
                 $directions[$key] = $value->getDirection();
                 $phones[$key] = $value->getPhone();
             }
-        }
-
+        
         switch($this->page){
             case "Nuestros Cines":
-                if(is_array($cinemas)){
+
                 for($i = 0; $i < count($cinemas); $i++){
                     if($i%2 === 0){
                         if($i != 0) $reply .= "</div>
@@ -524,64 +526,57 @@
                     ";
                 }
                 $reply .= "</div>\n";
-                }
                 break;
             case "Panel de Administrador":
-                $reply .= "<div class='row'>
-                    <div class='column side'></div>
-                    <div class='column middle'>
-                        <table class='alt'>
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nombre</th>
-                            <th>Direccion</th>
-                            <th>Telefono</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        "; 
-                if(is_array($cinemas)){      
-                    for($i = 0; $i < count($cinemas); $i++){
-                        $reply .= '<tr>
-                                <td>'. $ids[$i] .'</td>
-                                <td>'. $names[$i] .'</td>
-                                <td>'. $directions[$i] .'</td>
-                                <td>'. $phones[$i] .'</td>
-                                <td>
-                                    <form method="post" action="index.php?state=mc">
-                                        <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                        <input  name="name" type="hidden" value="'.$names[$i].'">
-                                        <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                        <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                        <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
-                                    </form> 
-                                </td> 
-                                <td> 
-                                    <form method="post" action="index.php?state=mc">
-                                        <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                        <input  name="name" type="hidden" value="'.$names[$i].'">
-                                        <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                        <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                        <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
-                                    </form> 
-                                </td> 
-                            </tr>
-                            '; 
-                    } 
-                }  
-                $reply .='</tbody>
-                            </table>
-                        </div>
-                        <div class="column side"></div>
-                    ';
+                    $reply .= "<div class='row'>
+                        <div class='column side'></div>
+                        <div class='column middle'>
+                            <ul class='tablelist col6'> 
+                                <li>Id</li>
+                                <li>Nombre</li>
+                                <li>Dirección</li>
+                                <li>Teléfono</li>
+                                <li>Editar</li>
+                                <li>Eliminar</li>
+                            "; 
+      
+                        for($i = 0; $i < count($cinemas); $i++){
+                            $reply .= '
+                                    <li>'. $ids[$i] .'</li>
+                                    <li>'. $names[$i] .'</li>
+                                    <li>'. $directions[$i] .'</li>
+                                    <li>'. $phones[$i] .'</li>
+                                    <li>
+                                        <form method="post" action="index.php?state=mc">
+                                            <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                            <input  name="name" type="hidden" value="'.$names[$i].'">
+                                            <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                            <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                            <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
+                                        </form> 
+                                    </li> 
+                                    <li> 
+                                        <form method="post" action="index.php?state=mc">
+                                            <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                            <input  name="name" type="hidden" value="'.$names[$i].'">
+                                            <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                            <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                            <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
+                                        </form> 
+                                    </li> 
+                                
+                                '; 
+                        } 
+                    $reply .='</ul>
+                            </div>
+                            <div class="column side"></div>
+                        ';
                 break;
             
             default:
                 break;
-
+         }
         }
-
         return $reply;
     }
 

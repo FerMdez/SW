@@ -98,7 +98,10 @@
             $usernames = array();
             $email = array();
             $rol = array();
-            if(is_array($managers)){  
+            if(!is_array($managers)){ 
+            $reply = "<h2> No hay ningun manager</h2>";
+            }
+            else{
                 foreach($managers as $key => $value){
                     $ids[$key] = $value->getId();
                     $idscinemas[$key] = $value->getIdcinema();
@@ -106,38 +109,35 @@
                     $email[$key] = $value->getEmail();
                     $rol[$key] = $value->getRoll();
                 }
-            }
+            
             $reply= "<div class='row'>
                     <div class='column side'></div>
                     <div class='column middle'>
-                        <table class='alt'>
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>IdCinema</th>
-                            <th>Nombre</th>
-                            <th>Email</th>
-                            <th>Rol</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                        <ul class ='tablelist col7'>
+                            <li class='title'>Id</li>
+                            <li class='title'>IdCinema</li>
+                            <li class='title'>Nombre</li>
+                            <li class='title'>Email</li>
+                            <li class='title'>Rol</li>
+                            <li class='title'>Editar</li>
+                            <li class='title'>Eliminar</li>
                         "; 
-            if(is_array($managers)){        
+                  
                 for($i = 0; $i < count($managers); $i++){
-                    $reply.= '<tr>
-                            <td>'. $ids[$i] .'</td>
-                            <td>'. $idscinemas[$i] .'</td>
-                            <td>'. $usernames[$i] .'</td>
-                            <td>'. $email[$i] .'</td>
-                            <td>'. $rol[$i] .'</td>
-                            <td>
+                    $reply.= '
+                            <li>'. $ids[$i] .'</li>
+                            <li>'. $idscinemas[$i] .'</li>
+                            <li>'. $usernames[$i] .'</li>
+                            <li>'. $email[$i] .'</li>
+                            <li>'. $rol[$i] .'</li>
+                            <li>
                                 <form method="post" action="index.php?state=mg">
                                     <input  name="id" type="hidden" value="'.$ids[$i].'">
                                     <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
                                     <input type="submit" id="submit" value="Editar" name="edit_manager" class="primary" />
                                 </form> 
-                            </td> 
-                            <td> 
+                            </li> 
+                            <li> 
                                 <form method="post" action="index.php?state=mg">
                                     <input  name="id" type="hidden" value="'.$ids[$i].'">
                                     <input  name="idcinema" type="hidden" value="'.$idscinemas[$i].'">
@@ -146,17 +146,16 @@
                                     <input  name="rol" type="hidden" value="'.$rol[$i].'">
                                     <input type="submit" id="submit" value="Eliminar" name="delete_manager" class="primary" />
                                 </form> 
-                            </td> 
-                        </tr>
+                            </li> 
                         '; 
                 } 
-            }
-            $reply.='</tbody>
-                    </table>
+            
+            $reply.='</ul>
                 </div>
                 <div class="column side"></div>
             </div>
             ';
+            }
             return $reply;
         }
         static function showAddBotton() {
@@ -260,7 +259,10 @@
             $codes = array();
             $actives = array();
     
-            if(is_array($promos)){ 
+            if(!is_array($promos)){ 
+             $reply = "<h2> No hay promociones </h2>";
+            }
+            else{
                 foreach($promos as $key => $value){
                     $ids[$key] = $value->getId();
                     $tittles[$key] = $value->getTittle();
@@ -268,32 +270,27 @@
                     $codes[$key] = $value->getCode();
                     $actives[$key] = $value->getActive();
                 }
-            }
             
              $reply= "<div class='row'>
-                    
-                        <div class='column middle'>
-                            <table class='alt'>
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Título</th>
-                                <th>Descripcion</th>
-                                <th>Código</th>
-                                <th>Activo</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+                     <div class='column middle'>
+                        <ul class='tablelist col7'>   
+                                <li class='title'>Id</li>
+                                <li class='title'>Título</li>
+                                <li class='title'>Descripcion</li>
+                                <li class='title'>Código</li>
+                                <li class='title'>Activo</li>
+                                <li class='title'>Editar</li>
+                                <li class='title'>Eliminar</li>
                             "; 
-            if(is_array($promos)){         
+                 
             for($i = 0; $i < count($promos); $i++){
-                $reply.= '<tr>
-                            <td>'. $ids[$i] .'</td>
-                            <td>'. $tittles[$i] .'</td>
-                            <td>'. $descriptions[$i] .'</td>
-                            <td>'. $codes[$i] .'</td>
-                            <td>'. $actives[$i] .'</td>
-                            <td>
+                $reply.= '
+                            <li>'. $ids[$i] .'</li>
+                            <li>'. $tittles[$i] .'</li>
+                            <li>'. $descriptions[$i] .'</li>
+                            <li>'. $codes[$i] .'</li>
+                            <li>'. $actives[$i] .'</li>
+                            <li>
                                 <form method="post" action="index.php?state=mp">
                                     <input  name="id" type="hidden" value="'.$ids[$i].'">
                                     <input  name="tittle" type="hidden" value="'.$tittles[$i].'">
@@ -302,8 +299,8 @@
                                     <input  name="active" type="hidden" value="'.$actives[$i].'">
                                     <input type="submit" id="submit" value="Editar" name="edit_promotion" class="primary" />
                                 </form> 
-                            </td> 
-                            <td> 
+                           
+                            <li> 
                                 <form method="post" action="index.php?state=mp">
                                     <input  name="id" type="hidden" value="'.$ids[$i].'">
                                     <input  name="tittle" type="hidden" value="'.$tittles[$i].'">
@@ -312,17 +309,18 @@
                                     <input  name="active" type="hidden" value="'.$actives[$i].'">
                                     <input type="submit" id="submit" value="Eliminar" name="delete_promotion" class="primary" />
                                 </form> 
-                            </td> 
-                        </tr>
+                            </li> 
+                        </li>
                     '; 
             } 
-            }
-             $reply.='</tbody>
-                         </table>
+                    
+             $reply.='</ul>
+                        
                         </div>
                         <div class="column side"></div>
                     </div> 
             ';
+            }
               return  $reply ;
         }
 
