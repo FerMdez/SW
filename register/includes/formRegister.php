@@ -93,18 +93,23 @@ class FormRegister extends Form {
                     if ($this->user->data_seek(0)) {
                         $result[] = "El email ya está registrado.";
                     } else {
-                        $bd->createUser("", $nombre, $email, $password, "user");
-                        $this->user = $bd->selectUser($nombre, $password);
-                        if ($this->user) {
-                            $this->user->setPass(null);
-                            $_SESSION["user"] = serialize($this->user);
-                            $_SESSION["nombre"] = $this->user->getName();
-                            $_SESSION["rol"] = $this->user->getRol();
-                            $_SESSION["login"] = true;
-                            $img = "../img/users/user.jpg"; //USER_PICS
-                            $profile_img = "../img/users/".$nombre.".jpg";
-                            copy($img, $profile_img);
-                            $result = ROUTE_APP."register/register.php";
+                        if($bd->createUser("", $nombre, $email, $password, "user")){
+                            $this->user = $bd->selectUser($nombre, $password);
+                            if ($this->user) {
+                                $this->user->setPass(null);
+                                $_SESSION["user"] = serialize($this->user);
+                                $_SESSION["nombre"] = $this->user->getName();
+                                $_SESSION["rol"] = $this->user->getRol();
+                                $_SESSION["login"] = true;
+                                $img = "../img/users/user.jpg"; //USER_PICS
+                                $profile_img = "../img/users/".$nombre.".jpg";
+                                copy($img, $profile_img);
+                                $result = ROUTE_APP."register/register.php";
+                            } else {
+                                $result[] = "Ha ocurrido un error al iniciar la sesión\nPero el usuario se creó correctamente.";
+                            }
+                        } else {
+                            $result[] = "Ha ocurrido un error al crear el usuario.";
                         }
                     }
                 }

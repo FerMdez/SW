@@ -47,8 +47,8 @@
 		public function createUser($id, $username, $email, $password, $rol){
 			$password = $this->encryptPass($password);
 
-			$sql = sprintf( "INSERT INTO users( id, username, email, passwd, rol) 
-								VALUES ( '%s', '%s', '%s', '%s', '%s')", 
+			$sql = sprintf( "INSERT INTO users ( id, username, email, passwd, rol) 
+								VALUES ( '%d', '%s', '%s', '%s', '%s')", 
 									$id, $username, $email, $password, $rol );
 			
 			$resul = mysqli_query($this->mysqli, $sql);
@@ -64,7 +64,6 @@
 			$sql = sprintf( "SELECT * FROM users WHERE username = '%s'", $username );
 			$resul = mysqli_query($this->mysqli, $sql);
 
-			$resul->data_seek(0);
 			$user = null;
 			while ($fila = $resul->fetch_assoc()) {
 				if($username === $fila['username'] && $this->verifyPass($password, $fila['passwd'])){
@@ -72,8 +71,8 @@
 				}
 			}
 
-			//mysqli_free_result($selectUser);
-			$resul->free();
+			mysqli_free_result($resul);
+			//$resul->free();
 
 			return $user;
 		}
