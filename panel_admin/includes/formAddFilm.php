@@ -100,7 +100,7 @@ class formAddFilm extends Form{
 				$finfo = new \finfo(FILEINFO_MIME_TYPE);
 				$mimeType = $finfo->file($_FILES['archivo']['tmp_name']);
 				$ok = preg_match('/image\/*./', $mimeType);
-				finfo_close($finfo);
+				//finfo_close($finfo);
 				
 				if ( $ok ) {
 					$tmp_name = $_FILES['archivo']['tmp_name'];
