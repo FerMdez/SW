@@ -36,7 +36,7 @@
                         <p>Sala: ".$purchase->getHallId()."</p>
                         <p>Asiento (Columna): ".$purchase->getRow()."</p>
                         <p>Asiento (Fila): ".$purchase->getColumn()."</p>
-                        <p>Hora de la Compra: ".$purchase->getTime()."</p>
+                        <p>Fecha de la Compra: ".$purchase->getTime()."</p>
                     </div>
                     ";
 

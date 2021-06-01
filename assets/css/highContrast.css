@@ -1,3 +1,7 @@
+/* Imports */
+@import url('manager.css');
+@import url('admin.css');
+
 /* Basic */
 * {
     box-sizing: border-box;
