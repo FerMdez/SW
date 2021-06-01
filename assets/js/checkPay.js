@@ -48,11 +48,8 @@ $(document).ready(function() {
     $("#card-number-0").change(function(){
         const cardNumber0 = $("#card-number-0");
         cardNumber0[0].setCustomValidity("");
-        cardNumber1[0].setCustomValidity("");
-        cardNumber2[0].setCustomValidity("");
-        cardNumber3[0].setCustomValidity("");
 
-        if(cardNumber0.val().length < 4){
+        if(cardNumber0.val().length === 4){
             $("#carNumberValid").show();
             $("#cardNumerInvalid").hide();
             cardNumber0[0].setCustomValidity("");
@@ -64,12 +61,9 @@ $(document).ready(function() {
     });
     $("#card-number-1").change(function(){
         const cardNumber1 = $("#card-number-1");
-        cardNumber0[0].setCustomValidity("");
         cardNumber1[0].setCustomValidity("");
-        cardNumber2[0].setCustomValidity("");
-        cardNumber3[0].setCustomValidity("");
 
-        if(cardNumber1.val().length < 4){
+        if(cardNumber1.val().length === 4){
             $("#carNumberValid").show();
             $("#cardNumerInvalid").hide();
             cardNumber1[0].setCustomValidity("");
@@ -81,12 +75,9 @@ $(document).ready(function() {
     });
     $("#card-number-2").change(function(){
         const cardNumber2 = $("#card-number-2");
-        cardNumber0[0].setCustomValidity("");
-        cardNumber1[0].setCustomValidity("");
         cardNumber2[0].setCustomValidity("");
-        cardNumber3[0].setCustomValidity("");
 
-        if(cardNumber2.val().length < 4){
+        if(cardNumber2.val().length === 4){
             $("#carNumberValid").show();
             $("#cardNumerInvalid").hide();
             cardNumber2[0].setCustomValidity("");
@@ -98,12 +89,9 @@ $(document).ready(function() {
     });
     $("#card-number-3").change(function(){
         const cardNumber3 = $("#card-number-3");
-        cardNumber0[0].setCustomValidity("");
-        cardNumber1[0].setCustomValidity("");
-        cardNumber2[0].setCustomValidity("");
         cardNumber3[0].setCustomValidity("");
 
-        if(cardNumber3.val().length < 4){
+        if(cardNumber3.val().length === 4){
             $("#carNumberValid").show();
             $("#cardNumerInvalid").hide();
             cardNumber3[0].setCustomValidity("");
