@@ -86,6 +86,102 @@
                     </div>'."\n";
         }
 
+        static function showHalls($idCinema) {
+            include_once('../assets/php/includes/hall.php');
+            include_once('../assets/php/includes/hall_dao.php');
+			$panel = '<div class="column side"></div>
+                <div class="column middle">';
+            $listhall = Hall::getListHalls($idCinema);
+            if(!$listhall){
+                $panel .= "<h2> No hay ninguna sala en este cine";
+            }else{
+            $panel .= '
+                <div class="row">
+                <ul class="tablelist col3">
+                    <li class="title"> Sala </li>
+                    <li class="title"> Asientos </li>
+                    <li class="title"> Sesión </li>
+                            '; 
+            $parity = "odd";
+            foreach($listhall as $hall){ 
+                $panel .='<div class="'.$parity.'">
+                                <li> '. $hall->getNumber().'</li>
+                                <li> '.$hall->getTotalSeats().' </li>
+                            </a>
+                            <a  href="?state=mc&cinema='.$idCinema.'number='. $hall->getNumber().'">
+                                <li> Sesiones </li>
+                            </a>
+                        </div>
+                        ';
+                $parity = ($parity == "odd") ? "even" : "odd";
+                }
+            $panel.='
+                </ul>';
+            }
+            $panel.='
+                </div>
+                <div class="column side"></div>';			
+            return $panel;
+
+        }
+
+       /* static function showSessions($idCinema, $hallNumber) {
+			//Session list
+			$panel .='	<div class = "column right">';
+			$sessions = Session::getListSessions($hall,$manager->getIdcinema(),$date);
+			
+			if($sessions) {
+				$panel .='
+					<form method="post" action="./?state=edit_session">
+						<table class="alt">
+							<thead>
+								<tr>
+									<th>Hora</th>
+									<th>Pelicula</th>
+									<th>Formato</th>
+									<th>Precio</th>
+								</tr>
+							</thead>
+							<tbody>'; 
+				
+				
+				foreach($sessions as $session){ 
+					$film = Session::getThisSessionFilm($session->getIdfilm());
+					$panel .='
+								<tr>
+									<td> '.date("H:i", strtotime( $session->getStartTime())).' </td>
+									<td> '. str_replace('_', ' ', $film["tittle"]) .' </td>
+									<td> '.$session->getFormat().' </td>
+									<td> '.$session->getSeatPrice().' </td>
+									<form method="post" action="./?state=edit_session">
+										<input  name="film" type="hidden" value="'.$session->getIdfilm().'">
+										<input  name="tittle" type="hidden" value="'.$film["tittle"].'">
+										<input  name="duration" type="hidden" value="'.$film["duration"].'">
+										<input  name="language" type="hidden" value="'.$film["language"].'">
+										<input  name="description" type="hidden" value="'.$film["description"].'">
+										<input  name="hall" type="hidden" value="'.$session->getIdhall().'">
+										<input  name="date" type="hidden" value="'.$session->getDate().'">
+										<input  name="start" type="hidden" value="'.$session->getStartTime().'">
+										<input  name="price" type="hidden" value="'.$session->getSeatPrice().'">
+										<input  name="format" type="hidden" value="'.$session->getFormat().'">	
+									<td> <input type="submit" id="submit" name ="edit_session"  value="Editar" class="primary" /> </td>
+									</form>
+								</tr>';
+					}
+				$panel.='
+							</tbody>
+						</table>
+					</form>';
+			} else {
+				$panel.=' <h3> No hay ninguna sesion </h3>';
+			}
+			$panel.='
+					<input type="submit" name="new_session" form="filter"  value="Añadir" class="button large" formaction="./?state=new_session">
+				</div>';
+			
+			return $panel;
+        }*/
+
 
         //Functions MANAGERS
         static function print_managers(){

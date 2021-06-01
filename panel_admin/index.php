@@ -16,8 +16,19 @@
                                     $reply=AdminPanel::deleteCinema();
                                 }                             
                                 else {
-                                    $reply=AdminPanel::addCinema();
-                                    $reply.= ($template->print_cinemas()); 
+                                    if(isset($_GET["cinema"])){
+                                       // $reply = AdminPanel::showHalls($_GET["cinema"]);
+                                       /* if(isset($_GET["number"])) {
+                                            $reply = AdminPanel::showHalls($_GET["cinema"], $_GET["number"]);
+                                        }
+                                        else { */
+                                            $reply = AdminPanel::showHalls($_GET["cinema"]);
+                                        //}
+                                    }
+                                    else {
+                                        $reply=AdminPanel::addCinema();
+                                        $reply.= ($template->print_cinemas()); 
+                                    }
                                 };  
                     break;
                     case 'mf': if(isset($_POST['edit_film'])) {
