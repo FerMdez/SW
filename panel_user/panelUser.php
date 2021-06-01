@@ -126,13 +126,13 @@
                     $filmDAO = new Film_DAO("complucine");
                     $film = $filmDAO->FilmData($session->getIdfilm());
 
-                    if($i%2 === 0){
-                        if($i != 0) $purchasesHTML .= '</div>
+                    if($i%3 === 0){
+                        if($i !== 0) $purchasesHTML .= '</div>
                         ';
-                        $purchasesHTML .= '<div class="column left">
+                        $purchasesHTML .= '<div class="column right">
                         ';
                     } else {
-                        if($i != 0) $purchasesHTML .= '</div>
+                        if($i !== 0) $purchasesHTML .= '</div>
                         ';
                         $purchasesHTML .= '<div class="column left">
                         ';
@@ -149,7 +149,8 @@
                                 <p>Sesión: '.$sessions[$i].'</p>
                                 <p>Asiento(Fila): '.$rows[$i].'</p>
                                 <p>Asiento(Columna): '.$columns[$i].'</p>
-                            </div>';
+                            </div>
+                        ';
                 }
             }
             

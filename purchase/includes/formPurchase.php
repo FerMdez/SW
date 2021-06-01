@@ -152,12 +152,15 @@ class FormPurchase extends Form {
         if (count($result) === 0) {
            if(isset($_SESSION["login"]) && $_SESSION["login"] == true){
                 $purchaseDAO = new PurchaseDAO("complucine");
-                $purchaseDAO->createPurchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), rand(1, $this->hall->getNumRows()), rand(1, $this->hall->getNumCol()), date("Y-m-d H:i:s"));
-                $purchase = new Purchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), rand(1, $this->hall->getNumRows()), rand(1, $this->hall->getNumCol()), strftime("%A %e de %B de %Y a las %H:%M"));
-                
-                $_SESSION["purchase"] = serialize($purchase);
-                $_SESSION["film_purchase"] = serialize($this->film);
-                $result = "resume.php";
+                if($purchaseDAO->createPurchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), rand(1, $this->hall->getNumRows()), rand(1, $this->hall->getNumCol()), date("Y-m-d H:i:s"))){
+                    $purchase = new Purchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), rand(1, $this->hall->getNumRows()), rand(1, $this->hall->getNumCol()), strftime("%A %e de %B de %Y a las %H:%M"));
+
+                    $_SESSION["purchase"] = serialize($purchase);
+                    $_SESSION["film_purchase"] = serialize($this->film);
+                    $result = "resume.php";
+                } else {
+                    $result[] = "Error al realizar la compra.";
+                }
            } else {
                 $purchase = new Purchase("null", $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), rand(1, $this->hall->getNumRows()), rand(1, $this->hall->getNumCol()), strftime("%A %e de %B de %Y a las %H:%M"));
                 $_SESSION["purchase"] = serialize($purchase);
