@@ -104,7 +104,7 @@ class FormSelectCinemaSession extends Form {
                         $count = 0;
                         $sessionsListHTML = '<select name="sessions" id="sessions"><pre>'.$errorSession.'</pre>';
                         foreach ($sessionsIT as $value) {
-                            if($this->_TODAY <= $value["DATE"]){
+                            if(strtotime($this->_TODAY) <= strtotime($value["DATE"])){
                                 if($value === reset($sessionsIT)){
                                     $sessionsListHTML .= '<option value="'.$value["sID"].'" >Fecha: '.$value["DATE"].' | Hora: '.$value["HOUR"].' | Sala: '.$value["HALL"].'</option>';
                                 } else {
