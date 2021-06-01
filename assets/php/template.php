@@ -485,7 +485,7 @@
         $phones = array();
 
         if(!is_array($cinemas)){
-            $reply = "<h2>No hay cines actualmentes</h2>";
+            $reply = "<h2>No hay cines actualmente</h2>";
         }
         else{
             foreach($cinemas as $key => $value){
