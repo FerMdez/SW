@@ -529,48 +529,50 @@
                 break;
             case "Panel de Administrador":
                     $reply .= "<div class='row'>
-                        <div class='column side'></div>
-                        <div class='column middle'>
+                            <div class='column side'></div>
+                            <div class='column middle'>
                             <ul class='tablelist col6'> 
-                                <li>Id</li>
-                                <li>Nombre</li>
-                                <li>Dirección</li>
-                                <li>Teléfono</li>
-                                <li>Editar</li>
-                                <li>Eliminar</li>
-                            "; 
-      
+                                <li class='title'>Id</li>
+                                <li class='title'>Nombre</li>
+                                <li class='title'>Dirección</li>
+                                <li class='title'>Teléfono</li>
+                                <li class='title'>Editar</li>
+                                <li class='title'>Eliminar</li>
+                            ";
+                        $parity = "odd";
                         for($i = 0; $i < count($cinemas); $i++){
                             $reply .= '
-                                    <li>'. $ids[$i] .'</li>
-                                    <li>'. $names[$i] .'</li>
-                                    <li>'. $directions[$i] .'</li>
-                                    <li>'. $phones[$i] .'</li>
-                                    <li>
-                                        <form method="post" action="index.php?state=mc">
-                                            <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                            <input  name="name" type="hidden" value="'.$names[$i].'">
-                                            <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                            <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                            <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
-                                        </form> 
-                                    </li> 
-                                    <li> 
-                                        <form method="post" action="index.php?state=mc">
-                                            <input  name="id" type="hidden" value="'.$ids[$i].'">
-                                            <input  name="name" type="hidden" value="'.$names[$i].'">
-                                            <input  name="direction" type="hidden" value="'.$directions[$i].'">
-                                            <input  name="phone" type="hidden" value="'.$phones[$i].'">
-                                            <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
-                                        </form> 
-                                    </li> 
-                                
+                                    <div class="'.$parity.'">
+                                    <a class="h2long" href="index.php?state=mc&cinema='.$ids[$i].'">
+                                        <li>'. $ids[$i] .'</li>
+                                        <li>'. $names[$i] .'</li>
+                                        <li>'. $directions[$i] .'</li>
+                                        <li>'. $phones[$i] .'</li>
+                                    </a>
+                                        <li>
+                                            <form method="post" action="index.php?state=mc">
+                                                <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                                <input  name="name" type="hidden" value="'.$names[$i].'">
+                                                <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                                <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                                <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
+                                            </form> 
+                                        </li> 
+                                        <li> 
+                                            <form method="post" action="index.php?state=mc">
+                                                <input  name="id" type="hidden" value="'.$ids[$i].'">
+                                                <input  name="name" type="hidden" value="'.$names[$i].'">
+                                                <input  name="direction" type="hidden" value="'.$directions[$i].'">
+                                                <input  name="phone" type="hidden" value="'.$phones[$i].'">
+                                                <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
+                                            </form> 
+                                        </li> 
+                                </div>
                                 '; 
+                                $parity = ($parity == "odd") ? "even" : "odd";
                         } 
-                    $reply .='</ul>
-                            </div>
-                            <div class="column side"></div>
-                        ';
+                    $reply .=' </div>
+                    <div class="column side"></div>';
                 break;
             
             default:
