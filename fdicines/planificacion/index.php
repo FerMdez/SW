@@ -243,9 +243,15 @@
                     <tr>
                         <td>Entrega Final</td>
                         <td>9 de Junio de 2021</td>
-                        <td>EN PROCESO</td>
+                        <td>ENTREGADO</td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td>100%</td>
+                    </tr>
+                </tfoot>
             </table>
         </section>
 

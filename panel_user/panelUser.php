@@ -90,6 +90,8 @@
         //User purchase history.
         static function purchases(){
             require_once('../assets/php/includes/purchase_dao.php');
+            include_once('../assets/php/includes/cinema_dao.php');
+            include_once('../assets/php/includes/hall_dao.php');
 
             $purchasesHTML = '';
 
@@ -111,7 +113,13 @@
                     $columns[$key] = $value->getColumn();
                     $dates[$key] = $value->getTime();
                 }
+
                 for($i = 0; $i < count($purchases); $i++){
+                    $cinemaDAO = new Cinema_DAO("complucine");
+                    $cinema = $cinemaDAO->cinemaData($cinemas[$i]);
+                    $hallDAO = new HallDAO("complucine");
+                    $hall = $hallDAO->HallData($halls[$i]);
+
                     if($i%2 === 0){
                         if($i != 0) $purchasesHTML .= '</div>
                         ';
@@ -124,8 +132,9 @@
                         ';
                     }
                     $purchasesHTML .= '<h1>Compara realizada el: '.$dates[$i].'</h1><hr />
-                                        <p>Cine: '.$cinemas[$i].'</p>
-                                        <p>Sala: '.$halls[$i].'</p>
+                                        <p>Cine: '.$cinema->getName().'</p>
+                                        <p>Dirección: '.$cinema->getDirection().'</p>
+                                        <p>Sala: '.$hall->getNumber().'</p>
                                         <p>Sesión: '.$sessions[$i].'</p>
                                         <p>Asiento(Fila): '.$rows[$i].'</p>
                                         <p>Asiento(Columna): '.$columns[$i].'</p>';

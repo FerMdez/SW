@@ -1,5 +1,5 @@
 <?php
-	include_once($prefix.'assets/php/includes/seat_dao.php');
+	include_once('seat_dao.php');
 
     class Seat{
 
