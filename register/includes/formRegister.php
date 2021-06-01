@@ -26,6 +26,7 @@ class FormRegister extends Form {
         $errorEmail = self::createMensajeError($errores, 'new_email', 'span', array('class' => 'error'));
         $errorPassword = self::createMensajeError($errores, 'new_pass', 'span', array('class' => 'error'));
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
+        $errorVerify = self::createMensajeError($errores, 'terms', 'span', array('class' => 'error'));
 
         $html = "<div class='row'>
                             <fieldset id='datos_personales'><pre>".$htmlErroresGlobales."</pre>
@@ -39,7 +40,7 @@ class FormRegister extends Form {
                                 <input type='password' name='repass' id='repass' value='' placeholder='Repita la contraseña' required/><pre>".$errorPassword2."</pre>
                                 <span id='repassValid'>&#x2714;</span></span><span id='repassInvalid'>&#x274C;</span>
                             </fieldset>
-                            <div class='verify'>
+                            <div class='verify'><pre>".$errorVerify."</pre>
                                 <input type='checkbox' id='checkbox' name='terms' required>
                                 <label for='terms'><a href ='../fdicines/terms_conditions/' target='_blank'>Marque esta casilla para verificar que ha leído nuestros términos y condiciones del servicio.</a></label>
                             </div>
@@ -58,7 +59,7 @@ class FormRegister extends Form {
         $nombre = $this->test_input($datos['new_name']) ?? null;
         $nombre = strtolower($nombre);
         if ( empty($nombre) || mb_strlen($nombre) < 3 || mb_strlen($nombre) > 15 ) {
-            $result['new_name'] = "El nombre tiene que tener\n una longitud de al menos\n 3 caracteres\n y menos de 15 caracteres.";
+            $result['new_name'] = "El nombre tiene que tener\nuna longitud de al menos\n3 caracteres\ny menos de 15 caracteres.";
         }
 
         $email = $this->test_input($datos['new_email']) ?? null;
@@ -68,11 +69,16 @@ class FormRegister extends Form {
         
         $password = $this->test_input($datos['new_pass']) ?? null;
         if ( empty($password) || !mb_ereg_match(self::HTML5_PASS_REGEXP, $password) ) {
-            $result['new_pass'] = "El password tiene que tener\n una longitud de al menos\n 4 caracteres 1 mayúscula y 1 número.";
+            $result['new_pass'] = "El password tiene que tener\nuna longitud de al menos\n 4 caracteres 1 mayúscula y 1 número.";
         }
         $password2 = $this->test_input($datos['repass']) ?? null;
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
             $result['repass'] = "Los passwords deben coincidir";
+        }
+
+        $verify = $this->test_input($datos['terms']) ?? null;
+        if ( empty($verify) ) {
+            $result['terms'] = "Debe confirmar la casilla de\ntérminos y condiciones.";
         }
         
         if (count($result) === 0) {

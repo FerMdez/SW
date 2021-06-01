@@ -22,9 +22,10 @@ class FormDeleteAccount extends Form {
         $errorEmail = self::createMensajeError($errores, 'email', 'span', array('class' => 'error'));
         $errorPassword = self::createMensajeError($errores, 'pass', 'span', array('class' => 'error'));
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
+        $errorVerify = self::createMensajeError($errores, 'verify', 'span', array('class' => 'error'));
 
         $html = "<div class='row'>
-                            <fieldset id='cuenta_usuario'><pre>".$htmlErroresGlobales."</pre>
+                            <fieldset id='cuenta_usuario'><pre>".$htmlErroresGlobales."</pre><pre>".$errorVerify."</pre>
                                 <legend>Datos de la cuenta</legend>
                                 <input type='text' name='name' id='name' ".$nameValue." placeholder='Nombre de usuario' required/><pre>".$errorNombre."</pre>
                                 <input type='text' name='email' id='email' ".$emailValue." placeholder='Email de usuario' required/><pre>".$errorEmail."</pre>
@@ -38,7 +39,7 @@ class FormDeleteAccount extends Form {
                             </div>
                             <div class='actions'>
                                 <!-- <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' /> -->
-                                <button class='danger' onclick='confirmDelete()'>Eliminar Cuenta de Usuario</button>
+                                <button class='danger' onclick='confirmDelete(event)'>Eliminar Cuenta de Usuario</button>
                             </div>
                         </div>";
 
@@ -67,6 +68,11 @@ class FormDeleteAccount extends Form {
         if ( empty($password2) || strcmp($password, $password2) !== 0 ) {
             $result['repass'] = "Los passwords deben coincidir.";
         }
+
+        $verify = $this->test_input($datos['verify']) ?? null;
+        if ( empty($verify) ) {
+            $result['verify'] = "Debe confirmar la casilla de verificación.";
+        }
         
         if (count($result) === 0) {
            $bd = new UserDAO("complucine");
@@ -77,15 +83,10 @@ class FormDeleteAccount extends Form {
                 if( (unserialize($_SESSION['user'])->getId() === $user->getId()) && ($nombre === $user->getName())
                         && ($email === $user->getEmail()) && ($bd->verifyPass($password, $user->getPass())) ){
 
-                    if(!isset($_GET['reply'])){
                         $bd->deleteUserAccount($user->getId());
                         unset($_SESSION);
                         session_destroy();
-                        
                         $result = ROUTE_APP;
-                    } else {
-                        $result[] = "Operación cancelada.";
-                    }
                     
                 } else {
                     $result[] = "Los datos introducidos\nno son válidos.";

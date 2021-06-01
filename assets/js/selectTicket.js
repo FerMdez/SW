@@ -5,16 +5,29 @@
 
 // Método 1: recargar la página y enviar un GET.
 window.onload = function(){
+    if(!select_cinema()) select_film();
+}
+
+function select_cinema(){
     var select = document.getElementById("select_cinema");
-    select.onchange = function(){
-        location.href += "&cinema=" + $('select[id=cinemas]').val();
+    console.log(select);
+    if(select != undefined){
+        select.onchange = function(){
+            location.href += "&cinema=" + $('select[id=cinemas]').val();
+        }
+        return true;
+    } else {
+        return false;
     }
 }
 
-var select_ = document.getElementById("select_film");
-select_.onchange = function(){
-    location.href += "&film=" + $('select[id=films]').val();
+function select_film(){
+    var select_ = document.getElementById("select_film");
+    select_.onchange = function(){
+        location.href += "&film=" + $('select[id=films]').val();
+    }
 }
+
 
 // Método 2: enviar una petición AJAX con POST. ==> (NO FUNCIONA, PERO LA IDEA ERA HACERLO ASÍ PARA EVITAR REFRESCAR LA PÁGINA Y LLENAR LA URL)
 /*

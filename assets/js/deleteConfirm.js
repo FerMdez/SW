@@ -3,10 +3,11 @@
  * CompluCine - FDI-cines
  */
 
-function confirmDelete() {
+function confirmDelete(e) {
 	if(confirm("¿Está seguro de que desea eliminar su cuenta de usuario?\nEsta acción no se puede deshacer.")){
-		document.formDeleteAccount.submit();
+		document.getElementById("formDeleteAccount1").submit();
 	} else {
-		location.href = "./";
+		//location.href = "./";
+		e.preventDefault();
 	}
 }
