@@ -8,8 +8,10 @@
 	require_once('../assets/php/includes/user.php');
 
 	if($_SESSION["login"] && $_SESSION["lastRol"] === "admin" && $_SESSION["rol"] === "manager") {
-		$manager = false;
 		$manager = new Manager(null, null, null, null, null);
+		if(isset($_POST['changecinema']))$_SESSION['cinema'] = $_POST['cinema'];
+		if(!is_null($_SESSION['cinema'])) $manager->setIdcinema($_SESSION['cinema']);
+		
 
 
 		$state = isset($_GET['state']) ? $_GET['state'] : '';

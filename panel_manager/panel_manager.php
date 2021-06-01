@@ -40,12 +40,9 @@
 		static function welcomeAdmin($manager) {
 			$cinemaList = new Cinema_DAO('complucine');
 			$cinemas = $cinemaList->allCinemaData();	
-			$cinema = 1;
+			$cinema;
 
             $name = strtoupper($_SESSION["nombre"]);
-			if(isset($_POST['change'])){
-				$manager->setIdcinema($_POST['cinema']);
-			}
 
 			if($manager->getIdcinema() != null) $cinema = strtoupper( $manager->getIdcinema());
 
@@ -67,7 +64,7 @@
 							";
 					}
 				}
-		$panel .= '				<input type="submit" name="change" value="Cambiar" /><br>
+		$panel .= '				<input type="submit" name="changecinema" value="Cambiar" /><br>
 							</select>
 						</form>
 					</div>';
