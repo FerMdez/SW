@@ -1,5 +1,5 @@
 <?php
-	include_once($prefix.'assets/php/includes/session_dao.php');
+	include_once('session_dao.php');
 
     class Session{
 

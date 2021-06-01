@@ -92,6 +92,8 @@
             require_once('../assets/php/includes/purchase_dao.php');
             include_once('../assets/php/includes/cinema_dao.php');
             include_once('../assets/php/includes/hall_dao.php');
+            include_once('../assets/php/includes/session_dao.php');
+            include_once('../assets/php/includes/film_dao.php');
 
             $purchasesHTML = '';
 
@@ -119,6 +121,10 @@
                     $cinema = $cinemaDAO->cinemaData($cinemas[$i]);
                     $hallDAO = new HallDAO("complucine");
                     $hall = $hallDAO->HallData($halls[$i]);
+                    $sessionDAO = new SessionDAO("complucine");
+                    $session = $sessionDAO->sessionData($sessions[$i]);
+                    $filmDAO = new Film_DAO("complucine");
+                    $film = $filmDAO->FilmData($session->getIdfilm());
 
                     if($i%2 === 0){
                         if($i != 0) $purchasesHTML .= '</div>
@@ -132,19 +138,25 @@
                         ';
                     }
                     $purchasesHTML .= '<h1>Compara realizada el: '.$dates[$i].'</h1><hr />
-                                        <p>Cine: '.$cinema->getName().'</p>
-                                        <p>Dirección: '.$cinema->getDirection().'</p>
-                                        <p>Sala: '.$hall->getNumber().'</p>
-                                        <p>Sesión: '.$sessions[$i].'</p>
-                                        <p>Asiento(Fila): '.$rows[$i].'</p>
-                                        <p>Asiento(Columna): '.$columns[$i].'</p>';
+                            <div class="column left">
+                                <p>Película: '.str_replace('_', ' ', strtoupper($film->getTittle())).'</p>
+                                <p>Idioma: '.$film->getLanguage().'</p>
+                                <p>Cine: '.$cinema->getName().'</p>
+                                <p>Dirección: '.$cinema->getDirection().'</p>
+                            </div>
+                            <div class="column right">
+                                <p>Sala: '.$hall->getNumber().'</p>
+                                <p>Sesión: '.$sessions[$i].'</p>
+                                <p>Asiento(Fila): '.$rows[$i].'</p>
+                                <p>Asiento(Columna): '.$columns[$i].'</p>
+                            </div>';
                 }
             }
             
-            return $reply = '<div class="code info">
+            return $reply = '<div class="code">
                             <h2>Historial de compras</h2><hr />
                             '.$purchasesHTML.'
-                        </div>'."\n";
+                        </div>';
         }
 
         //User payment details
