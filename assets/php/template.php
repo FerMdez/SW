@@ -529,8 +529,6 @@
                 break;
             case "Panel de Administrador":
                     $reply .= "<div class='row'>
-                            <div class='column side'></div>
-                            <div class='column middle'>
                             <ul class='tablelist col6'> 
                                 <li class='title'>Id</li>
                                 <li class='title'>Nombre</li>
@@ -571,8 +569,7 @@
                                 '; 
                                 $parity = ($parity == "odd") ? "even" : "odd";
                         } 
-                    $reply .=' </div>
-                    <div class="column side"></div>';
+                    $reply .=' </div>';
                 break;
             
             default:
