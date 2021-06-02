@@ -68,10 +68,10 @@ class FormSelectSeat extends Form {
                             ';
                 for($j = 1; $j <= $cols; $j++){
                     if($seats_map[$i][$j] >= 0){
-                        $html .= '<td> <input type="checkbox" class="check_box" name="checkbox'.$i.$j.'" value="'.$seats_map[$i][$j].'" id="checkbox'.$i.$j.'" checked> <label for="checkbox'.$i.$j.'"> </td>
+                        $html .= '<td> <input type="checkbox" class="check_box" name="checkbox'.$i.$j.'" value="'.$seats_map[$i][$j].'" id="checkbox'.$i.$j.'" /> <label for="checkbox'.$i.$j.'"> </td> <!-- checked -->
                             ';}
                     else {
-                        $html .= '<td> <input type="checkbox" class="check_box" name="checkbox'.$i.$j.'" value="'.$seats_map[$i][$j].'" id="checkbox'.$i.$j.'" disabled> <label for="checkbox'.$i.$j.'"> </td>
+                        $html .= '<td> <input type="checkbox" class="check_box" name="checkbox'.$i.$j.'" value="'.$seats_map[$i][$j].'" id="checkbox'.$i.$j.'" disabled /> <label for="checkbox'.$i.$j.'"> </td>
                             ';}
                 }
                     $html .='</tr>';

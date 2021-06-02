@@ -70,10 +70,13 @@
         $page = $this->page;
         $prefix = $this->prefix;
 
+        $extraCSS = "";
+        if($page === "Comprar Entrada") $extraCSS = "\n<link id='estilo' rel='stylesheet' type='text/css' href='{$prefix}assets/css/seat.css'>";
+
         echo"<head>
         <title>CompluCine | {$page}</title>
         <meta charset='utf-8' />
-        <link id='estilo' rel='stylesheet' type='text/css' href='{$prefix}assets/css/main.css'>
+        <link id='estilo' rel='stylesheet' type='text/css' href='{$prefix}assets/css/main.css'>{$extraCSS}
         <noscript><h1>Esta página requiere JavaScript para su correcto funcionamiento. 
             Compruebe si JavaScript está deshabilitado en su navegador.</h1></noscript>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
