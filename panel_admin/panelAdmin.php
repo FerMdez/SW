@@ -441,7 +441,7 @@
                                         <div class='code info'>
                                             <h1> ¡ATENCIÓN! </h1><hr />
                                             <p>Está viendo la web como un Usuario NO Registrado.</p>
-                                            <a href=''><button>Cerrar Mensaje</button></a>
+                                            <a href='".$prefix."'><button>Cerrar Mensaje</button></a>
                                         </div>
                                     </div>
                                     <div class='column side'></div>
@@ -458,7 +458,7 @@
                                              <div class='code info'>
                                                 <h1> ¡ATENCIÓN! </h1><hr />
                                                  <p>Está viendo la web como un Usuario Registrado.</p>
-                                                 <a href=''><button>Cerrar Mensaje</button></a>
+                                                 <a href='".$prefix."/panel_user'><button>Cerrar Mensaje</button></a>
                                              </div>
                                      </div>
                                      <div class='column side'></div>
@@ -475,7 +475,7 @@
                                                  <div class='code info'>
                                                     <h1> ¡ATENCIÓN! </h1><hr />
                                                     <p>Está viendo la web como un Gerente.</p>
-                                                     <a href=''><button>Cerrar Mensaje</button></a>
+                                                    <a href='".$prefix."/panel_manager'><button>Cerrar Mensaje</button></a>
                                                   </div>
                                         </div>
                                         <div class='column side'></div>
