@@ -441,7 +441,7 @@
                                         <div class='code info'>
                                             <h1> ¡ATENCIÓN! </h1><hr />
                                             <p>Está viendo la web como un Usuario NO Registrado.</p>
-                                            <a href='".$prefix."'><button>Cerrar Mensaje</button></a>
+                                            <a href='".$prefix."/login'><button>Cerrar Mensaje</button></a>
                                         </div>
                                     </div>
                                     <div class='column side'></div>
