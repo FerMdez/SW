@@ -20,11 +20,13 @@
 				$c_tel = $cinema->getPhone();
 			}
             $name = strtoupper($_SESSION["nombre"]);
+			$userPic = USER_PICS.strtolower($name).".jpg";
 			$cinema = strtoupper( $manager->getIdcinema());
 
             $panel = '<div class="code info">
 						<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
 						<hr />
+						<img src='.$userPic.' alt="user_profile_picture"/>
 						<p>Usuario: '.$name.'</p> <br>
 						<p>Cine: '.$c_name.'</p>
 						<p>Dirección: '.$c_dir.'</p>

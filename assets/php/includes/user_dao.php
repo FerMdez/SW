@@ -19,9 +19,14 @@
 
         //Encrypt password with SHA254.
 		private function encryptPass($password){
-			//$password = hash('sha256', $password);
-			$password = password_hash($password, PASSWORD_DEFAULT);
+			/* Una rica ensalada salada */
+			/* $SALAD = [
+				'cost' => 11,
+				'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM), //Hay que tener activado el módulo mcrypt para usar esta función.
+			]; */
 
+			$password = password_hash($password, PASSWORD_DEFAULT); //Actualmente en PHP PASSWORD_DEFAULT equivale a PASSWORD_BCRYPT.
+		
 			return $password;
 		}
 

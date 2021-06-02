@@ -7,7 +7,7 @@
 	require_once('../assets/php/includes/manager.php');
 	require_once('../assets/php/includes/user.php');
 
-	if($_SESSION["login"] && $_SESSION["lastRol"] === "admin" && $_SESSION["rol"] === "manager") {
+	if($_SESSION["login"] && isset($_SESSION["lastRol"]) && ($_SESSION["lastRol"] === "admin" || $_SESSION["rol"] === "manager")) {
 		$manager = new Manager(null, null, null, null, null);
 		if(isset($_POST['changecinema']))$_SESSION['cinema'] = $_POST['cinema'];
 		if(!is_null($_SESSION['cinema'])) $manager->setIdcinema($_SESSION['cinema']);

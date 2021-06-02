@@ -13,9 +13,19 @@
         }
 
         static function panel(){
+            include_once('../assets/php/includes/user.php');
+
+            $name = strtoupper(unserialize($_SESSION['user'])->getName());
+            $email = unserialize($_SESSION['user'])->getEmail();
+            $userPic = USER_PICS.strtolower($name).".jpg";
+
             return $reply=  '<div class="code info">
             <h1>Bienvenido al Panel de Administrador.</h1>
             <hr />
+            <img src='.$userPic.' alt="user_profile_picture"/>
+            <h3>'.strftime("%A %e de %B de %Y | %H:%M").'</h3>
+            <p>Administrador: '.$name.'</p>
+            <p>Email empresarial: '.$email.'</p>
             </div>'."\n"; 
         }
 

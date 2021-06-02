@@ -1,6 +1,5 @@
 <?php
     class DAO {
-
         //Atributes:
         public $mysqli;
 
