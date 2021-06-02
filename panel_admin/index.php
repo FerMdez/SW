@@ -17,13 +17,14 @@
                                 }                             
                                 else {
                                     if(isset($_GET["cinema"])){
-                                       // $reply = AdminPanel::showHalls($_GET["cinema"]);
-                                       /* if(isset($_GET["number"])) {
-                                            $reply = AdminPanel::showHalls($_GET["cinema"], $_GET["number"]);
-                                        }
-                                        else { */
-                                            $reply = AdminPanel::showHalls($_GET["cinema"]);
-                                        //}
+                                        if(isset($_GET["cinema"])){
+                                            if(isset($_GET["number"])) {
+                                                 $reply = AdminPanel::showSessions($_GET["cinema"]);
+                                             }
+                                             else { 
+                                                 $reply = AdminPanel::showHalls($_GET["cinema"]);
+                                             }
+                                         }
                                     }
                                     else {
                                         $reply=AdminPanel::addCinema();
@@ -65,9 +66,9 @@
                                     $reply=AdminPanel::addManager();
                                 }
                                 
-                                else {
-                                    $reply=AdminPanel::showAddBotton();
-                                    $reply.=AdminPanel::print_managers();
+                                else {  
+                                    $reply=AdminPanel::print_managers();
+                                    $reply.=AdminPanel::showAddBotton();
                                 }; 
                     break;
                     case 'un': 

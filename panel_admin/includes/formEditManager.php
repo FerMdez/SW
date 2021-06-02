@@ -23,9 +23,9 @@ class formEditManager extends Form{
         $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         $errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
-		$html = '<div class="row">
+		$html = '
                     <h1>EDITAR GERENTE ID:'.$_POST['id'].'</h1>
-                    <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
+                    <fieldset><pre>'.$htmlErroresGlobales.'</pre>
                     <legend>Selecciona cine.</legend><pre>'.$errorIdCinema.'</pre>
                     <input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>'
                     .$this->showCinemas().
@@ -34,7 +34,6 @@ class formEditManager extends Form{
                         <input type="submit" id="submit" value="Seleccionar" name="edit_manager" class="primary" />
                         <input type="reset" id="reset" value="Borrar" />       
                         </div>
-                </div>
                 </div>';
 
         return $html;
@@ -100,7 +99,7 @@ class formEditManager extends Form{
         $html = '';
         for($i = 0; $i < count($cinemas); $i++){
             $html.= '
-            <input type="radio" name="idcinema" value='.$ids[$i].' >  <label> '.$ids[$i].', '.$names[$i].'
+             <input type="radio" class="content-input" name="idcinema" value="'.$ids[$i].'" id="'.$ids[$i].'"><label class="efe" for="'.$ids[$i].'">  '.$ids[$i].', '.$names[$i].'
             </label>
             ';
         }

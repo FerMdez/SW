@@ -105,7 +105,9 @@ class formAddManager extends Form{
         $html='';
         for($i = 0; $i < count($users); $i++){
             $html .= '
-            <input type="radio" name="id" value='.$ids[$i].' >  <label> '.$ids[$i].', '.$usernames[$i].', '.$usernames[$key].'
+            <input type="radio" class="content-input" name="id" value="'.$ids[$i].'" id="'.$ids[$i].'"><label class="efe" for="'.$ids[$i].'"> '.$ids[$i].', '.$usernames[$i].
+            ', '.$usernames[$key].
+            '
             </label>
             ';
         }
@@ -129,7 +131,7 @@ class formAddManager extends Form{
         $html = '';
         for($i = 0; $i < count($cinemas); $i++){
             $html.= '
-            <input type="radio" name="idcinema" value='.$ids[$i].' >  <label> '.$ids[$i].', '.$names[$i].'
+            <input type="radio" class="content-input" name="idcinema" value="'.$ids[$i].'" id="'.$ids[$i].'"><label class="efe" for="'.$ids[$i].'">  '.$ids[$i].', '.$names[$i].'
             </label>
             ';
         }

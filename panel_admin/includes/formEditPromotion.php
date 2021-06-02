@@ -29,8 +29,7 @@ class formEditPromotion extends Form{
 		$errorImg = self::createMensajeError($errores, 'img', 'span', array('class' => 'error'));
 
 		$html = '<div class="row">
-					<fieldset id="promotion_form"><pre>'.$htmlErroresGlobales.'</pre>
-                    <fieldset id="film_form">
+                    <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>Datos de promocion</legend>
                             <input type="hidden" name="id" value='.$_POST['id'].'/>
 							<input type="text" name="tittle" id="tittle"value="'.$_POST['tittle'].'"required/><pre>'.$errorTittle.'</pre>

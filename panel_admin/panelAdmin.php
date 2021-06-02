@@ -118,7 +118,7 @@
                                 <li> '. $hall->getNumber().'</li>
                                 <li> '.$hall->getTotalSeats().' </li>
                             </a>
-                            <a  href="?state=mc&cinema='.$idCinema.'number='. $hall->getNumber().'">
+                            <a  href="?state=mc&cinema='.$idCinema.'&number=1">
                                 <li> Sesiones </li>
                             </a>
                         </div>
@@ -135,10 +135,39 @@
 
         }
 
-       /* static function showSessions($idCinema, $hallNumber) {
+        static function showSessions($idCinema){
+            include_once('../assets/php/includes/hall.php');
+            include_once('../assets/php/includes/hall_dao.php');
+            include_once('../assets/php/includes/session_dao.php');
+            include_once('../assets/php/includes/session.php');
+			//Base filtering values
+			$date = $_POST['date'] ?? $_GET['date'] ?? date("Y-m-d");
+			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
+			
+			//Session filter
+			$panel='<div class = "column left">
+					<form method="post" id="filter" action="?state=mc&cinema=1&number=1">
+						<input type="date" name="date" value="'.$date.'" min="2021-01-01" max="2031-12-31">
+							<select name="hall" class="button large">';
+						
+			foreach(Hall::getListHalls($idCinema) as $hll){
+				if($hll->getNumber() == $hall){
+					$panel.= '
+								<option value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
+				}else{ 
+					$panel.= '
+								<option value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
+				}
+			}
+			$panel.='
+							</select>
+						<input type="submit" name="filter" value="Filtrar" class="button large"/>
+					</form>
+				</div>
+			';
 			//Session list
 			$panel .='	<div class = "column right">';
-			$sessions = Session::getListSessions($hall,$manager->getIdcinema(),$date);
+			$sessions = Session::getListSessions($hall,$idCinema,$date);
 			
 			if($sessions) {
 				$panel .='
@@ -163,19 +192,6 @@
 									<td> '. str_replace('_', ' ', $film["tittle"]) .' </td>
 									<td> '.$session->getFormat().' </td>
 									<td> '.$session->getSeatPrice().' </td>
-									<form method="post" action="./?state=edit_session">
-										<input  name="film" type="hidden" value="'.$session->getIdfilm().'">
-										<input  name="tittle" type="hidden" value="'.$film["tittle"].'">
-										<input  name="duration" type="hidden" value="'.$film["duration"].'">
-										<input  name="language" type="hidden" value="'.$film["language"].'">
-										<input  name="description" type="hidden" value="'.$film["description"].'">
-										<input  name="hall" type="hidden" value="'.$session->getIdhall().'">
-										<input  name="date" type="hidden" value="'.$session->getDate().'">
-										<input  name="start" type="hidden" value="'.$session->getStartTime().'">
-										<input  name="price" type="hidden" value="'.$session->getSeatPrice().'">
-										<input  name="format" type="hidden" value="'.$session->getFormat().'">	
-									<td> <input type="submit" id="submit" name ="edit_session"  value="Editar" class="primary" /> </td>
-									</form>
 								</tr>';
 					}
 				$panel.='
@@ -185,12 +201,10 @@
 			} else {
 				$panel.=' <h3> No hay ninguna sesion </h3>';
 			}
-			$panel.='
-					<input type="submit" name="new_session" form="filter"  value="Añadir" class="button large" formaction="./?state=new_session">
-				</div>';
+			$panel.='</div>';
 			
 			return $panel;
-        }*/
+        }
 
 
         //Functions MANAGERS
@@ -217,8 +231,6 @@
                 }
             
             $reply= "<div class='row'>
-                    <div class='column side'></div>
-                    <div class='column middle'>
                         <ul class ='tablelist col7'>
                             <li class='title'>Id</li>
                             <li class='title'>IdCinema</li>
@@ -258,8 +270,6 @@
             
             $reply.='</ul>
                 </div>
-                <div class="column side"></div>
-            </div>
             ';
             }
             return $reply;
@@ -295,12 +305,11 @@
             $formEM = new formEditManager();
             $htmlEForm = $formEM->gestiona();
             return $reply=   '<!-- EDIT MANAGER -->
+
                 <div class="column side"></div>
                 <div class="column middle">
-                    <h3>EDITAR GERENTE</h3>
                     '.$htmlEForm.'
-                </div>
-                <div class="column side"></div>'."\n";
+                </div>';
         }
 
         static function deleteManager(){
@@ -327,8 +336,7 @@
                 <div class="column middle">
                     <h3>AÑADIR PROMOCIÓN</h3>
                     '.$htmlAForm.'
-                </div>
-                <div class="column side"></div>'."\n";
+                </div>';
         }
 
          static function editPromotion(){
@@ -378,7 +386,6 @@
                 }
             
              $reply= "<div class='row'>
-                     <div class='column middle'>
                         <ul class='tablelist col7'>   
                                 <li class='title'>Id</li>
                                 <li class='title'>Título</li>
@@ -422,8 +429,6 @@
                     
              $reply.='</ul>
                         
-                        </div>
-                        <div class="column side"></div>
                     </div> 
             ';
             }
