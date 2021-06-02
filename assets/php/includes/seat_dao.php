@@ -25,7 +25,7 @@
 		public function getAllSeats($number, $cinema){
 			
 			$sql = sprintf( "SELECT * FROM seat WHERE 
-							idhall = '%s' AND idcinema = '%s'", 
+							idhall = '%d' AND idcinema = '%d'", 
 							$number, $cinema);	
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			

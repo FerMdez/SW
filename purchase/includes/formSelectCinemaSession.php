@@ -6,6 +6,8 @@ include_once($prefix.'assets/php/includes/cinema_dao.php');
 include_once($prefix.'assets/php/includes/cinema.php');
 include_once($prefix.'assets/php/includes/session_dao.php');
 include_once($prefix.'assets/php/includes/session.php');
+include_once($prefix.'assets/php/includes/hall_dao.php');
+include_once($prefix.'assets/php/includes/hall.php');
 
 class FormSelectCinemaSession extends Form {
 
@@ -17,7 +19,7 @@ class FormSelectCinemaSession extends Form {
     private $_TODAY;         // Actual date.
 
     public function __construct() {
-        $options = array("action" => "confirm.php");
+        $options = array("action" => "selectSeat.php");
         parent::__construct('formSelectCinemaSession', $options);
 
         $TODAY = getdate();
@@ -219,9 +221,9 @@ class FormSelectCinemaSession extends Form {
             $pay = false;
         }
 
-        //Pay button:
+        //Select seat button:
         if($pay){
-            $pay = '<input type="submit" id="submit" value="Pagar" />';
+            $pay = '<input type="submit" id="submit" value="Seleccionar Asiento" />';
         }
 
             return '
@@ -258,7 +260,7 @@ class FormSelectCinemaSession extends Form {
         }
 
         if (count($result) === 0) {
-            $result = "confirm.php";
+            $result = "selectSeat.php";
         }
 
         return $result;

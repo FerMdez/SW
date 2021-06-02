@@ -10,7 +10,7 @@
     //Specific page content:
     $section = '<!-- Contact Form -->
         <section id="formulario">
-            <h4>Formulario (EN DESARROLLO)</h4>
+            <h4>Formulario</h4>
             '.$htmlForm.'
         </section>
         ';

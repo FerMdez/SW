@@ -20,19 +20,19 @@ class FormChangePass extends Form {
         $errorPassword2 = self::createMensajeError($errores, 'repass', 'span', array('class' => 'error'));
 
         $html = "<div class='row'>
-                            <fieldset id='contraseña_usuario'><pre>".$htmlErroresGlobales."</pre>
-                                <legend>Nueva Contraseña</legend>
-                                <input type='password' name='old_pass' id='old_pass' value='' placeholder='Contraseña Actual' required/><pre>".$errorOldPass."</pre>
-                                <input type='password' name='new_pass' id='new_pass' value='' placeholder='Nueva Contraseña' required/><pre>".$errorPassword."</pre>
-                                <span id='passValid'>&#x2714;</span><span id='passWarning'>&#x26a0;</span></span><span id='passInvalid'>&#x274C;</span>
-                                <input type='password' name='repass' id='repass' value='' placeholder='Repita la nueva contraseña' required/><pre>".$errorPassword2."</pre>
-                                <span id='repassValid'>&#x2714;</span></span><span id='repassInvalid'>&#x274C;</span>
-                            </fieldset>
-                            <div class='actions'> 
-                                <input type='submit' id='submit' value='Cambiar Contraseña' class='primary' />
-                                <input type='reset' id='reset' value='Borrar' />       
-                            </div>
-                        </div>";
+                        <fieldset id='contraseña_usuario'><pre>".$htmlErroresGlobales."</pre>
+                            <legend>Nueva Contraseña</legend>
+                            <input type='password' name='old_pass' id='old_pass' value='' placeholder='Contraseña Actual' required/><pre>".$errorOldPass."</pre>
+                            <input type='password' name='new_pass' id='new_pass' value='' placeholder='Nueva Contraseña' required/><pre>".$errorPassword."</pre>
+                            <span id='passValid'>&#x2714;</span><span id='passWarning'>&#x26a0;</span></span><span id='passInvalid'>&#x274C;</span>
+                            <input type='password' name='repass' id='repass' value='' placeholder='Repita la nueva contraseña' required/><pre>".$errorPassword2."</pre>
+                            <span id='repassValid'>&#x2714;</span></span><span id='repassInvalid'>&#x274C;</span>
+                        </fieldset>
+                        <div class='actions'> 
+                            <input type='submit' id='submit' value='Cambiar Contraseña' class='primary' />
+                            <input type='reset' id='reset' value='Borrar' />       
+                        </div>
+                    </div>";
 
         return $html;
     }

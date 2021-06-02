@@ -83,6 +83,7 @@ class FormPurchase extends Form {
                                 <p>Película: ".str_replace('_', ' ', strtoupper($this->film->getTittle()))."</p>
                                 <p>Cine: ".$this->cinema->getName()."</p>
                                 <p>Sala: ".$this->session->getIdhall()."</p>
+                                <p>Asiento: ".$_POST["checkbox11"]."</p>
                                 <p>Fecha: ".date_format(date_create($this->session->getDate()), 'd-m-Y')."</p>
                                 <p>Hora: ".$this->session->getStartTime()."</p>
                                 <p>Precio: ".$this->session->getSeatPrice()."€</p>
