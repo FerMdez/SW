@@ -434,8 +434,8 @@
             $_SESSION["lastRol"] = $_SESSION["rol"];
             //unset($_SESSION["rol"]);
             $_SESSION["rol"] = null;
-            header("Location: {$_SERVER['PHP_SELF']}");
-            $_SESSION['message'] = "<div class=''>
+            //header("Location: {$_SERVER['PHP_SELF']}");
+            return $reply = "<div class=''>
                                     <div class='column side'></div>
                                     <div class='column middle'>
                                         <div class='code info'>
@@ -451,8 +451,8 @@
         static function see_like_registed_user(){
             $_SESSION["lastRol"] = $_SESSION["rol"];
             $_SESSION["rol"] = "user";
-            header("Location: {$_SERVER['PHP_SELF']}");
-            $_SESSION['message'] = "<div class='row'>
+            //header("Location: {$_SERVER['PHP_SELF']}");
+            return $reply = "<div class='row'>
                                      <div class='column side'></div>
                                       <div class='column middle'>
                                              <div class='code info'>
@@ -468,8 +468,8 @@
         static function see_like_manager(){
             $_SESSION["lastRol"] = $_SESSION["rol"];
             $_SESSION["rol"] = "manager";
-            header("Location: {$_SERVER['PHP_SELF']}");
-            $_SESSION['message'] = "<div class='row'>
+            //header("Location: {$_SERVER['PHP_SELF']}");
+            return $reply = "<div class='row'>
                                       <div class='column side'></div>
                                        <div class='column middle'>
                                                  <div class='code info'>

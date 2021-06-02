@@ -71,13 +71,13 @@
                                 }; 
                     break;
                     case 'un': 
-                        AdminPanel::see_like_user();
+                        $reply=AdminPanel::see_like_user();
                         break;
                     case 'ur': 
-                        AdminPanel::see_like_registed_user(); 
+                        $reply=AdminPanel::see_like_registed_user(); 
                         break;
                     case 'ag': 
-                        AdminPanel::see_like_manager();
+                        $reply=AdminPanel::see_like_manager();
                         break;
                     default:
                         $reply=AdminPanel:: panel(); 
