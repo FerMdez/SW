@@ -6,9 +6,9 @@
 }
 
 .check_box:checked+label{
-	background:url('../../img/seat_red.png') no-repeat;
+	background:url('../../img/seat_grey.png') no-repeat;
 }
 
 .check_box:disabled+label{
-	background:url('../../img/seat_grey.png') no-repeat;
+	background:url('../../img/seat_red.png') no-repeat;
 }
