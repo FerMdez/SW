@@ -45,7 +45,7 @@ class FormPurchase extends Form {
         for($i = 0; $i <= $rows; $i++){
             for($j = 0; $j <= $cols; $j++){
                 $seat = $i.$j;
-                if(isset($_POST["checkbox".$seat])){ $this->seat = $seat; }
+                if(isset($_POST["checkbox".$seat])){ $this->seat = "(Fila) ".$i." - (Columna) ".$j; }
             }
         }
 

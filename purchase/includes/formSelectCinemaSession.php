@@ -78,7 +78,7 @@ class FormSelectCinemaSession extends Form {
                     $cinemasListHTML .= '</select>
                                 </section>';
                 } else {
-                    $cinemasListHTML = '<form><select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select></form>';
+                    $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select>';
                 }
     
                 $fiml_id = $film->getId();
