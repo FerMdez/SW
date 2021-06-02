@@ -62,24 +62,43 @@
 		}
 		
 		//Returns a query to get all the session's data.
-		public function getAllSessions($hall, $cinema, $date){
-			$date = date('Y-m-d', strtotime( $date ) ); 
+		public function getAllSessions($hall, $cinema, $date, $end){
+			if($end){
+  
+				$date = $date->format("Y-m-d"); 
+				$end = $end->format("Y-m-d");  
+				
+				// su output es date: 2021-05-30 end: 2021-07-11
+				$sql = sprintf( "SELECT * FROM session WHERE 
+								idcinema = '%s' AND idhall = '%s' AND date BETWEEN '%s' AND '%s' ORDER BY start_time ASC;", 
+								$cinema, $hall, $date, $end);				
+			}
 			
-			$sql = sprintf( "SELECT * FROM session WHERE 
-							idcinema = '%s' AND idhall = '%s' AND date = '%s' ORDER BY start_time ASC;", 
-							$cinema, $hall, $date);	
+			
+			if($date && !$end){
+				$date = date('Y-m-d', strtotime( $date ) ); 
+				
+				$sql = sprintf( "SELECT * FROM session WHERE 
+								idcinema = '%s' AND idhall = '%s' AND date = '%s' ORDER BY start_time ASC;", 
+								$cinema, $hall, $date);	
+			}else{
+				$sql = sprintf( "SELECT * FROM session WHERE 
+								idcinema = '%s' AND idhall = '%s' ORDER BY start_time ASC;", 
+								$cinema, $hall);	
+			}
+			
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			
 			$sessions = null;
 			
-			while($fila=mysqli_fetch_array($resul)){
+			while($fila=$resul->fetch_assoc()){
 				$sessions[] = $this->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"], $fila["seats_full"]);
 			}
 			mysqli_free_result($resul);
 			
 			return $sessions;
 		}
-
+		
 		public function getSessions_Film_Cinema($idFiml, $idCinema){
 			$sql = sprintf( "SELECT * FROM session WHERE session.idfilm = '%d' AND session.idcinema = '%d' ", $idFiml, $idCinema);
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');

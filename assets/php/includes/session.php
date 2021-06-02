@@ -28,7 +28,16 @@
 		public static function getListSessions($hall,$cinema,$date){
 			$bd = new SessionDAO('complucine');
 			if($bd ) {
-				return $bd->getAllSessions($hall, $cinema, $date);
+				if($date)
+					return $bd->getAllSessions($hall, $cinema, $date, null);
+				else
+					return $bd->getAllSessions($hall, $cinema, null, null);
+			}
+		}
+		public static function getListSessionsBetween2Dates($hall,$cinema,$start,$end){
+			$bd = new SessionDAO('complucine');
+			if($bd ) {
+				return $bd->getAllSessions($hall, $cinema, $start, $end);
 			}
 		}
 		
