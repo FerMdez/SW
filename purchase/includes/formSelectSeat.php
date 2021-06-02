@@ -42,11 +42,9 @@ class FormSelectSeat extends Form {
         //$seats = $hall->getTotalSeats();
 		$seats_map = array();
 
-        for($x = 0; $x < $hall->getTotalSeats(); $x++){
-            for($i = 0; $i < $rows; $i++){
-                for($j = 0; $j < $cols; $j++){ 
-                    $seats_map[$i][$j] = $seats[$x]->getState();
-                }
+        for($i = 1; $i <= $rows; $i++){
+            for($j = 1; $j <= $cols; $j++){ 
+                $seats_map[$i][$j] = $seats[$i]->getState();
             }
         }
         $html ='<h2>Seleccionar un Asiento</h2><hr />
@@ -73,7 +71,7 @@ class FormSelectSeat extends Form {
                         $html .= '<td> <input type="checkbox" class="check_box" name="checkbox'.$i.$j.'" value="'.$seats_map[$i][$j].'" id="checkbox'.$i.$j.'" checked> <label for="checkbox'.$i.$j.'"> </td>
                             ';}
                     else {
-                        $html .= '<td> <input type="checkbox" class="check_box" name="checkbox'.$i.$j.'" value="'.$seats_map[$i][$j].'" id="checkbox'.$i.$j.'" > <label for="checkbox'.$i.$j.'"> </td>
+                        $html .= '<td> <input type="checkbox" class="check_box" name="checkbox'.$i.$j.'" value="'.$seats_map[$i][$j].'" id="checkbox'.$i.$j.'" disabled> <label for="checkbox'.$i.$j.'"> </td>
                             ';}
                 }
                     $html .='</tr>';

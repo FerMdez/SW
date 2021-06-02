@@ -18,7 +18,8 @@ class FormPurchase extends Form {
     private $session;       // Session of the film to be purchased.
     private $cinema;        // Cinema of the film to be purchased.
     private $hall;          // Hall of the film to be purchased.
-    private $film;          // Film to be purchased.
+    private $seat;          // Seat of the film to be purchased. 
+    private $row;           // Row of the seat.
     private $years;         // Actual year.
     private $months;        // Months of the year.
     private $_TODAY;         // Actual date.
@@ -37,6 +38,16 @@ class FormPurchase extends Form {
 
         $hallDAO = new HallDAO("complucine");
         $this->hall = $hallDAO->HallData($this->session->getIdhall());
+
+
+        $rows = $this->hall->getNumRows();
+        $cols = $this->hall->getNumCol();
+        for($i = 0; $i <= $rows; $i++){
+            for($j = 0; $j <= $cols; $j++){
+                $seat = $i.$j;
+                if(isset($_POST["checkbox".$seat])){ $this->seat = $seat; }
+            }
+        }
 
         $TODAY = getdate();
         $year = "$TODAY[year]";
@@ -83,7 +94,7 @@ class FormPurchase extends Form {
                                 <p>Película: ".str_replace('_', ' ', strtoupper($this->film->getTittle()))."</p>
                                 <p>Cine: ".$this->cinema->getName()."</p>
                                 <p>Sala: ".$this->session->getIdhall()."</p>
-                                <p>Asiento: ".$_POST["checkbox11"]."</p>
+                                <p>Asiento: ".$this->seat."</p>
                                 <p>Fecha: ".date_format(date_create($this->session->getDate()), 'd-m-Y')."</p>
                                 <p>Hora: ".$this->session->getStartTime()."</p>
                                 <p>Precio: ".$this->session->getSeatPrice()."€</p>
@@ -163,7 +174,7 @@ class FormPurchase extends Form {
                     $result[] = "Error al realizar la compra.";
                 }
            } else {
-                $purchase = new Purchase("null", $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), rand(1, $this->hall->getNumRows()), rand(1, $this->hall->getNumCol()), strftime("%A %e de %B de %Y a las %H:%M"));
+            $purchase = new Purchase("null", $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), rand(1, $this->hall->getNumRows()), rand(1, $this->hall->getNumCol()), strftime("%A %e de %B de %Y a las %H:%M"));
                 $_SESSION["purchase"] = serialize($purchase);
                 $_SESSION["film_purchase"] = serialize($this->film);
                 $result = "resume.php";

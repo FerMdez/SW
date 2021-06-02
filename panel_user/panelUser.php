@@ -126,15 +126,15 @@
                     $filmDAO = new Film_DAO("complucine");
                     $film = $filmDAO->FilmData($session->getIdfilm());
 
-                    if($i%3 === 0){
+                    if($i%3 === 0 && $i !== 0){
                         if($i !== 0) $purchasesHTML .= '</div>
                         ';
-                        $purchasesHTML .= '<div class="column left">
+                        $purchasesHTML .= '<div class="column right">
                         ';
                     } else {
                         if($i !== 0) $purchasesHTML .= '</div>
                         ';
-                        $purchasesHTML .= '<div class="column right">
+                        $purchasesHTML .= '<div class="column left">
                         ';
                     }
                     $purchasesHTML .= '<h1>Compara realizada el: '.$dates[$i].'</h1><hr />

@@ -6,7 +6,7 @@
         private $_username;     //User name.
         private $_email;        //User email.
         private $_password;     //User password.
-        private $_rol;          //Type of user: user | manager | admin. --> Será eliminado en la siguiente práctica para usar el modelo relacional de nuestra BD.
+        private $_rol;          //Type of user: user | manager | admin.
 
 		//Constructor:
         function __construct($id, $username, $email, $password, $rol){

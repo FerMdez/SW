@@ -4,11 +4,11 @@
     class Seat{
 
         //Attributes:
-        private $_idhall;     
-        private $_idcinema;    
-		private $_numRow;     
-        private $_numCol;      
-		private $_state;      
+        private $_idhall;     	//Hall id.
+        private $_idcinema;    	//Cinema id.
+		private $_numRow;     	//Number of row.
+        private $_numCol;      	//Number of column.
+		private $_state;      	//State of the seat-
 
 		//Constructor:
         function __construct($idhall, $idcinema, $numRow, $numCol, $state){

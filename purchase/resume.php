@@ -18,6 +18,8 @@
         $cinemaDAO = new Cinema_DAO("complucine");
         $cinema = $cinemaDAO->cinemaData($purchase->getCinemaId());
 
+        $seat = 1; //$_POST[];
+
         unset($_SESSION["purchase"]);
         unset($_SESSION["film_purchase"]);
 
@@ -34,6 +36,7 @@
                         <p>Sesión (Hora): ".$session->getStartTime()."</p>
                         <p>Cine: ".$cinema->getName()."</p>
                         <p>Sala: ".$purchase->getHallId()."</p>
+                        <p>Asiento: ".$seat."</p>
                         <p>Asiento (Columna): ".$purchase->getRow()."</p>
                         <p>Asiento (Fila): ".$purchase->getColumn()."</p>
                         <p>Fecha de la Compra: ".$purchase->getTime()."</p>

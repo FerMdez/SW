@@ -5,12 +5,12 @@
     class Hall{
 
         //Attributes:
-        private $_number;      //Room number.
-        private $_idcinema;    //Cinema Id
-		private $_numRows;     //Num rows.
-        private $_numCol;      //Num columns.
-		private $_total_seats;
-		private $_seats_map;
+        private $_number;      	//Room number.
+        private $_idcinema;    	//Cinema Id
+		private $_numRows;     	//Num rows.
+        private $_numCol;      	//Num columns.
+		private $_total_seats;	//Toal seats.	
+		private $_seats_map;	//Seat map.
 
 		//Constructor:
         function __construct($number, $idcinema, $numRows, $numCol, $total_seats, $seats_map){
