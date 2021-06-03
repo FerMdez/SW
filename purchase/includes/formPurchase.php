@@ -110,7 +110,7 @@ class FormPurchase extends Form {
                                 <p>Asiento(s):".$seats."</p>
                                 <p>Fecha: ".date_format(date_create($this->session->getDate()), 'd-m-Y')."</p>
                                 <p>Hora: ".$this->session->getStartTime()."</p>
-                                <p>Precio: ".$this->session->getSeatPrice()*count($this->seat)."€</p>
+                                <p>Precio Total: ".$this->session->getSeatPrice()*count($this->seat)."€ (Precio por asiento: ".$this->session->getSeatPrice()." €)</p>
                             </fieldset>
                             <fieldset id='pagar_entrada'><pre>".$htmlErroresGlobales."</pre>
                                 <legend>Datos Bancarios</legend>

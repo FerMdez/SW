@@ -20,8 +20,8 @@
 
         $seatsArray = array_combine(unserialize($purchase->getRow()), unserialize($purchase->getColumn()));
         $seats = "";
-        foreach($seatsArray as $key=>$value){
-            $seats .= $key."-".$value.", ";
+        for($i=0; $i < count(unserialize($purchase->getRow())); $i++){
+            $seats .= unserialize($purchase->getRow())[$i]."-".unserialize($purchase->getColumn())[$i].", ";
         }
 
         unset($_SESSION["purchase"]);
