@@ -30,13 +30,17 @@ $(document).ready(function() {
     $("#codeValid").hide();
     $("#codeInvalid").hide();
 
+    //Iconos para validar el mes y año de expiración de la tarjeta:
+    $("#dateValid").hide();
+    $("#dateInvalid").hide();
+
 	
     //Comprueba que el titular de la tarjeta es válido.
 	$("#card-holder").change(function(){
         const cardHolder = $("#card-holder");
         cardHolder[0].setCustomValidity("");
 
-		if(cardHolder.val().length > 5  && !holderCheck(cardHolder.val())){
+		if(cardHolder.val().length > 5 && !holderCheck(cardHolder.val())){
             $("#cardNameValid").show();
             $("#cardNameInvalid").hide();
             cardHolder[0].setCustomValidity("");
@@ -119,6 +123,37 @@ $(document).ready(function() {
             $("#cvvValid").hide();
             $("#cvvInvalid").show();
             cvv[0].setCustomValidity("El CVV debe tener 3 dígitos.");
+        }
+    });
+
+    //Comprueba que el mes de expiración de la tarjeta es válido.
+	$("#card-expiration-month").change(function(){
+        const month = $("#card-expiration-month");
+        month[0].setCustomValidity("");
+
+		if(parseInt(month.val()) > parseInt(fecha.getMonth())){
+            $("#dateValid").show();
+            $("#dateInvalid").hide();
+            month[0].setCustomValidity("");
+        } else {
+            $("#dateValid").hide();
+            $("#dateInvalid").show();
+            month[0].setCustomValidity("El mes de expiración no es válido.");
+        }
+    });
+    //Comprueba que el mes de expiración de la tarjeta es válido.
+	$("#card-expiration-year").change(function(){
+        const year = $("#card-expiration-year");
+        year[0].setCustomValidity("");
+
+		if(parseInt(year.val()) >= parseInt(fecha.getFullYear())){
+            $("#dateValid").show();
+            $("#dateInvalid").hide();
+            year[0].setCustomValidity("");
+        } else {
+            $("#dateValid").hide();
+            $("#dateInvalid").show();
+            year[0].setCustomValidity("El año de expiración no es válido.");
         }
     });
 

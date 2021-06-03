@@ -125,7 +125,7 @@ class FormPurchase extends Form {
                                 <label for='card-cvv'>CVV: <span id='cvvValid'>&#x2714;</span><span id='cvvInvalid'>&#x274C;</span></label>
                                     <input type='text' name='card-cvv' id='card-cvv' class='fieldset-cvv' maxlength='3' placeholder='XXX' required /><pre>".$errorCVV."</pre>
                                 <br />
-                                <label for='card-expiration'>Fecha de Expiración: </label><pre>".$errorCardExpirationMonth.$errorCardExpirationYear."</pre><br />
+                                <label for='card-expiration'>Fecha de Expiración: <span id='dateValid'>&#x2714;</span><span id='dateInvalid'>&#x274C;</span></label><pre>".$errorCardExpirationMonth.$errorCardExpirationYear."</pre><br />
                                     <select name='card-expiration-month' id='card-expiration-month' required>
                                     ".$monthsHTML."
                                     </select>
