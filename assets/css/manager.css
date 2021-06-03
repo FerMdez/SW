@@ -67,6 +67,20 @@ table.seat td:first-child {
   background-color: #791515;
 }
 
+.code.welcome {
+  text-align: center;
+}
+
+.code.welcome img {
+  width: 75px;
+  height: 75px;
+  margin-top: 5px;
+  border: 1px solid #d3ebff;
+  border-radius: 5px;
+  padding: 5px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
 
 /* 
 lists like tables
