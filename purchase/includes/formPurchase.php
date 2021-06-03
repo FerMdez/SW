@@ -10,6 +10,7 @@ include_once($prefix.'assets/php/includes/hall_dao.php');
 include_once($prefix.'assets/php/includes/hall.php');
 include_once($prefix.'assets/php/includes/purchase_dao.php');
 include_once($prefix.'assets/php/includes/purchase.php');
+include_once($prefix.'assets/php/includes/promotion_dao.php');
 include_once($prefix.'assets/php/includes/user.php');
 
 class FormPurchase extends Form {
@@ -22,9 +23,10 @@ class FormPurchase extends Form {
     private $seat;          // Seat of the film to be purchased. 
     private $row;           // Row of the seat.
     private $col;           // Column of the seat.
+    private $code;          // Promotional code.
     private $years;         // Actual year.
     private $months;        // Months of the year.
-    private $_TODAY;         // Actual date.
+    private $_TODAY;        // Actual date.
 
     public function __construct() {
         parent::__construct('formPurchase');
@@ -54,6 +56,14 @@ class FormPurchase extends Form {
                     array_push($this->row, $i); 
                     array_push($this->col, $j); 
                 }
+            }
+        }
+
+        $promoDAO = new Promotion_DAO("complucine");
+        $this->code = intval(0);
+        if(isset($_POST["code"]) && $_POST["code"] !== ""){
+            if($promoDAO->GetPromotion($_POST["code"])->data_seek(0)){
+                $this->code = intval(3);
             }
         }
 
@@ -95,52 +105,63 @@ class FormPurchase extends Form {
                        <p>Vuelva atrás para selecionar otra sesión.</p>
                     </div>";
         } else {
-            $seats = "";
-            foreach($this->seat as $value){
-                $seats .= $value.", ";
-            }
+            if(!empty($this->seat)){
+                $seats = "";
+                foreach($this->seat as $value){
+                    $seats .= $value.", ";
+                }
 
-            $html = "<div class='row'>
-                            <fieldset id='datos_entrada'>
-                                <legend>Resumen de la Compra</legend>
-                                <img src='"."../img/films/".$this->film->getImg()."' alt='".$this->film->getTittle()."' />
-                                <p>Película: ".str_replace('_', ' ', strtoupper($this->film->getTittle()))."</p>
-                                <p>Cine: ".$this->cinema->getName()."</p>
-                                <p>Sala: ".$this->session->getIdhall()."</p>
-                                <p>Asiento(s):".$seats."</p>
-                                <p>Fecha: ".date_format(date_create($this->session->getDate()), 'd-m-Y')."</p>
-                                <p>Hora: ".$this->session->getStartTime()."</p>
-                                <p>Precio Total: ".$this->session->getSeatPrice()*count($this->seat)."€ (Precio por asiento: ".$this->session->getSeatPrice()." €)</p>
-                            </fieldset>
-                            <fieldset id='pagar_entrada'><pre>".$htmlErroresGlobales."</pre>
-                                <legend>Datos Bancarios</legend>
-                                <label for='card-holder'>Titular de la Tarjeta:  <span id='cardNameValid'>&#x2714;</span><span id='cardNameInvalid'>&#x274C;</span></label><pre>".$errorNombre."</pre><br />
-                                    <input type='text' name='card-holder' id='card-holder' class='card-holder' placeholder='NOMBRE APELLIDO1 APELLIDO2' required />
-                                <br />
-                                <label for='card-number'>Número de Tarjeta: <span id='carNumberValid'>&#x2714;</span><span id='cardNumerInvalid'>&#x274C;</span></label><pre>".$errorCardNumber."</pre><br />
-                                    <input type='num' name='card-number-0' id='card-number-0' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
-                                    <input type='num' name='card-number-1' id='card-number-1' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
-                                    <input type='num' name='card-number-2' id='card-number-2' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
-                                    <input type='num' name='card-number-3' id='card-number-3' class='input-cart-number' placeholder='XXXX' maxlength='4' required />    
-                                <label for='card-cvv'>CVV: <span id='cvvValid'>&#x2714;</span><span id='cvvInvalid'>&#x274C;</span></label>
-                                    <input type='text' name='card-cvv' id='card-cvv' class='fieldset-cvv' maxlength='3' placeholder='XXX' required /><pre>".$errorCVV."</pre>
-                                <br />
-                                <label for='card-expiration'>Fecha de Expiración: <span id='dateValid'>&#x2714;</span><span id='dateInvalid'>&#x274C;</span></label><pre>".$errorCardExpirationMonth.$errorCardExpirationYear."</pre><br />
-                                    <select name='card-expiration-month' id='card-expiration-month' required>
-                                    ".$monthsHTML."
-                                    </select>
-                                    <select name='card-expiration-year' id='card-expiration-year' required>
-                                    ".$yearsHTML."
-                                    </select>
-                            </fieldset>
-                            <div class='actions'> 
-                                <input type='hidden' name='sessions' id='sessions' value='".$_POST["sessions"]."' />
-                                <input type='hidden' name='row' id='row' value='".serialize($this->row)."' />
-                                <input type='hidden' name='col' id='col' value='".serialize($this->col)."' />
-                                <input type='submit' id='submit' value='Pagar' class='primary' />
-                                <input type='reset' id='reset' value='Borrar' />       
-                            </div>
-                        </div>";
+                $promo = "";
+                if($this->code > 0) $promo = "<pre>(Se ha aplicado un descuento por código promocional).</pre>";
+
+                $html = "<div class='row'>
+                                <fieldset id='datos_entrada'>
+                                    <legend>Resumen de la Compra</legend>
+                                    <img src='"."../img/films/".$this->film->getImg()."' alt='".$this->film->getTittle()."' />
+                                    <p>Película: ".str_replace('_', ' ', strtoupper($this->film->getTittle()))."</p>
+                                    <p>Cine: ".$this->cinema->getName()."</p>
+                                    <p>Sala: ".$this->session->getIdhall()."</p>
+                                    <p>Asiento(s):".$seats."</p>
+                                    <p>Fecha: ".date_format(date_create($this->session->getDate()), 'd-m-Y')."</p>
+                                    <p>Hora: ".$this->session->getStartTime()."</p>
+                                    <p>Precio Total: ".intval($this->session->getSeatPrice()*count($this->seat)-$this->code)."€ (Precio por asiento: ".$this->session->getSeatPrice()." €)</p>
+                                    <p>".$promo."</p>
+                                </fieldset>
+                                <fieldset id='pagar_entrada'><pre>".$htmlErroresGlobales."</pre>
+                                    <legend>Datos Bancarios</legend>
+                                    <label for='card-holder'>Titular de la Tarjeta:  <span id='cardNameValid'>&#x2714;</span><span id='cardNameInvalid'>&#x274C;</span></label><pre>".$errorNombre."</pre><br />
+                                        <input type='text' name='card-holder' id='card-holder' class='card-holder' placeholder='NOMBRE APELLIDO1 APELLIDO2' required />
+                                    <br />
+                                    <label for='card-number'>Número de Tarjeta: <span id='carNumberValid'>&#x2714;</span><span id='cardNumerInvalid'>&#x274C;</span></label><pre>".$errorCardNumber."</pre><br />
+                                        <input type='num' name='card-number-0' id='card-number-0' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
+                                        <input type='num' name='card-number-1' id='card-number-1' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
+                                        <input type='num' name='card-number-2' id='card-number-2' class='input-cart-number' placeholder='XXXX' maxlength='4' required />
+                                        <input type='num' name='card-number-3' id='card-number-3' class='input-cart-number' placeholder='XXXX' maxlength='4' required />    
+                                    <label for='card-cvv'>CVV: <span id='cvvValid'>&#x2714;</span><span id='cvvInvalid'>&#x274C;</span></label>
+                                        <input type='text' name='card-cvv' id='card-cvv' class='fieldset-cvv' maxlength='3' placeholder='XXX' required /><pre>".$errorCVV."</pre>
+                                    <br />
+                                    <label for='card-expiration'>Fecha de Expiración: <span id='dateValid'>&#x2714;</span><span id='dateInvalid'>&#x274C;</span></label><pre>".$errorCardExpirationMonth.$errorCardExpirationYear."</pre><br />
+                                        <select name='card-expiration-month' id='card-expiration-month' required>
+                                        ".$monthsHTML."
+                                        </select>
+                                        <select name='card-expiration-year' id='card-expiration-year' required>
+                                        ".$yearsHTML."
+                                        </select>
+                                </fieldset>
+                                <div class='actions'> 
+                                    <input type='hidden' name='sessions' id='sessions' value='".$_POST["sessions"]."' />
+                                    <input type='hidden' name='row' id='row' value='".serialize($this->row)."' />
+                                    <input type='hidden' name='col' id='col' value='".serialize($this->col)."' />
+                                    <input type='submit' id='submit' value='Pagar' class='primary' />
+                                    <input type='reset' id='reset' value='Borrar' />       
+                                </div>
+                            </div>";
+            } else {
+                $html = "<div class='code info'>
+                       <h2>No se ha seleccionado asiento(s).</h2>
+                       <p>Vuelva atrás para selecionar una butaca.</p>
+                    </div>";
+            }
         }
         return $html;
     }

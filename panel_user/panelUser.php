@@ -18,7 +18,7 @@
             $forms = self::manage();
 
             return $reply = '<div class="code info">
-                    <h1>Bienvenido, '.$name.', a tu Panel de Usuario.</h1>
+                    <h1>Bienvenido '.$name.', a tu Panel de Usuario.</h1>
                     <hr />
                     <a href="./?option=change_profile_pic"><img src='.$userPic.' alt="user_profile_picture"/></a>
                     <h3>'.strftime("%A %e de %B de %Y | %H:%M").'</h3>

@@ -83,6 +83,7 @@ class FormSelectSeat extends Form {
 
         //Pay button:
         $pay = '<input type="hidden" name="sessions" id="sessions" value="'.$_POST["sessions"].'" />
+                <input type="hidden" name="code" id="code" value="'.$_POST["code"].'" />
                 <input type="submit" id="submit" value="Pagar" />';
 
         return '
