@@ -1,11 +1,16 @@
 <?php
+require_once __DIR__.'/includes/config.php';
 
-require_once('../assets/php/config.php');
-require_once('./Evento.php');
+use es\ucm\fdi\aw\eventos\Evento;
+use es\ucm\fdi\aw\Aplicacion as App;
+use es\ucm\fdi\aw\http\ContentTypeNoSoportadoException;
+use es\ucm\fdi\aw\http\ParametroNoValidoException;
 
 // Procesamos la cabecera Content-Type
 $contentType= $_SERVER['CONTENT_TYPE'] ?? 'application/json';
 $contentType = strtolower(str_replace(' ', '', $contentType));
+
+
 
 // Verificamos corresponde con uno de los tipos soportados
 $acceptedContentTypes = array('application/json;charset=utf-8', 'application/json');
@@ -18,7 +23,7 @@ foreach ($acceptedContentTypes as $acceptedContentType) {
 }
 
 if (!$found) {
-    // throw new ContentTypeNoSoportadoException('Este servicio REST sólo soporta el content-type application/json');
+    throw new ContentTypeNoSoportadoException('Este servicio REST sólo soporta el content-type application/json');
 }
 
 $result = null;
@@ -39,8 +44,7 @@ switch($_SERVER['REQUEST_METHOD']) {
             // Comprobamos si es una lista de eventos entre dos fechas -> eventos.php?start=XXXXX&end=YYYYY
             $start = filter_input(INPUT_GET, 'start', FILTER_VALIDATE_REGEXP,  array("options" => array("regexp"=>"/\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))/")));
             $end = filter_input(INPUT_GET, 'end', FILTER_VALIDATE_REGEXP, array("options" => array("default" => null, "regexp"=>"/\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))/")));
-            if ($start) {     
-					
+            if ($start) {              
                 $startDateTime = $start . ' 00:00:00';
                 $endDateTime = $end;
                 if ($end) {
@@ -48,14 +52,14 @@ switch($_SERVER['REQUEST_METHOD']) {
                 }
                 $result = Evento::buscaEntreFechas(1, $startDateTime, $endDateTime);
             } else {
-				
                 // Comprobamos si es una lista de eventos completa
                 $result = Evento::buscaTodosEventos(1); // HACK: normalmente debería de ser App::getSingleton()->idUsuario();
             }
         }
+
         // Generamos un array de eventos en formato JSON
         $json = json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
-		
+
         http_response_code(200); // 200 OK
         header('Content-Type: application/json; charset=utf-8');
         header('Content-Length: ' . mb_strlen($json));
@@ -66,17 +70,18 @@ switch($_SERVER['REQUEST_METHOD']) {
     case 'POST':
         // 1. Leemos el contenido que nos envían
         $entityBody = file_get_contents('php://input');
+
         // 2. Verificamos que nos envían un objeto
         $dictionary = json_decode($entityBody);
         if (!is_object($dictionary)) {
-            //throw new ParametroNoValidoException('El cuerpo de la petición no es valido');
+            throw new ParametroNoValidoException('El cuerpo de la petición no es valido');
         }
         
         // 3. Reprocesamos el cuerpo de la petición como un array PHP
         $dictionary = json_decode($entityBody, true);
         $dictionary['userId'] = 1;// HACK: normalmente debería de ser App::getSingleton()->idUsuario();
         $e = Evento::creaDesdeDicionario($dictionary);
-        
+        error_log("hmmm");
         // 4. Guardamos el evento en BD
         $result = Evento::guardaOActualiza($e);
         
@@ -91,7 +96,6 @@ switch($_SERVER['REQUEST_METHOD']) {
 
     break;
     case 'PUT':
-		error_log("PUT");
         // 1. Comprobamos si es una consulta de un evento concreto -> eventos.php?idEvento=XXXXX
         $idEvento = filter_input(INPUT_GET, 'idEvento', FILTER_VALIDATE_INT);
         // 2. Leemos el contenido que nos envían
@@ -99,10 +103,9 @@ switch($_SERVER['REQUEST_METHOD']) {
         // 3. Verificamos que nos envían un objeto
         $dictionary = json_decode($entityBody);
         if (!is_object($dictionary)) {
-            //throw new ParametroNoValidoException('El cuerpo de la petición no es valido');
+            throw new ParametroNoValidoException('El cuerpo de la petición no es valido');
         }    
-		
-		
+
         // 4. Reprocesamos el cuerpo de la petición como un array PHP
         $dictionary = json_decode($entityBody, true);
         $e = Evento::buscaPorId($idEvento);
@@ -129,6 +132,8 @@ switch($_SERVER['REQUEST_METHOD']) {
         header('Content-Length: 0');
         break;
     default:
-        //throw new MetodoNoSoportadoException($_SERVER['REQUEST_METHOD']. ' no está soportado');
+        throw new MetodoNoSoportadoException($_SERVER['REQUEST_METHOD']. ' no está soportado');
     break;
+	
+	
 }

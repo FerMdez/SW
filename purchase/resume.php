@@ -18,7 +18,11 @@
         $cinemaDAO = new Cinema_DAO("complucine");
         $cinema = $cinemaDAO->cinemaData($purchase->getCinemaId());
 
-        $seat = 1; //$_POST[];
+        $seatsArray = array_combine(unserialize($purchase->getRow()), unserialize($purchase->getColumn()));
+        $seats = "";
+        foreach($seatsArray as $key=>$value){
+            $seats .= $key."-".$value.", ";
+        }
 
         unset($_SESSION["purchase"]);
         unset($_SESSION["film_purchase"]);
@@ -29,16 +33,14 @@
                         <p>Película: ".str_replace('_', ' ', strtoupper($film_purchase->getTittle()))."</p>
                         <p>Duración: ".$film_purchase->getDuration()." minutos</p>
                         <p>Idioma: ".$film_purchase->getLanguage()."</p>
-                        <p>Precio: ".$session->getSeatPrice()." €</p>
+                        <p>Precio: ".$session->getSeatPrice()*count(unserialize($purchase->getRow()))." €</p>
                     </div>
                     <div class='column right'>
                         <p>Sesión (Fecha): ".$session->getDate()."</p>
                         <p>Sesión (Hora): ".$session->getStartTime()."</p>
                         <p>Cine: ".$cinema->getName()."</p>
                         <p>Sala: ".$purchase->getHallId()."</p>
-                        <p>Asiento: ".$seat."</p>
-                        <p>Asiento (Columna): ".$purchase->getRow()."</p>
-                        <p>Asiento (Fila): ".$purchase->getColumn()."</p>
+                        <p>Asiento(s): ".$seats."</p>
                         <p>Fecha de la Compra: ".$purchase->getTime()."</p>
                     </div>
                     ";

@@ -39,7 +39,7 @@ class FormDeleteAccount extends Form {
                             </div>
                             <div class='actions'>
                                 <!-- <input type='submit' id='submit' value='Eliminar Cuenta de Usuario' class='primary' /> -->
-                                <button class='danger' onclick='confirmDelete(event)'>Eliminar Cuenta de Usuario</button>
+                                <button class='danger' onclick='confirmDelete(event)'>Eliminar Usuario</button>
                             </div>
                         </div>";
 
