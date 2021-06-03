@@ -4,6 +4,7 @@ function reRol(){
     if(isset($_SESSION["lastRol"])){
         $_SESSION["rol"] = $_SESSION["lastRol"];
         unset($_SESSION["lastRol"]);
+		unset($_SESSION["cinema"]);
     }
 }
 reRol();
