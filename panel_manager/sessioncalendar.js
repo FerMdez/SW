@@ -2,7 +2,14 @@
 $(document).ready(function(){
 	
 		var selectedFeed = $('#hall_selector').find(':selected').data('feed');
-	
+		var modal = document.getElementById("myModal");
+
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
 	   var calendar = $('#calendar').fullCalendar({
 		editable:true,
 		header:{
@@ -16,7 +23,8 @@ $(document).ready(function(){
 		timeFormat: 'H:mm',
 		select: function(start, end, allDay)
 			{
-
+			modal.style.display = "block";
+			/*
 			  var e = {
 				"date"  : $.fullCalendar.formatDate(allDay,"Y-MM-DD"),
 				"start" : $.fullCalendar.formatDate(start, "HH:mm"),
@@ -33,7 +41,7 @@ $(document).ready(function(){
 				calendar.fullCalendar('refetchEvents');
 				alert("Added Successfully");
 			   }
-			  })
+			  })*/
 			},
 		editable:true,
 		eventResize:function(event)
@@ -114,5 +122,17 @@ $(document).ready(function(){
 			$('#calendar').fullCalendar('addEventSource', feed);  
 			selectedFeed = feed;
 		};
+		
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
+		  modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		  if (event.target == modal) {
+			modal.style.display = "none";
+		  }
+		}
 });
 	

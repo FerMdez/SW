@@ -89,7 +89,7 @@
 			return $panel;
 		}
 		static function calendar(){
-			
+			$formSession = new FormSession("new_session", $_SESSION["cinema"] );
 			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
 			$halls = Hall::getListHalls($_SESSION["cinema"]);
 
@@ -115,8 +115,15 @@
 					<div class="column side"></div>	
 				</div>
 					<div class="row">
+						<div id="myModal" class="modal">
+
+							<div class="modal-content">
+						    <span class="close">&times;</span>
+								'.$formSession->gestiona().'
+							</div>
+						</div>
 						<div id="calendar"></div>
-					</div>';
+						</div>';
 			}else{
 				$panel ='<div class="row">
 							<h3> No hay ninguna sala en este cine </h3>
