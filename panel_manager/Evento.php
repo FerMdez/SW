@@ -15,14 +15,14 @@ class Evento implements \JsonSerializable
      *
      * @return array[Evento] Lista de eventos del usuario con id $userId.
      */
-    public static function buscaTodosEventos(int $userId)
+    public static function buscaTodosEventos(int $userId, $idhall)
     {
         if (!$userId) {
            // throw new \BadMethodCallException('$userId no puede ser nulo.');
         }
 		
         $result = [];
-		$sessions = Session::getListSessions("1","1",null);
+		$sessions = Session::getListSessions($idhall,"1",null);
 		
 		foreach($sessions as $s){
 			$e = new Evento();
@@ -41,7 +41,7 @@ class Evento implements \JsonSerializable
      *
      * @return Evento Evento encontrado.
      */
-    public static function buscaPorId(int $idEvento)
+    public static function buscaPorId(int $idEvento, $idhall)
     {
         if (!$idEvento) {
             throw new \BadMethodCallException('$idEvento no puede ser nulo.');
@@ -76,7 +76,7 @@ class Evento implements \JsonSerializable
      *
      * @return array[Evento] Lista de eventos encontrados.
      */
-    public static function buscaEntreFechas(int $userId, string $start, string $end = null)
+    public static function buscaEntreFechas(int $userId, string $start, string $end = null, $idhall)
     {	
         if (!$userId) {
             //throw new \BadMethodCallException('$userId no puede ser nulo.');
@@ -101,7 +101,7 @@ class Evento implements \JsonSerializable
         
         $result = [];
 		
-        $sessions = Session::getListSessionsBetween2Dates("1","1",$startDate,$endDate);
+        $sessions = Session::getListSessionsBetween2Dates($idhall,"1",$startDate,$endDate);
 		
 		foreach($sessions as $s){
 			$e = new Evento();
@@ -292,8 +292,11 @@ class Evento implements \JsonSerializable
     private $end;
 
 	private $idfilm;
-    /*private $idhall;
-    private $idcinema;
+   
+	
+    /*
+	 private $idhall;
+	private $idcinema;
     private $date;
     private $start_time;
 	private $seat_price;
@@ -309,7 +312,7 @@ class Evento implements \JsonSerializable
     {
         return $this->id;
     }
-
+	
     public function getUserId()
     {
         return $this->userId;
@@ -404,7 +407,7 @@ class Evento implements \JsonSerializable
 		$film =	Session::getThisSessionFilm($session->getIdfilm());
 		$dur = $film["duration"]+$extraDurationBetweenFilms;
 		
-		$tittle = "Sala: ".$session->getIdhall()." ".$film["tittle"];
+		$tittle = str_replace('_', ' ', $film["tittle"]) ;
 		$start = $session->getDate()." ".$session->getStartTime();
 		
 		$end = date('Y-m-d H:i:s', strtotime( $start . ' +'.$dur.' minute'));
@@ -541,6 +544,7 @@ class Evento implements \JsonSerializable
                 $this->idfilm = $idfilm;
             }
         }
+		
         /*
 		if (array_key_exists('idhall', $diccionario)) {
             $idhall = $diccionario['idhall'] ?? null;

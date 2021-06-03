@@ -23,17 +23,22 @@
 			$userPic = USER_PICS.strtolower($name).".jpg";
 			$cinema = strtoupper( $manager->getIdcinema());
 
-            $panel = '<div class="code info">
+            $panel = '<div class="code">
 						<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
 						<hr />
-						<img src='.$userPic.' alt="user_profile_picture"/>
-						<p>Usuario: '.$name.'</p> <br>
-						<p>Cine: '.$c_name.'</p>
-						<p>Dirección: '.$c_dir.'</p>
-						<p>Telefono: '.$c_tel.'</p> <br>
-						<p>Espero que estes pasando un buen dia</p>
-						
-						<a href="?state=calendar"> calendario </a>
+							<div class="column side"></div>
+							<div class="column middle">
+
+								<img src='.$userPic.' alt="user_profile_picture"/>
+								<p>Usuario: '.$name.'</p> <br>
+								<p>Cine: '.$c_name.'</p>
+								<p>Dirección: '.$c_dir.'</p>
+								<p>Telefono: '.$c_tel.'</p> <br>
+								<p>Espero que estes pasando un buen dia</p>
+							
+								<a href="?state=calendar"> calendario </a>
+							</div>
+							<div class="column side"></div>
 					</div>';
 				
 			return $panel;
@@ -73,11 +78,42 @@
 
 			return $panel;
 		}
-		static function calendar(){
-			$panel = '
-			<div class="code">
-				<div id="calendar"></div>
-			</div>';
+		static function calendar($manager){
+			
+			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
+			$halls = Hall::getListHalls($manager->getIdcinema());
+
+			if($halls){
+				$panel ='
+				<div class="row">
+					<div class="column side"></div>
+					<div class="column middle">
+						<br>
+						<select id="hall_selector" class="button large">';
+				foreach(Hall::getListHalls($manager->getIdcinema()) as $hll){
+					if($hll->getNumber() == $hall){
+						$panel.= '
+									<option data-feed="./eventos.php?hall='.$hll->getNumber().'" value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
+					}else{ 
+						$panel.= '
+									<option data-feed="./eventos.php?hall='.$hll->getNumber().'" value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
+					}
+				}
+				$panel.='
+						</select>
+					</div>		
+					<div class="column side"></div>	
+				</div>
+					<div class="row">
+						<div id="calendar"></div>
+					</div>';
+			}else{
+				$panel ='<div class="row">
+							<h3> No hay ninguna sala en este cine </h3>
+							<a href=."/?state=new_hall"> Añadir Sala </a>
+						</div>';
+			}
+
 			
 			return $panel;
 		}
