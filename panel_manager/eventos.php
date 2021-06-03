@@ -31,12 +31,13 @@ switch($_SERVER['REQUEST_METHOD']) {
     // Consulta de datos
     case 'GET':
 		$hall =  $_GET["hall"];
+		$cinema =  $_SESSION["cinema"];
         // Comprobamos si es una consulta de un evento concreto -> eventos.php?idEvento=XXXXX
         $idEvento = filter_input(INPUT_GET, 'idEvento', FILTER_VALIDATE_INT);
         if ($idEvento) {
 			
             $result = [];
-            $result[] = Evento::buscaPorId((int)$idEvento,$hall);
+            $result[] = Evento::buscaPorId((int)$idEvento,$hall,$cinema);
         } else {
             // Comprobamos si es una lista de eventos entre dos fechas -> eventos.php?start=XXXXX&end=YYYYY
             $start = filter_input(INPUT_GET, 'start', FILTER_VALIDATE_REGEXP,  array("options" => array("regexp"=>"/\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))/")));
@@ -48,11 +49,11 @@ switch($_SERVER['REQUEST_METHOD']) {
                 if ($end) {
                     $endDateTime = $end. ' 00:00:00';
                 }
-                $result = Evento::buscaEntreFechas(1, $startDateTime, $endDateTime, $hall);
+                $result = Evento::buscaEntreFechas(1, $startDateTime, $endDateTime, $hall,$cinema);
             } else {
 				
                 // Comprobamos si es una lista de eventos completa
-                $result = Evento::buscaTodosEventos(1, $hall); // HACK: normalmente debería de ser App::getSingleton()->idUsuario();
+                $result = Evento::buscaTodosEventos(1, $hall,$cinema); // HACK: normalmente debería de ser App::getSingleton()->idUsuario();
             }
         }
         // Generamos un array de eventos en formato JSON

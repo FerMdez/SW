@@ -15,14 +15,14 @@ class Evento implements \JsonSerializable
      *
      * @return array[Evento] Lista de eventos del usuario con id $userId.
      */
-    public static function buscaTodosEventos(int $userId, $idhall)
+    public static function buscaTodosEventos(int $userId, $idhall, $cinema)
     {
         if (!$userId) {
            // throw new \BadMethodCallException('$userId no puede ser nulo.');
         }
 		
         $result = [];
-		$sessions = Session::getListSessions($idhall,"1",null);
+		$sessions = Session::getListSessions($idhall,$cinema,null);
 		
 		foreach($sessions as $s){
 			$e = new Evento();
@@ -41,7 +41,7 @@ class Evento implements \JsonSerializable
      *
      * @return Evento Evento encontrado.
      */
-    public static function buscaPorId(int $idEvento, $idhall)
+    public static function buscaPorId(int $idEvento, $idhall, $cinema)
     {
         if (!$idEvento) {
             throw new \BadMethodCallException('$idEvento no puede ser nulo.');
@@ -76,7 +76,7 @@ class Evento implements \JsonSerializable
      *
      * @return array[Evento] Lista de eventos encontrados.
      */
-    public static function buscaEntreFechas(int $userId, string $start, string $end = null, $idhall)
+    public static function buscaEntreFechas(int $userId, string $start, string $end = null, $idhall, $cinema)
     {	
         if (!$userId) {
             //throw new \BadMethodCallException('$userId no puede ser nulo.');
@@ -101,7 +101,7 @@ class Evento implements \JsonSerializable
         
         $result = [];
 		
-        $sessions = Session::getListSessionsBetween2Dates($idhall,"1",$startDate,$endDate);
+        $sessions = Session::getListSessionsBetween2Dates($idhall,$cinema,$startDate,$endDate);
 		
 		foreach($sessions as $s){
 			$e = new Evento();

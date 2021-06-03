@@ -11,54 +11,60 @@
 		
         function __construct(){}
 
-		static function welcome($manager){
+		static function welcome(){
 			$bd = new Cinema_DAO('complucine');
 			if($bd){
-				$cinema = $bd->cinemaData($manager->getIdcinema());
+				
+				$cinema = $bd->cinemaData($_SESSION["cinema"]);
 				$c_name = $cinema->getName();
 				$c_dir = $cinema->getDirection();
-				$c_tel = $cinema->getPhone();
 			}
             $name = strtoupper($_SESSION["nombre"]);
 			$userPic = USER_PICS.strtolower($name).".jpg";
-			$cinema = strtoupper( $manager->getIdcinema());
 
-            $panel = '<div class="code">
-						<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
-						<hr />
-							<div class="column side"></div>
-							<div class="column middle">
-
-								<img src='.$userPic.' alt="user_profile_picture"/>
-								<p>Usuario: '.$name.'</p> <br>
-								<p>Cine: '.$c_name.'</p>
-								<p>Dirección: '.$c_dir.'</p>
-								<p>Telefono: '.$c_tel.'</p> <br>
-								<p>Espero que estes pasando un buen dia</p>
-							
-								<a href="?state=calendar"> calendario </a>
-							</div>
-							<div class="column side"></div>
-					</div>';
-				
+			$panel=  '<div class="code welcome">
+					<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
+            <hr />
+            <img src='.$userPic.' alt="user_profile_picture"/>
+            <h3>'.strftime("%A %e de %B de %Y | %H:%M").'</h3>
+			<p>Usuario: '.$name.'</p>  <br>
+			<p>Cine: '.$c_name.'</p>
+			<p>Dirección: '.$c_dir.'</p>
+			<a href="?state=calendar"> <p> Hack para entrar al calendario <p> </a>
+            </div>'."\n"; 
+			
 			return $panel;
         }
 		
-		static function welcomeAdmin($manager) {
+		static function welcomeAdmin() {
 			$cinemaList = new Cinema_DAO('complucine');
 			$cinemas = $cinemaList->allCinemaData();	
-			$cinema;
+			
+			$bd = new Cinema_DAO('complucine');
+			
+			$c_name = "Aun no se ha escogido un cine";
+			
+			if($bd && $_SESSION["cinema"] ){
+				
+				$cinema = $bd->cinemaData($_SESSION["cinema"]);
+				$c_name = $cinema->getName();
+				$cinema = $cinema->getId();
+			}
 
             $name = strtoupper($_SESSION["nombre"]);
+			$userPic = USER_PICS.strtolower($name).".jpg";
 
-			if($manager->getIdcinema() != null) $cinema = strtoupper( $manager->getIdcinema());
-
-            $panel = '<div class="code info">
-						<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
-						<hr />
-						<p>Usuario: '.$name.'</p>
-						<p>Cine: '.$cinema.'</p>
-						<p>Espero que estes pasando un buen dia</p>
+			$panel=  '<div class="code welcome">
+					<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
+					<hr />
+					<img src='.$userPic.' alt="user_profile_picture"/>
+					<h3>'.strftime("%A %e de %B de %Y | %H:%M").'</h3>
+					<p>Usuario: '.$name.'</p>  <br>
+					<h3>Como administrador puedes escoger el cine que gestionar</h3>
+					<p>Cine: '.$c_name.'</p>
+					
+					<a href="?state=calendar"> <p> Hack para entrar al calendario <p> </a>
+             
 						<form method="post" id="changecinema" action="index.php">
 							<select name="cinema" class="button large">
 							';
@@ -78,10 +84,10 @@
 
 			return $panel;
 		}
-		static function calendar($manager){
+		static function calendar(){
 			
 			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
-			$halls = Hall::getListHalls($manager->getIdcinema());
+			$halls = Hall::getListHalls($_SESSION["cinema"]);
 
 			if($halls){
 				$panel ='
@@ -90,7 +96,7 @@
 					<div class="column middle">
 						<br>
 						<select id="hall_selector" class="button large">';
-				foreach(Hall::getListHalls($manager->getIdcinema()) as $hll){
+				foreach(Hall::getListHalls($_SESSION["cinema"]) as $hll){
 					if($hll->getNumber() == $hall){
 						$panel.= '
 									<option data-feed="./eventos.php?hall='.$hll->getNumber().'" value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
@@ -128,11 +134,11 @@
 			return $panel;
         }
 		
-		static function manage_halls($manager){	
+		static function manage_halls(){	
 			
 			$panel = '<div class="column side"></div>
 					<div class="column middle">';
-			$listhall = Hall::getListHalls($manager->getIdcinema());
+			$listhall = Hall::getListHalls($_SESSION["cinema"]);
 			if(!$listhall){
 				$panel .= "<h2> No hay ninguna sala en este cine";
 			}else{
@@ -149,7 +155,7 @@
 								<li> '. $hall->getNumber().'</li>
 								<li> '.$hall->getTotalSeats().' </li>
 							</a>
-							<a href="?state=manage_sessions&hall='. $hall->getNumber().'">
+							<a href="?state=calendar&hall='. $hall->getNumber().'">
 								<li> Sesiones </li>
 							</a>
 						</div>
@@ -168,30 +174,30 @@
 			return $panel;
         }
 		
-		static function new_hall($manager){		
+		static function new_hall(){		
 		
-			$formHall = new FormHall("new_hall",$manager->getIdcinema(),new Hall(null, null, null, null, null, null));
+			$formHall = new FormHall("new_hall",$_SESSION["cinema"],new Hall(null, null, null, null, null, null));
 		
 			$panel = '<h1>Crear una sala.</h1><hr/></br>
 				'.$formHall->gestiona();
 			return $panel;
 		}
 		
-		static function edit_hall($manager){	
-			$hall = Hall::search_hall($_GET["number"], $manager->getIdcinema());
+		static function edit_hall(){	
+			$hall = Hall::search_hall($_GET["number"], $_SESSION["cinema"]);
 			
 			if($hall || isset($_POST["restart"]) || isset($_POST["filter"]) || isset($_POST["sumbit"]) ){
 				
-				$formHall = new FormHall("edit_hall",$manager->getIdcinema(), $hall);
+				$formHall = new FormHall("edit_hall",$_SESSION["cinema"], $hall);
 				$panel = '<h1>Editar una sala.</h1><hr/></br>
 					'.$formHall->gestiona();
 				return $panel;
 			} else{
-				return Manager_panel::warning($manager);
+				return Manager_panel::warning();
 			}
 		}
 		
-		static function manage_sessions($manager){
+		static function manage_sessions(){
 			//Base filtering values
 			$date = $_POST['date'] ?? $_GET['date'] ?? date("Y-m-d");
 			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
@@ -202,7 +208,7 @@
 						<input type="date" name="date" value="'.$date.'" min="2021-01-01" max="2031-12-31">
 							<select name="hall" class="button large">';
 						
-			foreach(Hall::getListHalls($manager->getIdcinema()) as $hll){
+			foreach(Hall::getListHalls($_SESSION["cinema"]) as $hll){
 				if($hll->getNumber() == $hall){
 					$panel.= '
 								<option value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
@@ -219,7 +225,7 @@
 			';
 			//Session list
 			$panel .='	<div class = "column right">';
-			$sessions = Session::getListSessions($hall,$manager->getIdcinema(),$date);
+			$sessions = Session::getListSessions($hall,$_SESSION["cinema"],$date);
 			
 			if($sessions) {
 				$panel .='
@@ -273,16 +279,16 @@
 			return $panel;
         }
 		
-		static function new_session($manager){	
-			$formSession = new FormSession("new_session", $manager->getIdcinema() );
+		static function new_session(){	
+			$formSession = new FormSession("new_session", $_SESSION["cinema"] );
 			
 			$panel = '<h1>Crear una sesion.</h1> <hr/> </br>
 				'.$formSession->gestiona();
 			return $panel;
 		}
 		
-		static function edit_session($manager){	
-			$formSession = new FormSession("edit_session", $manager->getIdcinema() );
+		static function edit_session(){	
+			$formSession = new FormSession("edit_session", $_SESSION["cinema"] );
 		
 			$panel = '<h1>Editar una sesion.</h1><hr/></br>
 				'.$formSession->gestiona();
@@ -290,19 +296,19 @@
 		}
 		
 		//TODO: estado al modificar sesiones para la seleccion de peliculas usando el template->print films
-		static function select_film($template,$manager){		
+		static function select_film($template){		
 			if(isset($_POST["select_film"]) && isset($_POST["option"])){
 				$_SESSION["option"] = $_POST["option"];
 				$panel = '<h1>Seleccionar Pelicula.</h1><hr /></br>';
 				$panel .= $template->print_fimls();
 				$_SESSION["option"] = "";
-			} else $panel = self::warning($manager);
+			} else $panel = self::warning();
 			
 			return $panel;
 		}
 		
 		//Funcion que se envia cuando hay inconsistencia en el panel manager, principalmente por tocar cosas con la ulr
-		static function warning($manager){
+		static function warning(){
 			$panel = '<div class="code info">
                     <h1>Ha habido un error.</h1>
                     <hr />
