@@ -57,6 +57,8 @@
 			$panel=  '<div class="code welcome">
 					<h1>Bienvenido '.$name.' a tu Panel de Manager.</h1>
 					<hr />
+					<div class="column side"> </div>
+					<div class="column middle">
 					<img src='.$userPic.' alt="user_profile_picture"/>
 					<h3>'.strftime("%A %e de %B de %Y | %H:%M").'</h3>
 					<p>Usuario: '.$name.'</p>  <br>
@@ -77,10 +79,12 @@
 							";
 					}
 				}
-		$panel .= '				<input type="submit" name="changecinema" value="Cambiar" /><br>
+		$panel .= '			<input type="submit" id="submit" name="changecinema" value="Cambiar" class="primary" />
 							</select>
 						</form>
-					</div>';
+					</div>
+					<div class="column side"> </div>
+					';
 
 			return $panel;
 		}
