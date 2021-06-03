@@ -19,11 +19,18 @@
 
         //Encrypt password with SHA254.
 		private function encryptPass($password){
-			/* Una rica ensalada salada */
-			/* $SALAD = [
-				'cost' => 11,
+			/**
+			 *  Por defecto, la función password_hash(), ya genera una contraseña con "SAL", 
+			 * aunque este sería un ejemplo de cómo crear unas opciones mejores que las que vienen por defecto,
+			 * aumentando el coste.
+			 * Más info: https://www.php.net/manual/es/faq.passwords.php#faq.passwords.salt
+			 * */
+			/*
+			$SALAD = [
+				'cost' => 11, //Por defecto password_hash lo pone a 10.
 				'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM), //Hay que tener activado el módulo mcrypt para usar esta función.
-			]; */
+			];
+			*/
 
 			$password = password_hash($password, PASSWORD_DEFAULT); //Actualmente en PHP PASSWORD_DEFAULT equivale a PASSWORD_BCRYPT.
 		

@@ -63,7 +63,7 @@ class FormPurchase extends Form {
         $this->code = intval(0);
         if(isset($_POST["code"]) && $_POST["code"] !== ""){
             if($promoDAO->GetPromotion($_POST["code"])->data_seek(0)){
-                $this->code = intval(3);
+                $this->code = intval(2);
             }
         }
 
