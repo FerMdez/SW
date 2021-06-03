@@ -7,7 +7,10 @@
 const regExpr = /^([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\']+[\s])+([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])+[\s]?([A-Za-zÁÉÍÓÚñáéíóúÑ]{0}?[A-Za-zÁÉÍÓÚñáéíóúÑ\'])?$/g;
 
 //Expresión regular para validar un código promocional:
-const refExprCode = /^0?[xX]?[0-9a-fA-F]*$/;
+const regExprCode = /^0?[xX]?[0-9a-fA-F]*$/;
+
+//Fecha acutal:
+const fecha = new Date();
 
 $(document).ready(function() {
 
@@ -33,7 +36,7 @@ $(document).ready(function() {
         const cardHolder = $("#card-holder");
         cardHolder[0].setCustomValidity("");
 
-		if(cardHolder.val().length > 5 && holderCheck(cardHolder.val())){
+		if(cardHolder.val().length > 5  && !holderCheck(cardHolder.val())){
             $("#cardNameValid").show();
             $("#cardNameInvalid").hide();
             cardHolder[0].setCustomValidity("");
