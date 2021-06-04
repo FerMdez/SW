@@ -10,7 +10,7 @@ window.onload = function(){
 
 function select_cinema(){
     var select = document.getElementById("select_cinema");
-    console.log(select);
+
     if(select != undefined){
         select.onchange = function(){
             location.href += "&cinema=" + $('select[id=cinemas]').val();

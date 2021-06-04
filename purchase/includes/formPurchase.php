@@ -160,6 +160,7 @@ class FormPurchase extends Form {
                 $html = "<div class='code info'>
                        <h2>No se ha seleccionado asiento(s).</h2>
                        <p>Vuelva atrás para selecionar una butaca.</p>
+                       <button id='go-back'>Volver</button>
                     </div>";
             }
         }

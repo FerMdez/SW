@@ -70,13 +70,15 @@
         $page = $this->page;
         $prefix = $this->prefix;
 
+        if(!isset($_SESSION["css"])) $_SESSION["css"] = "main.css";
+
         $extraCSS = "";
         if($page === "Comprar Entrada") $extraCSS = "\n<link id='estilo' rel='stylesheet' type='text/css' href='{$prefix}assets/css/seat.css'>";
 
         echo"<head>
         <title>CompluCine | {$page}</title>
         <meta charset='utf-8' />
-        <link id='estilo' rel='stylesheet' type='text/css' href='{$prefix}assets/css/main.css'>{$extraCSS}
+        <link id='estilo' rel='stylesheet' type='text/css' href='{$prefix}assets/css/{$_SESSION['css']}'>{$extraCSS}
         <noscript><h1>Esta página requiere JavaScript para su correcto funcionamiento. 
             Compruebe si JavaScript está deshabilitado en su navegador.</h1></noscript>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -664,16 +666,14 @@
     function print_footer(){
         $prefix = $this->prefix;
         $page = $this->page;
-
-        /* TODO */
-        if(!isset($_SESSION["css"]) || $_SESSION["css"] === "assets/css/main.css"){
+        
+        if(!isset($_SESSION["css"]) || $_SESSION["css"] === "main.css"){
             $css = "{$prefix}assets/css/highContrast.css";
             $nameCSS = "Alto Contraste";
         } else {
             $css = "{$prefix}assets/css/main.css";
             $nameCSS = "Contraste Normal";
         }
-        /****/
         
 
         echo"<footer>
@@ -685,7 +685,7 @@
             <a href='{$prefix}fdicines/terms_conditions/'>Términos de uso</a> |
             <a href='{$prefix}cinemas/'>Nuestros cines</a> |
             <a href='{$prefix}contacto/'>Contacto</a> |
-            <button id='css' onclick=\"cambiarCSS('$css');\">$nameCSS</button>
+            <button id='cssChange' onclick=\"cambiarCSS('$css');\">$nameCSS</button>
         </footer>\n";
     }
 
@@ -702,7 +702,8 @@
         if($page === "FDI-Cines") echo"<script type='text/javascript' src='{$prefix}assets/js/promotions.js'></script>\n";
         if($page === "Panel de Usuario") echo"<script type='text/javascript' src='{$prefix}assets/js/deleteConfirm.js'></script>\n";
         if($page === "Comprar Entrada") echo"<script type='text/javascript' src='{$prefix}assets/js/selectTicket.js'></script>
-        <script type='text/javascript' src='{$prefix}assets/js/checkPay.js'></script>\n";
+        <script type='text/javascript' src='{$prefix}assets/js/checkPay.js'></script>
+        <script type='text/javascript' src='{$prefix}assets/js/goBack.js'></script>\n";
     }
 
     }

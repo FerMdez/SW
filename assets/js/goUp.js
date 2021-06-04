@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	
 	$('.go-up').click(function(){
 		$('body, html').animate({
 			scrollTop: '0px'
