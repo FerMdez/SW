@@ -78,7 +78,7 @@ class FormSelectCinemaSession extends Form {
                     $cinemasListHTML .= '</select>
                                 </section>';
                 } else {
-                    $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select><button id="go-back">Volver</button>';
+                    $cinemasListHTML = '<select name="cinemas"><option value="" selected>No hay cines disponibles para esta película.</option></select>';
                 }
     
                 $fiml_id = $film->getId();
@@ -118,11 +118,11 @@ class FormSelectCinemaSession extends Form {
                         $sessionsListHTML .= '</select>';
     
                         if($count == 0) {
-                            $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select><button id="go-back">Volver</button>'; 
+                            $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select>'; 
                             $pay = false;
                         }
                     } else {
-                        $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select><button id="go-back">Volver</button>';
+                        $sessionsListHTML = '<select name="sessions"><option value="" selected>No hay sesiones disponibles para esta película.</option></select>';
                         $pay = false;
                     }
                 } else {
@@ -147,7 +147,7 @@ class FormSelectCinemaSession extends Form {
                                 <input type="text" name="code" id="code" value="" placeholder="Código pormocional" /><pre>'.$errorCode.'</pre> 
                         </div>';
             } else {
-                $html = '<h1>No existe la película.</h1><button id="go-back">Volver</button>';
+                $html = '<h1>No existe la película.</h1>';
                 $pay = false;
             }
         } else if(isset($_GET["cinema"])) {
@@ -192,7 +192,7 @@ class FormSelectCinemaSession extends Form {
                                 </section>';
 
                 } else {
-                    $filmsListHTML = '<select name="films"><option value="" selected>No hay películas disponibles para este cine.</option></select><button id="go-back">Volver</button>';
+                    $filmsListHTML = '<select name="films"><option value="" selected>No hay películas disponibles para este cine.</option></select>';
                 }
 
                 //Reply: Depends on whether the purchase is to be made from a selected movie or a cinema.
@@ -213,8 +213,7 @@ class FormSelectCinemaSession extends Form {
                         </div>';
 
             } else {
-                $html = '<h1>No existe el cine.</h1>
-                        <button id="go-back">Volver</button>';
+                $html = '<h1>No existe el cine.</h1>';
                 $pay = false;
             }
         } else {
@@ -226,6 +225,8 @@ class FormSelectCinemaSession extends Form {
         //Select seat button:
         if($pay){
             $pay = '<input type="submit" id="submit" value="Seleccionar Asiento" />';
+        } else {
+            $pay = '<button id="go-back">Volver</button>';
         }
 
             return '
