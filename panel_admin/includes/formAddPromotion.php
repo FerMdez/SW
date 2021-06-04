@@ -32,7 +32,7 @@ class formAddPromotion extends Form{
 							<input type="text" name="tittle" id="tittle" placeholder="Título" required/><pre>'.$errorTittle.'</pre>
 							<input type="text" name="description" id="description" placeholder="Descripción" required/><pre>'.$errorDescription.'</pre>
 							<input type="text" name="code" id="code" placeholder="Codigo" required/><pre>'.$errorCode.'</pre>
-							<input type="text" name="active" id="active" placeholder="Activo" required/><pre>'.$errorActive.'</pre>
+							<input type="text" name="active" id="active" placeholder="Activo (si/no)" required/><pre>'.$errorActive.'</pre>
 							<div class="file">Imagen promocional:<input type="file" name="archivo" id="file" placeholder="Imagen promocional" /></div>
 					</fieldset>
 					<div class="actions"> 
@@ -67,11 +67,19 @@ class formAddPromotion extends Form{
             $result['code'] = "El idioma no es válido";
         }
 
-		$active = $this->test_input($datos['active']) ?? null;
+		$active = strtolower($this->test_input($datos['active'])) ?? null;
 		//|| !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $description) 
-        if ( $active>1 ||$active<0 ) {
-            $result['active'] = "La descripcion no es válida";
+        if ( strcmp($active,"si") == 0 ||  strcmp($active,"no") == 0) {
+			if ( strcmp($active,"si") == 0 ) {
+				$boolean = 0;
+			}
+			else {
+				$boolean = 1;
+			}
         }
+		else {
+			$result['active'] = "El valor activo debe ser si/no";
+		}
         
         if (count($result) === 0) {
         	$bd = new Promotion_DAO("complucine");
@@ -113,7 +121,7 @@ class formAddPromotion extends Form{
 					//  $result['img'] = 'Error al mover el archivo';
 					//}
 					//$nombreBd = str_replace("_", " ", $nombre);
-					$bd->createPromotion(null, $tittle,$description,$code,$active, $nombreBd);
+					$bd->createPromotion(null, $tittle,$description,$code,$boolean, $nombreBd);
 					$_SESSION['message'] = "<div class='row'>
 										<div class='column side'></div>
 										<div class='column middle'>
@@ -131,7 +139,8 @@ class formAddPromotion extends Form{
 				}else {
 					$result['img'] = 'El archivo tiene un nombre o tipo no soportado';
 				}
-				} else {
+				} 
+				else {
 				$result['img'] = 'Error al subir el archivo.';
 				}
 				

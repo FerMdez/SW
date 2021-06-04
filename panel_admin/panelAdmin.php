@@ -382,7 +382,12 @@
                     $tittles[$key] = $value->getTittle();
                     $descriptions[$key] = $value->getDescription();
                     $codes[$key] = $value->getCode();
-                    $actives[$key] = $value->getActive();
+                    if ($value->getActive() == 0) {
+                        $actives[$key] = "si";
+                    }
+                    else{
+                        $actives[$key] = "no";
+                    }
                 }
             
              $reply= "<div class='row'>
@@ -395,7 +400,7 @@
                                 <li class='title'>Editar</li>
                                 <li class='title'>Eliminar</li>
                             "; 
-                 
+      
             for($i = 0; $i < count($promos); $i++){
                 $reply.= '
                             <li>'. $ids[$i] .'</li>

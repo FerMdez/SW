@@ -74,11 +74,19 @@ class formEditPromotion extends Form{
             $result['code'] = "El idioma no es válido";
         }
 
-		$active = $this->test_input($datos['active']) ?? null;
+		$active = strtolower($this->test_input($datos['active'])) ?? null;
 		//|| !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $description) 
-        if ( $active>1 ||$active<0 ) {
-            $result['active'] = "La descripcion no es válida";
+        if ( strcmp($active,"si") == 0 ||  strcmp($active,"no") == 0) {
+			if ( strcmp($active,"si") == 0 ) {
+				$boolean = 0;
+			}
+			else {
+				$boolean = 1;
+			}
         }
+		else {
+			$result['active'] = "El valor activo debe ser si/no";
+		}
         
         if (count($result) === 0) {
         	$bd = new Promotion_DAO("complucine");
@@ -118,7 +126,7 @@ class formEditPromotion extends Form{
 					//  $result['img'] = 'Error al mover el archivo';
 					//}
 					//$nombreBd = str_replace("_", " ", $nombre);
-				   $bd->editPromotion($id, $tittle,$description,$code,$active, $nombreBd);
+				   $bd->editPromotion($id, $tittle,$description,$code,$boolean, $nombreBd);
 				   $_SESSION['message'] = "<div class='row'>
 											<div class='column side'></div>
 											<div class='column middle'>
