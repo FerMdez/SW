@@ -27,19 +27,18 @@
   }
   
   .col7 .odd{
-     background: green;
+     background: rgba(144, 144, 144, 0.25);;
      display: grid;
      grid-column-start: 1;
      grid-column-end: 8;
-     grid-template-columns: repeat(5,auto); 
+     grid-template-columns: repeat(7,1fr); 
   }
   
   .col7 .even{
-     background: pink;
      display: grid;
      grid-column-start: 1;
      grid-column-end: 8;
-     grid-template-columns: repeat(5,auto); 
+     grid-template-columns: repeat(7,1fr);  
   }
   
   .tablelist.col7 a.h4long

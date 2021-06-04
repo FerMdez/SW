@@ -240,9 +240,10 @@
                             <li class='title'>Editar</li>
                             <li class='title'>Eliminar</li>
                         "; 
-                  
+                    $parity = "odd";   
                 for($i = 0; $i < count($managers); $i++){
                     $reply.= '
+                            <div class="'.$parity.'">
                             <li>'. $ids[$i] .'</li>
                             <li>'. $idscinemas[$i] .'</li>
                             <li>'. $usernames[$i] .'</li>
@@ -265,7 +266,9 @@
                                     <input type="submit" id="submit" value="Eliminar" name="delete_manager" class="primary" />
                                 </form> 
                             </li> 
+                            </div>
                         '; 
+                        $parity = ($parity == "odd") ? "even" : "odd";
                 } 
             
             $reply.='</ul>
@@ -400,7 +403,7 @@
                                 <li class='title'>Editar</li>
                                 <li class='title'>Eliminar</li>
                             "; 
-      
+                $parity ="odd";
             for($i = 0; $i < count($promos); $i++){
                 $reply.= '
                             <li>'. $ids[$i] .'</li>
@@ -429,7 +432,9 @@
                                 </form> 
                             </li> 
                         </li>
+                        </div>
                     '; 
+                    $parity = ($parity=="odd")? "even":"odd";
             } 
                     
              $reply.='</ul>
