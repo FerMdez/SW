@@ -406,6 +406,7 @@
                 $parity ="odd";
             for($i = 0; $i < count($promos); $i++){
                 $reply.= '
+                            <div class="'.$parity.'">
                             <li>'. $ids[$i] .'</li>
                             <li>'. $tittles[$i] .'</li>
                             <li>'. $descriptions[$i] .'</li>
