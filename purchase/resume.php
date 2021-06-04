@@ -9,6 +9,7 @@
     include_once($prefix.'assets/php/includes/session.php');
     include_once($prefix.'assets/php/includes/cinema_dao.php');
     include_once($prefix.'assets/php/includes/cinema.php');
+    include_once($prefix.'assets/php/includes/promotion_dao.php');
 
     if(isset($_SESSION["purchase"]) && isset($_SESSION["film_purchase"])){
         $purchase = unserialize($_SESSION["purchase"]);

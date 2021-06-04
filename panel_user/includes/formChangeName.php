@@ -80,6 +80,12 @@ class FormChangeName extends Form {
                 } else {
                     $bd->changeUserName(unserialize($_SESSION['user'])->getId(), $nombre);
                     $user = $bd->selectUser($nombre, $password);
+
+                    $actual_img = "../img/users/".unserialize($_SESSION['user'])->getName().".jpg";
+                    $new_img = "../img/users/".$nombre.".jpg";
+                    copy($actual_img, $new_img);
+                    unlink($actual_img);
+
                     $_SESSION['user'] = serialize($user);
                     $_SESSION["nombre"] = $user->getName();
                     $_SESSION['message'] = "<div class='row'>

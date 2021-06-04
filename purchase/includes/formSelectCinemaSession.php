@@ -143,7 +143,7 @@ class FormSelectCinemaSession extends Form {
                                 '.$cinemasListHTML.'
                                 <h3>Sesiones</h3>
                                 '.$sessionsListHTML.'
-                                <h3>Aplicar código promocional<span id="codeValid">&#x2714;</span><span id="codeInvalid">&#x274C;</span></h3>
+                                <h3><a href="../promotions/" target="_blank">Aplicar código promocional</a><span id="codeValid">&#x2714;</span><span id="codeInvalid">&#x274C;</span></h3>
                                 <input type="text" name="code" id="code" value="" placeholder="Código pormocional" /><pre>'.$errorCode.'</pre> 
                         </div>';
             } else {
