@@ -373,7 +373,15 @@
   filter: drop-shadow(5px 5px 10px #1f2c3d);
 }
 .code.cinemas {
-  height: 200px;
+  height: 250px;
+}
+.code.cinemas img {
+  margin: 0 0 0.2em 0;
+  width: 230px;
+  height: 130px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .code.promo img {
   margin: 0.1em 0 0.8em 0;

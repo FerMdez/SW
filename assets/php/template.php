@@ -520,6 +520,7 @@
                             <div class='zoom'>
                                 <a href='".$prefix."purchase?cinema=".$ids[$i]."'>
                                 <div class='code cinemas'>
+                                    <img src='../img/sala1.jpg' alt='".$names[$i]."' />
                                     <h2>".$names[$i]."</h2>
                                     <hr />
                                     <li>Dirección: ".$directions[$i]."</li>
