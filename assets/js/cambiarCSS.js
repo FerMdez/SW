@@ -4,6 +4,7 @@
  */
 
 function cambiarCSS(nuevo){
+    /*
     if(nuevo.includes("main.css")){
         var viejo = "{$prefix}assets/css/highContrast.css";
         var oldName = "Alto Contraste";
@@ -11,6 +12,7 @@ function cambiarCSS(nuevo){
         var viejo = "{$prefix}assets/css/main.css";
         var oldName = "Contrast Normal";
     }
+    */
 
     var url = "../assets/php/common/changeCSS.php?css=" + nuevo;
 	$.get(url);

@@ -520,11 +520,17 @@
                             <div class='zoom'>
                                 <a href='".$prefix."purchase?cinema=".$ids[$i]."'>
                                 <div class='code cinemas'>
-                                    <img src='../img/sala1.jpg' alt='".$names[$i]."' />
                                     <h2>".$names[$i]."</h2>
                                     <hr />
-                                    <li>Dirección: ".$directions[$i]."</li>
-                                    <li>Teléfono: ".$phones[$i]."</li>
+                                    <section class='column left'>
+                                        <img src='../img/sala1.jpg' alt='".$names[$i]."' />
+                                    </section>
+                                    <section class='column right'>
+                                        <section class='blockquote'>
+                                            <li>Dirección: ".$directions[$i]."</li>
+                                            <li>Teléfono: ".$phones[$i]."</li>
+                                        </section>
+                                    </section>
                                 </div>
                                 </a>
                             </div>
