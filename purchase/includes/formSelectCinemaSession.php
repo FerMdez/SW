@@ -126,7 +126,7 @@ class FormSelectCinemaSession extends Form {
                         $pay = false;
                     }
                 } else {
-                    $sessionsListHTML = '<select name="sessions"><option value="" selected>Primero seleccione un cine.</option></select><button id="go-back">Volver</button>';
+                    $sessionsListHTML = '<select name="sessions"><option value="" selected>Primero seleccione un cine.</option></select>';
                     $pay = false;
                 }
     
@@ -147,7 +147,7 @@ class FormSelectCinemaSession extends Form {
                                 <input type="text" name="code" id="code" value="" placeholder="Código pormocional" /><pre>'.$errorCode.'</pre> 
                         </div>';
             } else {
-                $html = '<h1>No existe la película.</h1>';
+                $html = '<h1>No existe la película.</h1><button id="go-back">Volver</button>';
                 $pay = false;
             }
         } else if(isset($_GET["cinema"])) {
