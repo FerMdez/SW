@@ -145,7 +145,7 @@ class formEditPromotion extends Form{
 					$result['img'] = 'El archivo tiene un nombre o tipo no soportado';
 				}
 				} else {
-				   $bd->editPromotionNoImg($id, $tittle,$description,$code,$active);
+				   $bd->editPromotionNoImg($id, $tittle,$description,$code,$boolean);
 				   $_SESSION['message'] = "<div class='row'>
 											<div class='column side'></div>
 											<div class='column middle'>
