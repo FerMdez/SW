@@ -371,15 +371,16 @@ main img {
   filter: drop-shadow(5px 5px 10px #1f2c3d);
 }
 .code.cinemas {
-  height: 210px;
+  height: 230px;
 }
 .code.cinemas img {
   margin: 0.7em 0 0.2em 0;
   width: 200px;
-  height: 110px;
+  height: 115px;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  box-shadow: 0 4px 8px 0 #00020f, 0 6px 20px 0 #00020f;
 }
 .code.promo img {
   margin: 0.1em 0 0.8em 0;
