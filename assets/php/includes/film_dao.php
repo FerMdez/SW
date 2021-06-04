@@ -47,6 +47,7 @@
 			return $film;
 		}
 
+		//Returns if exist a Film with this id
 		public function existFilm($id){
 			$id = $this->mysqli->real_escape_string($id);
 

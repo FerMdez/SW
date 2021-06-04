@@ -21,7 +21,7 @@
 		}
 		
 		
-	    //Returns a query to get All the films.
+	    //Returns a query to get All the promotion.
 		public function allPromotionData(){
 			$sql = sprintf( "SELECT * FROM promotion ");
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
@@ -33,21 +33,21 @@
 			return $promotions;
 		}
 
-		//Returns a  film data .
+		//Returns a  promotion data  by code.
 		public function GetPromotion($code){
 			$sql = sprintf( "SELECT * FROM promotion WHERE promotion.code = '%s'", $code );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;
 		}
 
-		//Returns a  film data .
+		//Returns a  promotion data  by id.
 		public function promotionData($id){
 			$sql = sprintf( "SELECT * FROM promotion WHERE promotion.id = '%d'", $id);
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
 			return $resul;
 		}
 
-		//Deleted film by "id".
+		//Deleted promotion by "id".
 		public function deletePromotion($id){
 			$sql = sprintf( "DELETE FROM promotion WHERE promotion.id = '%d' ;",$id);
 
@@ -56,7 +56,7 @@
 			return $resul;
 		}
 		
-		//Edit a film.
+		//Edit a promotion with new img.
 		public function editPromotion($id, $tittle, $description, $code, $active, $img){
 			$sql = sprintf( "UPDATE promotion SET tittle = '%s' , description = '%s', code ='%s' , active ='%s', img = '%s'
 								WHERE promotion.id = '%d';", 
@@ -67,6 +67,7 @@
 			return $resul;
 		}
 
+		//Edit a promotion without new img.
 		public function editPromotionNoImg($id, $tittle, $description, $code, $active){
 			$sql = sprintf( "UPDATE promotion SET tittle = '%s' , description = '%s', code ='%s' , active ='%s'
 								WHERE promotion.id = '%d';", 
@@ -77,7 +78,7 @@
 			return $resul;
 		}
 
-		//Returns a  film data .
+		//Returns a  promotion data as object.
 		public function GetPromotionObj($code){
 			$sql = sprintf( "SELECT * FROM promotion WHERE promotion.code = '%s'", $code );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');

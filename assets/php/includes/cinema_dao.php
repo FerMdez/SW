@@ -57,6 +57,7 @@
 			return $cinema;
 		}
 
+		//Returns if exist a cinema with that id
 		public function existCinema($id){
 			$id = $this->mysqli->real_escape_string($id);
 
