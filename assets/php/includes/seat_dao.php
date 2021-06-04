@@ -10,7 +10,7 @@
 
 		//Methods:
 
-        //Create a new Hall.
+        //Create a new Seat.
 		public function createSeat($hall, $cinema, $row, $col, $state){
 
 			$sql = sprintf( "INSERT INTO `seat`( `idhall`, `idcinema`, `numrow`, `numcolum`, `active`) 
@@ -22,6 +22,7 @@
 			return $sql;
 		}
 		
+		//search all Seat
 		public function getAllSeats($number, $cinema){
 			
 			$sql = sprintf( "SELECT * FROM seat WHERE 
@@ -38,7 +39,7 @@
 			
 			return $seat_map;
 		}
-		
+		//Delete a Seat
 		public function deletemapSeats($hall, $cinema){
             $sql = sprintf( "DELETE FROM `seat` WHERE 
 							idcinema = '%s' AND idhall = '%s'", 
@@ -48,7 +49,8 @@
 
             return $resul;
         }
-			
+		
+		//Create a new Seat Data Transfer Object.
 		public function loadSeat($idhall, $idcinema, $numRow, $numCol, $state){
 			return new Seat($idhall, $idcinema, $numRow, $numCol, $state);
 		}

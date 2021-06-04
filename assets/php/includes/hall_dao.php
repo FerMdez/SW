@@ -60,6 +60,7 @@
 			return $hall;
 		}
 		
+		//Search a hall
 		public function searchHall($number, $cinema){
 			
 			$sql = sprintf( "SELECT * FROM hall WHERE 

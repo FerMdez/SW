@@ -8,6 +8,7 @@
         }
 		//Methods:
 		
+		//Create a new Session 
 		public function createSession($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
 			$format = $this->mysqli->real_escape_string($format);	
 			$date = date('Y-m-d', strtotime( $date ) ); 
@@ -35,6 +36,7 @@
 			return $session;
 		}	
 		
+		//Search for a title
 		public function filmTittle($idfilm){
 			$sql = sprintf("SELECT * FROM film JOIN  session ON film.id = session.idfilm WHERE session.idfilm = '%d' ", $idfilm );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $idfilm);
@@ -99,6 +101,7 @@
 			return $sessions;
 		}
 		
+		//Look for a title and cinema
 		public function getSessions_Film_Cinema($idFiml, $idCinema){
 			$sql = sprintf( "SELECT * FROM session WHERE session.idfilm = '%d' AND session.idcinema = '%d' ", $idFiml, $idCinema);
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
@@ -112,6 +115,7 @@
 			return $sessions;
 		}
 		
+		//Edit Session.
         public function editSession($idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $origin){
 			$format = $this->mysqli->real_escape_string($format);
 			$date = date('Y-m-d', strtotime( $date ) ); 
@@ -129,6 +133,7 @@
             return $resul;
         }
 
+		//Delete Session 
         public function deleteSession($hall, $cinema, $date, $startTime){
 
             $sql = sprintf( "DELETE FROM `session` WHERE 
