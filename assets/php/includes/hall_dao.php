@@ -11,7 +11,7 @@
 
 		//Methods:
 
-        //Create a new Hall.
+        //Create a new hall taking the new number,cinema, rows, cols, seats and seats map saving in the database
 		public function createHall($number, $cinema, $rows, $cols, $seats, $seats_map){
 			
 			$sql = sprintf( "INSERT INTO `hall`( `number`, `idcinema`, `numrows`, `numcolumns`, `total_seats`) 
@@ -60,7 +60,7 @@
 			return $hall;
 		}
 		
-		//Search a hall
+		//Returns a  hall data taking the number and cinema
 		public function searchHall($number, $cinema){
 			
 			$sql = sprintf( "SELECT * FROM hall WHERE 
@@ -87,7 +87,7 @@
 			return new Hall($number, $idcinema, $numrows, $numcolumns, $total_seats, $seats_map);
 		}
 
-		//Edit Hall.
+		//Edit a hall taking the new number, rows, cols ans seats with respect to its origin parameter
 		public function editHall($number, $cinema, $rows, $cols, $seats, $og_number){
 			
 			$sql = sprintf( "UPDATE `hall`
@@ -101,7 +101,7 @@
 			return $resul;
 		}
 
-		//Delete Hall.
+		//Delete a hall whit the primary key
 		public function deleteHall($number, $cinema){
 
 			$sql = sprintf( "DELETE FROM `hall` WHERE `hall`.`number` = '%d' AND `hall`.`idcinema` = '%d';",$number, $cinema);

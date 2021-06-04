@@ -10,7 +10,7 @@
 
 		//Methods:
 
-        //Create a new Seat.
+        //Create a new Seat  taking the new hall,cinema,row,col and state saving in the database
 		public function createSeat($hall, $cinema, $row, $col, $state){
 
 			$sql = sprintf( "INSERT INTO `seat`( `idhall`, `idcinema`, `numrow`, `numcolum`, `active`) 
@@ -22,7 +22,7 @@
 			return $sql;
 		}
 		
-		//search all Seat
+		//Returns a query to get all the seat's data.
 		public function getAllSeats($number, $cinema){
 			
 			$sql = sprintf( "SELECT * FROM seat WHERE 
@@ -39,7 +39,7 @@
 			
 			return $seat_map;
 		}
-		//Delete a Seat
+		//Delete a Seat whit the primary key
 		public function deletemapSeats($hall, $cinema){
             $sql = sprintf( "DELETE FROM `seat` WHERE 
 							idcinema = '%s' AND idhall = '%s'", 

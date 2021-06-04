@@ -8,7 +8,7 @@
         }
 		//Methods:
 		
-		//Create a new Session 
+		//Create a new Session  taking the new id,film, hall, cinema, date, start time, seat price and format saving in the database
 		public function createSession($id, $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format){
 			$format = $this->mysqli->real_escape_string($format);	
 			$date = date('Y-m-d', strtotime( $date ) ); 
@@ -36,7 +36,7 @@
 			return $session;
 		}	
 		
-		//Search for a title
+		//Look for a tittle with the id film
 		public function filmTittle($idfilm){
 			$sql = sprintf("SELECT * FROM film JOIN  session ON film.id = session.idfilm WHERE session.idfilm = '%d' ", $idfilm );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $idfilm);
@@ -46,7 +46,7 @@
 			return $resul;
 		}	
 		
-		//Returns a session
+		//Look for a session with the primary key 
 		public function searchSession($cinema, $hall, $startTime, $date){
 			$date = date('Y-m-d', strtotime( $date ) ); 
 			$startTime = date('H:i:s', strtotime( $startTime ) );
@@ -70,7 +70,6 @@
 				$date = $date->format("Y-m-d"); 
 				$end = $end->format("Y-m-d");  
 				
-				// su output es date: 2021-05-30 end: 2021-07-11
 				$sql = sprintf( "SELECT * FROM session WHERE 
 								idcinema = '%s' AND idhall = '%s' AND date BETWEEN '%s' AND '%s' ORDER BY start_time ASC;", 
 								$cinema, $hall, $date, $end);				
@@ -115,7 +114,7 @@
 			return $sessions;
 		}
 		
-		//Edit Session.
+		//Edit a session taking the new film, hall, date, start time, seat price and format with respect to its origin parameter
         public function editSession($idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $origin){
 			$format = $this->mysqli->real_escape_string($format);
 			$date = date('Y-m-d', strtotime( $date ) ); 
@@ -133,7 +132,7 @@
             return $resul;
         }
 
-		//Delete Session 
+		//Delete a session whit the primary key
         public function deleteSession($hall, $cinema, $date, $startTime){
 
             $sql = sprintf( "DELETE FROM `session` WHERE 
