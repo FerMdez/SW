@@ -97,14 +97,13 @@ table.seat td:first-child {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
 .modal-content {
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  height: 80%;
+  width: 40%;
+  height: 95%;
 }
 
 /* The Close Button */
@@ -120,6 +119,19 @@ table.seat td:first-child {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+/*lil film list*/
+.film_list{
+	margin-top:1em;
+	height:20%;
+	overflow-y: scroll;
+}
+
+.film_list button{
+	margin:auto;
+	
 }
 
 /*Full calendar*/
