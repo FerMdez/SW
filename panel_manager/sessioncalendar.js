@@ -33,6 +33,9 @@ $(document).ready(function(){
 			x = document.getElementById("film_list");
 			x.style.display = "block";
 			
+
+			
+
 			document.getElementById("hall").value = document.getElementById("hall_selector").value;
 			document.getElementById("startDate").value = $.fullCalendar.formatDate( start, "Y-MM-DD" );
 			document.getElementById("endDate").value = $.fullCalendar.formatDate( end, "Y-MM-DD" );
@@ -151,14 +154,19 @@ $(document).ready(function(){
 		}
 		
 		function formout(){
-			
+			$(modal).fadeOut(100,function(){
 			var success = document.getElementById("success");
 			if(success){
 				calendar.fullCalendar('refetchEvents');
+				success.style.display = "none";
+				
+				document.getElementById("new_session_form").style.display = "block";
+				document.getElementById("price").value = "";
+				document.getElementById("format").value = "";
+				document.getElementById("film_id").value = "";
+				document.getElementById("startHour").value ="";
 			}
-			
-			$(modal).fadeOut();
-			
+			});
 		}
 });
 	

@@ -24,7 +24,7 @@ $(document).ready(function () {
       encode: true,
     }).done(function (data) {
       console.log(data);
-	  checkErrors(data,"form#new_session_form");
+	  checkErrors(data,"new_session_form");
     })
 	.fail(function (jqXHR, textStatus) {
         $("form#new_session_form").html(
@@ -89,15 +89,19 @@ $(document).ready(function () {
 			  );
 			}
       } else {
-        $(formname).html(
-          '<div class="alert alert-success" id="success">' + data.message + "</div>"
-        );
+ 
+		$("#operation_msg").addClass("has_no_error");
+		$("#operation_msg").append(
+			'<div class="alert alert-success" id="success">' + data.message + "</div>"
+		 );
+		 document.getElementById(formname).style.display = "none";
+
       }
 			
 		}
     e.preventDefault();
   });
-			  
+		
 	$('.film_button').bind('click', function(e) {
             var id = $(this).attr('id'); 
 			

@@ -9,6 +9,7 @@ class NewSessionForm {
         $filmslist = $films->allFilmData();
 		
 		$form='
+		<div id="operation_msg" class="operation_msg"> </div>
 		<form id="new_session_form" name="new_session_form" action="eventos.php.php" method="POST">
 			<div id="global_group" class="form_group"></div>
 			<fieldset>
