@@ -26,10 +26,17 @@ $(document).ready(function(){
 		select: function(start, end, allDay)
 			{
 			$(modal).fadeIn();
-
+			
+		    var x = document.getElementById("film_group");
+			x.style.display = "none";
+			
+			x = document.getElementById("film_list");
+			x.style.display = "block";
+			
 			document.getElementById("hall").value = document.getElementById("hall_selector").value;
 			document.getElementById("startDate").value = $.fullCalendar.formatDate( start, "Y-MM-DD" );
 			document.getElementById("endDate").value = $.fullCalendar.formatDate( end, "Y-MM-DD" );
+			
 			
 			/*
 			  var e = {
@@ -133,14 +140,25 @@ $(document).ready(function(){
 		
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
-		   $(modal).fadeOut();
+		   formout();
 		}
 
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
 		  if (event.target == modal) {
-			 $(modal).fadeOut();
+			 formout();
 		  }
+		}
+		
+		function formout(){
+			
+			var success = document.getElementById("success");
+			if(success){
+				calendar.fullCalendar('refetchEvents');
+			}
+			
+			$(modal).fadeOut();
+			
 		}
 });
 	

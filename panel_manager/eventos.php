@@ -72,7 +72,6 @@ switch($_SERVER['REQUEST_METHOD']) {
 		$data = [];
 		//Testing hacks
 		$correct_response = 'Operación completada';
-		$film = "1";
 		
 		$entityBody = file_get_contents('php://input');
 		$dictionary = json_decode($entityBody);
@@ -86,6 +85,7 @@ switch($_SERVER['REQUEST_METHOD']) {
 		$startDate = $dictionary->{"startDate"} ?? "";
 		$endDate = $dictionary->{"endDate"} ?? "";		
 		$startHour = $dictionary->{"startHour"} ?? "";		
+		$idfilm = $dictionary->{"idFilm"} ?? "";	
 		
 		if (empty($price) || $price <= 0 ) 
 			$errors['price'] = 'El precio no puede ser 0.';
@@ -108,9 +108,14 @@ switch($_SERVER['REQUEST_METHOD']) {
 		}
 		if (empty($startHour)) 
 			$errors['startHour'] = 'Es necesario escoger el horario de la sesion.';
-
+		
+		error_log("El valor de idfilm: ".$idfilm);
+		
+		if (!is_numeric($idfilm) && $idfilm <= 0 ) 
+			$errors['idfilm'] = 'No se ha seleccionado una pelicula.';
+		
 		while($startDate < $endDate && empty($errors)){
-				$msg = Session::create_session($_SESSION["cinema"], $hall, $startHour, $startDate, $film, $price, $format);
+				$msg = Session::create_session($_SESSION["cinema"], $hall, $startHour, $startDate, $idfilm, $price, $format);
 				
 				if(strcmp($msg,$correct_response)!== 0)
 					$errors['price'] = $msg;
@@ -121,11 +126,9 @@ switch($_SERVER['REQUEST_METHOD']) {
 		}
 		
 		if (!empty($errors)) {
-			error_log("no success");
 			$data['success'] = false;
 			$data['errors'] = $errors;
 		} else {
-			error_log("succes");
 			$data['success'] = true;
 		}
 
