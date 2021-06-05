@@ -487,11 +487,12 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
 }
 .promotions button {
-  margin: 1em 1em 0 1em;
+  margin: 4em 1em 0 1em;
   background-repeat: no-repeat;
-  height: 125px;
-  width: 125px;
+  height: 40px;
+  width: 40px;
   background-position: center;
+  text-indent: 0px;
 }
 .controls {
   text-align: center;
@@ -502,6 +503,7 @@
   border-radius: 25px;
   background-repeat: no-repeat;
   background-position: center;
+  text-indent: -1px;
 }
 .controls #stop {
   height: 30px;
@@ -509,16 +511,18 @@
   border-radius: 25px;
   background-repeat: no-repeat;
   background-position: center;
+  text-indent: -5px;
 }
 /* Responsive layout */
 @media (max-width: 750px) {
   .promotions button {
-    margin: 0 1em 0 1em;
+    width: 10%;
+    margin: 0.5em 1em 0 1em;
   }
   .promotions .imagen {
-    margin-top: 2.5em;
+    margin-top: 0.2em;
     width: 100%;
-    height: 40px;
+    height: 45px;
   }
 }
   

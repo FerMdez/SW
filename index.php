@@ -24,13 +24,13 @@
             <div class="code">
                 <h2>Promociones</h2>
                 <section class="promotions">
-                    <button id="retroceder">Anterior</button>
+                    <button id="retroceder">&#x23EA;</button>
                     <a href="promotions/" class="imagen"></a>
-                    <button id="avanzar">Siguiente</button>
+                    <button id="avanzar">&#x23E9;</button>
                 </section>
                 <section class="controls">
                     <button id="play">&#x25b6;</button>
-                    <button id="stop" disabled>||</button>
+                    <button id="stop" disabled>&#9208;</button>
                 </section>
             </div>
         </section>
