@@ -1,37 +1,106 @@
 $(document).ready(function () {
 	
-	$("form#new_session_form").on('submit', function(e){
+	//New form session
+	$('#sumbit_new').click( function(e) {
+		$(".form_group").removeClass("has_error");
+		$(".help_block").remove();
 		
-	$(".form_group").removeClass("has_error");
-    $(".help_block").remove();
-	
-    var formData = {
-      price: $("#price").val(),
-	  format: $("#format").val(),
-	  hall: $("#hall").val(),
-	  startDate: $("#startDate").val(),
-	  endDate: $("#endDate").val(),
-	  startHour: $("#startHour").val(),
-	  idFilm: $("#film_id").val(),
-    };
-			  
-    $.ajax({
-      type: "POST",
-      url:"eventos.php",
-	  contentType: 'application/json; charset=utf-8',
-      dataType: "json",
-	  data:JSON.stringify(formData),
-      encode: true,
-    }).done(function (data) {
-      console.log(data);
-	  checkErrors(data,"new_session_form");
-    })
-	.fail(function (jqXHR, textStatus) {
-        $("form#new_session_form").html(
-          '<div class="alert alert-danger">Could not reach server, please try again later. '+textStatus+'</div>'
-        );
+		var formData = {
+		  price: $("#price").val(),
+		  format: $("#format").val(),
+		  hall: $("#hall").val(),
+		  startDate: $("#startDate").val(),
+		  endDate: $("#endDate").val(),
+		  startHour: $("#startHour").val(),
+		  idFilm: $("#film_id").val(),
+		};
+				  
+		$.ajax({
+		  type: "POST",
+		  url:"eventos.php",
+		  contentType: 'application/json; charset=utf-8',
+		  dataType: "json",
+		  data:JSON.stringify(formData),
+		  encode: true,
+		}).done(function (data) {
+		  console.log(data);
+		  checkErrors(data,"session_form");
+		})
+		.fail(function (jqXHR, textStatus) {
+			$("form#session_form").html(
+			  '<div class="alert alert-danger">Could not reach server, please try again later. '+textStatus+'</div>'
+			);
      });
-	
+	     e.preventDefault();
+  });
+	//Edit session
+	$('#sumbit_edit').click( function(e) {
+		$(".form_group").removeClass("has_error");
+		$(".help_block").remove();
+		
+		
+		var formData = {
+		  price: $("#price").val(),
+		  format: $("#format").val(),
+		  hall: $("#hall").val(),
+		  startDate: $("#startDate").val(),
+		  endDate: $("#endDate").val(),
+		  startHour: $("#startHour").val(),
+		  idFilm: $("#film_id").val(),
+		  og_hall: $("#original_hall").val(),
+		  og_date: $("#original_date").val(),
+		  og_start: $("#original_start_time").val(),
+		};
+		console.log(formData);
+		
+		$.ajax({
+		  type: "PUT",
+		  url:"eventos.php",
+		  contentType: 'application/json; charset=utf-8',
+		  dataType: "json",
+		  data:JSON.stringify(formData),
+		  encode: true,
+		}).done(function (data) {
+		  console.log(data);
+		  checkErrors(data,"session_form");
+		})
+		.fail(function (jqXHR, textStatus) {
+			$("form#session_form").html(
+			  '<div class="alert alert-danger">Could not reach server, please try again later. '+textStatus+'</div>'
+			);
+     });
+	     e.preventDefault();
+  });
+	/*
+  	$('#sumbit_del').click( function(e) {
+		$(".form_group").removeClass("has_error");
+		$(".help_block").remove();
+		
+		var formData = {
+		  og_hall: $("#original_hall").val(),
+		  og_date: $("#original_date").val(),
+		  og_start: $("#original_start_time").val(),
+		};
+				
+		$.ajax({
+		  type: "DELETE",
+		  url:"eventos.php",
+		  contentType: 'application/json; charset=utf-8',
+		  dataType: "json",
+		  data:JSON.stringify(formData),
+		  encode: true,
+		}).done(function (data) {
+		  console.log(data);
+		  checkErrors(data,"session_form");
+		})
+		.fail(function (jqXHR, textStatus) {
+			$("form#session_form").html(
+			  '<div class="alert alert-danger">Could not reach server, please try again later. '+textStatus+'</div>'
+			);
+     });
+	     e.preventDefault();
+  });*/
+  
 	function checkErrors(data,formname) {
 		if (!data.success) {
 			if (data.errors.price) {
@@ -89,18 +158,16 @@ $(document).ready(function () {
 			  );
 			}
       } else {
- 
 		$("#operation_msg").addClass("has_no_error");
 		$("#operation_msg").append(
 			'<div class="alert alert-success" id="success">' + data.message + "</div>"
 		 );
-		 document.getElementById(formname).style.display = "none";
+		 document.getElementById("session_form").style.display = "none";
 
-      }
-			
 		}
-    e.preventDefault();
-  });
+			
+	}
+
 		
 	$('.film_button').bind('click', function(e) {
             var id = $(this).attr('id'); 
@@ -116,7 +183,6 @@ $(document).ready(function () {
 			
 			var dur = document.getElementById("dur"+id);
 			document.getElementById("film_dur").innerHTML = dur.innerHTML;
-			
 
 			var img = document.getElementById("img"+id);
 			document.getElementById("film_img").src = "../img/films/"+img.value;

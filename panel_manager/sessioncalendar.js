@@ -23,8 +23,10 @@ $(document).ready(function(){
 		selectable:true,
 		selectHelper:true,
 		timeFormat: 'H:mm',
+		
 		select: function(start, end, allDay)
 			{
+				
 			$(modal).fadeIn();
 			
 		    var x = document.getElementById("film_group");
@@ -33,58 +35,14 @@ $(document).ready(function(){
 			x = document.getElementById("film_list");
 			x.style.display = "block";
 			
-
-			
-
 			document.getElementById("hall").value = document.getElementById("hall_selector").value;
 			document.getElementById("startDate").value = $.fullCalendar.formatDate( start, "Y-MM-DD" );
 			document.getElementById("endDate").value = $.fullCalendar.formatDate( end, "Y-MM-DD" );
 			
-			
-			/*
-			  var e = {
-				"date"  : $.fullCalendar.formatDate(allDay,"Y-MM-DD"),
-				"start" : $.fullCalendar.formatDate(start, "HH:mm"),
-				"end"   : $.fullCalendar.formatDate(end, "HH:mm")
-			  };
-			
-			  $.ajax({
-			   url:"eventos.php",
-			   type:"POST",
-			   contentType: 'application/json; charset=utf-8',
-			   dataType: "json",
-			   data:JSON.stringify(e),
-			   success:function()
-			   {
-				calendar.fullCalendar('refetchEvents');
-				alert("Added Successfully");
-			   }
-			  })*/
+			document.getElementById("sumbit_new").style.display = "block";
+			document.getElementById("edit_inputs").style.display = "none";
 			},
 		editable:true,
-		eventResize:function(event)
-		{
-		 var e = {
-		   "id"    : event.id,
-		   "userId": event.userId,
-		   "start" : $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss"),
-		   "end"   : $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss"),
-		   "title" : event.title
-		 };
-		 
-		 $.ajax({
-		  url:"eventos.php?idEvento="+event.id,
-		  type:"PUT",
-		  contentType: 'application/json; charset=utf-8',
-		  dataType:"json",
-		  data:JSON.stringify(e),
-		  success:function(){
-		   calendar.fullCalendar('refetchEvents');
-		   alert('Event Update');
-		  }
-		 })
-		},
-
 		eventDrop:function(event)
 		{
 		 var e = {
@@ -95,7 +53,7 @@ $(document).ready(function(){
 		   "title" : event.title
 		 };
 		 $.ajax({
-		  url:"eventos.php?idEvento="+event.id,
+		  url:"eventos.php?idEvento="+event.id+"resize=true",
 		  contentType: 'application/json; charset=utf-8',
 		  dataType: "json",
 		  type:"PUT",
@@ -107,27 +65,37 @@ $(document).ready(function(){
 		  }
 		 });
 		},
-
+		
 		eventClick:function(event)
-		{
-		 if(confirm("Are you sure you want to remove it?"))
-		 {
-		  var id = event.id;
-		  $.ajax({
-		   url:"eventos.php?idEvento="+id,
-		   contentType: 'application/json; charset=utf-8',
-		   dataType: "json",
-		   type:"DELETE",
-		   success:function()
-		   {
-			calendar.fullCalendar('refetchEvents');
-			alert("Event Removed");
-		   },
-		   error: function(XMLHttpRequest, textStatus, errorThrown) { 
-			alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-		   }
-		  })
-		 }
+		{	
+		 	$(modal).fadeIn();
+
+		    var x = document.getElementById("film_group");
+			x.style.display = "block";
+			
+			x = document.getElementById("film_list");
+			x.style.display = "none";
+			
+			document.getElementById("hall").value = document.getElementById("hall_selector").value;
+			document.getElementById("startDate").value = $.fullCalendar.formatDate( event.start, "Y-MM-DD" );
+			document.getElementById("endDate").value = $.fullCalendar.formatDate( event.end, "Y-MM-DD" );
+			document.getElementById("price").value = event.seat_price;
+			document.getElementById("format").value = event.format;
+			document.getElementById("startHour").value = event.start_time;
+			
+			document.getElementById("original_hall").value = document.getElementById("hall_selector").value;
+			document.getElementById("original_start_time").value = event.start_time;
+			document.getElementById("original_date").value = $.fullCalendar.formatDate( event.start, "Y-MM-DD" );
+			
+			document.getElementById("film_title").innerHTML = event.film.tittle;
+			document.getElementById("film_lan").innerHTML = event.film.language;
+			document.getElementById("film_dur").innerHTML = event.film.duration+" min";
+			document.getElementById("film_img").src = "../img/films/"+event.film.img;
+			document.getElementById("film_desc").innerHTML = event.film.description;
+			document.getElementById("film_id").value = event.film.idfilm;
+			document.getElementById("sumbit_new").style.display = "none";
+			document.getElementById("edit_inputs").style.display = "grid";	
+			
 		},
 
 	   });
@@ -158,14 +126,17 @@ $(document).ready(function(){
 			var success = document.getElementById("success");
 			if(success){
 				calendar.fullCalendar('refetchEvents');
+				calendar.fullCalendar('reren');
 				success.style.display = "none";
-				
-				document.getElementById("new_session_form").style.display = "block";
+
+				document.getElementById("session_form").style.display = "block";
 				document.getElementById("price").value = "";
 				document.getElementById("format").value = "";
 				document.getElementById("film_id").value = "";
 				document.getElementById("startHour").value ="";
 			}
+				$(".form_group").removeClass("has_error");
+				$(".help_block").remove();
 			});
 		}
 });

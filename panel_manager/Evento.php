@@ -56,6 +56,7 @@ class Evento implements \JsonSerializable
             while($fila = $rs->fetch_assoc()) {
                 $result = new Evento();
                 $result->asignaDesdeDiccionario($fila);
+				
             }
             $rs->free();
         } else {
@@ -282,7 +283,7 @@ class Evento implements \JsonSerializable
     /**
      * @param array[string] Nombre de las propiedades de la clase.
      */
-    const PROPERTIES = ['id', 'userId', 'title', 'start', 'end', 'idfilm'];
+    const PROPERTIES = ['id', 'userId', 'title', 'start', 'end', 'idfilm', 'start_time', 'seat_price', 'format', 'seats_full'];
 	//'idfilm','idhall','idcinema','date', 'start_time', 'seat_price', 'format', 'seats_full'];
     
     private $id;
@@ -292,16 +293,10 @@ class Evento implements \JsonSerializable
     private $end;
 
 	private $idfilm;
-   
-	
-    /*
-	 private $idhall;
-	private $idcinema;
-    private $date;
     private $start_time;
 	private $seat_price;
     private $format;
-    private $seats_full;*/
+    private $seats_full;
 
 
     private function __construct()
@@ -311,6 +306,11 @@ class Evento implements \JsonSerializable
     public function getId()
     {
         return $this->id;
+    }
+	
+     public function getIdfilm()
+    {
+        return $this->idfilm;
     }
 	
     public function getUserId()
@@ -391,13 +391,19 @@ class Evento implements \JsonSerializable
      * @return Devuelve un objeto con propiedades públicas y que represente el estado de este evento.
      */
     public function jsonSerialize()
-    {
+    {	
         $o = new \stdClass();
         $o->id = $this->id;
         $o->userId = $this->userId;
         $o->title = $this->title;
         $o->start = $this->start->format(self::MYSQL_DATE_TIME_FORMAT);
         $o->end = $this->end->format(self::MYSQL_DATE_TIME_FORMAT);
+        $o->start_time = $this->start_time;
+		$o->seat_price = $this->seat_price;
+        $o->format = $this->format;
+		$o->film = Session::getThisSessionFilm($this->idfilm);
+		
+		
         return $o;
     }
  
@@ -419,13 +425,10 @@ class Evento implements \JsonSerializable
 			"start" => $start,
 			"end" => $end,
 			"idfilm" => $session->getIdfilm(),
-			/*"idcinema" => $session->getIdcinema(),
-			"idhall" => $session->getIdhall(),
-			"date" => $session->getDate(),
 			"start_time" => $session->getStartTime(),
 			"seat_price" => $session->getSeatPrice(),
 			"format" => $session->getFormat(),
-			"seats_full" => $session->getSeatsFull(),*/
+			"seats_full" => $session->getSeatsFull(),
 		);
 		
 		return $dictionary;
@@ -545,34 +548,6 @@ class Evento implements \JsonSerializable
             }
         }
 		
-        /*
-		if (array_key_exists('idhall', $diccionario)) {
-            $idhall = $diccionario['idhall'] ?? null;
-            if (empty($idhall)) {
-               // throw new \BadMethodCallException('$diccionario[\'end\'] no puede ser una cadena vacía o nulo');
-            } else {
-                $this->idhall = $idhall;
-            }
-        }
-		
-		if (array_key_exists('idcinema', $diccionario)) {
-            $idcinema = $diccionario['idcinema'] ?? null;
-            if (empty($idcinema)) {
-               // throw new \BadMethodCallException('$diccionario[\'end\'] no puede ser una cadena vacía o nulo');
-            } else {
-                $this->idcinema = $idcinema;
-            }
-        }
-		
-		if (array_key_exists('date', $diccionario)) {
-            $date = $diccionario['date'] ?? null;
-            if (empty($date)) {
-               // throw new \BadMethodCallException('$diccionario[\'end\'] no puede ser una cadena vacía o nulo');
-            } else {
-                $this->date = $date;
-            }
-        }
-		
 		if (array_key_exists('start_time', $diccionario)) {
             $start_time = $diccionario['start_time'] ?? null;
             if (empty($start_time)) {
@@ -607,7 +582,7 @@ class Evento implements \JsonSerializable
             } else {
                 $this->seats_full = $seats_full;
             }
-        }*/
+        }
 		
         self::compruebaConsistenciaFechas($this->start, $this->end);
         

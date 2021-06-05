@@ -2,7 +2,7 @@
 
 require_once($prefix.'assets/php/includes/film_dao.php');
 
-class NewSessionForm {
+class EditSessionForm {
 
 	public static function getForm(){
 		$films = new Film_DAO("complucine");
@@ -10,13 +10,7 @@ class NewSessionForm {
 		
 		$form='
 		<div id="operation_msg" class="operation_msg"> </div>
-		<form id="session_form" name="session_form" action="eventos.php" method="POST">
-		
-			<input type="hidden" id="film_id" name="film_id" value=""/>
-			<input type="hidden" id="original_hall" name="film_id" value=""/>
-			<input type="hidden" id="original_date" name="film_id" value=""/>
-			<input type="hidden" id="original_start_time" name="film_id" value=""/>
-			
+		<form id="new_session_form" name="new_session_form" action="eventos.php.php" method="POST">
 			<div id="global_group" class="form_group"></div>
 			<fieldset>
 				<legend>Datos</legend>
@@ -53,14 +47,15 @@ class NewSessionForm {
 				</div>
 			</fieldset>
 			<input type="reset" id="reset" value="Limpiar Campos" >
-			<input type="submit" id="sumbit_new" name="sumbit_new" class="sumbit" value="Añadir" />
+			<input type="submit" id="submit_new" name="sumbit" class="primary" value="Añadir" />
 			<div class="two-inputs-line" id="edit_inputs">
-				<input type="submit" id="sumbit_edit" name="sumbit_edit" class="sumbit" value="Editar" />
-				<input type="submit" id="submit_del" name="submit_del" class="black button" value="Borrar" />
+				<input type="submit" id="submit_edit" name="sumbit" class="primary" value="Editar" />
+				<input type="submit" id="submit_del" name="sumbit" class="primary" inclick="confirm("¿Seguro que quieres eliminar esta sesion?")value="Borrar" />
 			</div>
 		<div id="film_msg_group" class="form_group"> </div>
 		<div id="film_group" class="form_group">
 			<div class="code showtimes">
+				<input type="hidden" id="film_id" name="film_id" value=""/>
 				<h2 id="film_title"> titulo </h2>
 				<hr />
 				<div class="img_desc">
@@ -95,8 +90,7 @@ class NewSessionForm {
 		$form.='
 			</ul>
 		</div>
-		</form>
-		';
+		</form>';
 
 		return $form;
 	}
