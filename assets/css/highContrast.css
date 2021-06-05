@@ -221,6 +221,9 @@
     table.alt thead, table.alt tfoot {
       border-top: 0;
     }
+    .tablelist a {
+      color: #dadada;
+    }
   
   
   /* Main */
