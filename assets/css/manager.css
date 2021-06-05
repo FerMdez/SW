@@ -215,6 +215,11 @@ table.seat td:first-child {
   background-color: #d3ebff;
 }
 
+.fc-container #myModal .modal-content{
+    border-radius: 1.75em;
+    background-color: #d3ebff;
+}
+
 
 /* 
 lists like tables
