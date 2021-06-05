@@ -82,6 +82,29 @@ table.seat td:first-child {
   backface-visibility: hidden;
 }
 
+/*Change inputs*/
+.two-inputs-line{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+}
+
+.two-inputs-line input,
+.two-inputs-line label{
+   width:90%;
+   margin: auto;
+}
+
+.one-input-line{
+	display: grid;
+    grid-template-columns: repeat(1,auto);
+	margin-top: 1em;
+}
+.one-input-line input
+{
+	width:50%;
+	margin:auto;
+}
+
 /* pop up window */
 
 .modal {
@@ -106,6 +129,30 @@ table.seat td:first-child {
   height: 95%;
 }
 
+.modal form{
+	width: 90%;
+}
+
+.modal .image{
+    margin: auto;
+    text-align: center;
+    padding-top: 1em;
+    padding-right: 1em;
+}
+
+.modal .code img{
+    height: 100%;
+    width: 100%;
+	max-height: 9em;
+}
+.modal .code.showtimes{
+	height:100%;
+}
+
+.modal .code.showtimes p{
+	height: 100%;
+    max-height: 9em;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -124,15 +171,22 @@ table.seat td:first-child {
 
 /*lil film list*/
 .film_list{
-	margin-top:1em;
-	height:20%;
-	overflow-y: scroll;
+    margin-top: 2em;
+    height: 20em;
+    overflow-y: scroll;
 }
 
 .film_list button{
 	margin:auto;
 	
 }
+
+.img_desc{
+  display: grid;
+  list-style-type: none;
+  grid-template-columns: repeat(2,1fr); 
+}
+
 
 /*Full calendar*/
 
