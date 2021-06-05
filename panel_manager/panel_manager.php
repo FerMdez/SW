@@ -5,7 +5,7 @@
 	require_once($prefix.'assets/php/includes/cinema_dao.php');
 	include_once('./includes/formHall.php');	
 	include_once('./includes/formSession.php');	
-
+	include_once('./includes/NewSessionForm.php');
 	
     class Manager_panel {
 		
@@ -89,7 +89,7 @@
 			return $panel;
 		}
 		static function calendar(){
-			$formSession = new FormSession("new_session", $_SESSION["cinema"] );
+			
 			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
 			$halls = Hall::getListHalls($_SESSION["cinema"]);
 
@@ -114,15 +114,15 @@
 					</div>		
 					<div class="column side"></div>	
 				</div>
-					<div class="row">
-						<div id="myModal" class="modal">
+					<div class="row fc-container">
+						<div id="calendar"></div>
+							<div id="myModal" class="modal">
 
 							<div class="modal-content">
-						    <span class="close">&times;</span>
-								'.$formSession->gestiona().'
+						    <span class="close">&times;</span> <br> <br>
+								'.NewSessionForm::getForm().'
 							</div>
 						</div>
-						<div id="calendar"></div>
 						</div>';
 			}else{
 				$panel ='<div class="row">

@@ -2,6 +2,7 @@
 
 require_once('../assets/php/config.php');
 require_once('./Evento.php');
+include_once($prefix.'assets/php/includes/session.php');
 
 // Procesamos la cabecera Content-Type
 $contentType= $_SERVER['CONTENT_TYPE'] ?? 'application/json';
@@ -67,31 +68,68 @@ switch($_SERVER['REQUEST_METHOD']) {
     break;
     // Añadir un nuevo evento    
     case 'POST':
-        // 1. Leemos el contenido que nos envían
-        $entityBody = file_get_contents('php://input');
-        // 2. Verificamos que nos envían un objeto
-        $dictionary = json_decode($entityBody);
-        if (!is_object($dictionary)) {
-            //throw new ParametroNoValidoException('El cuerpo de la petición no es valido');
-        }
-        
-        // 3. Reprocesamos el cuerpo de la petición como un array PHP
-        $dictionary = json_decode($entityBody, true);
-        $dictionary['userId'] = 1;// HACK: normalmente debería de ser App::getSingleton()->idUsuario();
+		$errors = [];
+		$data = [];
+		//Testing hacks
+		$correct_response = 'Operación completada';
+		$film = "1";
 		
-        $e = Evento::creaDesdeDicionario($dictionary);
-        
-        // 4. Guardamos el evento en BD
-        $result = Evento::guardaOActualiza($e);
-        
-        // 5. Generamos un objecto como salida.
-        $json = json_encode($result, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_NUMERIC_CHECK);
+		$entityBody = file_get_contents('php://input');
+		$dictionary = json_decode($entityBody);
+		
+		if (!is_object($dictionary))
+            $errors['global'] = 'El cuerpo de la petición no es valido';
+		
+		$price = $dictionary->{"price"} ?? "";
+		$format = $dictionary->{"format"} ?? "";
+		$hall = $dictionary->{"hall"} ?? "";		
+		$startDate = $dictionary->{"startDate"} ?? "";
+		$endDate = $dictionary->{"endDate"} ?? "";		
+		$startHour = $dictionary->{"startHour"} ?? "";		
+		
+		if (empty($price) || $price <= 0 ) 
+			$errors['price'] = 'El precio no puede ser 0.';
+		if (empty($format)) 
+			$errors['format'] = 'El formato no puede estar vacio. Ej: 3D, 2D, voz original';
+		if (empty($hall) || $hall<=0 ) 
+			$errors['hall'] = 'La sala no puede ser 0 o menor';
+		if (empty($startDate)) 
+			$errors['startDate'] = 'Las sesiones tienen que empezar algun dia.';
+		else if (empty($endDate)) 
+			$errors['endDate'] = 'Las sesiones tienen que teminar algun dia.';
+		else {
+			$start = strtotime($startDate);
+			$end = strtotime($endDate);
+			$start = date('Y-m-d', $start);
+			$end = date('Y-m-d', $end);
+			
+			if($start >= $end)
+				$errors['date'] = 'La fecha inicial no puede ser antes o el mismo dia que la final.';
+		}
+		if (empty($startHour)) 
+			$errors['startHour'] = 'Es necesario escoger el horario de la sesion.';
 
-        http_response_code(201); // 201 Created
-        header('Content-Type: application/json; charset=utf-8');
-        header('Content-Length: ' . mb_strlen($json));
+		while($startDate < $endDate && empty($errors)){
+				$msg = Session::create_session($_SESSION["cinema"], $hall, $startHour, $startDate, $film, $price, $format);
+				
+				if(strcmp($msg,$correct_response)!== 0)
+					$errors['price'] = $msg;
+				else
+					$data['message'] = $msg;
+				
+				$startDate = date('Y-m-d H:i:s', strtotime( $startDate . ' +1 day'));
+		}
+		
+		if (!empty($errors)) {
+			error_log("no success");
+			$data['success'] = false;
+			$data['errors'] = $errors;
+		} else {
+			error_log("succes");
+			$data['success'] = true;
+		}
 
-        echo $json;   
+		echo json_encode($data);
 
     break;
     case 'PUT':

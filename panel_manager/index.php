@@ -23,7 +23,7 @@
 								<div class='code info'>
 									<h1> ¡ATENCIÓN! </h1><hr />
 									<p>Está viendo la web como un Usuario NO Registrado.</p>
-									<a href=''><button>Cerrar Mensaje</button></a>
+									<a href='".$prefix."'><button>Cerrar Mensaje</button></a>
 								</div>
 							</div>
 							<div class='column side'></div>
@@ -39,7 +39,7 @@
 								<div class='code info'>
 									<h1> ¡ATENCIÓN! </h1><hr />
 									<p>Está viendo la web como un Usuario Registrado.</p>
-									<a href=''><button>Cerrar Mensaje</button></a>
+									<a href='".$prefix."'><button>Cerrar Mensaje</button></a>
 								</div>
 							</div>
 							<div class='column side'></div>
@@ -121,7 +121,7 @@
 								<div class='code info'>
 									<h1> ¡ATENCIÓN! </h1><hr />
 									<p>Está viendo la web como un Usuario Registrado.</p>
-									<a href='".$prefix."panel_user'><button>Cerrar Mensaje</button></a>
+									<a href='".$prefix."'><button>Cerrar Mensaje</button></a>
 								</div>
 							</div>
 							<div class='column side'></div>
@@ -195,3 +195,4 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 <script src="./sessioncalendar.js"></script>
+<script src="./sessionforms.js"></script>

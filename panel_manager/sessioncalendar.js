@@ -17,20 +17,27 @@ $(document).ready(function(){
 		 center:'title',
 		 right:'month,agendaWeek,agendaDay'
 		},
+		firstDay: 1,
+		fixedWeekCount: false,
 		eventSources: [ selectedFeed ],
 		selectable:true,
 		selectHelper:true,
 		timeFormat: 'H:mm',
 		select: function(start, end, allDay)
 			{
-			//modal.style.display = "block";
 			$(modal).fadeIn();
+
+			document.getElementById("hall").value = document.getElementById("hall_selector").value;
+			document.getElementById("startDate").value = $.fullCalendar.formatDate( start, "Y-MM-DD" );
+			document.getElementById("endDate").value = $.fullCalendar.formatDate( end, "Y-MM-DD" );
+			
 			/*
 			  var e = {
 				"date"  : $.fullCalendar.formatDate(allDay,"Y-MM-DD"),
 				"start" : $.fullCalendar.formatDate(start, "HH:mm"),
 				"end"   : $.fullCalendar.formatDate(end, "HH:mm")
 			  };
+			
 			  $.ajax({
 			   url:"eventos.php",
 			   type:"POST",
@@ -126,15 +133,13 @@ $(document).ready(function(){
 		
 		// When the user clicks on <span> (x), close the modal
 		span.onclick = function() {
-		  //modal.style.display = "none";
-		  $(modal).fadeOut();
+		   $(modal).fadeOut();
 		}
 
 		// When the user clicks anywhere outside of the modal, close it
 		window.onclick = function(event) {
 		  if (event.target == modal) {
-			//modal.style.display = "none";
-			$(modal).fadeOut();
+			 $(modal).fadeOut();
 		  }
 		}
 });
