@@ -39,6 +39,7 @@
 			
 			return $seat_map;
 		}
+
 		//Delete a Seat whit the primary key
 		public function deletemapSeats($hall, $cinema){
             $sql = sprintf( "DELETE FROM `seat` WHERE 
@@ -49,6 +50,19 @@
 
             return $resul;
         }
+
+		//Change state of the seat.
+		public function changeSeatState($hall, $cinema, $row, $col, $state){
+			$id = $this->mysqli->real_escape_string($idHall);
+			$state = $this->mysqli->real_escape_string($state);
+
+			$sql = sprintf( "UPDATE seat SET active = '%d' WHERE idhall = '%d' AND idcinema = '%d' AND numrow = '%d' AND numcolum = '%d'", 
+																						$state, $hall, $cinema, $row, $col );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+
+			return $resul;
+
+		}
 		
 		//Create a new Seat Data Transfer Object.
 		public function loadSeat($idhall, $idcinema, $numRow, $numCol, $state){

@@ -712,8 +712,7 @@
         if($page === "Comprar Entrada") echo"<script type='text/javascript' src='{$prefix}assets/js/selectTicket.js'></script>
         <script type='text/javascript' src='{$prefix}assets/js/checkPay.js'></script>
         <script type='text/javascript' src='{$prefix}assets/js/goBack.js'></script>\n";
-        if($page === "Panel de Gerente") echo"<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-        <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+        if($page === "Panel de Gerente") echo"<script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
         <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js'></script>
         <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
         <script type='text/javascript' src='{$prefix}assets/js/sessionCalendar.js'></script>

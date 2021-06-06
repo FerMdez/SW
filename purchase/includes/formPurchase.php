@@ -8,6 +8,8 @@ include_once($prefix.'assets/php/includes/cinema_dao.php');
 include_once($prefix.'assets/php/includes/cinema.php');
 include_once($prefix.'assets/php/includes/hall_dao.php');
 include_once($prefix.'assets/php/includes/hall.php');
+include_once($prefix.'assets/php/includes/seat_dao.php');
+include_once($prefix.'assets/php/includes/seat.php');
 include_once($prefix.'assets/php/includes/purchase_dao.php');
 include_once($prefix.'assets/php/includes/purchase.php');
 include_once($prefix.'assets/php/includes/promotion_dao.php');
@@ -51,7 +53,7 @@ class FormPurchase extends Form {
         for($i = 0; $i <= $rows; $i++){
             for($j = 0; $j <= $cols; $j++){
                 $seat = $i.$j;
-                if(isset($_POST["checkbox".$seat])){ 
+                if(isset($_POST["checkbox".$seat])){
                     array_push($this->seat, $i."-".$j);
                     array_push($this->row, $i); 
                     array_push($this->col, $j); 
@@ -208,6 +210,16 @@ class FormPurchase extends Form {
                 for($i = 0; $i < $count; $i++){
                     if($purchaseDAO->createPurchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), $rows[$i], $cols[$i], date("Y-m-d H:i:s"))){
                         $purchase = new Purchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), $datos["row"], $datos["col"], strftime("%A %e de %B de %Y a las %H:%M"));
+                        
+                        $seatDAO = new SeatDAO("complucine");
+                        $seats_list = $seatDAO->getAllSeats($this->session->getIdhall(), $this->cinema->getId());
+                        foreach($seats_list as $key=>$value){
+                            if( $seats_list[$key]->getNumRows() === $datos["row"][11] &&
+                                 $seats_list[$key]->getNumCol() === $datos["col"][11] ){
+                                    $seats_list[$key]->setState(intval(-1));
+                                    $seatDAO->changeSeatState( $seats_list[$key]->getNumber(), $seats_list[$key]->getIdcinema(), $seats_list[$key]->getNumRows(), $seats_list[$key]->getNumCol(), $seats_list[$key]->getState());
+                            }
+                        }
 
                         $_SESSION["purchase"] = serialize($purchase);
                         $_SESSION["film_purchase"] = serialize($this->film);
@@ -218,6 +230,17 @@ class FormPurchase extends Form {
                 }
            } else {
             $purchase = new Purchase("null", $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), $datos["row"], $datos["col"], strftime("%A %e de %B de %Y a las %H:%M"));
+                
+                $seatDAO = new SeatDAO("complucine");
+                $seats_list = $seatDAO->getAllSeats($this->session->getIdhall(), $this->cinema->getId());
+                foreach($seats_list as $key=>$value){
+                    if( $seats_list[$key]->getNumRows() === $datos["row"][11] &&
+                         $seats_list[$key]->getNumCol() === $datos["col"][11] ){
+                            $seats_list[$key]->setState(intval(-1));
+                            $seatDAO->changeSeatState( $seats_list[$key]->getNumber(), $seats_list[$key]->getIdcinema(), $seats_list[$key]->getNumRows(), $seats_list[$key]->getNumCol(), $seats_list[$key]->getState());
+                    }
+                }
+
                 $_SESSION["purchase"] = serialize($purchase);
                 $_SESSION["film_purchase"] = serialize($this->film);
                 $result = "resume.php";
