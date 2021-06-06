@@ -36,7 +36,7 @@
 			return $session;
 		}	
 		
-		//Look for a tittle with the id film
+		//Look for a film with the id film
 		public function filmTittle($idfilm){
 			$sql = sprintf("SELECT * FROM film JOIN  session ON film.id = session.idfilm WHERE session.idfilm = '%d' ", $idfilm );
 			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $idfilm);
@@ -51,6 +51,7 @@
 			$date = date('Y-m-d', strtotime( $date ) ); 
 			$startTime = date('H:i:s', strtotime( $startTime ) );
 			
+
 			$sql = sprintf( "SELECT * FROM session WHERE 
 							idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
 							$cinema, $hall, $date, $startTime);	
@@ -62,6 +63,33 @@
 			
 			return $session;
 		}
+		
+		public function searchSessionActivesAtStartTimeAndFilmDuration($cinema, $hall, $startTime, $date, $idfilm){
+			$date = date('Y-m-d', strtotime( $date ) ); 
+			$startTime = date('H:i:s', strtotime( $startTime ) );
+			$sessions = [];
+			
+			$sql = sprintf("SELECT duration FROM film WHERE id='%s'", $idfilm );
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database en sessionData con la id '. $idfilm);
+			
+			$duration = ($resul->fetch_assoc())["duration"]+10;
+			$endHour = date('Y-m-d H:i:s', strtotime( $startTime . ' +'.$duration.' minute'));
+			
+			$sql = sprintf( "SELECT * FROM session WHERE 
+					idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time BETWEEN '%s' AND '%s' ORDER BY start_time ASC;", 
+					$cinema, $hall, $date, $startTime, $endHour);	
+			
+			
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			
+			while($fila=$resul->fetch_assoc()){
+				$sessions[] = $this->loadSession($fila["id"], $fila["idfilm"], $fila["idhall"], $fila["idcinema"], $fila["date"], $fila["start_time"], $fila["seat_price"], $fila["format"], $fila["seats_full"]);
+			}
+			mysqli_free_result($resul);
+
+			return $sessions;
+		}
+		
 		
 		//Returns a query to get all the session's data.
 		public function getAllSessions($hall, $cinema, $date, $end){
@@ -126,10 +154,11 @@
                              WHERE 
 								idcinema = '%s' AND idhall = '%s' AND date = '%s' AND start_time = '%s'", 
                 $idfilm, $idhall, $idcinema, $date, $startTime, $seatPrice, $format, $origin["cinema"],$origin["hall"],$origin["date"],$origin["start"]);
-
-            $resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
-
+			
+			$resul = mysqli_query($this->mysqli, $sql) or die ('Error into query database');
+			
             return $resul;
+			
         }
 
 		//Delete a session whit the primary key
