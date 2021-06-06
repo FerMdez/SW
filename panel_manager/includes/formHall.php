@@ -30,7 +30,7 @@ class FormHall extends Form {
 		$rows = $data['rows'] ?? $this->og_hall->getNumRows() ?? "12";
 		$cols = $data['cols'] ?? $this->og_hall->getNumCol() ?? "8";
 		
-		//Seats_map
+		//Init Seats_map
 		$seats = 0;
 		$seats_map = array();
 		for($i = 1;$i <= $rows; $i++){
@@ -145,8 +145,6 @@ class FormHall extends Form {
 		return $html;
 	}
 	
-    //Methods:
-
     //Process form:
    protected function procesaFormulario($datos){
         $result = array();
@@ -170,29 +168,24 @@ class FormHall extends Form {
 				}
 			}	
 		}
-		
+		//Check input errors
 		if ($seats == 0 && isset($datos["sumbit"]) ) {
             $result['seats'] = "<li> No puede haber 0 asientos disponibles. </li> <br>";
         }
-		
 		if ($rows <= 0) {
             $result['rows'] = "<li> No puede haber 0 o menos filas. </li> <br>";
         }
-		
 		if ($cols <= 0) {
             $result['cols'] = "<li> No puede haber 0 o menos columnas. </li> <br>";
         }
-		
 		
         $number = $datos['number'] ?? null;
 		if (empty($number) && isset($datos["sumbit"])) {
             $result['number'] = "<li> El numero de sala tiene que ser mayor que 0. </li> <br>";
         }
-		
 		if(isset($datos["restart"])){
 			return $result = "./?state=".$this->option."&number=".$this->og_hall->getNumber()."";
 		}
-			
         if (count($result) === 0 && isset($datos["sumbit"]) ) {
 				if($this->option == "new_hall"){
 					$_SESSION['msg'] = Hall::create_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map);
@@ -203,7 +196,6 @@ class FormHall extends Form {
 					return $result = './?state=success';
 				}
         }
-		
 		if (!isset($result['number']) && isset($datos["delete"]) ) {
 			if($this->option == "edit_hall"){
                 $_SESSION['msg'] = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());

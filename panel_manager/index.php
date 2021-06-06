@@ -56,18 +56,6 @@
 				$panel = Manager_panel::edit_hall();
 				break;	
 			case "manage_sessions":
-				$panel = Manager_panel::manage_sessions();
-				break;
-			case "new_session":
-				$panel = Manager_panel::new_session();
-				break;
-			case "edit_session":
-				$panel = Manager_panel::edit_session();
-				break;
-			case "select_film":
-				$panel = Manager_panel::select_film($template);
-				break;
-			case "calendar":
 				$panel = Manager_panel::calendar();
 				break;
 			case "success":
@@ -138,22 +126,10 @@
 				$panel = Manager_panel::edit_hall();
 				break;	
 			case "manage_sessions":
-				$panel = Manager_panel::manage_sessions();
-				break;
-			case "new_session":
-				$panel = Manager_panel::new_session();
-				break;
-			case "edit_session":
-				$panel = Manager_panel::edit_session();
-				break;
-			case "select_film":
-				$panel = Manager_panel::select_film($template);
+				$panel = Manager_panel::calendar();
 				break;
 			case "success":
 				$panel = Manager_panel::success();
-				break;
-			case "calendar":
-				$panel = Manager_panel::calendar();
 				break;
 			default:  
 				$panel = Manager_panel::welcome();
@@ -194,5 +170,5 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
-<script src="./sessioncalendar.js"></script>
-<script src="./sessionforms.js"></script>
+<script src="./sessionCalendar.js"></script>
+<script src="./sessionFormProcess.js"></script>
