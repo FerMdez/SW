@@ -6,6 +6,7 @@ class FormRegister extends Form {
     //Constants:
     const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$';
     const HTML5_PASS_REGEXP = '^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{4,16}$';
+    private const _USER = "user";
 
     //Atributes:
     private $user;      // User who is going to log-in.
@@ -93,7 +94,7 @@ class FormRegister extends Form {
                     if ($this->user->data_seek(0)) {
                         $result[] = "El email ya está registrado.";
                     } else {
-                        if($bd->createUser("", $nombre, $email, $password, "user")){
+                        if($bd->createUser("", $nombre, $email, $password, self::_USER)){
                             $this->user = $bd->selectUser($nombre, $password);
                             if ($this->user) {
                                 $this->user->setPass(null);

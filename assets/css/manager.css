@@ -34,18 +34,6 @@ table.seat td:first-child {
   border-right: solid 2px #1f2c3d;
 }
 
-.has_error,
-.help_block{
-	color: #a94442;	
-    display: block;
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-
-.has_error input{
-	border-color: #a94442;
-	    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
-}
 .check_box {
   display:none;
 }
@@ -63,7 +51,7 @@ table.seat td:first-child {
 
 .black.button {
   width: 100%;
-  height: 35px;
+  height: 30px;
   border: 1px solid #dadada;
   background-color: #00020f;
   color: #dadada;
@@ -78,24 +66,6 @@ table.seat td:first-child {
   border:#000000;
   background-color: #791515;
 }
-
-.modal .submit:hover
-{
-    background-color: #d3ebff;
-}
-
-.modal .sumbit{
-	width: 100%;
-    height: 35px;
-    border: 1px solid #000000;
-    padding: 5px;
-    margin-top: 5px;
-    font-size: 15px;
-    font-weight: bold;
-    box-shadow: 2px 2px #1f2c3d;
-    filter: brightness(105%);
-    cursor: pointer
-}	
 
 .code.welcome {
   text-align: center;
@@ -174,7 +144,6 @@ table.seat td:first-child {
     height: 100%;
     width: 100%;
 	max-height: 9em;
-	margin: auto;
 }
 .modal .code.showtimes{
 	height:100%;
@@ -184,7 +153,6 @@ table.seat td:first-child {
 	height: 100%;
     max-height: 9em;
 }
-
 /* The Close Button */
 .close {
   color: #aaaaaa;
@@ -200,32 +168,12 @@ table.seat td:first-child {
   cursor: pointer;
 }
 
-.alert_success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-}
-
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-	text-align: center;
- border-radius: 1.75em;
-}
-
-.alert_danger {
-    color: #ab2828;
-    background-color: #f0d8d8;
-    border-color: #f70000;
-}
 
 /*lil film list*/
 .film_list{
+    margin-top: 2em;
     height: 20em;
     overflow-y: scroll;
-	margin: auto;
 }
 
 .film_list button{
