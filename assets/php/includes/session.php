@@ -34,33 +34,29 @@
 					return $bd->getAllSessions($hall, $cinema, null, null);
 			}
 		}
+		
 		public static function getListSessionsBetween2Dates($hall,$cinema,$start,$end){
 			$bd = new SessionDAO('complucine');
 			if($bd ) {
 				return $bd->getAllSessions($hall, $cinema, $start, $end);
 			}
 		}
-		
-		public static function create_session($cinema, $hall, $start, $date, $film, $price, $format,$repeat){
+		public static function searchSessionActivesAtStartTimeAndFilmDuration(){
+			$bd = new SessionDAO('complucine');
+			$bd->searchSessionActivesAtStartTimeAndFilmDuration(1, 1, 1, 1, 1);
+			
+		}
+		public static function create_session($cinema, $hall, $start, $date, $film, $price, $format){
 			$bd = new SessionDAO('complucine');
 			if($bd ){
-				if(!$bd->searchSession($cinema, $hall, $start, $date)){
+				if(!$bd->searchSessionActivesAtStartTimeAndFilmDuration($cinema, $hall, $start, $date, $film)){
 					$bd->createSession(null,$film, $hall, $cinema, $date, $start, $price, $format);
-
-					if($repeat > "0") {
-						$repeats = $repeat;
-						$repeat = $repeat - 1;
-						$date = date('Y-m-d', strtotime( $date . ' +1 day') );
-						self::create_session($cinema, $hall, $start, $date, $film, $price, $format,$repeat);
-						return "Se han creado las ".$repeat ." sesiones con exito";
-					}
-						
-					else
-						return "Se ha creado la session con exito";
+					return 'Operación completada';
 				} else 
-					return "Esta session ya existe";
-				
-			} else return "Error al conectarse a la base de datos";
+					return 'La session del dia '.$date.' coincide con otra';
+
+			} else return 'Error al conectarse a la base de datos';
+
 		}
 		
 		public static function edit_session($cinema, $or_hall, $or_date, $or_start, $hall, $start, $date, $film, $price, $format){
@@ -69,8 +65,9 @@
 				if($bd->searchSession($cinema, $or_hall, $or_start, $or_date)){
 					if(!$bd->searchSession($cinema,$hall,$start,$date)){
 						$origin = array("cinema" => $cinema,"hall" => $or_hall,"start" => $or_start,"date" => $or_date);
-						$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format,$origin);
-						return "Se ha editado la session con exito";			
+						$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format, $origin);
+						return "Se ha editado la session con exito";		
+						
 					}else if($or_hall == $hall && $or_start == $start && $or_date == $date){
 						$origin = array("cinema" => $cinema,"hall" => $or_hall,"start" => $or_start,"date" => $or_date);
 						$bd->editSession($film, $hall, $cinema, $date, $start, $price, $format, $origin);
@@ -78,7 +75,7 @@
 					}else{
 						return "Ya existe una sesion con los parametros nuevos";	
 					}
-						
+					
 				} else 
 					return "La session a editar no existe";
 				
@@ -93,15 +90,18 @@
 					return "Se ha eliminado la session con exito";						
 				} else 
 					return "Esta session no existe";
-				
 			} else return "Error al conectarse a la base de datos";
+			
+			return "Se ha eliminado la session con exito";	
 		}
 		
 		//Esto deberia estar en film.php? seguramente
 		public static function getThisSessionFilm($idfilm){
 			$bd = new SessionDAO('complucine');
 			if($bd ) {
-				return $bd->filmTittle($idfilm);
+				$film = $bd->filmTittle($idfilm);
+				$film["tittle"] = str_replace('_', ' ',$film["tittle"]);
+				return $film;
 			}
 		}
 		
