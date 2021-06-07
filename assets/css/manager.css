@@ -157,6 +157,7 @@ table.seat td:first-child {
   border: 1px solid #888;
   width: 40%;
   height: 95%;
+  overflow: auto;
 }
 
 .modal form{
@@ -336,6 +337,10 @@ table.seat td:first-child {
 .fc-container #myModal .modal-content{
     border-radius: 1.75em;
     background-color: #d3ebff;
+}
+
+.fc-container .fc-toolbar .fc-state-active, .fc-toolbar .ui-state-active {
+  z-index: 0;
 }
 
 
