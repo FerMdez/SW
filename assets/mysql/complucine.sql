@@ -3,10 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 07-06-2021 a las 11:04:18
+-- Tiempo de generación: 07-06-2021 a las 12:25:45
 -- Versión del servidor: 10.0.28-MariaDB-2+b1
 -- Versión de PHP: 7.3.27-1~deb10u1
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -31,6 +32,12 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- RELACIONES PARA LA TABLA `admin`:
+--   `id`
+--       `users` -> `id`
+--
+
+--
 -- Volcado de datos para la tabla `admin`
 --
 
@@ -49,6 +56,10 @@ CREATE TABLE `cinema` (
   `direction` varchar(120) NOT NULL,
   `phone` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONES PARA LA TABLA `cinema`:
+--
 
 --
 -- Volcado de datos para la tabla `cinema`
@@ -74,6 +85,10 @@ CREATE TABLE `film` (
   `description` text NOT NULL,
   `img` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONES PARA LA TABLA `film`:
+--
 
 --
 -- Volcado de datos para la tabla `film`
@@ -106,6 +121,12 @@ CREATE TABLE `hall` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- RELACIONES PARA LA TABLA `hall`:
+--   `idcinema`
+--       `cinema` -> `id`
+--
+
+--
 -- Volcado de datos para la tabla `hall`
 --
 
@@ -125,6 +146,14 @@ CREATE TABLE `manager` (
   `id` int(15) UNSIGNED NOT NULL,
   `idcinema` int(15) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONES PARA LA TABLA `manager`:
+--   `idcinema`
+--       `cinema` -> `id`
+--   `id`
+--       `users` -> `id`
+--
 
 --
 -- Volcado de datos para la tabla `manager`
@@ -148,6 +177,10 @@ CREATE TABLE `promotion` (
   `active` tinyint(1) NOT NULL DEFAULT '1',
   `img` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONES PARA LA TABLA `promotion`:
+--
 
 --
 -- Volcado de datos para la tabla `promotion`
@@ -175,15 +208,20 @@ CREATE TABLE `purchase` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `purchase`
+-- RELACIONES PARA LA TABLA `purchase`:
+--   `idhall`
+--       `seat` -> `idhall`
+--   `idcinema`
+--       `seat` -> `idcinema`
+--   `numrow`
+--       `seat` -> `numrow`
+--   `numcolum`
+--       `seat` -> `numcolum`
+--   `idsession`
+--       `session` -> `id`
+--   `iduser`
+--       `users` -> `id`
 --
-
-INSERT INTO `purchase` (`iduser`, `idsession`, `idhall`, `idcinema`, `numrow`, `numcolum`, `time_purchase`) VALUES
-(7, 120, 2, 1, 2, 4, '2021-05-28 14:24:58'),
-(7, 37, 1, 1, 5, 4, '2021-06-02 09:58:05'),
-(7, 93, 2, 1, 9, 5, '2021-06-02 09:58:55'),
-(7, 95, 2, 1, 4, 6, '2021-06-02 09:59:28'),
-(7, 190, 2, 3, 2, 3, '2021-06-02 14:18:50');
 
 -- --------------------------------------------------------
 
@@ -198,6 +236,14 @@ CREATE TABLE `seat` (
   `numcolum` int(3) UNSIGNED NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- RELACIONES PARA LA TABLA `seat`:
+--   `idhall`
+--       `hall` -> `number`
+--   `idcinema`
+--       `hall` -> `idcinema`
+--
 
 --
 -- Volcado de datos para la tabla `seat`
@@ -624,6 +670,16 @@ CREATE TABLE `session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- RELACIONES PARA LA TABLA `session`:
+--   `idfilm`
+--       `film` -> `id`
+--   `idhall`
+--       `hall` -> `number`
+--   `idcinema`
+--       `hall` -> `idcinema`
+--
+
+--
 -- Volcado de datos para la tabla `session`
 --
 
@@ -816,6 +872,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Usuarios';
 
 --
+-- RELACIONES PARA LA TABLA `users`:
+--
+
+--
 -- Volcado de datos para la tabla `users`
 --
 
@@ -979,6 +1039,7 @@ ALTER TABLE `seat`
 ALTER TABLE `session`
   ADD CONSTRAINT `FK_FILM` FOREIGN KEY (`idfilm`) REFERENCES `film` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_HALL_` FOREIGN KEY (`idhall`,`idcinema`) REFERENCES `hall` (`number`, `idcinema`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
