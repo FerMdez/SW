@@ -85,47 +85,57 @@
 		}
 		//Manage the sessions using full calendar js events and a pop up form which is constantly edited with more js
 		static function calendar(){
-			$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
-			$halls = Hall::getListHalls($_SESSION["cinema"]);
-
-			if($halls){
-				$panel ='
-				<div class="row">
-					<div class="column side"></div>
-					<div class="column middle">
-						<br>
-						<select id="hall_selector" class="button large">';
-				foreach(Hall::getListHalls($_SESSION["cinema"]) as $hll){
-					if($hll->getNumber() == $hall){
-						$panel.= '
-									<option data-feed="./eventsProcess.php?hall='.$hll->getNumber().'" value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
-					}else{ 
-						$panel.= '
-									<option data-feed="./eventsProcess.php?hall='.$hll->getNumber().'" value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
+			if(isset($_SESSION["cinema"])){
+				$hall = $_POST['hall'] ?? $_GET['hall'] ?? "1";
+				$halls = Hall::getListHalls($_SESSION["cinema"]);
+				
+				if($halls){
+					$panel ='
+					<div class="row">
+						<div class="column side"></div>
+						<div class="column middle">
+							<br>
+							<select id="hall_selector" class="button large">';
+					foreach(Hall::getListHalls($_SESSION["cinema"]) as $hll){
+						if($hll->getNumber() == $hall){
+							$panel.= '
+										<option data-feed="./eventsProcess.php?hall='.$hll->getNumber().'" value="'. $hll->getNumber() .'"selected> Sala '. $hll->getNumber() .'</option> ';
+						}else{ 
+							$panel.= '
+										<option data-feed="./eventsProcess.php?hall='.$hll->getNumber().'" value="'. $hll->getNumber() .'"> Sala '. $hll->getNumber() .'</option>';
+						}
 					}
-				}
-				$panel.='
-						</select>
-					</div>		
-					<div class="column side"></div>	
-				</div>
-					<div class="row fc-container">
-						<div id="calendar"></div>
-							<div id="myModal" class="modal">
+					$panel.='
+							</select>
+						</div>		
+						<div class="column side"></div>	
+					</div>
+						<div class="row fc-container">
+							<div id="calendar"></div>
+								<div id="myModal" class="modal">
 
-							<div class="modal-content">
-						    <span class="close">&times;</span> <br> <br>
-								'.SessionForm::getForm().'
+								<div class="modal-content">
+								<span class="close">&times;</span> <br> <br>
+									'.SessionForm::getForm().'
+								</div>
 							</div>
-						</div>
-						</div>';
+							</div>';
+				}else{
+					$panel ='<div class="row">
+								<h3> No hay ninguna sala en este cine </h3>
+								<a href=."/?state=new_hall"> Añadir Sala </a>
+							</div>';
+				}
 			}else{
-				$panel ='<div class="row">
-							<h3> No hay ninguna sala en este cine </h3>
-							<a href=."/?state=new_hall"> Añadir Sala </a>
-						</div>';
+				$panel = '<div class="code info">
+				<h1>Aun no se ha seleccionado un cine.</h1>
+				<hr />
+				<p> >.< </p>
+				<p> Selecciona un cine en el panel principal </p>
+				</div>'."\n";
 			}
-			return $panel;
+				return $panel;
+
 		}
 		
 		static function success(){
@@ -140,42 +150,50 @@
         }
 		
 		static function manage_halls(){	
-			
-			$panel = '<div class="column side"></div>
-					<div class="column middle">';
-			$listhall = Hall::getListHalls($_SESSION["cinema"]);
-			if(!$listhall){
-				$panel .= "<h2> No hay ninguna sala en este cine";
-			}else{
-			$panel .= '
-				<ul class="tablelist col3">
-					<li class="title"> Sala </li>
-					<li class="title"> Asientos </li>
-					<li class="title"> Sesión </li>
-							'; 
-			$parity = "odd";
-			foreach($listhall as $hall){ 
-				$panel .='<div class="'.$parity.'">
-							<a class="h2long" href="?state=edit_hall&number='. $hall->getNumber().'">
-								<li> '. $hall->getNumber().'</li>
-								<li> '.$hall->getTotalSeats().' </li>
-							</a>
-							<a href="?state=manage_sessions&hall='. $hall->getNumber().'">
-								<li> Sesiones </li>
-							</a>
-						</div>
-						';
-				$parity = ($parity == "odd") ? "even" : "odd";
+			if(isset($_SESSION["cinema"])){
+				$panel = '<div class="column side"></div>
+						<div class="column middle">';
+				$listhall = Hall::getListHalls($_SESSION["cinema"]);
+				if(!$listhall){
+					$panel .= "<h2> No hay ninguna sala en este cine";
+				}else{
+				$panel .= '
+					<ul class="tablelist col3">
+						<li class="title"> Sala </li>
+						<li class="title"> Asientos </li>
+						<li class="title"> Sesión </li>
+								'; 
+				$parity = "odd";
+				foreach($listhall as $hall){ 
+					$panel .='<div class="'.$parity.'">
+								<a class="h2long" href="?state=edit_hall&number='. $hall->getNumber().'">
+									<li> '. $hall->getNumber().'</li>
+									<li> '.$hall->getTotalSeats().' </li>
+								</a>
+								<a href="?state=manage_sessions&hall='. $hall->getNumber().'">
+									<li> Sesiones </li>
+								</a>
+							</div>
+							';
+					$parity = ($parity == "odd") ? "even" : "odd";
+					}
+				$panel.='
+					</ul>';
 				}
-			$panel.='
-				</ul>';
+				$panel.='
+							<form method="post" action="./?state=new_hall">
+								<input type="submit" name="new_hall" value="Añadir Sala" class="button large" />
+							</form>
+					</div>
+					<div class="column side"></div>';			
+			}else{
+				$panel = '<div class="code info">
+				<h1>Aun no se ha seleccionado un cine.</h1>
+				<hr />
+				<p> >.< </p>
+				<p> Selecciona un cine en el panel principal </p>
+				</div>'."\n";
 			}
-			$panel.='
-						<form method="post" action="./?state=new_hall">
-							<input type="submit" name="new_hall" value="Añadir Sala" class="button large" />
-						</form>
-				</div>
-				<div class="column side"></div>';			
 			return $panel;
         }
 		

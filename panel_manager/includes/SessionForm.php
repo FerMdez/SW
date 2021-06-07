@@ -66,12 +66,11 @@ class SessionForm {
 				<div class="img_desc">
 					<div class="image"> <img src="../img/films/iron_man.jpg" alt="iron man" id="film_img" /> </div>
 					<div class="blockquote">
-						<p id="film_desc">"Un empresario millonario construye un traje blindado y lo usa para combatir el crimen y el terrorismo."</p>
+						<li id="film_dur"> Duración: duracion minutos</li>
+						<li id="film_lan"> Lenguaje: idioma </li>
 					</div>
 				</div>
-				<li id="film_dur"> Duración: duracion minutos</li>
-				<li id="film_lan"> Lenguaje: idioma </li>
-				</div>
+			</div>
 			<button type="button" class="button large" id="return"> Cambiar pelicula </button>
 		</div>
 		<div class="film_list" id="film_list">
@@ -83,7 +82,6 @@ class SessionForm {
 						<input type="hidden" value="'.$film->getId().'" id="id'.$i.'"/>
 						<input type="hidden" value="'.$film->getImg().'" id="img'.$i.'"/>
 						<input type="hidden" value="'.$film->getLanguage().'" id="lan'.$i.'"/>
-						<input type="hidden" value="'.$film->getDescription().'" id="desc'.$i.'"/>
 						<li value="'.$film->getTittle().'"id="title'.$i.'"> '. str_replace('_', ' ',$film->getTittle()).'</li>
 						<li id="dur'.$i.'"> '.$film->getDuration().' min</li>
 						<li> <button type="button" class="film_button" id="'.$i.'"> Seleccionar </button> </li>

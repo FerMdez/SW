@@ -19,24 +19,18 @@ foreach ($acceptedContentTypes as $acceptedContentType) {
 switch($_SERVER['REQUEST_METHOD']) {
     // Get Events
     case 'GET':
-		error_log("GET");
+		
 		$hall =  $_GET["hall"];
 		$cinema =  $_SESSION["cinema"];
+		
+		$start = $_GET["start"];
+		$end = $_GET["end"];
 
-		// Comprobamos si es una lista de eventos entre dos fechas -> eventos.php?start=XXXXX&end=YYYYY
-		$start = filter_input(INPUT_GET, 'start', FILTER_VALIDATE_REGEXP,  array("options" => array("regexp"=>"/\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))/")));
-		$end = filter_input(INPUT_GET, 'end', FILTER_VALIDATE_REGEXP, array("options" => array("default" => null, "regexp"=>"/\d{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([1-2][0-9])|(3[0-1]))/")));
 		if ($start) {     
-				
-			$startDateTime = $start . ' 00:00:00';
-			$endDateTime = $end;
-			if ($end) {
-				$endDateTime = $end. ' 00:00:00';
-			}
-			$result = Event::searchEventsBetween2dates($startDateTime, $endDateTime, $hall,$cinema);
+			$result = Event::searchEventsBetween2dates($start, $end, $hall,$cinema);
 		} else {
 			// Comprobamos si es una lista de eventos completa
-			$result = Event::searchAllEvents($hall,$cinema); 
+			$result = Event::searchAllEvents($hall,$cinema); 	
 		}
         
         // Generamos un array de eventos en formato JSON
@@ -44,12 +38,12 @@ switch($_SERVER['REQUEST_METHOD']) {
         http_response_code(200); // 200 OK
         header('Content-Type: application/json; charset=utf-8');
         header('Content-Length: ' . mb_strlen($json));;
-
-        echo $json;    
+		
+		echo $json;    
     break;
     // Add Session  
     case 'POST':
-		error_log("POST");
+
 		$errors = [];
 		$data = [];
 		
@@ -136,6 +130,7 @@ switch($_SERVER['REQUEST_METHOD']) {
 		
 		//Check if the user is droping an event in a new date
 		if(isset($_GET["drop"]) && $_GET["drop"]){
+
 			$or_hall = $dictionary->{"idhall"} ?? "";		
 			$or_date = $dictionary->{"startDate"} ?? "";		
 			$or_start = $dictionary->{"startHour"} ?? "";	
@@ -144,7 +139,7 @@ switch($_SERVER['REQUEST_METHOD']) {
 			$format = $dictionary->{"format"} ?? "";	
 			
 			$new_date = $dictionary->{"newDate"} ?? "";	
-			
+		
 			$msg = Session::edit_session($_SESSION["cinema"], $or_hall, $or_date, $or_start, $or_hall, $new_date, $new_date, $idfilm, $price, $format);
 			
 			if(strcmp($msg,$correct_response)!== 0)
@@ -159,7 +154,8 @@ switch($_SERVER['REQUEST_METHOD']) {
 			$startDate = $dictionary->{"startDate"} ?? "";
 			
 			$endDate = $dictionary->{"endDate"} ?? "";		
-			$startHour = $dictionary->{"startHour"} ?? "";		
+			$startHour = $dictionary->{"startHour"} ?? "";	
+			
 			$idfilm = $dictionary->{"idFilm"} ?? "";	
 			
 			$or_hall = $dictionary->{"og_hall"} ?? "";		
@@ -191,7 +187,8 @@ switch($_SERVER['REQUEST_METHOD']) {
 			if (!is_numeric($idfilm) && $idfilm <= 0 ) 
 				$errors['idfilm'] = 'No se ha seleccionado una pelicula.';
 			
-			if(empty($errors)){				
+			if(empty($errors)){		
+		
 					$msg = Session::edit_session($_SESSION["cinema"], $or_hall, $or_date, $or_start, $hall, $startHour, $startDate, $idfilm, $price, $format);
 					
 					if(strcmp($msg,$correct_response)!== 0)
@@ -207,7 +204,7 @@ switch($_SERVER['REQUEST_METHOD']) {
 				$data['success'] = true;
 			}
 		}
-		
+	
 		echo json_encode($data);
         break;
 	//Delete a session
