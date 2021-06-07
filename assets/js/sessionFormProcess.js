@@ -14,7 +14,7 @@ $(document).ready(function () {
 		  startHour: $("#startHour").val(),
 		  idFilm: $("#film_id").val(),
 		};
-				  
+		console.log(formData);	  
 		$.ajax({
 		  type: "POST",
 		  url:"eventsProcess.php",
@@ -23,7 +23,6 @@ $(document).ready(function () {
 		  data:JSON.stringify(formData),
 		  encode: true,
 		}).done(function (data) {
-		  console.log(data);
 		  checkErrors(data,"session_form");
 		})
 		.fail(function (jqXHR, textStatus) {
@@ -61,7 +60,6 @@ $(document).ready(function () {
 		  data:JSON.stringify(formData),
 		  encode: true,
 		}).done(function (data) {
-		  console.log(data);
 		  checkErrors(data,"session_form");
 		})
 		.fail(function (jqXHR, textStatus) {
@@ -76,30 +74,30 @@ $(document).ready(function () {
 		$(".form_group").removeClass("has_error");
 		$(".help_block").remove();
 		
-		
-		var formData = {
-		  og_hall: $("#original_hall").val(),
-		  og_date: $("#original_date").val(),
-		  og_start: $("#original_start_time").val(),
-		};
-		console.log(formData);
-		
-		$.ajax({
-		  type: "DELETE",
-		  url:"eventsProcess.php",
-		  contentType: 'application/json; charset=utf-8',
-		  dataType: "json",
-		  data:JSON.stringify(formData),
-		  encode: true,
-		}).done(function (data) {
-		  console.log(data);
-		  checkErrors(data,"session_form")
-		})
-		.fail(function (jqXHR, textStatus) {
-			$("form#session_form").html(
-			  '<div class="alert alert_danger">Could not reach server, please try again later. '+textStatus+'</div>'
-			);
-     });
+		if(confirm("¿Seguro que quieres eliminar esta sesión?")){
+			var formData = {
+			og_hall: $("#original_hall").val(),
+			og_date: $("#original_date").val(),
+			og_start: $("#original_start_time").val(),
+			};
+			console.log(formData);
+			
+			$.ajax({
+			type: "DELETE",
+			url:"eventsProcess.php",
+			contentType: 'application/json; charset=utf-8',
+			dataType: "json",
+			data:JSON.stringify(formData),
+			encode: true,
+			}).done(function (data) {
+			checkErrors(data,"session_form")
+			})
+			.fail(function (jqXHR, textStatus) {
+				$("form#session_form").html(
+				'<div class="alert alert_danger">Could not reach server, please try again later. '+textStatus+'</div>'
+				);
+		});
+	}
 	     e.preventDefault();
   });
 
@@ -188,9 +186,6 @@ $(document).ready(function () {
 
 			var img = document.getElementById("img"+id);
 			document.getElementById("film_img").src = "../img/films/"+img.value;
-			
-			var desc = document.getElementById("desc"+id);
-			document.getElementById("film_desc").innerHTML = desc.value;
 			
 			var idf = document.getElementById("id"+id);
 			document.getElementById("film_id").value = idf.value;

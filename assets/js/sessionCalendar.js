@@ -5,27 +5,32 @@ $(document).ready(function(){
 		var modal = document.getElementById("myModal");
 		var btn = document.getElementById("myBtn");
 		var span = document.getElementsByClassName("close")[0];
-	
+
 	   var calendar = $('#calendar').fullCalendar({
-		editable:true,
+		
 		header:{
-		 left:'prev,next today',
+		 left:'prev,next,today',
 		 center:'title',
 		 right:'month,agendaWeek,agendaDay'
 		},
 		firstDay: 1,
+		editable:true,
 		fixedWeekCount: false,
 		eventSources: [ selectedFeed ],
 		selectable:true,
 		selectHelper:true,
 		timeFormat: 'H:mm',
+		slotLabelFormat: 'H:mm',
+		nowIndicator: true,
+		allDaySlot: false,
+		eventDurationEditable: false,
+		
 		eventOverlap: function(stillEvent, movingEvent) {
-				return (stillEvent.start_time > stillEvent.end && stillEvent.end < movingEvent.start_time)
+				return (stillEvent.start_time > movingEvent.start_time && stillEvent.end < movingEvent.start_time)
 		},
 		//Add event/session function when u click in any non-event date. Prepares the form to be seen as such
 		select: function(start, end, allDay)
 			{
-				
 			$(modal).fadeIn();
 			
 		    var x = document.getElementById("film_group");
@@ -40,7 +45,6 @@ $(document).ready(function(){
 			document.getElementById("sumbit_new").style.display = "block";
 			document.getElementById("edit_inputs").style.display = "none";
 			},
-		editable:true,
 		//Edit only the date/hour start of an event/session when u click,drag and drop an event.
 		eventDrop:function(event)
 		{
@@ -50,10 +54,9 @@ $(document).ready(function(){
 			"startHour":event.start_time,
 			"startDate":event.date,
 			"price": event.seat_price,
-			"idfilm": event.film.idfilm,
+			"idfilm": event.film_id,
 			"format": event.format,
 		 };
-		 console.log(e);
 		 console.log(event);
 		 $.ajax({
 		  url:"eventsProcess.php?drop=true",
@@ -74,7 +77,7 @@ $(document).ready(function(){
 		eventClick:function(event)
 		{	
 		 	$(modal).fadeIn();
-
+			console.log(event);
 		    var x = document.getElementById("film_group");
 			x.style.display = "block";
 			
@@ -92,12 +95,11 @@ $(document).ready(function(){
 			document.getElementById("original_start_time").value = event.start_time;
 			document.getElementById("original_date").value = $.fullCalendar.formatDate( event.start, "Y-MM-DD" );
 			
-			document.getElementById("film_title").innerHTML = event.film.tittle;
-			document.getElementById("film_lan").innerHTML = event.film.language;
-			document.getElementById("film_dur").innerHTML = event.film.duration+" min";
-			document.getElementById("film_img").src = "../img/films/"+event.film.img;
-			document.getElementById("film_desc").innerHTML = event.film.description;
-			document.getElementById("film_id").value = event.film.idfilm;
+			document.getElementById("film_title").innerHTML = event.title;
+			document.getElementById("film_lan").innerHTML = event.film_lan;
+			document.getElementById("film_dur").innerHTML = event.film_dur+" min";
+			document.getElementById("film_img").src = "../img/films/"+event.film_img;
+			document.getElementById("film_id").value = event.film_id;
 			document.getElementById("sumbit_new").style.display = "none";
 			document.getElementById("edit_inputs").style.display = "grid";	
 			
@@ -136,4 +138,3 @@ $(document).ready(function(){
 			});
 		}
 });
-	
