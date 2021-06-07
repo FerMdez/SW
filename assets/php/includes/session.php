@@ -41,11 +41,7 @@
 				return $bd->getAllSessions($hall, $cinema, $start, $end);
 			}
 		}
-		public static function searchSessionActivesAtStartTimeAndFilmDuration(){
-			$bd = new SessionDAO('complucine');
-			$bd->searchSessionActivesAtStartTimeAndFilmDuration(1, 1, 1, 1, 1);
-			
-		}
+
 		public static function create_session($cinema, $hall, $start, $date, $film, $price, $format){
 			$bd = new SessionDAO('complucine');
 			if($bd ){
@@ -75,7 +71,6 @@
 					}else{
 						return "Ya existe una sesion con los parametros nuevos";	
 					}
-					
 				} else 
 					return "La session a editar no existe";
 				
@@ -90,9 +85,7 @@
 					return "Se ha eliminado la session con exito";						
 				} else 
 					return "Esta session no existe";
-			} else return "Error al conectarse a la base de datos";
-			
-			return "Se ha eliminado la session con exito";	
+			} else return "Error al conectarse a la base de datos";	
 		}
 		
 		//Esto deberia estar en film.php? seguramente

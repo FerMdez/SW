@@ -22,24 +22,19 @@ class Event implements \JsonSerializable
   
     public static function searchEventsBetween2dates(string $start, string $end = null, $idhall, $cinema)
     {	
-        $startDate = \DateTime::createFromFormat(self::MYSQL_DATE_TIME_FORMAT, $start);
-		$endDate =  \DateTime::createFromFormat(self::MYSQL_DATE_TIME_FORMAT, $end);
         
         $result = [];
-		
-        $sessions = Session::getListSessionsBetween2Dates($idhall,$cinema,$startDate,$endDate);
-		
-		foreach($sessions as $s){
-			$e = new Event();
-			$dictionary = self::session2dictionary($s);
-			$e = $e->dictionary2event($dictionary);
-			$result[] = $e;
-		}
-		
+        $sessions = Session::getListSessionsBetween2Dates($idhall,$cinema,$start,$end);
+        if($sessions){
+            foreach($sessions as $s){
+                $e = new Event();
+                $dictionary = self::session2dictionary($s);
+                $e = $e->dictionary2event($dictionary);
+                $result[] = $e;
+            }
+         }
         return $result;
     }
-
-    const MYSQL_DATE_TIME_FORMAT= 'Y-m-d H:i:s';
     
     private $id;
     private $title;
@@ -70,17 +65,44 @@ class Event implements \JsonSerializable
     //Return an object that allows Event object to be serialized as json because private atributes cant be serialized
     public function jsonSerialize()
     {	
+        $film = Session::getThisSessionFilm($this->idfilm);
+        
+        $undesirable = array(
+            'á','À','Á','Â','Ã','Ä','Å',
+            'ß','Ç',
+            'È','É','Ê','Ë',
+            'Ì','Í','Î','Ï','Ñ',
+            'Ò','Ó','Ô','Õ','Ö',
+            'Ù','Ú','Û','Ü',
+            'ñ'
+        );
+        $good = array(
+            'a','A','A','A','A','A','A',
+            'B','C',
+            'E','E','E','E',
+            'I','I','I','I','N',
+            'O','O','O','O','O',
+            'U','U','U','U',
+            'n'
+        );
+
+        $lan = str_replace($undesirable, $good, $film["language"]);
+
+
         $o = new \stdClass();
         $o->id = $this->id;
         $o->title = $this->title;
-        $o->start = $this->start->format(self::MYSQL_DATE_TIME_FORMAT);
-        $o->end = $this->end->format(self::MYSQL_DATE_TIME_FORMAT);
+        $o->start = $this->start;
+        $o->end = $this->end;
         $o->start_time = $this->start_time;
 		$o->seat_price = $this->seat_price;
         $o->format = $this->format;
-		$o->film = Session::getThisSessionFilm($this->idfilm);
-		$o->date = $this->start->format("Y-m-d");
-		
+    	$o->film_dur = $film["duration"];
+        $o->film_id = $film["idfilm"];
+        $o->film_lan = $lan;
+        $o->film_img = $film["img"];
+		$o->date = $this->start;
+
         return $o;
     }
  
@@ -90,10 +112,9 @@ class Event implements \JsonSerializable
 		$film =	Session::getThisSessionFilm($session->getIdfilm());
 		$dur = $film["duration"]+$extraDurationBetweenFilms;
 		
-		$tittle = str_replace('_', ' ', $film["tittle"]) ;
+		$tittle = \str_replace('_', ' ', $film["tittle"]) ;
 		$start = $session->getDate()." ".$session->getStartTime();
-		
-		$end = date('Y-m-d H:i:s', strtotime( $start . ' +'.$dur.' minute'));
+		$end = \date('Y-m-d H:i:s', \strtotime( $start . ' +'.$dur.' minute'));
 		
 		$dictionary = array(
 			"id" => $session->getId(),
@@ -124,17 +145,16 @@ class Event implements \JsonSerializable
         
         if (array_key_exists('start', $dictionary)) {
             $start = $dictionary['start'];
-			$startDate = \DateTime::createFromFormat(self::MYSQL_DATE_TIME_FORMAT, $start);
-            $this->start = $startDate;
+            //$start = DateTime::createFromFormat("y-m-d H:i:s", $start);
+            $this->start = $start;
         }
 
-        
         if (array_key_exists('end', $dictionary)) {
             $end = $dictionary['end'] ?? null;
-            $endDate = \DateTime::createFromFormat(self::MYSQL_DATE_TIME_FORMAT, $end);
-            $this->end = $endDate;
+            $this->end = $end;
         }
 		
+        
 		if (array_key_exists('idfilm', $dictionary)) {
             $idfilm = $dictionary['idfilm'] ?? null;
             $this->idfilm = $idfilm;
