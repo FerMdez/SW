@@ -224,7 +224,7 @@ CREATE TABLE `purchase` (
 --
 
 --
--- Volcado de datos para la tabla `promotion`
+-- Volcado de datos para la tabla `purchase`
 --
 
 INSERT INTO `purchase` (`iduser`, `idsession`, `idhall`, `idcinema`, `numrow`, `numcolum`, `time_purchase`) VALUES
