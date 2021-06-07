@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 02-06-2021 a las 21:03:55
+-- Tiempo de generación: 07-06-2021 a las 11:04:18
 -- Versión del servidor: 10.0.28-MariaDB-2+b1
 -- Versión de PHP: 7.3.27-1~deb10u1
 
@@ -29,6 +29,13 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(15) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `admin`
+--
+
+INSERT INTO `admin` (`id`) VALUES
+(0);
 
 -- --------------------------------------------------------
 
@@ -173,12 +180,6 @@ CREATE TABLE `purchase` (
 
 INSERT INTO `purchase` (`iduser`, `idsession`, `idhall`, `idcinema`, `numrow`, `numcolum`, `time_purchase`) VALUES
 (7, 120, 2, 1, 2, 4, '2021-05-28 14:24:58'),
-(101, 62, 1, 1, 10, 4, '2021-06-01 17:00:07'),
-(101, 92, 2, 1, 4, 1, '2021-06-01 17:01:43'),
-(101, 124, 2, 1, 6, 8, '2021-06-01 17:05:45'),
-(101, 126, 2, 1, 9, 2, '2021-06-01 17:08:16'),
-(101, 78, 1, 1, 12, 4, '2021-06-01 17:30:21'),
-(101, 92, 2, 1, 11, 4, '2021-06-01 17:33:57'),
 (7, 37, 1, 1, 5, 4, '2021-06-02 09:58:05'),
 (7, 93, 2, 1, 9, 5, '2021-06-02 09:58:55'),
 (7, 95, 2, 1, 4, 6, '2021-06-02 09:59:28'),
@@ -823,8 +824,7 @@ INSERT INTO `users` (`id`, `username`, `email`, `passwd`, `rol`) VALUES
 (1, 'manager', 'manager@complucine.sytes.net', 'shTS9RK/eJPoQ', 'manager'),
 (2, 'user', 'user@complucine.sytes.net', 'shO5etd.DYKWg', 'user'),
 (3, 'manager2', 'manager2@complucine.sytes.net', '$2y$10$IAoCBP5mWz.dEIV7qsy1guyoOpfrfovwDBOEL9wVFn2oM1x9nx2xW', 'manager'),
-(7, 'fernando', 'fer@complucine.sytes.net', '$2y$10$/3yjEh4d7AOY3RyNjXIIkO5H2hg7/kiHiToJa92tCBPd7s3UPtB.G', 'user'),
-(101, 'user2', 'user2@ucm.es', '$2y$10$BlP5ymruCBMsqD3WKA4a6u5zL29/K4GYJdRMP76WIUmJgm4EjMf8u', 'user');
+(7, 'fernando', 'fer@complucine.sytes.net', '$2y$10$/3yjEh4d7AOY3RyNjXIIkO5H2hg7/kiHiToJa92tCBPd7s3UPtB.G', 'user');
 
 --
 -- Índices para tablas volcadas
