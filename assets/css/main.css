@@ -377,7 +377,7 @@ main img {
   margin: 0.7em 0 0.2em 0;
   width: 100%;
   height: 119px;
-  display: inline-block;
+  display: block;
   margin-left: auto;
   margin-right: auto;
   box-shadow: 0 4px 8px 0 #00020f, 0 6px 20px 0 #00020f;
