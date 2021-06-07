@@ -52,6 +52,7 @@
         }
 
 		//Change state of the seat.
+		/*
 		public function changeSeatState($hall, $cinema, $row, $col, $state){
 			$id = $this->mysqli->real_escape_string($idHall);
 			$state = $this->mysqli->real_escape_string($state);
@@ -63,6 +64,7 @@
 			return $resul;
 
 		}
+		*/
 		
 		//Create a new Seat Data Transfer Object.
 		public function loadSeat($idhall, $idcinema, $numRow, $numCol, $state){

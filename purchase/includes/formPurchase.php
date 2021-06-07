@@ -211,6 +211,7 @@ class FormPurchase extends Form {
                     if($purchaseDAO->createPurchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), $rows[$i], $cols[$i], date("Y-m-d H:i:s"))){
                         $purchase = new Purchase(unserialize($_SESSION["user"])->getId(), $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), $datos["row"], $datos["col"], strftime("%A %e de %B de %Y a las %H:%M"));
                         
+                        /*
                         $seatDAO = new SeatDAO("complucine");
                         $seats_list = $seatDAO->getAllSeats($this->session->getIdhall(), $this->cinema->getId());
                         foreach($seats_list as $key=>$value){
@@ -220,6 +221,7 @@ class FormPurchase extends Form {
                                     $seatDAO->changeSeatState( $seats_list[$key]->getNumber(), $seats_list[$key]->getIdcinema(), $seats_list[$key]->getNumRows(), $seats_list[$key]->getNumCol(), $seats_list[$key]->getState());
                             }
                         }
+                        */
 
                         $_SESSION["purchase"] = serialize($purchase);
                         $_SESSION["film_purchase"] = serialize($this->film);
@@ -231,15 +233,6 @@ class FormPurchase extends Form {
            } else {
             $purchase = new Purchase("null", $this->session->getId(), $this->session->getIdhall(), $this->cinema->getId(), $datos["row"], $datos["col"], strftime("%A %e de %B de %Y a las %H:%M"));
                 
-                $seatDAO = new SeatDAO("complucine");
-                $seats_list = $seatDAO->getAllSeats($this->session->getIdhall(), $this->cinema->getId());
-                foreach($seats_list as $key=>$value){
-                    if( $seats_list[$key]->getNumRows() === $datos["row"][11] &&
-                         $seats_list[$key]->getNumCol() === $datos["col"][11] ){
-                            $seats_list[$key]->setState(intval(-1));
-                            $seatDAO->changeSeatState( $seats_list[$key]->getNumber(), $seats_list[$key]->getIdcinema(), $seats_list[$key]->getNumRows(), $seats_list[$key]->getNumCol(), $seats_list[$key]->getState());
-                    }
-                }
 
                 $_SESSION["purchase"] = serialize($purchase);
                 $_SESSION["film_purchase"] = serialize($this->film);

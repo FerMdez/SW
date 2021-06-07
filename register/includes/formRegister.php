@@ -102,7 +102,7 @@ class FormRegister extends Form {
                                 $_SESSION["nombre"] = $this->user->getName();
                                 $_SESSION["rol"] = $this->user->getRol();
                                 $_SESSION["login"] = true;
-                                $img = "../img/users/user.jpg"; //USER_PICS
+                                $img = "../img/tmp/user.jpg"; //TMP_DIR
                                 $profile_img = "../img/users/".$nombre.".jpg";
                                 copy($img, $profile_img);
                                 $result = ROUTE_APP."register/register.php";
