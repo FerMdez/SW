@@ -223,6 +223,17 @@ CREATE TABLE `purchase` (
 --       `users` -> `id`
 --
 
+--
+-- Volcado de datos para la tabla `promotion`
+--
+
+INSERT INTO `purchase` (`iduser`, `idsession`, `idhall`, `idcinema`, `numrow`, `numcolum`, `time_purchase`) VALUES
+(7, 120, 2, 1, 2, 4, '2021-05-28 14:24:58'),
+(7, 37, 1, 1, 5, 4, '2021-06-02 09:58:05'),
+(7, 93, 2, 1, 9, 5, '2021-06-02 09:58:55'),
+(7, 95, 2, 1, 4, 6, '2021-06-02 09:59:28'),
+(7, 190, 2, 3, 2, 3, '2021-06-02 14:18:50');
+
 -- --------------------------------------------------------
 
 --
