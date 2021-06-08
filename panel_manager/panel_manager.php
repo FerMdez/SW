@@ -138,19 +138,6 @@
 
 		}
 		
-		static function success(){
-			$msg = "operacion completada con exito";
-			if(isset($_GET["msg"])) $msg = $_GET["msg"];
-			
-            $panel = '<div class="code info">
-                    <h1>Operacion completada.</h1>
-                    <hr />
-                    <p>'.$msg.'</p>
-                </div>'."\n";
-			
-			return $panel;
-        }
-		
 		static function manage_halls(){	
 			if(isset($_SESSION["cinema"])){
 				$panel = '<div class="column side"></div>

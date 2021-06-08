@@ -58,9 +58,6 @@
 			case "manage_sessions":
 				$panel = Manager_panel::calendar();
 				break;
-			case "success":
-				$panel = Manager_panel::success();
-				break;
 			default:  
 				$panel = Manager_panel::welcomeAdmin($manager);
 				break;
@@ -127,9 +124,6 @@
 				break;	
 			case "manage_sessions":
 				$panel = Manager_panel::calendar();
-				break;
-			case "success":
-				$panel = Manager_panel::success();
 				break;
 			default:  
 				$panel = Manager_panel::welcome();
