@@ -36,6 +36,7 @@
 				if(!$bd->searchHall($number, $cinema)){
 					$bd->createHall($number, $cinema, $rows, $cols, $seats, $seats_map);
 					Seat::createSeats($number, $cinema, $rows, $cols, $seats_map);
+					return "Se ha creado la sala con exito";
 				} else {
 					return "Esta sala ya existe";
 				}
@@ -50,11 +51,13 @@
 						Seat::deleteAllSeats($number, $cinema);
 						$bd->editHall($number, $cinema, $rows, $cols, $seats, $og_number);
 						Seat::createSeats($number, $cinema, $rows, $cols, $seats_map);
+						return "Se ha editado la sala con exito";
 					}else{
 						if(!$bd->searchHall($number, $cinema)){
 							Seat::deleteAllSeats($og_number, $cinema);
 							$bd->editHall($number, $cinema, $rows, $cols, $seats, $og_number);
 							Seat::createSeats($number, $cinema, $rows, $cols, $seats_map);
+							return "Se ha editado la sala con exito";
 						}else
 							return "El nuevo numero de sala ya existe en otra sala";
 					}
@@ -70,6 +73,7 @@
 				if($bd->searchHall($og_number, $cinema)){
 					$bd->deleteHall($og_number, $cinema);
 					Seat::deleteAllSeats($og_number, $cinema);
+					return "La sala se ha eliminado correctamente";
 				} else {
 					return "La sala a borrar no existe";
 				}
