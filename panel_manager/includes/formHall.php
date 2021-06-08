@@ -186,21 +186,21 @@ class FormHall extends Form {
         else if (count($result) === 0 && isset($datos["sumbit"]) ) {
 				if($this->option == "new_hall"){
 					$_SESSION['msg'] = Hall::create_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map);
-					 $result = './?state=success';
+					//$result = './?state=success';
 				}
 				else if($this->option == "edit_hall"){
 					$_SESSION['msg'] = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-					 $result = './?state=success';
+					//$result = './?state=success';
 				}
         }
 		else if (!isset($result['number']) && isset($datos["delete"]) ) {
 			if($this->option == "edit_hall"){
                 $_SESSION['msg'] = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-                 $result = './?state=success';
+                //$result = './?state=success';
             }
         }
 		else if(isset($datos["restart"])){
-			$result = "./?state=".$this->option."&number=".$this->og_hall->getNumber()."";
+			//$result = "./?state=".$this->option."&number=".$this->og_hall->getNumber()."";
 	   }
 		
 		
