@@ -8,7 +8,7 @@ include_once('../assets/php/form.php');
 class formDeleteCinema extends Form{
 
     public function __construct(){
-        $op = array("action"=>"./?state=mc");
+        $op = array("action"=>"./?state=mc&option=d");
         parent::__construct('formAddCinema',$op);
     } 
 
@@ -59,7 +59,7 @@ class formDeleteCinema extends Form{
                                         <div class='column side'></div>
                                     </div>
                                     ";
-                //$result = './?state=mc';                    
+                $result = './?state=mc';                    
             }	
             $exist->free();
             }

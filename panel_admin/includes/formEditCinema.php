@@ -8,7 +8,7 @@ include_once('../assets/php/form.php');
 class formEditCinema extends Form{
 
     public function __construct(){
-        $op = array("action"=>"./?state=mc");
+        $op = array("action"=>"./?state=mc&option=e");
         parent::__construct('formAddCinema',$op);
     } 
 
@@ -83,7 +83,7 @@ class formEditCinema extends Form{
                                         <div class='column side'></div>
                                     </div>
                                     ";
-                //$result = './?state=mc'; 
+                $result = './?state=mc'; 
             }
             else{
                 $result[] = "El cine seleccionado no existe.";	                  

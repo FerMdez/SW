@@ -11,7 +11,7 @@ class formAddPromotion extends Form{
 	const EXTENSIONS = array('gif','jpg','jpe','jpeg','png');
 
 	public function __construct() {
-        $options = array("action" => "./?state=mp", 'enctype' => 'multipart/form-data');
+        $options = array("action" => "./?state=mp&option=a", 'enctype' => 'multipart/form-data');
         parent::__construct('formAddPromotion', $options);
     }
 
@@ -134,7 +134,7 @@ class formAddPromotion extends Form{
 										<div class='column side'></div>
 									</div>
 									";
-					//$result = './?state=mp';
+					$result = './?state=mp';
 			
 				}else {
 					$result['img'] = 'El archivo tiene un nombre o tipo no soportado';

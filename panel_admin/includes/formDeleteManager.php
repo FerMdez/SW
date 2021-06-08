@@ -10,7 +10,7 @@ class formDeleteManager extends Form{
 	const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
 
 	public function __construct() {
-        $options = array("action" => "./?state=mg");
+        $options = array("action" => "./?state=mg&option=d");
         parent::__construct('formDeleteManager', $options);
     }
 
@@ -64,7 +64,7 @@ class formDeleteManager extends Form{
                                             </div>
                                         <div class='column side'></div>
                                     </div>";
-                //$result = './?state=mg';
+                $result = './?state=mg';
             }
             else{
                 $result[] = "ERROR. No existe un manager con ese ID";

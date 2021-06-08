@@ -10,7 +10,7 @@ class formDeleteFilm extends Form{
 	const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
 
 	public function __construct() {
-        $options = array("action" => "./?state=mf");
+        $options = array("action" => "./?state=mf&option=d");
         parent::__construct('formDeleteFilm', $options);
     }
 
@@ -69,7 +69,7 @@ class formDeleteFilm extends Form{
 										<div class='column side'></div>
 										</div>
 					";
-					//$result = './?state=mf';
+					$result = './?state=mf';
 			}
 			else{
 				$result[] = "La pelicula seleccionada no existe.";

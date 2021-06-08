@@ -10,7 +10,7 @@ class formDeletePromotion extends Form{
 	
 
 	public function __construct() {
-        $op = array("action" => "./?state=mp");
+        $op = array("action" => "./?state=mp&option=d");
         parent::__construct('formEditPromotion', $op);
     }
 
@@ -73,7 +73,7 @@ class formDeletePromotion extends Form{
 										<div class='column side'></div>
 									</div>
 									";
-				//$result = './?state=mp';
+				$result = './?state=mp';
 			}
 			else{
 				

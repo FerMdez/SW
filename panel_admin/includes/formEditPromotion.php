@@ -12,7 +12,7 @@ class formEditPromotion extends Form{
     const EXTENSIONS = array('gif','jpg','jpe','jpeg','png');
 
     public function __construct() {
-        $options = array("action" => "./?state=mp", 'enctype' => 'multipart/form-data');
+        $options = array("action" => "./?state=mp&option=e", 'enctype' => 'multipart/form-data');
         parent::__construct('formEditPromotion', $options);
     }
 
@@ -139,7 +139,7 @@ class formEditPromotion extends Form{
 											<div class='column side'></div>
 											</div>
 											";
-					//$result = './?state=mp';
+					$result = './?state=mp';
 			
 				}else {
 					$result['img'] = 'El archivo tiene un nombre o tipo no soportado';
@@ -158,7 +158,7 @@ class formEditPromotion extends Form{
 											<div class='column side'></div>
 											</div>
 											";
-					//$result = './?state=mp';
+					$result = './?state=mp';
 				}
 			}
 			else{
