@@ -64,7 +64,7 @@ class formDeleteManager extends Form{
                                             </div>
                                         <div class='column side'></div>
                                     </div>";
-                $result = './?state=mg';
+                //$result = './?state=mg';
             }
             else{
                 $result[] = "ERROR. No existe un manager con ese ID";

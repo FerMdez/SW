@@ -69,7 +69,7 @@ class formEditManager extends Form{
                                             </div>
                                         <div class='column side'></div>
                                     </div>";
-                $result = './?state=mg';           
+               // $result = './?state=mg';           
                 
             }
             else{

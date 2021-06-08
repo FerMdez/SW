@@ -78,7 +78,7 @@ class formAddManager extends Form{
                                         <div class='column side'></div>
                                     </div>
                     ";
-                $result = './?state=mg';
+                //$result = './?state=mg';
             }
             $exist->free();
             
