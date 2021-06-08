@@ -15,14 +15,16 @@ class formDeleteManager extends Form{
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
-       
+        $html ="";
+        if (!isset($_SESSION['message'])) {
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         //$errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
-		$html = '<div class="row">
+		$html .= '<div class="row">
+        <h3>ELIMINAR GERENTE</h3>
                     <fieldset id="manager_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>¿Estás seguro de que quieres eliminar este gerente?</legend><pre>'.$errorId.'</pre>
                         <input type="hidden" name="id" value='.$_POST['id'].'/>
@@ -37,7 +39,7 @@ class formDeleteManager extends Form{
                         <input type="submit" id="submit" value="Cancelar"  class="primary" />
                     </div>
                 </div>';
-
+        }
         return $html;
     }
 

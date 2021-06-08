@@ -13,28 +13,31 @@ class formEditCinema extends Form{
     } 
 
     protected function generaCamposFormulario($datos,$errores=array()){
+        $html ="";
+        if(!isset($_SESSION['message'])) {
+            $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+            $errorId= self::createMensajeError($errores,'id','span',array('class'=>'error'));
+            $errorName = self::createMensajeError($errores,'name','span',array('class'=>'error'));
+            $errorDirection = self::createMensajeError($errores,'direction','span',array('class'=>'error'));
+            $errrorPhone = self ::createMensajeError($errores,'phone',array('class'=>'error'));
 
-        $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
-        $errorId= self::createMensajeError($errores,'id','span',array('class'=>'error'));
-        $errorName = self::createMensajeError($errores,'name','span',array('class'=>'error'));
-        $errorDirection = self::createMensajeError($errores,'direction','span',array('class'=>'error'));
-        $errrorPhone = self ::createMensajeError($errores,'phone',array('class'=>'error'));
-
-        $html = '<div class="row">
-                            <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
-                            <legend>Datos de cine </legend>  
-                            <input type="hidden" name="id" value='.$_POST['id'].'/>                 
-                            <input type="text" name="name" value="'.$_POST['name'].'" required/><pre>'.$errorName.'</pre>
-                            <input type="text" name="direction" value="'.$_POST['direction'].'"required/><pre>'.$errorDirection.'</pre>
-                            <input type="text" name="phone"  value="'.$_POST['phone'].'"required/><pre>'.$errrorPhone.'</pre>
-                        </fieldset>
-                            <div class="actions"> 
-                                <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
-                                <input type="reset" id="reset" value="Borrar" />       
+            $html .= '<div class="row">
+                                <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
+                                <legend>Datos de cine </legend>  
+                                <input type="hidden" name="id" value='.$_POST['id'].'/>                 
+                                <input type="text" name="name" value="'.$_POST['name'].'" required/><pre>'.$errorName.'</pre>
+                                <input type="text" name="direction" value="'.$_POST['direction'].'"required/><pre>'.$errorDirection.'</pre>
+                                <input type="text" name="phone"  value="'.$_POST['phone'].'"required/><pre>'.$errrorPhone.'</pre>
+                            </fieldset>
+                                <div class="actions"> 
+                                    <input type="submit" id="submit" value="Editar" name="edit_cinema" class="primary" />
+                                    <input type="reset" id="reset" value="Borrar" />       
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>  ';
+                    </div>  ';
+        }
+
         return $html;
     }           
     

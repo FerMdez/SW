@@ -17,7 +17,8 @@ class formEditFilm extends Form{
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
-       
+        $html ="";
+        if (!isset($_SESSION['message'])) {
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
@@ -28,7 +29,7 @@ class formEditFilm extends Form{
 		$errorDescription = self::createMensajeError($errores, 'description', 'span', array('class' => 'error'));
 		$errorImage = self::createMensajeError($errores, 'img', 'span', array('class' => 'error'));
 
-		$html = '
+		$html .= '
             <div class="row">
                 <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
                 <legend>Datos de pelicula</legend>
@@ -48,7 +49,7 @@ class formEditFilm extends Form{
         </div>
         <div class="column side"></div>
         ';
-
+        }
         return $html;
     }
 
@@ -137,7 +138,7 @@ class formEditFilm extends Form{
                                                 <div class='column side'></div>
                                             </div>
                                             ";
-                         //$result = './?state=mf';
+                        //$result = './?state=mf';
                  
                      }else {
                          $result['img'] = 'El archivo tiene un nombre o tipo no soportado';

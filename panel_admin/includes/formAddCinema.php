@@ -14,23 +14,24 @@ class formAddCinema extends Form{
 
     protected function generaCamposFormulario($datos,$errores=array()){
 
-        $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
-        $errorName = self::createMensajeError($errores,'namecinema','span',array('class'=>'error'));
-        $errorDirection = self::createMensajeError($errores,'direction','span',array('class'=>'error'));
-        $errrorPhone = self ::createMensajeError($errores,'phone',array('class'=>'error'));
+            $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
+            $errorName = self::createMensajeError($errores,'namecinema','span',array('class'=>'error'));
+            $errorDirection = self::createMensajeError($errores,'direction','span',array('class'=>'error'));
+            $errrorPhone = self ::createMensajeError($errores,'phone',array('class'=>'error'));
 
-        $html = '<div class="row"></div>
-                    <fieldset id = "cinema_form">'.$htmlErroresGlobales.'</pre>
-                    <legend>Añadir cine</legend>
-                     <input type="text" name="namecinema" id="namecinema" placeholder="Nombre" required/><pre>'.$errorName.'</pre>
-                     <input type="text" name="direction" id="direction" placeholder="Direccion" required/><pre>'.$errorDirection.'</pre> 
-                     <input type="text" name="phone" id="phone" placeholder="Teléfono" required/><pre>'.$errrorPhone.'</pre>
-                    </fieldset>
-                    <div class="actions"> 
-                        <input type="submit" id="submit" value="Añadir cine" class="primary" />
-                        <input type="reset" id="reset" value="Borrar" />       
-                    </div>
-                </div>  ';
+            $html = '<div class="row"></div>
+                        <fieldset id = "cinema_form">'.$htmlErroresGlobales.'</pre>
+                        <legend>Añadir cine</legend>
+                        <input type="text" name="namecinema" id="namecinema" placeholder="Nombre" required/><pre>'.$errorName.'</pre>
+                        <input type="text" name="direction" id="direction" placeholder="Direccion" required/><pre>'.$errorDirection.'</pre> 
+                        <input type="text" name="phone" id="phone" placeholder="Teléfono" required/><pre>'.$errrorPhone.'</pre>
+                        </fieldset>
+                        <div class="actions"> 
+                            <input type="submit" id="submit" value="Añadir cine" class="primary" />
+                            <input type="reset" id="reset" value="Borrar" />       
+                        </div>
+                    </div>  ';
+        
         return $html;
     }           
     

@@ -15,7 +15,8 @@ class formDeletePromotion extends Form{
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
-       
+		$html ="";
+        if (!isset($_SESSION['message'])) {
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
@@ -26,7 +27,8 @@ class formDeletePromotion extends Form{
 		//$errorActive = self::createMensajeError($errores, 'active', 'span', array('class' => 'error'));
 		//$errorImage = self::createMensajeError($errores, 'image', 'span', array('class' => 'error'));
 
-		$html = '<div class="row">
+		$html .= '<div class="row">
+		<h3>ELIMINAR PROMOCIÓN</h3>
 						<fieldset id="promotion_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>¿Estás seguro de que quieres eliminar esta promocion?</legend>
                             <input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>
@@ -42,7 +44,7 @@ class formDeletePromotion extends Form{
 						</div>
 					</div>
 				</div>';
-
+		}
         return $html;
     }
 

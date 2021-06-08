@@ -17,13 +17,14 @@ class formEditManager extends Form{
 
 	protected function generaCamposFormulario($datos, $errores = array()){
        
-
+        $html ="";
+        if (!isset($_SESSION['message'])) {
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         $errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
-		$html = '
+		$html .= '
                     <h1>EDITAR GERENTE ID:'.$_POST['id'].'</h1>
                     <fieldset><pre>'.$htmlErroresGlobales.'</pre>
                     <legend>Selecciona cine.</legend><pre>'.$errorIdCinema.'</pre>
@@ -35,7 +36,7 @@ class formEditManager extends Form{
                         <input type="reset" id="reset" value="Borrar" />       
                         </div>
                 </div>';
-
+        }
         return $html;
     }
 
@@ -69,7 +70,7 @@ class formEditManager extends Form{
                                             </div>
                                         <div class='column side'></div>
                                     </div>";
-               // $result = './?state=mg';           
+                //$result = './?state=mg';           
                 
             }
             else{

@@ -13,11 +13,12 @@ class formDeleteCinema extends Form{
     } 
 
     protected function generaCamposFormulario($datos,$errores=array()){
-
+        $html ="";
+        if (!isset($_SESSION['message'])) {
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
 
-        $html = '
+        $html .= '
                     <fieldset id = "cinema_form"><pre>'.$htmlErroresGlobales.'</pre>
                     <legend>¿Estás seguro de que quieres eliminar este cine?</legend>
 					<input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>
@@ -29,6 +30,7 @@ class formDeleteCinema extends Form{
                         <input type="submit" id="submit" value="Eliminar" name="delete_cinema" class="primary" />
                         <input type="submit" id="submit" value="Cancelar" class="primary" />
                     </div>';
+        }
          return $html;
     }           
     

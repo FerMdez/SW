@@ -17,7 +17,8 @@ class formEditPromotion extends Form{
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
-       
+		$html ="";
+        if (!isset($_SESSION['message'])) {
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
@@ -28,7 +29,8 @@ class formEditPromotion extends Form{
 		$errorActive = self::createMensajeError($errores, 'active', 'span', array('class' => 'error'));
 		$errorImg = self::createMensajeError($errores, 'img', 'span', array('class' => 'error'));
 
-		$html = '<div class="row">
+		$html .= '<div class="row">
+		<h3>EDITAR PROMOCIÓN</h3>
                     <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
                         <legend>Datos de promocion</legend>
                             <input type="hidden" name="id" value='.$_POST['id'].'/>
@@ -44,7 +46,7 @@ class formEditPromotion extends Form{
 						</div>
 					</div>
 				</div>';
-
+		}
         return $html;
     }
 

@@ -297,8 +297,7 @@
             $htmlAForm = $formAM->gestiona();
             return $reply=   '<!-- ADD MANAGER -->
                 <div class="column side"></div>
-                <div class="column middle">
-                    <h3>AÑADIR GERENTE</h3>
+                <div class="column middle">  
                     '.$htmlAForm.'
                 </div>
                 <div class="column side"></div>'."\n";
@@ -308,7 +307,6 @@
             $formEM = new formEditManager();
             $htmlEForm = $formEM->gestiona();
             return $reply=   '<!-- EDIT MANAGER -->
-
                 <div class="column side"></div>
                 <div class="column middle">
                     '.$htmlEForm.'
@@ -322,7 +320,6 @@
             return $reply=  '<!-- DELETE MANAGER -->
                 <div class="column side"></div>
                 <div class="column middle">
-                    <h3>ELIMINAR GERENTE</h3>
                     '.$htmlDForm.'
                 </div>
                 <div class="column side"></div>'."\n";
@@ -337,7 +334,6 @@
             return $reply=   '<!-- ADD PROMOTION -->
                 <div class="column side"></div>
                 <div class="column middle">
-                    <h3>AÑADIR PROMOCIÓN</h3>
                     '.$htmlAForm.'
                 </div>';
         }
@@ -349,7 +345,6 @@
             return $reply=  '<!-- EDIT MANAGER -->
                 <div class="column side"></div>
                 <div class="column middle">
-                    <h3>EDITAR PROMOCIÓN</h3>
                     '.$htmlEForm.'
                 </div>
                 <div class="column side"></div>'."\n";
@@ -362,7 +357,6 @@
             return $reply=  '<!-- DELETE MANAGER -->
             <div class="column side"></div>
                     <div class="column middle">
-                    <h3>ELIMINAR PROMOCIÓN</h3>
                     '.$htmlDForm.'
                     </div>'."\n";
         }

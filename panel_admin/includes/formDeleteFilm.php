@@ -11,11 +11,13 @@ class formDeleteFilm extends Form{
 
 	public function __construct() {
         $options = array("action" => "./?state=mf");
+		
         parent::__construct('formDeleteFilm', $options);
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
-       
+		$html ="";
+        if (!isset($_SESSION['message'])) {
 
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
@@ -26,7 +28,7 @@ class formDeleteFilm extends Form{
 		//$errorDescription = self::createMensajeError($errores, 'description', 'span', array('class' => 'error'));
 		//$errorImage = self::createMensajeError($errores, 'image', 'span', array('class' => 'error'));
 
-		$html = '<div class="row">
+		$html .= '<div class="row">
 				<fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
 					<legend>¿Estás seguro de que quieres eliminar esta pelicula?</legend>
 					<input type="hidden" name="id" value='.$_POST['id'].'/><pre>'.$errorId.'</pre>
@@ -41,7 +43,7 @@ class formDeleteFilm extends Form{
 					<input type="submit" id="submit" value="Cancelar" class="primary" />
 				</div>
 		</div>';
-
+		}
         return $html;
     }
 

@@ -17,14 +17,16 @@ class formAddManager extends Form{
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
-       
+       $html = "";
 
+       if (!isset($_SESSION['message'])) {
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorId = self::createMensajeError($errores, 'id', 'span', array('class' => 'error'));
         $errorIdCinema = self::createMensajeError($errores, 'idcinema', 'span', array('class' => 'error'));
 
-		$html = '<fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
+		$html .= '<h3>AÑADIR GERENTE</h3>
+        <fieldset id="film_form"><pre>'.$htmlErroresGlobales.'</pre>
                     <legend>Selecciona usuario.</legend><pre>'.$errorId.'</pre>' 
                     .$this->showUsers().
                     '</fieldset>
@@ -38,7 +40,7 @@ class formAddManager extends Form{
                         </div>
                 </div>
                 ';
-
+       }
         return $html;
     }
 

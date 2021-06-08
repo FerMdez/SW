@@ -16,8 +16,7 @@ class formAddFilm extends Form{
     }
 
 	protected function generaCamposFormulario($datos, $errores = array()){
-       
-
+		
         // Se generan los mensajes de error si existen.
         $htmlErroresGlobales = self::generaListaErroresGlobales($errores);
         $errorTittle = self::createMensajeError($errores, 'tittle', 'span', array('class' => 'error'));
@@ -41,7 +40,7 @@ class formAddFilm extends Form{
 						</div>
 					</div>
 				</div>';
-
+		
         return $html;
     }
 
