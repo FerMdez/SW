@@ -83,7 +83,7 @@ class formEditCinema extends Form{
                                         <div class='column side'></div>
                                     </div>
                                     ";
-                $result = './?state=mc'; 
+                //$result = './?state=mc'; 
             }
             else{
                 $result[] = "El cine seleccionado no existe.";	                  

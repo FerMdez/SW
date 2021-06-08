@@ -134,7 +134,7 @@ class formAddPromotion extends Form{
 										<div class='column side'></div>
 									</div>
 									";
-					$result = './?state=mp';
+					//$result = './?state=mp';
 			
 				}else {
 					$result['img'] = 'El archivo tiene un nombre o tipo no soportado';

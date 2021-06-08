@@ -59,7 +59,7 @@ class formDeleteCinema extends Form{
                                         <div class='column side'></div>
                                     </div>
                                     ";
-                $result = './?state=mc';                    
+                //$result = './?state=mc';                    
             }	
             $exist->free();
             }

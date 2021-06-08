@@ -73,7 +73,7 @@ class formDeletePromotion extends Form{
 										<div class='column side'></div>
 									</div>
 									";
-				$result = './?state=mp';
+				//$result = './?state=mp';
 			}
 			else{
 				

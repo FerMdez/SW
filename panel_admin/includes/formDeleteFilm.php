@@ -69,7 +69,7 @@ class formDeleteFilm extends Form{
 										<div class='column side'></div>
 										</div>
 					";
-					$result = './?state=mf';
+					//$result = './?state=mf';
 			}
 			else{
 				$result[] = "La pelicula seleccionada no existe.";

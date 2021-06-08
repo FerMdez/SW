@@ -137,7 +137,7 @@ class formEditFilm extends Form{
                                                 <div class='column side'></div>
                                             </div>
                                             ";
-                        $result = './?state=mf';
+                        //$result = './?state=mf';
                  
                      }else {
                          $result['img'] = 'El archivo tiene un nombre o tipo no soportado';
@@ -156,7 +156,7 @@ class formEditFilm extends Form{
                                                 <div class='column side'></div>
                                             </div>
                                             ";
-                         $result = './?state=mf';
+                         //$result = './?state=mf';
                      }
 
                 }
