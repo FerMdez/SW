@@ -84,9 +84,7 @@ class FormHall extends Form {
 						<label> Columnas: </label> <input type="number" name="cols" min="1" id="cols" value="'.$cols.'"/> <br>
 						<label> Asientos totales:'.$seats.' </label> <input type="hidden" name="seats" id="seats" value="'.$seats.'"readonly/> <br>
 						<input type="submit" name="filter" value="Actualizar mapa de la sala" class="button large" /> 
-						';
-						if($this->option == "edit_hall")
-								$html .= ' <input type="submit" id="restart" name="restart" value="Restaurar mapa original" class="black button" />';						
+						';					
 					$html .='
 					</fieldset><br>
 					'.$errorNumber.'
@@ -185,27 +183,39 @@ class FormHall extends Form {
         }
         else if (count($result) === 0 && isset($datos["sumbit"]) ) {
 				if($this->option == "new_hall"){
-					$_SESSION['msg'] = Hall::create_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map);
-					//$result = './?state=success';
+					$msg = Hall::create_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map);
+					FormHall::prepare_message( $msg );
 				}
 				else if($this->option == "edit_hall"){
-					$_SESSION['msg'] = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-					//$result = './?state=success';
+					$msg = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
+					FormHall::prepare_message( $msg );
 				}
         }
 		else if (!isset($result['number']) && isset($datos["delete"]) ) {
 			if($this->option == "edit_hall"){
-                $_SESSION['msg'] = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-                //$result = './?state=success';
+                $msg = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
+               FormHall::prepare_message( $msg );
             }
         }
-		else if(isset($datos["restart"])){
-			//$result = "./?state=".$this->option."&number=".$this->og_hall->getNumber()."";
-	   }
 		
 		
         return $result;
     }
+	
+	public static function prepare_message( $msg ){
+		$_SESSION['message'] =  "<div class='row'>
+                                        <div class='column side'></div>
+                                        <div class='column middle'>
+                                            <div class='code info'>
+                                                <h1> Operacion Completada </h1><hr />
+                                                <p>".$msg."</p>
+                                                <a href='./index.php?state=manage_halls'><button>Cerrar Mensaje</button></a>
+                                            </div>
+                                        </div>
+                                        <div class='column side'></div>
+                                    </div>
+                                    ";	
+	}
 }
 
 ?>
