@@ -380,10 +380,10 @@
                     $descriptions[$key] = $value->getDescription();
                     $codes[$key] = $value->getCode();
                     if ($value->getActive() == 0) {
-                        $actives[$key] = "si";
+                        $actives[$key] = "no";
                     }
                     else{
-                        $actives[$key] = "no";
+                        $actives[$key] = "si";
                     }
                 }
             
