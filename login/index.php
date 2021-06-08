@@ -4,7 +4,7 @@
      * user | userpass --> Usuario de pruebas 1.
      * fernando | ferpass --> Usuario de pruebas 2.
      * manager | managerpass --> Manager asociado al cine 1.
-     * manager | manager2pass --> Manager asociado al cine 2.
+     * manager2 | Manager2pass --> Manager asociado al cine 2.
      * admin | adminpass --> Administrador de la aplicación.
      */
     
