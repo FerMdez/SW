@@ -70,10 +70,10 @@ class formAddPromotion extends Form{
 		//|| !mb_ereg_match(self::HTML5_EMAIL_REGEXP, $description) 
         if ( strcmp($active,"si") == 0 ||  strcmp($active,"no") == 0) {
 			if ( strcmp($active,"si") == 0 ) {
-				$boolean = 0;
+				$boolean = 1;
 			}
 			else {
-				$boolean = 1;
+				$boolean = 0;
 			}
         }
 		else {
