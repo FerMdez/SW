@@ -188,18 +188,18 @@ class FormHall extends Form {
 		}
         if (count($result) === 0 && isset($datos["sumbit"]) ) {
 				if($this->option == "new_hall"){
-					Hall::create_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map);
-					return $result = './?state=success&new=true';
+					$msg = Hall::create_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map);
+					return $result = './?state=success&msg='.$msg;
 				}
 				if($this->option == "edit_hall"){
-					Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-					return $result = './?state=success&edit=true';
+					$msg = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
+					return $result = './?state=success&msg='.$msg;
 				}
         }
 		if (!isset($result['number']) && isset($datos["delete"]) ) {
 			if($this->option == "edit_hall"){
-                Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
-                return $result = './?state=success&del=true';
+               $msg = Hall::delete_hall($number, $this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
+                return $result = './?state=success&msg='.$msg;
             }
         }
 		
