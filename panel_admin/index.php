@@ -9,10 +9,10 @@
     if(!isset($_GET["state"]))
         $_GET["state"] =null;
         switch($_GET["state"]){
-                    case 'mc': if(isset($_POST['edit_cinema']) || (isset($_GET['option']) && ($_GET['option'] == 'e'))) {
+                    case 'mc': if(isset($_POST['edit_cinema'])) {
                                     $reply=AdminPanel::editCinema();
                                 }
-                                else if(isset($_POST['delete_cinema']) || (isset($_GET['option']) && ($_GET['option'] == 'd'))) {
+                                else if(isset($_POST['delete_cinema'])) {
                                     $reply=AdminPanel::deleteCinema();
                                 }                             
                                 else {
@@ -26,42 +26,46 @@
                                              }
                                          }
                                     }
-                                    else if(!isset($_GET['option']) || ($_GET['option'] == 'a')) {
+                                    else {
                                         $reply=AdminPanel::addCinema();
                                         $reply.= ($template->print_cinemas()); 
-                                }};   break;
-                    case 'mf': if(isset($_POST['edit_film']) || (isset($_GET['option']) && ($_GET['option'] == 'e'))) {
+                                    }
+                                };  
+                    break;
+                    case 'mf': if(isset($_POST['edit_film'])) {
                                 $reply=AdminPanel::editFilm();
                             }
-                            else if(isset($_POST['delete_film']) || (isset($_GET['option']) && ($_GET['option'] == 'd'))) {
+                            else if(isset($_POST['delete_film'])) {
                                 $reply=AdminPanel::deleteFilm();
                             }
-                            else if(!isset($_GET['option']) || ($_GET['option'] == 'a')) {
+                            else {
                                 $reply=AdminPanel::addFilm();
                                 $reply.= $template->print_fimls();
-                            };
+                            };  
                     break;
                     case 'mp': 
-                                if(isset($_POST['edit_promotion']) || (isset($_GET['option']) && ($_GET['option'] == 'e'))) {
+                                if(isset($_POST['edit_promotion'])) {
                                     $reply=AdminPanel::editPromotion();
                                 }
-                                else if(isset($_POST['delete_promotion']) || (isset($_GET['option']) && ($_GET['option'] == 'd'))) {
+                                else if(isset($_POST['delete_promotion'])) {
                                     $reply=AdminPanel::deletePromotion();
                                 }
-                                else if(!isset($_GET['option']) || ($_GET['option'] == 'a')) {
+                                else {
                                     $reply=AdminPanel::addPromotion();
                                     $reply.=AdminPanel::print_promotions();
+                                
                                 }; 
                     break;
-                    case 'mg': if(isset($_POST['edit_manager']) || (isset($_GET['option']) && ($_GET['option'] == 'e'))) {
+                    case 'mg': if(isset($_POST['edit_manager'])) {
                                     $reply=AdminPanel::editManager();
                                 }
-                                else if(isset($_POST['delete_manager']) || (isset($_GET['option']) && ($_GET['option'] == 'd'))) {
+                                else if(isset($_POST['delete_manager'])) {
                                     $reply=AdminPanel::deleteManager();
                                 }
-                                else if(isset($_POST['add_manager']) || (isset($_GET['option']) && ($_GET['option'] == 'a'))) {
+                                else if(isset($_POST['add_manager'])) {
                                     $reply=AdminPanel::addManager();
                                 }
+                                
                                 else {  
                                     $reply=AdminPanel::print_managers();
                                     $reply.=AdminPanel::showAddBotton();

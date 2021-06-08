@@ -10,7 +10,7 @@ class formDeleteFilm extends Form{
 	const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
 
 	public function __construct() {
-        $options = array("action" => "./?state=mf&option=d");
+        $options = array("action" => "./?state=mf");
         parent::__construct('formDeleteFilm', $options);
     }
 

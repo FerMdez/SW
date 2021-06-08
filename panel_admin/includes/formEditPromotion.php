@@ -12,7 +12,7 @@ class formEditPromotion extends Form{
     const EXTENSIONS = array('gif','jpg','jpe','jpeg','png');
 
     public function __construct() {
-        $options = array("action" => "./?state=mp&option=e", 'enctype' => 'multipart/form-data');
+        $options = array("action" => "./?state=mp", 'enctype' => 'multipart/form-data');
         parent::__construct('formEditPromotion', $options);
     }
 

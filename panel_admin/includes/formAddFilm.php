@@ -11,7 +11,7 @@ class formAddFilm extends Form{
 	const EXTENSIONS = array('gif','jpg','jpe','jpeg','png');
 
 	public function __construct() {
-        $options = array("action" => "./?state=mf&option=a", 'enctype' => 'multipart/form-data');
+        $options = array("action" => "./?state=mf", 'enctype' => 'multipart/form-data');
         parent::__construct('formAddFilm', $options);
     }
 

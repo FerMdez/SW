@@ -11,7 +11,7 @@ class formEditManager extends Form{
 	const HTML5_EMAIL_REGEXP = '^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'; 
 
 	public function __construct() {
-        $options = array("action" => "./?state=mg&option=e");
+        $options = array("action" => "./?state=mg");
         parent::__construct('formEditManager', $options);
     }
 
@@ -69,7 +69,7 @@ class formEditManager extends Form{
                                             </div>
                                         <div class='column side'></div>
                                     </div>";
-                //$result = './?state=mg';           
+               // $result = './?state=mg';           
                 
             }
             else{

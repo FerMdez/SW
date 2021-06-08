@@ -8,7 +8,7 @@ include_once('../assets/php/form.php');
 class formAddCinema extends Form{
 
     public function __construct(){
-        $op = array("action"=>"./?state=mc&option=a");
+        $op = array("action"=>"./?state=mc");
         parent::__construct('formAddCinema',$op);
     } 
 

@@ -10,7 +10,7 @@ class formDeletePromotion extends Form{
 	
 
 	public function __construct() {
-        $op = array("action" => "./?state=mp&option=d");
+        $op = array("action" => "./?state=mp");
         parent::__construct('formEditPromotion', $op);
     }
 
