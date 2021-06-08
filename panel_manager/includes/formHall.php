@@ -17,10 +17,10 @@ class FormHall extends Form {
 		if($hall)
 			$this->og_hall = $hall;
 		
-		if($option == "edit_hall")
+		if($option == "edit_hall" && $hall)
 			$options = array("action" => "./?state=".$option."&number=".$hall->getNumber()."&editing=true");
 		else
-			$options = array("action" => "./?state=".$option."&number=".$hall->getNumber()."&editing=false");
+			$options = array("action" => "./?state=".$option."&editing=false");
         parent::__construct('formHall',$options);
     }
 	
@@ -187,7 +187,11 @@ class FormHall extends Form {
 					FormHall::prepare_message( $msg );
 				}
 				else if($this->option == "edit_hall"){
-					$msg = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
+					if($this->og_hall)
+						$msg = Hall::edit_hall($number,$this->cinema, $rows, $cols, $seats, $seats_map, $this->og_hall->getNumber());
+					else
+						$msg = "La sala que intentas editar ya no existe";
+					
 					FormHall::prepare_message( $msg );
 				}
         }
