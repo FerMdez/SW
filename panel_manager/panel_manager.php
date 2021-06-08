@@ -139,12 +139,16 @@
 		}
 		
 		static function success(){
+			$msg = "operacion completada con exito";
+			if(isset($_GET["new"])) $msg = "La sala se ha creado con exito";
+			if(isset($_GET["edit"])) $msg = "La sala se ha editado con exito";
+			if(isset($_GET["del"])) $msg = "La sala se ha eliminado con exito";
+			
             $panel = '<div class="code info">
                     <h1>Operacion completada.</h1>
                     <hr />
-                    <p>'.$_SESSION['msg'].'</p>
+                    <p>'.$msg.'</p>
                 </div>'."\n";
-			$_SESSION['msg'] = "";
 			
 			return $panel;
         }
