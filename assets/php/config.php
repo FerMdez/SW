@@ -2,10 +2,10 @@
     /**
     * Connection parameters to the DB.
     */
-    define('BD_HOST', 'localhost');
-    define('BD_NAME', 'complucine');
-    define('BD_USER', 'sw');
-    define('BD_PASS', '_admin_');
+    define('BD_HOST', '');
+    define('BD_NAME', '');
+    define('BD_USER', '');
+    define('BD_PASS', '');
 
     /*
     * Configuration parameters used to generate URLs and file paths in the application
