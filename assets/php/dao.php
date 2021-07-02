@@ -2,10 +2,10 @@
     // TO-DO: Completar
     class DAO {
         //Constants:
-        private const _SERVERNAME = "localhost";
-        private const _USERNAME = "sw";
-        private const _PASSWORD = "_admin_";
-        private const _BD = "complucine";
+        private const _SERVERNAME = "";
+        private const _USERNAME = "";
+        private const _PASSWORD = "";
+        private const _BD = "";
 
         //Atributes:
         public $mysqli;
