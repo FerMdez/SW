@@ -1,0 +1,14 @@
+.check_box+label{
+    background:url('../../img/seat_green.png') no-repeat;
+    height: 16px;
+    width: 16px;
+    display:inline-block;
+}
+
+.check_box:checked+label{
+	background:url('../../img/seat_grey.png') no-repeat;
+}
+
+.check_box:disabled+label{
+	background:url('../../img/seat_red.png') no-repeat;
+}
